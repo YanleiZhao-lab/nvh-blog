@@ -7,31 +7,22 @@ export default defineConfig({
   lastUpdated: true,
   appearance: 'dark',
   cleanUrls: true,
+  base: '/blog/',
 
   head: [
-    ['link', { rel: 'icon', href: '/logo.svg' }],
+    ['link', { rel: 'icon', href: '/blog/logo.svg' }],
     ['meta', { name: 'theme-color', content: '#2f81f7' }],
   ],
 
   themeConfig: {
-    logo: '/logo.svg',
+    logo: '/blog/logo.svg',
     siteTitle: 'NVH Test',
 
     nav: [
-      { text: '首页', link: '/' },
-      { text: '博客', link: '/posts/' },
+      { text: '首页', link: '/blog/' },
+      { text: '博客', link: '/blog/posts/' },
       { text: 'NVH百宝箱', link: 'https://nvhtest.cn' },
     ],
-
-    sidebar: {
-      '/posts/': [
-        {
-          text: '全部文章',
-          collapsed: false,
-          items: [],
-        },
-      ],
-    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/YanleiZhao-lab/nvh-blog' },
