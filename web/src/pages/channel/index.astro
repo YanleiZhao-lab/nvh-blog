@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const items = (await getCollection("channel")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const categories = ["全部", ...Array.from(new Set(items.map((item) => item.data.category)))];
+---
+<BaseLayout title="频道 | NVH Test" description="NVH Test 频道：NVH 测试、信号处理、CAE、论文和工具内容聚合。" current="频道">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">channel.nvhtest.cn</p>
+      <h1>频道架构：按主题组织工程内容流。</h1>
+      <p class="lead">参考成熟频道页的信息结构：频道切换、单列 feed、标签、更新时间、讨论入口和 RSS。评论与账号交给论坛，不在静态页里自造系统。</p>
+    </div>
+    <aside class="hero__panel">
+      <div class="metric"><strong>{items.length} 条</strong><span>首批频道内容</span></div>
+      <div class="metric"><strong>RSS</strong><span><a href="/rss.xml">公开订阅入口</a></span></div>
+    </aside>
+  </section>
+  <section class="section layout" data-filter-group>
+    <aside class="sidebar">
+      <label for="channel-search">搜索频道</label>
+      <input class="search" id="channel-search" type="search" placeholder="搜索 FFT、CAE、MCP" data-search />
+      {categories.map((category) => (
+        <button class="chip" type="button" data-filter={category === "全部" ? "all" : category} aria-pressed={category === "全部" ? "true" : "false"}>{category}</button>
+      ))}
+    </aside>
+    <div class="feed">
+      {items.map((item) => (
+        <article class="article-row" data-filter-card data-category={item.data.category} data-tags={item.data.tags.join(" ")}>
+          <span class="badge">{item.data.status}</span>
+          <h2>{item.data.title}</h2>
+          <p>{item.data.description}</p>
+          <div class="tags">{item.data.tags.map((tag) => <span class="badge">#{tag}</span>)}</div>
+          <div class="meta"><span>{item.data.category}</span><time datetime={item.data.date.toISOString()}>{item.data.date.toLocaleDateString("zh-CN")}</time><span>{item.data.author}</span>{item.data.discussionUrl && <a href={item.data.discussionUrl}>讨论入口</a>}</div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <script is:inline src="/assets/site.js"></script>
+</BaseLayout>

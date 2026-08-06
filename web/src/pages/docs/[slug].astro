@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs");
+  return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+---
+<BaseLayout title={`${doc.data.title} | NVH Test`} description={doc.data.description} current="文档">
+  <article class="section" style="max-width: 880px; margin: 0 auto;">
+    <p class="eyebrow">{doc.data.category}</p>
+    <h1>{doc.data.title}</h1>
+    <p class="lead">{doc.data.description}</p>
+    <div class="meta"><time datetime={doc.data.date.toISOString()}>{doc.data.date.toLocaleDateString("zh-CN")}</time><span>{doc.data.status}</span></div>
+    <div style="margin-top: 28px;"><Content /></div>
+  </article>
+</BaseLayout>

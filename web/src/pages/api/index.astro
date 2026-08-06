@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+<BaseLayout title="API 架构 | NVH Test" description="NVH Test 专业 API 与通用 AI API 网关架构。" current="API">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">api.nvhtest.cn / ai-api.nvhtest.cn</p>
+      <h1>API 架构：专业 NVH 服务和通用 AI 网关严格拆分。</h1>
+      <p class="lead">第一版后端只提供可运行 mock endpoints，用于验证 Docker、路由和服务边界；不接真实支付、模型供应商、客户文件或 MCP 执行。</p>
+    </div>
+    <aside class="hero__panel">
+      <div class="metric"><strong>专业 API</strong><span><a href="http://localhost:8082/health">localhost:8082/health</a></span></div>
+      <div class="metric"><strong>AI 网关</strong><span><a href="http://localhost:8083/health">localhost:8083/health</a></span></div>
+    </aside>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card"><h3>专业 NVH API</h3><p>项目、任务、文件、报告、Skill 和 MCP 请求。</p></article>
+      <article class="card"><h3>通用 AI API</h3><p>路由、供应商、密钥、用量和限流。</p></article>
+      <article class="card"><h3>隔离规则</h3><p>两套服务不共享数据库、密钥、日志、额度和用户工作流。</p></article>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="NVH 百宝箱：面向 NVH 工程师的测试方法、信号处理、CAE 仿真与学术交流内容站。" />
+    <title>NVH 百宝箱 | 工程研究与技术交流</title>
+    <link rel="icon" href="./assets/origin/logo.svg" />
+    <link rel="stylesheet" href="./assets/editorial-home.css" />
+  </head>
+  <body class="editorial-home">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-mark" href="./index.html" aria-label="NVH 百宝箱首页">
+          <span class="site-mark__name">NVH TEST</span>
+          <span class="site-mark__issue">工程研究刊</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="主导航">
+          <a aria-current="page" href="./index.html">首页</a>
+          <a href="./pages/blog.html">博客</a>
+          <a href="./pages/docs.html">文档</a>
+          <a href="./pages/channel.html">频道</a>
+          <a href="./pages/forum.html">论坛</a>
+        </nav>
+
+        <details class="mobile-nav">
+          <summary>目录</summary>
+          <nav aria-label="移动端导航">
+            <a aria-current="page" href="./index.html">首页</a>
+            <a href="./pages/blog.html">博客</a>
+            <a href="./pages/docs.html">文档</a>
+            <a href="./pages/channel.html">频道</a>
+            <a href="./pages/forum.html">论坛</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <header class="masthead page-shell">
+        <div class="masthead__title">
+          <p class="section-label">Noise · Vibration · Harshness</p>
+          <h1>NVH 百宝箱</h1>
+        </div>
+        <div class="masthead__note">
+          <p>持续学习，持续进步。面向 NVH 工程师的研究、方法与交流档案。</p>
+          <dl class="issue-meta">
+            <div><dt>刊期</dt><dd>Vol. 01</dd></div>
+            <div><dt>更新</dt><dd><time datetime="2026-07-20">2026.07.20</time></dd></div>
+          </dl>
+        </div>
+      </header>
+
+      <div class="dateline page-shell" aria-label="刊物信息">
+        <span>测试 · 分析 · 仿真 · 学术</span>
+        <span>www.nvhtest.cn</span>
+      </div>
+
+      <article class="lead-story page-shell" aria-labelledby="lead-title">
+        <div class="lead-story__copy">
+          <p class="section-label">本期研究 / Featured Study</p>
+          <h2 id="lead-title"><a href="./pages/blog.html">从时域到频域：工程测试中的信号判读</a></h2>
+          <p class="lead-story__summary">围绕数据采集、窗函数、频谱分辨率、阶次分析与结果复核，整理一条可重复使用的 NVH 工程分析路径。从测试问题出发，让参数选择和结论判断都有依据。</p>
+          <div class="story-actions">
+            <a class="border-link border-link--dark" href="./pages/blog.html">阅读研究目录 <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="./pages/docs.html">查阅方法文档 <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <figure class="signal-figure" aria-labelledby="signal-caption">
+          <svg viewBox="0 0 640 360" role="img" aria-label="由低频振动逐渐过渡到高频振动的示意波形">
+            <line x1="32" y1="180" x2="608" y2="180" class="signal-axis" />
+            <path class="signal-line signal-line--soft" d="M32 185 C68 95 104 270 140 180 S212 90 248 180 S320 270 356 180 S428 95 464 180 S536 270 608 178" />
+            <path class="signal-line" d="M32 180 C56 145 80 215 104 180 S152 145 176 180 S224 215 248 180 S296 145 320 180 S368 215 392 180 S440 145 464 180 S512 215 536 180 S584 145 608 180" />
+            <circle cx="320" cy="180" r="5" class="signal-point" />
+          </svg>
+          <figcaption id="signal-caption"><span>Signal study 01</span><span>Time / Frequency</span></figcaption>
+        </figure>
+      </article>
+
+      <section class="latest page-shell" aria-labelledby="latest-title">
+        <div class="section-heading">
+          <div><p class="section-label">Latest Notes</p><h2 id="latest-title">近期内容</h2></div>
+          <a class="text-link" href="./pages/channel.html">查看全部频道 <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="latest-grid">
+          <article class="story-card">
+            <div class="story-card__meta"><span>01</span><span>NVH 测试</span></div>
+            <h3><a href="./pages/blog.html">传感器安装中的常见误差来源</a></h3>
+            <p>安装刚度、测量方向、质量加载与线缆处理如何改变采集结果。</p>
+            <a class="story-card__link" href="./pages/blog.html" aria-label="阅读传感器安装中的常见误差来源">阅读全文 <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="story-card">
+            <div class="story-card__meta"><span>02</span><span>信号处理</span></div>
+            <h3><a href="./pages/docs.html">FFT 参数选择的工程检查清单</a></h3>
+            <p>采样率、频率分辨率、窗函数和平均方式之间的实际权衡。</p>
+            <a class="story-card__link" href="./pages/docs.html" aria-label="阅读 FFT 参数选择的工程检查清单">阅读全文 <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="story-card">
+            <div class="story-card__meta"><span>03</span><span>工程论坛</span></div>
+            <h3><a href="./pages/forum.html">本周讨论与问题征集</a></h3>
+            <p>围绕测试、仿真与论文研究，建立可检索、可复用的技术讨论。</p>
+            <a class="story-card__link" href="./pages/forum.html" aria-label="进入本周讨论与问题征集">进入论坛 <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="index-band" aria-labelledby="topics-title">
+        <div class="page-shell topic-layout">
+          <div class="topic-intro">
+            <p class="section-label">Research Index</p>
+            <h2 id="topics-title">工程知识，按主题长期沉淀。</h2>
+            <p>博客负责发布完整文章，文档整理可复用方法，频道聚合同类内容，论坛承接具体问题与同行讨论。</p>
+          </div>
+
+          <ol class="topic-list">
+            <li><a href="./pages/channel.html"><span>01</span><strong>NVH 测试</strong><small>采集、测量与诊断</small><b aria-hidden="true">→</b></a></li>
+            <li><a href="./pages/channel.html"><span>02</span><strong>信号处理</strong><small>频谱、阶次与滤波</small><b aria-hidden="true">→</b></a></li>
+            <li><a href="./pages/channel.html"><span>03</span><strong>CAE 与仿真</strong><small>模型、验证与案例</small><b aria-hidden="true">→</b></a></li>
+            <li><a href="./pages/channel.html"><span>04</span><strong>论文与学术</strong><small>阅读、复现与讨论</small><b aria-hidden="true">→</b></a></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="updates page-shell" aria-labelledby="updates-title">
+        <div class="section-heading">
+          <div><p class="section-label">Site Journal</p><h2 id="updates-title">站点进展</h2></div>
+        </div>
+        <div class="updates-layout">
+          <ol class="update-list">
+            <li><time datetime="2026-07-20">2026.07.20</time><p><strong>前台首页</strong><span>Editorial 研究刊物版式上线，统一博客、文档、频道与论坛入口。</span></p></li>
+            <li><time datetime="2026-07-19">2026.07.19</time><p><strong>频道目录</strong><span>完成 NVH 测试、信号处理、CAE、API / MCP 与论文分类。</span></p></li>
+            <li><time datetime="2026-07-18">2026.07.18</time><p><strong>论坛准备</strong><span>形成 Discourse 分类、社区规则、部署与上线检查文档。</span></p></li>
+          </ol>
+
+          <aside class="service-note" aria-labelledby="service-note-title">
+            <p class="section-label">Service Boundary</p>
+            <h3 id="service-note-title">专业服务与通用 AI 网关保持独立。</h3>
+            <p>当前阶段只完善内容前台与论坛准备。专业 NVH API、Skill、MCP 服务和通用 AI API 均维持规划状态。</p>
+            <a class="border-link" href="./pages/api.html">查看服务规划 <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-shell site-footer__inner">
+        <p><strong>NVH 百宝箱</strong><span>工程研究、技术文档与同行交流。</span></p>
+        <nav aria-label="页脚导航">
+          <a href="https://github.com/nancheng1994/Githubfeishu.github.io">GitHub</a>
+          <a href="./pages/sync.html">内容同步</a>
+          <a href="./pages/forum.html">论坛</a>
+        </nav>
+        <p class="copyright">© 2023–2026 NVH Z</p>
+      </div>
+    </footer>
+  </body>
+</html>

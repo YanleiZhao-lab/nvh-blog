@@ -1,0 +1,128 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, statusBadge, getReadingTime } from "../../utils/blog";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const sorted = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return sorted.map((post, i) => ({
+    params: { slug: post.slug },
+    props: {
+      post,
+      prev: sorted[i + 1] || null,
+      next: sorted[i - 1] || null,
+    },
+  }));
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+const readingTime = getReadingTime(post.body);
+---
+
+<BaseLayout
+  title={`${post.data.title} | NVH Test`}
+  description={post.data.description}
+  current="博客"
+  article={true}
+>
+  <article>
+    <header class="article-header">
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span class={`badge ${statusBadge(post.data.status)}`}>{post.data.status}</span>
+        <span class="badge badge--accent">{post.data.category}</span>
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+      <div class="article-meta-row">
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        <span>·</span>
+        <span>{post.data.author}</span>
+        <span>·</span>
+        <span>约 {readingTime} 分钟阅读</span>
+      </div>
+    </header>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 32px; align-items: start;">
+      <div class="prose">
+        <Content />
+
+        {post.data.discussionUrl && (
+          <blockquote>
+            💬 这篇文章有对应的<a href={post.data.discussionUrl}>论坛讨论</a>，欢迎参与。
+          </blockquote>
+        )}
+      </div>
+
+      <aside class="toc" id="toc-container">
+        <h4>目录</h4>
+        <ul id="toc-list"></ul>
+      </aside>
+    </div>
+
+    <nav class="article-nav">
+      {prev ? (
+        <a href={`/blog/${prev.slug}/`} class="nav-prev">
+          <span class="label">← 上一篇</span>
+          <span class="title">{prev.data.title}</span>
+        </a>
+      ) : <div></div>}
+      {next ? (
+        <a href={`/blog/${next.slug}/`} class="nav-next">
+          <span class="label">下一篇 →</span>
+          <span class="title">{next.data.title}</span>
+        </a>
+      ) : <div></div>}
+    </nav>
+  </article>
+
+  <script is:inline>
+    // 自动生成目录
+    (function () {
+      const content = document.querySelector(".prose");
+      const tocList = document.getElementById("toc-list");
+      if (!content || !tocList) return;
+
+      const headings = content.querySelectorAll("h2, h3");
+      if (headings.length < 2) {
+        document.getElementById("toc-container").style.display = "none";
+        return;
+      }
+
+      headings.forEach((h, i) => {
+        const id = h.id || `heading-${i}`;
+        h.id = id;
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `#${id}`;
+        a.textContent = h.textContent;
+        a.setAttribute("data-toc-link", id);
+        if (h.tagName === "H3") {
+          a.style.paddingLeft = "12px";
+          a.style.fontSize = "12px";
+        }
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+
+      // 滚动高亮
+      const links = document.querySelectorAll("[data-toc-link]");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const link = document.querySelector(`[data-toc-link="${entry.target.id}"]`);
+            if (link) {
+              if (entry.isIntersecting) {
+                links.forEach((l) => l.classList.remove("active"));
+                link.classList.add("active");
+              }
+            }
+          });
+        },
+        { rootMargin: "-80px 0px -80% 0px" }
+      );
+      headings.forEach((h) => observer.observe(h));
+    })();
+  </script>
+</BaseLayout>

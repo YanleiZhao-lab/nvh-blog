@@ -1,0 +1,119 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, statusBadge } from "../../utils/blog";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const categories = ["全部", ...Array.from(new Set(posts.map((p) => p.data.category)))];
+const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
+const recent = posts.slice(0, 5);
+---
+
+<BaseLayout title="博客 | NVH Test" description="NVH Test 博客：研究笔记、工程案例、测试方法和工具更新。" current="博客">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">blog.nvhtest.cn</p>
+      <h1>博客：从工程问题沉淀可复用文章。</h1>
+      <p class="lead">
+        基于 Markdown + Git 的写作流，直接在编辑器里写 .md 文件、提交即可发布。不依赖外部 CMS。
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="/blog/all/">全部文章（{posts.length}）</a>
+        <a class="btn" href="/rss.xml">RSS 订阅</a>
+      </div>
+    </div>
+    <aside class="hero__panel">
+      <div class="metric">
+        <strong>{posts.length} 篇</strong>
+        <span>文章总数</span>
+      </div>
+      <div class="metric">
+        <strong>{categories.length - 1}</strong>
+        <span>内容分类</span>
+      </div>
+      <div class="metric">
+        <strong>{allTags.length}</strong>
+        <span>标签</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section" style="padding-top: 32px;">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Latest</p>
+        <h2>最新文章</h2>
+      </div>
+      <a class="btn" href="/blog/all/">查看全部 →</a>
+    </div>
+
+    <div class="feed">
+      {recent.map((post) => (
+        <article
+          class="article-card fade-in"
+        >
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 12px;">
+            <span class={`badge ${statusBadge(post.data.status)}`}>{post.data.status}</span>
+            <a href={`/blog/category/${post.data.category}/`}><span class="badge badge--default">{post.data.category}</span></a>
+          </div>
+          <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+          <div class="tags">
+            {post.data.tags.map((tag) => (
+              <a href={`/blog/tag/${tag}/`}><span class="badge badge--default">#{tag}</span></a>
+            ))}
+          </div>
+          <div class="article-meta">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            <span>·</span>
+            <span>{post.data.author}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Browse</p>
+        <h2>按分类浏览</h2>
+      </div>
+    </div>
+    <div class="grid">
+      {categories.filter(c => c !== "全部").map((cat) => {
+        const count = posts.filter(p => p.data.category === cat).length;
+        return (
+          <a href={`/blog/category/${cat}/`} class="card" style="text-decoration: none;">
+            <span class="badge badge--accent">{cat}</span>
+            <h3 style="margin-top: 12px;">{cat}</h3>
+            <p>{count} 篇文章 →</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Tags</p>
+        <h2>标签索引</h2>
+      </div>
+    </div>
+    <div class="tag-cloud" style="gap: 10px;">
+      {allTags.map((tag) => {
+        const count = posts.filter(p => p.data.tags.includes(tag)).length;
+        return (
+          <a href={`/blog/tag/${tag}/`}>
+            <span class="badge badge--default" style="font-size: 14px; padding: 6px 14px;">
+              #{tag} ({count})
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

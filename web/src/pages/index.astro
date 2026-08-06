@@ -1,0 +1,98 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const blogPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+).slice(0, 3);
+---
+
+<BaseLayout title="NVH Test | 工程研究门户" description="面向 NVH 工程研究的博客、文档、频道、论坛和 API 服务入口。" current="首页">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Noise · Vibration · Harshness</p>
+      <h1>NVH 工程研究、知识库与技术社区。</h1>
+      <p class="lead">
+        研究笔记、工程案例、测试方法、工具更新——先跑内容和社区，再逐步接入专业 NVH API、定制 Skill 和通用 AI 网关。
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="/blog/">阅读博客</a>
+        <a class="btn" href="/docs/">查看文档</a>
+        <a class="btn" href="/forum/">论坛规划</a>
+      </div>
+    </div>
+    <aside class="hero__panel">
+      <div class="metric"><strong>内容</strong><span>博客、文档、频道持续更新</span></div>
+      <div class="metric"><strong>社区</strong><span>论坛准备包，Discourse 即将上线</span></div>
+      <div class="metric"><strong>服务</strong><span>专业 API 与 AI 网关独立 mock</span></div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Site map</p>
+        <h2>站群入口</h2>
+      </div>
+      <p>每个服务可独立部署，也可通过 Docker 组合预览。</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="badge badge--accent">www</span>
+        <h3 style="margin-top: 12px;"><a href="/blog/">博客与门户</a></h3>
+        <p>研究笔记、工程案例、测试方法和工具更新。</p>
+      </article>
+      <article class="card">
+        <span class="badge badge--accent">docs</span>
+        <h3 style="margin-top: 12px;"><a href="/docs/">文档知识库</a></h3>
+        <p>部署、站群架构、内容同步和后端规划文档。</p>
+      </article>
+      <article class="card">
+        <span class="badge badge--accent">channel</span>
+        <h3 style="margin-top: 12px;"><a href="/channel/">频道</a></h3>
+        <p>CAE 验证、FFT 流程、论文模板等专题内容。</p>
+      </article>
+      <article class="card">
+        <span class="badge badge--accent">skill</span>
+        <h3 style="margin-top: 12px;"><a href="/skill/">Skill</a></h3>
+        <p>MCP / Skill 服务的公开日志和能力说明。</p>
+      </article>
+      <article class="card">
+        <span class="badge badge--accent">forum</span>
+        <h3 style="margin-top: 12px;"><a href="/forum/">论坛</a></h3>
+        <p>Discourse 社区，讨论、问答、案例沉淀。</p>
+      </article>
+      <article class="card">
+        <span class="badge badge--accent">API</span>
+        <h3 style="margin-top: 12px;"><a href="https://sub2api.jinanshengjikeji.com">API 服务</a></h3>
+        <p>专业 NVH API 与通用 AI API 网关。</p>
+      </article>
+    </div>
+  </section>
+
+  {blogPosts.length > 0 && (
+    <section class="section">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">Latest</p>
+          <h2>最新文章</h2>
+        </div>
+        <a class="btn" href="/blog/">查看全部 →</a>
+      </div>
+      <div class="grid">
+        {blogPosts.map((post) => (
+          <article class="card">
+            <span class="badge badge--default">{post.data.category}</span>
+            <h3 style="margin-top: 12px;"><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            <div class="article-meta">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString("zh-CN")}
+              </time>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

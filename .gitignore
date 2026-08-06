@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.trellis/
+*.log
+.env
+.env.local
+.DS_Store
+web/dist/
+web/package-lock.json
+forum/config/discourse.conf

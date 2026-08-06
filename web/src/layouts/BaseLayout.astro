@@ -1,0 +1,118 @@
+---
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description: string;
+  current?: string;
+  article?: boolean;
+}
+
+const { title, description, current = "", article = false } = Astro.props;
+const links = [
+  ["首页", "/"],
+  ["博客", "/blog/"],
+  ["文档", "/docs/"],
+  ["频道", "/channel/"],
+  ["Skill", "/skill/"],
+  ["论坛", "/forum/"],
+  ["收藏", "/nvh/github/"],
+];
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script is:inline>
+      // Theme init — runs before paint to prevent flash
+      (function () {
+        const stored = localStorage.getItem("nvh-theme");
+        const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+        const theme = stored || (prefersLight ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div class="container topbar__inner">
+          <a class="brand" href="/" aria-label="NVH Test 首页">
+            <span class="brand__mark">N</span>
+            <span>
+              <strong>NVH Test</strong>
+              <small>工程研究与知识社区</small>
+            </span>
+          </a>
+          <nav class="nav" aria-label="主导航">
+            {links.map(([label, href]) => (
+              <a href={href} aria-current={current === label ? "page" : undefined}>{label}</a>
+            ))}
+          </nav>
+          <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+            <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="page">
+        <div class={article ? "container article-page" : "container"}>
+          <slot />
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer__inner">
+          <span>NVH Test · nvhtest.cn</span>
+          <span>内容、论坛、专业 API 与通用 AI 网关保持独立部署边界。</span>
+        </div>
+      </footer>
+    </div>
+
+    <script is:inline>
+      // Theme toggle
+      const toggle = document.getElementById("theme-toggle");
+      const iconMoon = document.getElementById("icon-moon");
+      const iconSun = document.getElementById("icon-sun");
+
+      function updateIcons() {
+        const theme = document.documentElement.getAttribute("data-theme");
+        if (theme === "light") {
+          iconMoon.style.display = "block";
+          iconSun.style.display = "none";
+        } else {
+          iconMoon.style.display = "none";
+          iconSun.style.display = "block";
+        }
+      }
+      updateIcons();
+
+      toggle.addEventListener("click", () => {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("nvh-theme", next);
+        updateIcons();
+      });
+    </script>
+  </body>
+</html>

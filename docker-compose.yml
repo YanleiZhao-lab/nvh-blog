@@ -1,0 +1,85 @@
+﻿services:
+  web:
+    build:
+      context: ./web
+    ports:
+      - "127.0.0.1:8090:80"
+    restart: unless-stopped
+    mem_limit: 512m
+
+  forum-preview:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./forum:/usr/share/nginx/html:ro
+    ports:
+      - "127.0.0.1:8091:80"
+    restart: unless-stopped
+
+  api:
+    profiles: ["api"]
+    build:
+      context: ./api
+    environment:
+      NVH_API_DATABASE_URL: ${NVH_API_DATABASE_URL:-postgresql://nvh_api:nvh_api_dev@api-db:5432/nvh_api}
+      NVH_API_REDIS_URL: ${NVH_API_REDIS_URL:-redis://api-redis:6379/0}
+      NVH_API_OBJECT_STORAGE_URL: ${NVH_API_OBJECT_STORAGE_URL:-http://minio:9000}
+      NVH_API_KEY_PREFIX: ${NVH_API_KEY_PREFIX:-nvh_dev_}
+    ports:
+      - "127.0.0.1:8082:8000"
+    depends_on:
+      - api-db
+      - api-redis
+
+  api-db:
+    profiles: ["api"]
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: nvh_api
+      POSTGRES_USER: nvh_api
+      POSTGRES_PASSWORD: nvh_api_dev
+    volumes:
+      - nvh_api_pg:/var/lib/postgresql/data
+
+  api-redis:
+    profiles: ["api"]
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - nvh_api_redis:/data
+
+  ai-api:
+    profiles: ["api"]
+    build:
+      context: ./ai-api
+    environment:
+      AI_API_DATABASE_URL: ${AI_API_DATABASE_URL:-postgresql://ai_api:ai_api_dev@ai-api-db:5432/ai_api}
+      AI_API_REDIS_URL: ${AI_API_REDIS_URL:-redis://ai-api-redis:6379/0}
+      AI_API_KEY_PREFIX: ${AI_API_KEY_PREFIX:-ai_dev_}
+    ports:
+      - "127.0.0.1:8083:8000"
+    depends_on:
+      - ai-api-db
+      - ai-api-redis
+
+  ai-api-db:
+    profiles: ["api"]
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ai_api
+      POSTGRES_USER: ai_api
+      POSTGRES_PASSWORD: ai_api_dev
+    volumes:
+      - ai_api_pg:/var/lib/postgresql/data
+
+  ai-api-redis:
+    profiles: ["api"]
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ai_api_redis:/data
+
+volumes:
+  nvh_api_pg:
+  nvh_api_redis:
+  ai_api_pg:
+  ai_api_redis:

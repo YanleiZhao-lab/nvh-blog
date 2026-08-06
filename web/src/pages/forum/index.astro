@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+<BaseLayout title="论坛 | NVH Test" description="NVH Test 论坛：Discourse 社区分类、规则和部署入口。" current="论坛">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">forum.nvhtest.cn</p>
+      <h1>论坛架构：Discourse 承载长期讨论。</h1>
+      <p class="lead">论坛不自研运行时。当前交付分类方案、社区规则、部署教程和预览页；正式上线后主按钮切换到 Discourse。</p>
+      <div class="actions">
+        <a class="button primary" href="/forum-preview/">查看论坛准备页</a>
+        <a class="button" href="/docs/forum-deployment/">部署文档</a>
+      </div>
+    </div>
+    <aside class="hero__panel">
+      <div class="metric"><strong>运行时</strong><span>Discourse official Docker</span></div>
+      <div class="metric"><strong>当前</strong><span>静态准备包和分类配置</span></div>
+      <div class="metric"><strong>边界</strong><span>不承载密钥、付款、客户数据和 API 控制台</span></div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <div><p class="eyebrow">Status</p><h2>当前状态：准备中</h2></div>
+      <p>Discourse 官方 Docker 至少需要 2GB 独立内存。当前服务器资源不足，论坛以静态预览形式占位。</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="badge">基础设施</span>
+        <h3>VPS 资源评估</h3>
+        <p>Discourse 捆绑 PostgreSQL + Redis + Sidekiq + Rails，生产环境推荐 4GB RAM。待服务器升级后部署。</p>
+      </article>
+      <article class="card">
+        <span class="badge">DNS</span>
+        <h3>forum.nvhtest.cn</h3>
+        <p>域名已规划，通过 Cloudflare DNS 解析。上线时创建 A 记录指向 VPS。</p>
+      </article>
+      <article class="card">
+        <span class="badge">SMTP</span>
+        <h3>邮件服务</h3>
+        <p>需要可靠的 SMTP 提供商用于账号激活、通知和密码重置。部署前准备凭据。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><div><p class="eyebrow">Categories</p><h2>推荐版块</h2></div></div>
+    <div class="grid">
+      {["公告", "NVH 测试", "信号处理", "CAE 与仿真", "声学材料", "论文与学术", "工具开发", "问题求助", "数据与资源"].map((name) => (
+        <article class="card"><span class="badge">forum</span><h3>{name}</h3><p>上线时在 Discourse 中作为一级分类或精选标签维护。</p></article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><div><p class="eyebrow">Roadmap</p><h2>上线计划</h2></div></div>
+    <div class="grid">
+      <article class="card">
+        <span class="badge">第一步</span>
+        <h3>确认社区边界</h3>
+        <p>论坛服务公开讨论和知识沉淀，不承载客户私密数据、付款、密钥或后端配置。</p>
+      </article>
+      <article class="card">
+        <span class="badge">第二步</span>
+        <h3>定稿分类与规则</h3>
+        <p>使用 category-plan.md 和 community-guidelines.md 做第一版管理员配置。</p>
+      </article>
+      <article class="card">
+        <span class="badge">第三步</span>
+        <h3>准备基础设施</h3>
+        <p>VPS、Cloudflare DNS、SMTP、管理员邮箱、备份策略全部确认后再安装 Discourse。</p>
+      </article>
+      <article class="card">
+        <span class="badge">第四步</span>
+        <h3>切换正式入口</h3>
+        <p>Discourse 上线后，将本页主按钮改为 https://forum.nvhtest.cn/。</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
