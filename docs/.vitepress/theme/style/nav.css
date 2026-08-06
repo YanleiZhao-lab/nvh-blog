@@ -1,0 +1,30 @@
+.m-nav-layout {
+  --vp-layout-max-width: 1660px;
+
+  .container {
+    max-width: var(--vp-layout-max-width) !important;
+  }
+
+  .content-container,
+  .content {
+    max-width: 100% !important;
+  }
+
+  .aside {
+    padding-left: 0;
+    max-width: 224px;
+  }
+
+  .content .copyright {
+    display: none;
+  }
+
+  .vp-doc h2 {
+    margin-top: 24px;
+  }
+
+  .medium-zoom-overlay,
+  .medium-zoom-image {
+    z-index: 0 !important;
+  }
+}

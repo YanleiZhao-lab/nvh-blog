@@ -21,6 +21,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/blog/' },
       { text: '博客', link: '/blog/posts/' },
+      { text: '导航', link: '/blog/nav/' },
       { text: 'NVH百宝箱', link: 'https://nvhtest.cn' },
     ],
 
