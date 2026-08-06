@@ -1,0 +1,47 @@
+name: Sync Feishu & Deploy
+
+on:
+  # 手动触发同步
+  workflow_dispatch:
+  # 定时同步（每小时检查一次飞书更新）
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm install --prod
+
+      - name: 同步飞书文档
+        env:
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+          FEISHU_WIKI_ID: ${{ secrets.FEISHU_WIKI_ID }}
+        run: npx elog sync
+
+      - name: 构建 VitePress
+        run: npm run docs:build
+
+      - name: 配置 Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: 提交同步的文档
+        run: |
+          git add -A
+          git diff --staged --quiet || git commit -m "docs: 同步飞书文档 $(date +'%Y-%m-%d %H:%M')"
+          git push

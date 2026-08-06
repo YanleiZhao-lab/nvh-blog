@@ -1,0 +1,87 @@
+/* NVH Test — VitePress 自定义样式 */
+
+:root {
+  /* 品牌色 — 工程蓝 */
+  --vp-c-brand-1: #2f81f7;
+  --vp-c-brand-2: #4493f8;
+  --vp-c-brand-3: #1a66d4;
+  --vp-c-brand-soft: rgba(47, 129, 247, 0.14);
+
+  /* 背景色 */
+  --vp-bg: #ffffff;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2f81f7, #00ccff);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #2f81f7 50%, #00ccff 50%);
+  --vp-home-hero-image-filter: blur(44px);
+
+  /* 字体 */
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+}
+
+.dark {
+  --vp-c-brand-1: #4493f8;
+  --vp-c-brand-2: #2f81f7;
+  --vp-c-brand-3: #5ba3f9;
+  --vp-bg: #0a0e14;
+}
+
+/* 首页 Hero */
+.VPHero .name {
+  font-weight: 800;
+}
+
+/* 文章页排版增强 */
+.vp-doc {
+  --vp-doc-font-size: 16px;
+}
+
+.vp-doc h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h2 {
+  margin-top: 2.5em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* 代码块 */
+.vp-doc div[class*='language-'] {
+  border-radius: 10px;
+  margin: 1.5em 0;
+}
+
+/* 图片圆角 */
+.vp-doc img {
+  border-radius: 10px;
+}
+
+/* 引用块 */
+.vp-doc blockquote {
+  border-left: 3px solid var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 20px;
+  color: var(--vp-c-text-2);
+}
+
+/* 表格 */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+/* 自定义容器 */
+.custom-block {
+  border-radius: 10px;
+}
+
+/* 搜索按钮 */
+.DocSearch-Button {
+  border-radius: 8px;
+}

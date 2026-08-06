@@ -1,4 +1,14 @@
 ﻿services:
+  # VitePress 博客（飞书同步）
+  blog:
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:8092:80"
+    restart: unless-stopped
+    mem_limit: 256m
+
+  # 原有 Astro Web
   web:
     build:
       context: ./web
@@ -15,12 +25,13 @@
       - "127.0.0.1:8091:80"
     restart: unless-stopped
 
+  # API mock（可选，需 --profile api）
   api:
     profiles: ["api"]
     build:
       context: ./api
     environment:
-      NVH_API_DATABASE_URL: ${NVH_API_DATABASE_URL:-postgresql://nvh_api:nvh_api_dev@api-db:5432/nvh_api}
+      NVH_API_DATABASE_URL: ${NVH_API_DATABASE_URL:-postgresql://nvh_api:***@api-db:5432/nvh_api}
       NVH_API_REDIS_URL: ${NVH_API_REDIS_URL:-redis://api-redis:6379/0}
       NVH_API_OBJECT_STORAGE_URL: ${NVH_API_OBJECT_STORAGE_URL:-http://minio:9000}
       NVH_API_KEY_PREFIX: ${NVH_API_KEY_PREFIX:-nvh_dev_}
@@ -52,7 +63,7 @@
     build:
       context: ./ai-api
     environment:
-      AI_API_DATABASE_URL: ${AI_API_DATABASE_URL:-postgresql://ai_api:ai_api_dev@ai-api-db:5432/ai_api}
+      AI_API_DATABASE_URL: ${AI_API_DATABASE_URL:-postgresql://ai_api:***@ai-api-db:5432/ai_api}
       AI_API_REDIS_URL: ${AI_API_REDIS_URL:-redis://ai-api-redis:6379/0}
       AI_API_KEY_PREFIX: ${AI_API_KEY_PREFIX:-ai_dev_}
     ports:

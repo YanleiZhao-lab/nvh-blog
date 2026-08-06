@@ -1,0 +1,18 @@
+{
+  "name": "nvh-blog",
+  "version": "1.0.0",
+  "description": "NVH Test 博客 — VitePress + 飞书同步 + Docker 部署",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "elog:sync": "elog sync -e .elog.env",
+    "elog:clean": "elog clean"
+  },
+  "dependencies": {
+    "@elog/cli": "^0.14.0",
+    "medium-zoom": "^1.1.0",
+    "vitepress": "^1.5.0"
+  }
+}

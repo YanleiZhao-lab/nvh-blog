@@ -1,10 +1,14 @@
 node_modules/
 dist/
-.trellis/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+elog.cache.json
+.elog.env
 *.log
 .env
 .env.local
 .DS_Store
+.trellis/
+web/node_modules/
 web/dist/
 web/package-lock.json
-forum/config/discourse.conf
