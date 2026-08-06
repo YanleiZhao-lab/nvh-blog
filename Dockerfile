@@ -1,8 +1,11 @@
 FROM node:22-alpine AS build
+RUN apk add --no-cache git
 WORKDIR /app
+RUN git init && git config user.email "build@nvh.test" && git config user.name "build"
 COPY package.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
+RUN git add -A && git commit -m "build" --allow-empty
 RUN npm run docs:build
 
 FROM nginx:1.27-alpine
