@@ -13,8 +13,7 @@ import './style/index.css'
 import MNavLinks from './components/MNavLinks.vue'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import Linkcard from './components/Linkcard.vue'
-import backtotop from './components/backtotop.vue'
-import bsz from './components/bsz.vue'
+import MyLayout from './components/MyLayout.vue'
 import HomeUnderline from './components/HomeUnderline.vue'
 import confetti from './components/confetti.vue'
 
@@ -29,11 +28,7 @@ export default {
       props.class = frontmatter.value.layoutClass
     }
 
-    return h(DefaultTheme.Layout, props, {
-      'doc-before': () => h(ArticleMetadata),
-      'doc-footer-before': () => h(backtotop),
-      'layout-bottom': () => h(bsz),
-    })
+    return h(MyLayout, props)
   },
 
   enhanceApp({ app, router }) {
