@@ -3,8 +3,8 @@ import { generateSidebar } from 'vitepress-sidebar'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'NVH Test',
-  description: 'NVH 工程研究与知识社区',
+  title: 'Test',
+  description: '工程研究与知识社区',
   lastUpdated: true,
   appearance: 'dark',
   base: '/blog/',
@@ -12,18 +12,17 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', href: '/logo.png' }],
-    ['meta', { name: 'theme-color', content: '#bd34fe' }],
+    ['meta', { name: 'theme-color', content: '#1f6feb' }],
   ],
 
   themeConfig: {
     logo: '/logo.png',
-    siteTitle: 'NVH Test',
+    siteTitle: 'Test',
 
     nav: [
       { text: '首页', link: '/' },
       { text: '博客', link: '/posts/' },
       { text: '导航', link: '/nav/' },
-      { text: 'NVH百宝箱', link: 'https://nvhtest.cn' },
     ],
 
     // 自动侧边栏
@@ -35,10 +34,6 @@ export default defineConfig({
       useTitleFromFrontmatter: true,
       hyphenToSpace: true,
     }),
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/YanleiZhao-lab/nvh-blog' },
-    ],
 
     search: {
       provider: 'local',
@@ -82,14 +77,9 @@ export default defineConfig({
       },
     },
 
-    editLink: {
-      pattern: 'https://github.com/YanleiZhao-lab/nvh-blog/edit/main/docs/:path',
-      text: '在 GitHub 上编辑此页',
-    },
-
     footer: {
       message: '基于 VitePress + 飞书同步 + Docker 部署',
-      copyright: `Copyright © 2024-${new Date().getFullYear()} NVH Test`,
+      copyright: `Copyright © 2024-${new Date().getFullYear()} Test`,
     },
 
     sidebarMenuLabel: '目录',

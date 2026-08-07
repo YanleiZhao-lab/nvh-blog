@@ -414,11 +414,14 @@
 }
 
 :root {
+    --rainbow-prev: #0a3d62;
+    --rainbow-next: #00b4d8;
+
     /* hero标题渐变色 */
     --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--rainbow-prev) 30%, var(--rainbow-next));
+    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #0a3d62, #1f6feb, #00b4d8);
 
     /*hero logo背景渐变色 */
-    --vp-home-hero-image-background-image: linear-gradient(-45deg, var(--rainbow-prev) 30%, var(--rainbow-next));
+    --vp-home-hero-image-background-image: linear-gradient(-45deg, #0a3d62 30%, #00b4d8);
     --vp-home-hero-image-filter: blur(80px);
 }

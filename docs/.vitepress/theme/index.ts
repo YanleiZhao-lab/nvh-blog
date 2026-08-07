@@ -17,6 +17,9 @@ import MyLayout from './components/MyLayout.vue'
 import HomeUnderline from './components/HomeUnderline.vue'
 import confetti from './components/confetti.vue'
 
+// 彩虹背景动画
+let homePageStyle: HTMLStyleElement | undefined
+
 export default {
   extends: DefaultTheme,
 
@@ -40,13 +43,19 @@ export default {
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false })
+
+      // 彩虹动画：首页注入 animation，离开时移除
       router.onBeforeRouteChange = () => {
         NProgress.start()
       }
       router.onAfterRouteChanged = () => {
         busuanzi.fetch()
         NProgress.done()
+        updateHomePageStyle(location.pathname.replace('/blog/', '/') === '/' || location.pathname === '/blog/')
       }
+
+      // 初始加载时检查
+      updateHomePageStyle(location.pathname.replace('/blog/', '/') === '/' || location.pathname === '/blog/')
     }
   },
 
@@ -60,6 +69,10 @@ export default {
 
     onMounted(() => {
       initZoom()
+
+      // 首页彩虹动画
+      const isHome = location.pathname === '/blog/' || location.pathname === '/blog'
+      updateHomePageStyle(isHome)
 
       nextTick(() => {
         try {
@@ -87,7 +100,25 @@ export default {
 
     watch(
       () => route.path,
-      () => nextTick(() => initZoom())
+      () => {
+        nextTick(() => initZoom())
+        const isHome = route.path === '/' || route.path === '/blog/'
+        updateHomePageStyle(isHome)
+      }
     )
   },
+}
+
+// 彩虹背景动画：动态注入/移除 CSS animation
+function updateHomePageStyle(value: boolean) {
+  if (value) {
+    if (homePageStyle) return
+    homePageStyle = document.createElement('style')
+    homePageStyle.innerHTML = `:root { animation: rainbow 12s linear infinite; }`
+    document.body.appendChild(homePageStyle)
+  } else {
+    if (!homePageStyle) return
+    homePageStyle.remove()
+    homePageStyle = undefined
+  }
 }
