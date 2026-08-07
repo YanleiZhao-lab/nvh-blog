@@ -66,7 +66,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
       <backtotop />
     </template>
     <template #layout-top>
-      <notice />
       <MouseFollower />
       <MouseClick />
     </template>
