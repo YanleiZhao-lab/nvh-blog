@@ -11,18 +11,19 @@ export default defineConfig({
   cleanUrls: false,
 
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'icon', href: '/logo.svg' }],
     ['meta', { name: 'theme-color', content: '#1f6feb' }],
   ],
 
   themeConfig: {
-    logo: '/logo.png',
+    logo: '/logo.svg',
     siteTitle: 'Test',
 
     nav: [
       { text: '首页', link: '/' },
       { text: '博客', link: '/posts/' },
       { text: '导航', link: '/nav/' },
+      { text: '主站', link: 'https://www.nvhtest.cn' },
     ],
 
     // 自动侧边栏
