@@ -15,6 +15,8 @@ import ArticleMetadata from './components/ArticleMetadata.vue'
 import Linkcard from './components/Linkcard.vue'
 import backtotop from './components/backtotop.vue'
 import bsz from './components/bsz.vue'
+import HomeUnderline from './components/HomeUnderline.vue'
+import confetti from './components/confetti.vue'
 
 export default {
   extends: DefaultTheme,
@@ -38,6 +40,8 @@ export default {
     app.component('MNavLinks', MNavLinks)
     app.component('ArticleMetadata', ArticleMetadata)
     app.component('Linkcard', Linkcard)
+    app.component('HomeUnderline', HomeUnderline)
+    app.component('confetti', confetti)
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false })

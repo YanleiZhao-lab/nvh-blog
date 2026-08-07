@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { generateSidebar } from 'vitepress-sidebar'
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -6,24 +7,34 @@ export default defineConfig({
   description: 'NVH 工程研究与知识社区',
   lastUpdated: true,
   appearance: 'dark',
-  cleanUrls: true,
   base: '/blog/',
+  cleanUrls: false,
 
   head: [
-    ['link', { rel: 'icon', href: '/blog/logo.svg' }],
-    ['meta', { name: 'theme-color', content: '#2f81f7' }],
+    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['meta', { name: 'theme-color', content: '#bd34fe' }],
   ],
 
   themeConfig: {
-    logo: '/blog/logo.svg',
+    logo: '/logo.png',
     siteTitle: 'NVH Test',
 
     nav: [
-      { text: '首页', link: '/blog/' },
-      { text: '博客', link: '/blog/posts/' },
-      { text: '导航', link: '/blog/nav/' },
+      { text: '首页', link: '/' },
+      { text: '博客', link: '/posts/' },
+      { text: '导航', link: '/nav/' },
       { text: 'NVH百宝箱', link: 'https://nvhtest.cn' },
     ],
+
+    // 自动侧边栏
+    sidebar: generateSidebar({
+      documentRootPath: '/docs',
+      collapsed: false,
+      collapseDepth: 2,
+      useTitleFromFileHeading: true,
+      useTitleFromFrontmatter: true,
+      hyphenToSpace: true,
+    }),
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/YanleiZhao-lab/nvh-blog' },
@@ -84,5 +95,20 @@ export default defineConfig({
     sidebarMenuLabel: '目录',
     returnToTopLabel: '返回顶部',
     darkModeSwitchLabel: '深浅模式',
+  },
+
+  markdown: {
+    lineNumbers: true,
+    image: {
+      lazyLoading: true,
+    },
+    container: {
+      tipLabel: '提示',
+      warningLabel: '警告',
+      dangerLabel: '危险',
+      infoLabel: '信息',
+      noteLabel: '备注',
+      detailsLabel: '详细信息',
+    },
   },
 })
