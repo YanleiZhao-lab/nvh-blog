@@ -1,23 +1,21 @@
 # NVH Test Blog
 
-NVH 工程研究博客 — VitePress + 飞书同步 + Docker 部署
-
-## 架构
-
-```
-飞书写文章 → Elog 同步到 GitHub → VPS Docker 自动构建部署
-```
+NVH 工程研究博客，基于 VitePress + 飞书同步 + Docker 部署。
 
 ## 目录结构
 
 ```
-├── docs/                 # VitePress 内容目录（飞书同步目标）
-│   ├── .vitepress/       # VitePress 配置 + 主题
-│   ├── *.md              # 文章
-│   └── public/           # 静态资源
-├── Dockerfile            # Docker 构建文件
-├── docker-compose.yml    # Docker Compose 编排
-└── .github/workflows/    # GitHub Actions（可选 CI/CD）
+docs/
+├── .vitepress/
+│   ├── config.mts         # VitePress 配置
+│   └── theme/             # 主题组件和样式
+│       ├── components/    # Vue 组件
+│       ├── style/         # 模块化 CSS
+│       └── index.ts       # 主题入口
+├── posts/                 # 博客文章
+├── nav/                   # 导航页
+├── public/                # 静态资源
+└── index.md               # 首页
 ```
 
 ## 本地开发
@@ -33,6 +31,6 @@ npm run docs:dev
 docker compose up -d --build
 ```
 
-## 许可证
+## 写作
 
-MIT
+飞书知识库写文章 → Elog 同步 → GitHub Actions 自动构建部署

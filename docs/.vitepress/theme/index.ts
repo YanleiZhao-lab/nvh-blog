@@ -2,12 +2,19 @@ import DefaultTheme from 'vitepress/theme'
 import { h, onMounted, watch, nextTick } from 'vue'
 import { useRoute, useData } from 'vitepress'
 import mediumZoom from 'medium-zoom'
-import './style/custom.css'
+import giscusTalk from 'vitepress-plugin-comment-with-giscus'
+import { inBrowser } from 'vitepress'
+import busuanzi from 'busuanzi.pure.js'
+import { NProgress } from 'nprogress-v2/dist/index.js'
+import 'nprogress-v2/dist/index.css'
 
-import ArticleMetadata from './components/ArticleMetadata.vue'
-import GiscusComment from './components/GiscusComment.vue'
-import Busuanzi from './components/Busuanzi.vue'
+import './style/index.css'
+
 import MNavLinks from './components/MNavLinks.vue'
+import ArticleMetadata from './components/ArticleMetadata.vue'
+import Linkcard from './components/Linkcard.vue'
+import backtotop from './components/backtotop.vue'
+import bsz from './components/bsz.vue'
 
 export default {
   extends: DefaultTheme,
@@ -16,33 +23,69 @@ export default {
     const props: Record<string, any> = {}
     const { frontmatter } = useData()
 
+    if (frontmatter.value?.layoutClass) {
+      props.class = frontmatter.value.layoutClass
+    }
+
     return h(DefaultTheme.Layout, props, {
-      // 文章标题下方插入元数据（字数/阅读时间）
       'doc-before': () => h(ArticleMetadata),
-
-      // 文章底部插入评论
-      'doc-after': () => h(GiscusComment),
-
-      // 页脚插入访客统计
-      'layout-bottom': () => h(Busuanzi),
+      'doc-footer-before': () => h(backtotop),
+      'layout-bottom': () => h(bsz),
     })
   },
 
-  enhanceApp({ app }) {
-    // 全局注册 MNavLinks，使 nav 页面可使用 <MNavLinks />
+  enhanceApp({ app, router }) {
     app.component('MNavLinks', MNavLinks)
+    app.component('ArticleMetadata', ArticleMetadata)
+    app.component('Linkcard', Linkcard)
+
+    if (inBrowser) {
+      NProgress.configure({ showSpinner: false })
+      router.onBeforeRouteChange = () => {
+        NProgress.start()
+      }
+      router.onAfterRouteChanged = () => {
+        busuanzi.fetch()
+        NProgress.done()
+      }
+    }
   },
 
   setup() {
     const route = useRoute()
+    const { frontmatter } = useData()
+
     const initZoom = () => {
-      mediumZoom('.vp-doc img:not(.no-zoom):not(.VPImage)', {
-        background: 'var(--vp-c-bg)',
-      })
+      mediumZoom('.main img', { background: 'var(--vp-c-bg)' })
     }
+
     onMounted(() => {
       initZoom()
+
+      nextTick(() => {
+        try {
+          giscusTalk(
+            {
+              repo: 'YanleiZhao-lab/nvh-blog',
+              repoId: 'R_kgDOTv4fGQ',
+              category: 'Announcements',
+              categoryId: 'DIC_kwDOTv4fGc4DC0BQ',
+              mapping: 'pathname',
+              inputPosition: 'bottom',
+              lang: 'zh-CN',
+            },
+            {
+              frontmatter,
+              route,
+            },
+            true
+          )
+        } catch (e) {
+          console.warn('Giscus init deferred:', e)
+        }
+      })
     })
+
     watch(
       () => route.path,
       () => nextTick(() => initZoom())
