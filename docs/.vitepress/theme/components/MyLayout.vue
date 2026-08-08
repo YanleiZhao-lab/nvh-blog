@@ -9,6 +9,7 @@ import MouseFollower from "./MouseFollower.vue"
 import backtotop from "./backtotop.vue"
 import notice from "./notice.vue"
 import bsz from "./bsz.vue"
+import GiscusComment from "./GiscusComment.vue"
 
 const { isDark } = useData()
 
@@ -68,6 +69,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     <template #layout-top>
       <MouseFollower />
       <MouseClick />
+    </template>
+    <template #doc-after>
+      <GiscusComment />
     </template>
     <template #layout-bottom>
       <bsz />
