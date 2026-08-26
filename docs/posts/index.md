@@ -12,6 +12,7 @@
 
 ## 测试方法
 
+- [锤击法模态测试实战指南](./testing/impact-testing-guide.html) — 锤头选择、双击、加窗与相干判据的完整实操要点
 - [FFT 窗函数选择](./testing/fft-window-functions.html) — 从频谱泄漏出发对比四种常用窗函数
 - [FFT 基础流程：从采样率到谱线解释](./testing/fft-flow.html) — 采样率、抗混叠、加窗、平均与谱线判读
 - [传感器与采样配置检查](./testing/sensor-checklist.html) — 加速度计、麦克风、采样率配置检查清单
