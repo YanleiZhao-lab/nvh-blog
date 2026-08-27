@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import { h, onMounted, watch, nextTick } from 'vue'
+import { h, onMounted, watch, nextTick, createApp } from 'vue'
 import { useRoute, useData } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import { inBrowser } from 'vitepress'
@@ -15,6 +15,7 @@ import Linkcard from './components/Linkcard.vue'
 import MyLayout from './components/MyLayout.vue'
 import HomeUnderline from './components/HomeUnderline.vue'
 import confetti from './components/confetti.vue'
+import PyodideRunner from './components/PyodideRunner.vue'
 
 // 彩虹背景动画
 let homePageStyle: HTMLStyleElement | undefined
@@ -39,6 +40,7 @@ export default {
     app.component('Linkcard', Linkcard)
     app.component('HomeUnderline', HomeUnderline)
     app.component('confetti', confetti)
+  app.component('PyodideRunner', PyodideRunner)
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false })
@@ -66,8 +68,26 @@ export default {
       mediumZoom('.main img', { background: 'var(--vp-c-bg)' })
     }
 
+    const enhancePythonBlocks = () => {
+      document.querySelectorAll('div.language-python:not([data-run-enhanced])').forEach(el => {
+        el.setAttribute('data-run-enhanced', '1')
+        const code = el.querySelector('pre')?.textContent || ''
+        if (!code.trim()) return
+        // 跳过太长的代码（>60行不增强）
+        if (code.split('\n').length > 60) return
+        const mount = document.createElement('div')
+        el.parentElement.insertBefore(mount, el.nextSibling)
+        // 用 Vue 动态挂载
+        try {
+          const app = createApp(PyodideRunner, { code })
+          app.mount(mount)
+        } catch (e) { console.warn('pyodide enhance skip', e) }
+      })
+    }
+
     onMounted(() => {
       initZoom()
+      nextTick(() => enhancePythonBlocks())
 
       // 首页彩虹动画
       const isHome = location.pathname === '/blog/' || location.pathname === '/blog'
@@ -97,10 +117,12 @@ export default {
       })
     })
 
+
+
     watch(
       () => route.path,
       () => {
-        nextTick(() => initZoom())
+        nextTick(() => { initZoom(); enhancePythonBlocks() })
         const isHome = route.path === '/' || route.path === '/blog/'
         updateHomePageStyle(isHome)
       }

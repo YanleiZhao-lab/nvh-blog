@@ -27,23 +27,42 @@ const ran = ref(false)
 
 let pyodide = null
 
+const MIRRORS = [
+  'https://registry.npmmirror.com/pyodide/0.26.4/files/',
+  'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
+]
+let loadingPromise = null
+
 async function getPyodide() {
   if (pyodide) return pyodide
-  status.value = '加载 Python 运行时(首次约10秒)…'
-  statusType.value = 'loading'
-  const src = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js'
-  await new Promise((res, rej) => {
-    const s = document.createElement('script')
-    s.src = src
-    s.onload = res
-    s.onerror = rej
-    document.head.appendChild(s)
-  })
-  pyodide = await window.loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
-  })
-  ready.value = true
-  return pyodide
+  if (loadingPromise) return loadingPromise
+  loadingPromise = (async () => {
+    let lastErr = null
+    for (const base of MIRRORS) {
+      try {
+        status.value = '加载 Python 运行时(首次约10秒)…'
+        statusType.value = 'loading'
+        if (!window.loadPyodide) {
+          await new Promise((res, rej) => {
+            const s = document.createElement('script')
+            s.src = base + 'pyodide.js'
+            s.onload = res
+            s.onerror = () => rej(new Error('load fail: ' + base))
+            document.head.appendChild(s)
+          })
+        }
+        pyodide = await window.loadPyodide({ indexURL: base })
+        ready.value = true
+        return pyodide
+      } catch (e) {
+        lastErr = e
+        // 清理失败的 loadPyodide 状态，试下一个源
+      }
+    }
+    loadingPromise = null
+    throw new Error('所有 CDN 均加载失败: ' + lastErr)
+  })()
+  return loadingPromise
 }
 
 async function run() {
@@ -69,7 +88,7 @@ async function run() {
     ran.value = true
   } catch (e) {
     error.value = String(e).split('\n').slice(-8).join('\n')
-    status.value = '出错'
+    status.value = '出错（网络或运行时问题）'
     statusType.value = 'err'
   } finally {
     busy.value = false
