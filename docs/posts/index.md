@@ -14,6 +14,8 @@
 
 - [功率谱密度 PSD：随机信号为什么必须用它](./theory/psd-explained.html) — Autopower 幅值随分辨率变化，除以 Δf 后随机数据可跨分辨率对比；正弦信号正好相反，谐波幅值判读用 Autopower
 
+- [窗函数修正系数：幅值校正 vs 能量校正](./theory/window-correction-factors.html) — 汉宁窗把谱峰压低一半，幅值系数 2.00 与能量系数 1.633 只能二选一：读谱峰用幅值校正、算 RMS 用能量校正，Testlab 的 RMS 计算永远在后台用能量校正值
+
 ## 操作实践
 
 （测试软件操作、数据处理技巧，持续更新）
