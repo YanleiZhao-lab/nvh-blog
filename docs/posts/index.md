@@ -8,6 +8,8 @@
 
 - [dB 与对数刻度：为什么声学量都用分贝](./theory/decibel-basics.html) — 分贝不是单位而是对数比值，功率类 10 lg 与幅值类 20 lg 的区别、参考值、能量叠加与 A 计权
 
+- [谱与自功率谱的区别](./theory/spectrum-vs-autopower.html) — 只差一个复共轭乘法：Spectrum 保相位、Autopower 消相位，多帧平均时一个幅值衰减一个稳定收敛，ODS 等既要相位又要平均的场合用相位参考谱
+
 - [混叠：采样定理的工程代价与抗混叠滤波器](./theory/aliasing.html) — 高于带宽的频率镜像折叠成假低频，Span 只有 80% 带宽，带宽按关心频率的 1.25 倍设置
 
 ## 操作实践
