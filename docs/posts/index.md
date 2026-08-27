@@ -16,6 +16,8 @@
 
 - [窗函数修正系数：幅值校正 vs 能量校正](./theory/window-correction-factors.html) — 汉宁窗把谱峰压低一半，幅值系数 2.00 与能量系数 1.633 只能二选一：读谱峰用幅值校正、算 RMS 用能量校正，Testlab 的 RMS 计算永远在后台用能量校正值
 
+- [RMS 与总级：从时域到频域的能量守恒](./theory/rms-overall-level.html) — 谱的 RMS 就是总级：谱线平方和开根号，Parseval 定理保证时域频域对得上；手动复算须核对线性单位、RMS 格式、能量校正三件事，Peak 格式硬算偏大 3 dB
+
 ## 操作实践
 
 （测试软件操作、数据处理技巧，持续更新）
