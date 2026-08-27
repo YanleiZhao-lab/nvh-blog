@@ -88,7 +88,7 @@ Simcenter 官方指南给出的验收标准：力谱在关注频段内应平坦�
 
 力通道做触发源，设置触发电平捕捉冲击开始时刻，同时配置预触发（pre-trigger）保留完整的力脉冲上升沿。
 
-![Trigger 子表：触发电平与预触发设置]({{IMG}}trigger-setup.png)
+![Trigger 子表：触发电平与预触发设置](/images/impact-testing/trigger-setup.png)
 
 *Trigger 子工作表，预触发不足会切掉力脉冲前沿（图源：Siemens）*预触发时间不足，力脉冲前沿被切掉，FRF 幅值系统性偏低。
 
@@ -104,7 +104,7 @@ Simcenter 官方指南给出的验收标准：力谱在关注频段内应平坦�
 - **响应信号：理想情况不加窗**。如果测量时间足够长，响应自然衰减到零，无泄漏。Simcenter 官方的态度很明确：与其加指数窗，不如延长测量时间——指数窗会引入附加阻尼，必须事后修正，修正是潜在的误差源。
 - **响应衰减不完时：指数窗（Exponential Window）** + 阻尼修正。结构阻尼大、测量时间受限制时才用。
 
-![指数窗示意]({{IMG}}exponential-window.png)
+![指数窗示意](/images/impact-testing/exponential-window.png)
 
 *指数窗（图源：Siemens）*
 
@@ -120,7 +120,7 @@ Simcenter 官方指南给出的验收标准：力谱在关注频段内应平坦�
 
 FRF 测完先看相干（Coherence），再看幅值和相位：
 
-![FRF（下）与相干函数（上）：反共振处相干下降属正常]({{IMG}}frf-coherence.png)
+![FRF（下）与相干函数（上）：反共振处相干下降属正常](/images/impact-testing/frf-coherence.png)
 
 *相干函数大部分频段接近 1，仅在反共振（响应低、噪声占比高）处下降（图源：Siemens）*
 
