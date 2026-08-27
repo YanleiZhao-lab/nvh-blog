@@ -4,6 +4,8 @@
 
 ## 理论基础
 
+- [声学量Q：体积加速度的物理意义](./theory/acoustic-quantity-q.html) — 声学系统的"力"：面积×加速度的面积分，高频相位相消要求细分区；Q-source 互易法靠 P/F≡A/Q（均为 1/m²）把 12 次敲击合成 1 次测量，标定单决定通道设置
+
 - [量化与量程：ADC 位数如何决定动态范围](./theory/gain-range-quantization.html) — bin size = 量程/2^位数，信号占量程比例决定可用台阶数，增益在 ADC 前把信号顶到满量程，电平指示条与自动量程的设置判据
 
 - [dB 与对数刻度：为什么声学量都用分贝](./theory/decibel-basics.html) — 分贝不是单位而是对数比值，功率类 10 lg 与幅值类 20 lg 的区别、参考值、能量叠加与 A 计权
