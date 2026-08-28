@@ -42,6 +42,7 @@
 
 （测试软件操作、数据处理技巧，持续更新）
 
+- [彩色图谱判读：colormap 的正确打开方式](./practice/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
 - [RPM 信号去毛刺：转速信号的清洗](./practice/rpm-spike-removal.html) — 偶发尖峰用 Time Data Editor 手动替换，每转规律毛刺用 TACHO 统计剔除函数，参数含义与选择依据
 
 ## 研究笔记
