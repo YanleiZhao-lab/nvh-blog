@@ -47,6 +47,7 @@
 - [彩色图谱判读：colormap 的正确打开方式](./practice/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
 - [RPM 信号去毛刺：转速信号的清洗](./practice/rpm-spike-removal.html) — 偶发尖峰用 Time Data Editor 手动替换，每转规律毛刺用 TACHO 统计剔除函数，参数含义与选择依据
 - [逐循环平均：发动机工况数据处理](./practice/cycle-cycle-averaging.html) — 先到角域再谈统计：Free Run (angle) 切 720° 循环、Map Statistics AD 算平均包络、Cyl Offset 多缸对齐、Frame Statistics 门区抓每循环峰值
+- [Time Signal Calculator：时域公式处理实用技巧](./practice/time-signal-calculator-tips.html) — 公式表串起数据后天补救：滤波函数 Sample Frequency 只管预览、积分前先高通防漂、8 Hz 方波造虚拟转速通道喂给 HARMONIC_FILTER 扣定频谐波族，MAD 统计剔毛刺的 numpy 复现
 
 ## 研究笔记
 
