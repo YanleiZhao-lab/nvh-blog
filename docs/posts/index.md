@@ -54,6 +54,8 @@
 - [三向加速度计通道设置技巧](./practice/triaxial-channel-tricks.html) — 三招官方技巧防飞点：Auto Fill 拖拽批量填 PointId/Direction、V-24 单线三向头结构上杜绝接错线、MultiChannel 设 Triax-RH 强制右手系；附评论区隐藏大坑——Direction 只是标签不翻极性，标 -X 必须同时给灵敏度取负，RMS 查不出而方向投影一测就露馅的 numpy 复现
 - [Time Signal Calculator：时域公式处理实用技巧](./practice/time-signal-calculator-tips.html) — 公式表串起数据后天补救：滤波函数 Sample Frequency 只管预览、积分前先高通防漂、8 Hz 方波造虚拟转速通道喂给 HARMONIC_FILTER 扣定频谐波族，MAD 统计剔毛刺的 numpy 复现
 
+- [谐波去除：从信号中剥离已知干扰](./practice/harmonic-removal.html) — 不滤波而是先估计再减：角域循环平均只留同步成分、非同步成分被平均掉，四步算法剥掉 zebra 盘偏心假 1 阶、多旋转部件阶次归属、8 Hz 电力谐波定频污染；六参数表与相位差 360 度乘阶次小数部分的 numpy 复现
+
 ## 研究笔记
 
 - [NVH 指标体系与工程解释](./research/nvh-metrics.html) — 响度、尖锐度、粗糙度等指标的完整工程解释
