@@ -48,6 +48,7 @@
 
 （测试软件操作、数据处理技巧，持续更新）
 
+- [模态拟合入门：稳定图与极点选择](./practice/modal-curvefitting-start.html) — 拟合器解的是极点估计问题：LSCE 整体估计一次算出全套频率阻尼、稳定图上物理模态连成光柱而计算模态随阶数漂移、频率/阻尼/振型三稳才选、密集模态靠多参考点模态参与解耦；附相关函数 Prony 拟合亲眼看计算模态漂移的 numpy 演示
 - [彩色图谱判读：colormap 的正确打开方式](./practice/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
 - [RPM 信号去毛刺：转速信号的清洗](./practice/rpm-spike-removal.html) — 偶发尖峰用 Time Data Editor 手动替换，每转规律毛刺用 TACHO 统计剔除函数，参数含义与选择依据
 - [逐循环平均：发动机工况数据处理](./practice/cycle-cycle-averaging.html) — 先到角域再谈统计：Free Run (angle) 切 720° 循环、Map Statistics AD 算平均包络、Cyl Offset 多缸对齐、Frame Statistics 门区抓每循环峰值
