@@ -43,14 +43,13 @@ async function getPyodide() {
         status.value = '加载 Python 运行时(首次约10秒)…'
         statusType.value = 'loading'
         if (!window.loadPyodide) {
-          await new Promise((res, rej) => {
-            const s = document.createElement('script')
-            const v = base.includes('/pyodide/') ? '?v=26' : ''
-            s.src = base + 'pyodide.js' + v
-            s.onload = res
-            s.onerror = () => rej(new Error('load fail: ' + base))
-            document.head.appendChild(s)
-          })
+          // fetch + eval：同域最稳（script 标签在部分环境静默失败）
+          const r = await fetch(base + 'pyodide.js?v=26')
+          if (!r.ok) throw new Error('fetch pyodide.js: ' + r.status)
+          const code = await r.text()
+          // eslint-disable-next-line no-eval
+          (0, eval)(code)
+          if (!window.loadPyodide) throw new Error('loadPyodide 未定义')
         }
         let idxURL = base.startsWith('/') ? new URL(base, location.origin).href : base
         // Pyodide 0.26 支持 indexURL 带 query？不支持 — 改用 lockFileURL 方式不可靠
