@@ -53,6 +53,7 @@
 - [模态拟合入门：稳定图与极点选择](./practice/modal-curvefitting-start.html) — 拟合器解的是极点估计问题：LSCE 整体估计一次算出全套频率阻尼、稳定图上物理模态连成光柱而计算模态随阶数漂移、频率/阻尼/振型三稳才选、密集模态靠多参考点模态参与解耦；附相关函数 Prony 拟合亲眼看计算模态漂移的 numpy 演示
 - [彩色图谱判读：colormap 的正确打开方式](./practice/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
 - [RPM 信号去毛刺：转速信号的清洗](./practice/rpm-spike-removal.html) — 偶发尖峰用 Time Data Editor 手动替换，每转规律毛刺用 TACHO 统计剔除函数，参数含义与选择依据
+- [斑马带接缝修正：扭振测量的隐形杀手](./practice/zebra-tape-correction.html) — 缠带收尾的搭接缝每转制造一次假转速跳变，专门污染扭振最关心的低阶段：豁口低估、挤压高估、每转固定角度形状可重复三要素识别；ZEBRA_MOMENTS_TO_RPM 按理论角度全局重排脉冲而随机毛刺先剔后修；附单点几何缺陷经间隔倒数放大 52 倍伪装成扭振的 numpy 复现
 - [逐循环平均：发动机工况数据处理](./practice/cycle-cycle-averaging.html) — 先到角域再谈统计：Free Run (angle) 切 720° 循环、Map Statistics AD 算平均包络、Cyl Offset 多缸对齐、Frame Statistics 门区抓每循环峰值
 - [三向加速度计通道设置技巧](./practice/triaxial-channel-tricks.html) — 三招官方技巧防飞点：Auto Fill 拖拽批量填 PointId/Direction、V-24 单线三向头结构上杜绝接错线、MultiChannel 设 Triax-RH 强制右手系；附评论区隐藏大坑——Direction 只是标签不翻极性，标 -X 必须同时给灵敏度取负，RMS 查不出而方向投影一测就露馅的 numpy 复现
 - [Time Signal Calculator：时域公式处理实用技巧](./practice/time-signal-calculator-tips.html) — 公式表串起数据后天补救：滤波函数 Sample Frequency 只管预览、积分前先高通防漂、8 Hz 方波造虚拟转速通道喂给 HARMONIC_FILTER 扣定频谐波族，MAD 统计剔毛刺的 numpy 复现
