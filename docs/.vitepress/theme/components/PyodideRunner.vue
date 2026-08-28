@@ -45,13 +45,16 @@ async function getPyodide() {
         if (!window.loadPyodide) {
           await new Promise((res, rej) => {
             const s = document.createElement('script')
-            s.src = base + 'pyodide.js'
+            const v = base.includes('/pyodide/') ? '?v=26' : ''
+            s.src = base + 'pyodide.js' + v
             s.onload = res
             s.onerror = () => rej(new Error('load fail: ' + base))
             document.head.appendChild(s)
           })
         }
-        const idxURL = base.startsWith('/') ? new URL(base, location.origin).href : base
+        let idxURL = base.startsWith('/') ? new URL(base, location.origin).href : base
+        // Pyodide 0.26 支持 indexURL 带 query？不支持 — 改用 lockFileURL 方式不可靠
+        // 直接方案：asm.js 的 404 缓存需要 CF purge，这里用 canonical URL
         pyodide = await window.loadPyodide({ indexURL: idxURL })
         ready.value = true
         return pyodide
