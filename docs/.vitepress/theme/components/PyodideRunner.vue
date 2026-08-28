@@ -28,8 +28,8 @@ const ran = ref(false)
 let pyodide = null
 
 const MIRRORS = [
-  'https://registry.npmmirror.com/pyodide/0.26.4/files/',
-  'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
+  '/pyodide/',                                  // 自托管（同域，最稳）
+  'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',  // 备用
 ]
 let loadingPromise = null
 
@@ -51,7 +51,8 @@ async function getPyodide() {
             document.head.appendChild(s)
           })
         }
-        pyodide = await window.loadPyodide({ indexURL: base })
+        const idxURL = base.startsWith('/') ? new URL(base, location.origin).href : base
+        pyodide = await window.loadPyodide({ indexURL: idxURL })
         ready.value = true
         return pyodide
       } catch (e) {
