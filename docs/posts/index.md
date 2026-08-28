@@ -24,6 +24,8 @@
 
 - [dB 与对数刻度：为什么声学量都用分贝](./theory/decibel-basics.html) — 分贝不是单位而是对数比值，功率类 10 lg 与幅值类 20 lg 的区别、参考值、能量叠加与 A 计权
 
+- [平均技术对比：同一组数据，五种平均差出三倍](./theory/averaging-types.html) — 3g/5g/10g 三帧数据五种平均从 3 到 10 g：能量平均平方放大高幅值帧（6.68 g）、线性平均保相位、指数平均顺序敏感（3,5,10 得 7 g 而 5,10,3 得 5.25 g）、Max/Min 是峰值保持不收敛；声学默认能量平均、worst-case 用 Maximum、EWF 是记忆长度旋钮
+
 - [谱与自功率谱的区别](./theory/spectrum-vs-autopower.html) — 只差一个复共轭乘法：Spectrum 保相位、Autopower 消相位，多帧平均时一个幅值衰减一个稳定收敛，ODS 等既要相位又要平均的场合用相位参考谱
 
 - [混叠：采样定理的工程代价与抗混叠滤波器](./theory/aliasing.html) — 高于带宽的频率镜像折叠成假低频，Span 只有 80% 带宽，带宽按关心频率的 1.25 倍设置
