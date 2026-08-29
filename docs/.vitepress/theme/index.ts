@@ -68,7 +68,10 @@ export default {
       mediumZoom('.main img', { background: 'var(--vp-c-bg)' })
     }
 
+    // 在线 Python 运行暂时下线（浏览器兼容问题）：恢复时改回 true
+    const PYODIDE_ENABLED = false
     const enhancePythonBlocks = () => {
+      if (!PYODIDE_ENABLED) return
       document.querySelectorAll('div.language-python:not([data-run-enhanced])').forEach(el => {
         el.setAttribute('data-run-enhanced', '1')
         const code = el.querySelector('pre')?.textContent || ''
