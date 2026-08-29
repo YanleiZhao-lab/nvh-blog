@@ -68,6 +68,13 @@ async function getPyodide() {
   return loadingPromise
 }
 
+const BLOCKED = /\b(import\s+(os|sys|subprocess|socket|shutil|pathlib|ctypes|requests|urllib|http|pickle)|from\s+(os|sys|subprocess|socket|pathlib|ctypes|requests|urllib)\b|\bopen\s*\(|\bexec\s*\(|\beval\s*\(|__import__|\bos\.|\bsys\.)/
+
+function guard(code) {
+  if (BLOCKED.test(code)) throw new Error('安全限制：演示代码仅允许 numpy/math 演示用途')
+  if (code.split('\n').length > 60) throw new Error('安全限制：代码超过 60 行')
+}
+
 async function run() {
   busy.value = true
   error.value = ''
@@ -75,6 +82,7 @@ async function run() {
   status.value = '运行中…'
   statusType.value = 'loading'
   try {
+    guard(props.code)
     const py = await getPyodide()
     let out = ''
     py.setStdout({ batched: (s) => { out += s + '\n' } })
@@ -84,14 +92,18 @@ async function run() {
       await py.loadPackage('numpy')
       status.value = '已加载 numpy…'
     }
-    await py.runPythonAsync(props.code)
-    output.value = out.trim()
+    // 25 秒超时熔断（防死循环）
+    await Promise.race([
+      py.runPythonAsync(props.code),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('超时中断（25秒）：可能存在死循环')), 25000))
+    ])
+    output.value = out.trim().slice(0, 20000)
     status.value = '完成 ✓'
     statusType.value = 'ok'
     ran.value = true
   } catch (e) {
     error.value = String(e).split('\n').slice(-8).join('\n')
-    status.value = '出错（网络或运行时问题）'
+    status.value = '出错'
     statusType.value = 'err'
   } finally {
     busy.value = false
