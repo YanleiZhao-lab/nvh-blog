@@ -97,3 +97,4 @@
 - [FFT 窗函数选择](./testing/fft-window-functions.html) — 从频谱泄漏出发对比四种常用窗函数
 - [FFT 基础流程：从采样率到谱线解释](./testing/fft-flow.html) — 采样率、抗混叠、加窗、平均与谱线判读
 - [传感器与采样配置检查](./testing/sensor-checklist.html) — 加速度计、麦克风、采样率配置检查清单
+- [扭振阶次实操三招：通道组、纵轴量纲与三维动画](./practice/torsional-orders-tips.html) — tacho 通道组改 Vibration 一份信号两种身份免分线；RPM 波动除以 2*pi*O*f_rot 换角度（±25 RPM @ 2 阶 2600 RPM 折合约 0.275 度峰值），积分前先洗净转速信号；RMS/峰值/峰峰值差 1.414 到 2.828 倍报告必须写明口径；Torsional Node 圆盘动画把扭转 ODS 直观呈现
