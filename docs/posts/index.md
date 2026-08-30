@@ -109,6 +109,7 @@
 - [阶次切线幅值：怎样取才是对的](./practice/order-cuts-amplitude.html) — 切线幅值是带内能量的 RMS 求和而非读单根谱线：带宽太窄漏涂抹带、太宽吃进邻阶，同一组数据能差出数 dB 直接决定过没过目标线；四种带宽模式 Order/百分比/频率/谱线数各对应一种随 RPM 变化的几何，切前必须对着 colormap 目视定带宽、报告里注明设置，numpy 演示 0.05/0.12/0.60 阶三个带宽差出 7.3 dB；Testlab 里 Throughput 批处理与 Processing Cursor 交互切法及 PWM 阶次的 Offset 用法
 - [矢量合成：把三向振动变成一个可读数](./practice/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](./practice/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
+- [MIMO 多输入多输出测试：多激振器协同激励的收益与代价](./practice/mimo-testing.html) — 多台激振器买来三样东西：参考点避开模态节点的冗余、模态参与因子对密集/重根模态的解耦、FRF 矩阵整行整列支撑互易性自检；正规方程三步推出矩阵 H1 估计（H=Syx·Sxx^-1），命门是输入互不相关——相关系数 0 到 0.999 条件数 1.4 涨到 2117、FRF 误差涨四个数量级，而常相干反而虚高到 0.999 掩盖病情；主分量分析鉴别独立源、2~4 台激振器是甜点区，LSCE/CMIF 吃多参考数据
 
 ## 研究笔记
 
