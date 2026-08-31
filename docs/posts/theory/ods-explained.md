@@ -145,11 +145,11 @@ $$
 判断一幅 ODS 是否“某一阶振型占主导”，标准工具是 MAC（Modal Assurance Criterion，模态置信判据）与 MSF（Modal Scale Factor，模态比例因子）。以 $[V]$ 表示一组模态振型（或 ODS）构成的矩阵，$\{V_{jk}\}$、$\{V_{lk}\}$ 为其中第 $j$、$l$ 列向量，上标 $H$ 表示共轭转置，则（式 17-12、17-13）：
 
 $$
-MSF_{jlk} = \frac{\{V_{jk}\}^H \{V_{lk}\}}{\{V_{jk}\}^H \{V_{jk}\}}
+MSF_{jlk} = \frac{V_{jk}^{H} V_{lk}}{V_{jk}^{H} V_{jk}}
 $$
 
 $$
-MAC_{jlk} = \frac{\left| \{V_{jk}\}^H \{V_{lk}\} \right|^2}{\left( \{V_{jk}\}^H \{V_{jk}\} \right) \left( \{V_{lk}\}^H \{V_{lk}\} \right)}
+MAC_{jlk} = \frac{\left| V_{jk}^{H} V_{lk} \right|^{2}}{\left( V_{jk}^{H} V_{jk} \right) \left( V_{lk}^{H} V_{lk} \right)}
 $$
 
 两个向量线性相关（一幅是另一幅的常数倍）时 MAC 接近 1（100%），MSF 即二者之间的比例常数；彼此无关时 MAC 接近零，MSF 无意义。把实测 ODS 与各阶计算/试验模态振型逐一计算 MAC，值接近 100% 的那阶即主导模态。按 LMS 手册的判据：ODS 与模态振型彼此对应时，MAC 应接近 100%，MSF 应接近于整数。
