@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import mathjax3 from 'markdown-it-mathjax3'
 import { generateSidebar } from 'vitepress-sidebar'
 
 export default defineConfig({
@@ -90,6 +91,7 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: true,
+    math: true,
     image: {
       lazyLoading: true,
     },
@@ -102,6 +104,7 @@ export default defineConfig({
       detailsLabel: '详细信息',
     },
     config: (md) => {
+      md.use(mathjax3)
       md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
         let htmlResult = slf.renderToken(tokens, idx, options)
         if (tokens[idx].tag === 'h1') htmlResult += `<ArticleMetadata />`
