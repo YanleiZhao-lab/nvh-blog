@@ -79,7 +79,7 @@
 
 - [功率谱密度 PSD：随机信号为什么必须用它](theory/signal-processing/psd-explained.html) — Autopower 幅值随分辨率变化，除以 Δf 后随机数据可跨分辨率对比；正弦信号正好相反，谐波幅值判读用 Autopower
 
-- [窗函数修正系数：幅值校正 vs 能量校正](theory/signal-processing/window-correction-factors.html) — 汉宁窗把谱峰压低一半，幅值系数 2.00 与能量系数 1.633 只能二选一：读谱峰用幅值校正、算 RMS 用能量校正，Testlab 的 RMS 计算永远在后台用能量校正值
+- [窗函数修正系数：幅值校正 vs 能量校正](theory/signal-processing/window-correction-factors.html) — 幅值系数 Ka=N/sum(w) 与能量系数 Ke=sqrt(N/sum(w^2)) 从汉宁窗定义分步推导（相干增益 1/2 与均方增益 3/8）：汉宁窗 2.00/1.633、平顶窗 4.18/2.26 全系数表；选错模式 RMS 偏差 +22.5%（Ka/Ke=1.225）；Testlab Automatic 按数据类型分配、RMS 计算后台换用能量校正值
 
 - [RMS 与总级：从时域到频域的能量守恒](theory/signal-processing/rms-overall-level.html) — 谱的 RMS 就是总级：谱线平方和开根号，Parseval 定理保证时域频域对得上；手动复算须核对线性单位、RMS 格式、能量校正三件事，Peak 格式硬算偏大 3 dB
 - [吉布斯现象：为什么陡峭滤波器会振铃](theory/signal-processing/gibbs-phenomenon.html) — 时域突变需要无限带宽，实测必然截断，边沿就留下约 9% 的振铃过冲：截断量决定振铃时长、滤波器陡度决定振铃幅度，压振铃要靠缓滚降 Bessel 而不是加带宽
