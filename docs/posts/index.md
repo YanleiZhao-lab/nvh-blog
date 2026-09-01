@@ -67,7 +67,7 @@ title: "📖 全部文章"
 
 - [倍频程：人耳的频率分辨与计权](theory/acoustics-basics/octaves-hearing.html) — 频率轴从物理等间距改为听觉等间距：带宽逐带翻倍、白噪声每带约升 3 dB；滤波法倍频程不是 FFT 分组求和，A 计权 1 kHz 零点低频显著衰减，dBA 对低频源偏乐观
 
-- [声压、声功率、声强：三个量到底什么区别](theory/acoustics-basics/pressure-power-intensity.html) — 暖房类比讲透三个量：声压是某点的温度、声功率是暖气瓦数、声强是有方向的热流；Lw 恒 103 dB 而声压每倍距掉 6 dB，验收条款必须写清是哪个量的 dB
+- [声压、声功率、声强：定义、分贝换算与选用判据](theory/acoustics-basics/pressure-power-intensity.html) — 暖气类比说明三个量的物理图像：声压是某点的温度、声功率是暖气瓦数、声强是有方向的热流；Lw 恒 103 dB 而声压每倍距降 6 dB，验收条款必须写明是哪个量的分贝值
 
 - [声学量Q：体积加速度的物理意义](theory/acoustics-basics/acoustic-quantity-q.html) — 声学系统的"力"：面积×加速度的面积分，高频相位相消要求细分区；Q-source 互易法靠 P/F≡A/Q（均为 1/m²）把 12 次敲击合成 1 次测量，标定单决定通道设置
 
