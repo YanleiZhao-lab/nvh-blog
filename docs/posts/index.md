@@ -44,7 +44,7 @@
 
 - [PWM 开关噪声：电机啸叫的频率指纹](theory/acoustics-basics/pwm-switching-noise.html) — 电动车 colormap 上那族"不穿零频"的悬空曲线是逆变器开关的频率指纹：机械阶次转速归零必落地，开关族以 2500/5000/10000 Hz 为中心、边带间距等于电频率随转速散开，幅值可高达电机本体；5000 Hz 在 600 到 12000 rpm 间折算表观阶次 500 到 25 阶，别当机械阶次查齿轮；整改抬基频出听阈（动效率）或随机 PWM 摊能量（峰值降到 5%，谱底抬升）
 - [声品质评价指标：响度、尖锐度、粗糙度](theory/acoustics-basics/sound-quality-metrics.html) — dB(A) 相同声音感受可以完全不同：宋标尺让响度可线性沟通（每 +10 方翻倍），Zwicker 法沿 Bark 临界带算局部响度、显式计入掩蔽；尖锐度 acum 盯高频占比（g(z) 高于 16 Bark 指数抬升）；粗糙度 asper 与抖动 vacil 以调制频率 15～20 Hz 分界，各在 70 Hz 与 4 Hz 最敏感；电驱呜呜声、关门声这类"不响但烦"的问题就该用这组指标
-- [清晰度指数与语言干扰级：车里说话还听得清吗](theory/acoustics-basics/articulation-index.html) — 决定"话能不能听清"的不是 dBA 是语言频带：AI 按 1/3 倍频程计权算可懂度余额（私密上限 0.05），PSIL/ANSI-SIL 三四个带级平均快速分级（口径差 1~2.5 dB 不可混比）；67 dBA 轰鸣车与 56 dBA 风噪车 PSIL 打平、2 kHz 带信噪比 6 dB vs 14 dB 的 numpy 对照
+- [清晰度指数与语言干扰级：语言频带内的可懂度评价](theory/acoustics-basics/articulation-index.html) — 决定"话能不能听清"的不是 dBA 是语言频带：AI 按 1/3 倍频程计权算可懂度余额（私密上限 0.05），PSIL/ANSI-SIL 三四个带级平均快速分级（口径差 1~2.5 dB 不可混比）；67 dBA 轰鸣车与 56 dBA 风噪车 PSIL 打平、2 kHz 带信噪比 6 dB vs 14 dB 的 numpy 对照
 
 - [从FRF提取阻尼：3dB带宽法的原理、误差来源与Testlab游标](theory/modal-analysis/damping-from-frf.html) — 共振峰宽度与阻尼成正比：峰顶下 3dB 量带宽，Q=f0/(f2-f1)、ζ=1/(2Q)；Q=25 的峰带宽仅 4 Hz，df=2 Hz 谱线直读 Q 偏低 33%，插值可救；指数窗虚增阻尼满足 ζ_eq=ζ+1/(2πf0τ)，τ=0.1s 时 2% 被读成 3.51%，Testlab 拟合与 R18 游标自动补偿；密集模态峰重叠时 3dB 法失效，换曲线拟合联合多张 FRF
 
