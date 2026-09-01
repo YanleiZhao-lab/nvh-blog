@@ -60,7 +60,7 @@ $$EU_{act} = EU_{rec} \times \frac{S_{rec}}{S_{act}}$$
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-换成分贝视角更便于快速心算。幅值比例 $k$ 对应 $20\lg k$ dB（幅值平方才是功率，所以是 20 不是 10，推导见《[dB 与对数刻度](../../theory/decibel-basics.html)》）：
+换成分贝视角更便于快速心算。幅值比例 $k$ 对应 $20\lg k$ dB（幅值平方才是功率，所以是 20 不是 10，推导见《[dB 与对数刻度](../../theory/acoustics-basics/decibel-basics.html)》）：
 
 | 错填、实际 | 比例因子 | 幅值偏差 | 典型场景 |
 | --- | --- | --- | --- |
@@ -104,7 +104,7 @@ print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixe
 
 ## 四、Testlab 实操六步：Time Signal Calculator
 
-思路就是把第二节的公式落成一行 TSC 公式：新建 trace = 原始通道 × 比例因子。Time Signal Calculator 的启用与函数体系在《[Time Signal Calculator 实用技巧](../../practice/time-signal-calculator-tips.html)》里讲过，这里只走校准修正这条流程。
+思路就是把第二节的公式落成一行 TSC 公式：新建 trace = 原始通道 × 比例因子。Time Signal Calculator 的启用与函数体系在《[Time Signal Calculator 实用技巧](./time-signal-calculator-tips.html)》里讲过，这里只走校准修正这条流程。
 
 1. **装载数据**：Navigator 里右键 .LDSF 文件，选 Add to Input Basket，数据进 Time Data Selection 工作表；
 2. **启用插件**：Tools -> Add-ins 勾选 Time Signal Calculator，公式表出现在工作表底部；
@@ -153,7 +153,7 @@ print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixe
 
 TSC 修正只作用于**时域历程**。之前算好的频谱、阶次切片、自功率谱不会跟着变——它们的幅值同样错了，必须用修正后的时域数据重新处理一遍。好在时历是所有后续分析的源头，源头正了，重算一遍谱水到渠成。
 
-真正救不回的是**硬件层面已经损失的信息**：过载削波砍掉的峰值、量程过大导致的量化粗噪，这些在电压变成数字的那一刻就定型了，任何后处理系数只能缩放、不能还原。判断依据见《[信号过载：削波如何毁掉频谱](../../theory/overload-clipping-distortion.html)》与《[量化与量程](../../theory/gain-range-quantization.html)》。
+真正救不回的是**硬件层面已经损失的信息**：过载削波砍掉的峰值、量程过大导致的量化粗噪，这些在电压变成数字的那一刻就定型了，任何后处理系数只能缩放、不能还原。判断依据见《[信号过载：削波如何毁掉频谱](../../theory/signal-processing/overload-clipping-distortion.html)》与《[量化与量程](../../theory/signal-processing/gain-range-quantization.html)》。
 
 ::: warning 工程注意
 修完别急着交付：拿一条修正后的数据与同测点正常通道做量级交叉核对（比如悬置上下方加速度、左右对称点），比例因子敲反这种低级错误靠交叉核对十分钟就能暴露。修正记录也要留档——Run 后缀、修正因子、原灵敏度、真实灵敏度四项写进试验记录，半年后有人翻数据时不至于一头雾水。

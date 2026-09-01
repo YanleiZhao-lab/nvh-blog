@@ -15,12 +15,12 @@
     "@mdit-vue/shared": "^0.12.0",
     "busuanzi.pure.js": "^1.0.2",
     "canvas-confetti": "^1.9.3",
+    "markdown-it-mathjax3": "^4.3.2",
     "medium-zoom": "^1.1.0",
     "nprogress-v2": "^1.0.5",
     "vitepress": "^1.5.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.1",
     "vitepress-plugin-group-icons": "^1.2.4",
-    "vitepress-sidebar": "^1.30.0",
-    "markdown-it-mathjax3": "^4.3.2"
+    "vitepress-sidebar": "^1.30.0"
   }
 }
