@@ -35,6 +35,8 @@ export default defineConfig({
       useTitleFromFileHeading: true,
       useTitleFromFrontmatter: true,
       hyphenToSpace: true,
+      // posts/index.md 生成可点击的「全部文章」入口（而不是仅作分组标题）
+      manualIndexRoute: true,
     }),
 
     search: {
