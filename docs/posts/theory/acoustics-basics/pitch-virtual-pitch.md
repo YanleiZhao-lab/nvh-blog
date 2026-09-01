@@ -175,5 +175,5 @@ print("mel: 8000 Hz = 2100 mel, 1300 Hz = 1050 mel，恰好减半")
 ## 相关阅读
 
 - [声品质评价指标：响度、尖锐度、粗糙度](./sound-quality-metrics.html)
-- [声音的掩蔽效应：为什么电动车的提示音要抢在路噪前面](./masking-effect.html)
+- [声音的掩蔽效应：临界带、响度计算与 AVAS 设计判据](./masking-effect.html)
 - [清晰度指数与语言干扰级：车里说话还听得清吗](./articulation-index.html)
