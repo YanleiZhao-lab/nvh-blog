@@ -88,7 +88,7 @@ title: "📖 全部文章"
 - [RMS 与总级：从时域到频域的能量守恒](theory/signal-processing/rms-overall-level.html) — 谱的 RMS 就是总级：谱线平方和开根号，Parseval 定理保证时域频域对得上；手动复算须核对线性单位、RMS 格式、能量校正三件事，Peak 格式硬算偏大 3 dB
 - [吉布斯现象：为什么陡峭滤波器会振铃](theory/signal-processing/gibbs-phenomenon.html) — 时域突变需要无限带宽，实测必然截断，边沿就留下约 9% 的振铃过冲：截断量决定振铃时长、滤波器陡度决定振铃幅度，压振铃要靠缓滚降 Bessel 而不是加带宽
 
-- [隔声量测量：传声损失TL的实验室方法](theory/acoustics-basics/sound-transmission-loss.html) — TL = 10 lg(Wi/Wt) 且强依赖频率；3% 裸露或 1% 开孔就能把 30 dB 材料打到 20 dB 以下，"第一个洞最贵"；阻抗管两负载法测消声器管路、双室声强法测前壁板顺带拿泄漏云图、双混响室声压法测建筑规范件
+- [隔声量测量：传声损失TL的实验室方法](theory/acoustics-basics/sound-transmission-loss.html) — TL = 10 lg(Wi/Wt) 且强依赖频率；3% 裸露或 1% 开孔即可把 30 dB 材料的等效 TL 降到 20 dB 以下，首个泄漏造成的损失最大；阻抗管两负载法测消声器管路、双室声强法测前壁板并给出泄漏云图、双混响室声压法测建筑规范件
 - [声强法测声功率：双传声器探头与ISO 9614扫描](theory/acoustics-basics/sound-intensity-probe-power.html) — 声强对封闭面积分直接得声功率，无需消声室，稳态背景噪声高 10 dB 也能测准到 1 dB；探头本质是欧拉方程加有限差分，分析仪算互谱虚部；隔离垫定频限（50 mm 到 1.25 kHz、12 mm 到 5 kHz），ISO 9614-2 扫描快、9614-1 离散点可仲裁，测量同时获得的声强图谱常是定位问题的关键数据
 - [声场指数与动态性能指数：声强法测量的质量判据](theory/acoustics-basics/sound-field-indicators.html) — 声强数据是否可用，ISO 9614-1 规定逐项核验指标：残余声强由通道相位失配决定（δpIo = 10lg(kd/φe)，低频 kd 减小使其下降），扣除偏差因子 χ 得动态性能指数 Ld = δ−χ（精密级与工程级 χ 取 10 dB，观察级 7 dB）；F1~F4 分别量化时间稳定性、声压与声强偏差、外噪声源贡献与空间不均匀性；判据一 Ld−F2>0 逐频带核验测量链，判据二 N>C·F4² 核验网格密度（1-4 kHz 带精密级 C 达 57，A 计权 C=8 属观察级）；F3−F2 超 3 dB 须先处理外噪声源再复测
 - [声吸收：吸声系数与混响室法](theory/acoustics-basics/sound-absorption.html) — α 逐频率才有意义：多孔材料高频好用、低频受限于λ/4 法则（63 Hz 需 1.36 m 厚）；四分之一波长处质点速度最大、摩擦吸声最强，空腔等效加厚；阻抗管垂直入射 vs 混响室随机入射两套数据不能互换，Sabine 式 A = 0.16V/T 两步相减得样品吸声量
