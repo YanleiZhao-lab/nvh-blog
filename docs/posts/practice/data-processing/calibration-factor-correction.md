@@ -4,13 +4,13 @@ title: "测量后才发现灵敏度设错了：校准因子事后修正"
 
 # 测量后才发现灵敏度设错了：校准因子事后修正
 
-> 拿错传感器、手滑敲错一位数、赶时间没校准就用了个"大概值"——采完一整车数据才发现通道设置里的灵敏度（Sensitivity）是错的，幅值整体差了 10 倍。重测不可能，数据不能扔。这篇讲清楚电压到工程单位的换算链、为什么一个比例因子就能救回全部数据、Time Signal Calculator 的六步操作与批量处理，以及哪些错误是事后救不回来的。
+> 传感器拿错型号、灵敏度录入笔误、或未经校准即采用标称值——采集完成后才发现通道设置中的灵敏度（Sensitivity）与传感器实际值不符，全部数据幅值整体偏离。本文说明电压到工程单位的换算链、事后修正比例因子的分步推导、Time Signal Calculator 的六步操作与多 Run 批量处理方法，以及不可事后修正的硬件级错误的边界。
 
-## 一、错的不是数据，是那把"电压尺子"
+## 一、错误发生在电压—工程单位换算环节
 
-SCADAS 采集卡记录的永远是**电压**。加速度、声压这些工程量（Engineering Unit，EU）是软件用传感器灵敏度换算出来的：灵敏度写成 **电压/EU**，比如 10.0 mV/g 的加速度计、53.3 mV/Pa 的传声器。通道设置里的 Actual Sensitivity 栏告诉 Testlab"每多少毫伏对应一个工程单位"，它就是那把把电压刻度翻译成物理量的尺子。
+SCADAS 采集卡记录的永远是**电压**。加速度、声压这些工程量（Engineering Unit，EU）是软件用传感器灵敏度换算出来的：灵敏度定义为**电压/EU**，例如 10.0 mV/g 的加速度计、53.3 mV/Pa 的传声器。通道设置中的 Actual Sensitivity 栏告诉 Testlab"每多少毫伏对应一个工程单位"，它决定了电压刻度到物理量的换算比例。
 
-尺子标错刻度，量出来的数自然整体偏掉。社区知识库里的经典案例：本想用 100 mV/g 的 B 型加速度计，实际装的是 10 mV/g 的 A 型，通道设置里却按 100 mV/g 填了。
+灵敏度录入错误时，换算结果按同一比例整体偏离。Simcenter Testing Knowledge Base 中的典型案例：本意使用 100 mV/g 的 B 型加速度计，实际安装的是 10 mV/g 的 A 型，通道设置中却按 100 mV/g 填写。
 
 ![两款常见灵敏度的加速度计：100 mV/g 与 10 mV/g](/images/calibration-factor-correction/fig1-two-accel-models.png)
 
@@ -20,37 +20,39 @@ SCADAS 采集卡记录的永远是**电压**。加速度、声压这些工程量
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-后果方向要心里有数：**把传感器报得比实际更灵敏，读数就偏小**。告诉软件"100 mV 是 1 g"，传感器实际 1 g 只输出 10 mV，于是 14 mV 的真实电压被算成 0.14 g——时历峰值只有应有的十分之一（下图应为 1.4 g）。
+偏离方向有明确规律：**录入灵敏度高于传感器实际值时，读数偏小**。软件被告知"100 mV 对应 1 g"，而传感器实际 1 g 只输出 10 mV，于是 14 mV 的真实电压被换算为 0.14 g——时历峰值仅为应有值的十分之一（下图中真实值应为 1.4 g）。
 
 ![按错误灵敏度记录的时域历程，峰值只读到 0.14 g](/images/calibration-factor-correction/fig3-wrong-time-history.png)
 
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **灵敏度（Sensitivity）**：传感器输出电压与工程单位的比值，单位电压/EU（mV/g、mV/Pa），由厂家出厂标定给出
+- **灵敏度（Sensitivity）**：传感器输出电压与工程单位之比，单位为电压/EU（mV/g、mV/Pa），由厂家出厂标定给出
 - **工程单位（Engineering Unit, EU）**：被测物理量的单位——g、Pa、m/s²，电压信号经灵敏度换算后的呈现形式
-- **Actual Sensitivity**：通道设置里实际生效的灵敏度栏，事后核查与修正都围绕它展开
+- **Actual Sensitivity**：通道设置中实际生效的灵敏度栏，事后核查与修正均围绕它展开
 :::
 
-关键认知先立住：**原始电压数据从头到尾没被破坏**。SCADAS 存下的电压值在修正前后一模一样，要改的只是电压到 EU 的换算系数。这是数据可救的物理基础。
+修正的前提条件在此确立：**原始电压数据从头到尾未被破坏**。SCADAS 存储的电压值在修正前后完全一致，需要修改的只是电压到 EU 的换算系数。这是数据可以事后修正的物理基础。
 
-## 二、修正因子：一步推导
+## 二、修正比例因子：从定义出发推导
 
-设采集到的电压为 $V$（这串数始终不变），录入的错误灵敏度为 $S_{rec}$，传感器真实灵敏度为 $S_{act}$。
+设采集到的电压为 $V$（mV，该序列始终不变），录入的错误灵敏度为 $S_{rec}$（mV/g），传感器真实灵敏度为 $S_{act}$（mV/g）。
 
-软件当时按错误灵敏度换算，存下的工程单位值是：
+软件当时按错误灵敏度换算，存储的工程单位值为：
 
-$$EU_{rec} = V / S_{rec}$$
+$$EU_{rec} = \frac{V}{S_{rec}}$$
 
-而真实值应为：
+物理意义：每毫伏被折算为 $1/S_{rec}$ 个工程单位。
 
-$$EU_{act} = V / S_{act}$$
+真实值应为：
 
-两式相除消掉 $V$，得到修正关系：
+$$EU_{act} = \frac{V}{S_{act}}$$
+
+两式相除消去 $V$，得到修正关系：
 
 $$EU_{act} = EU_{rec} \times \frac{S_{rec}}{S_{act}}$$
 
-物理意义很直白：错误与真实灵敏度之比是一个**无量纲比例因子**，把记录数据整体乘上它即可。案例里 $100/10 = 10$，幅值放大 10 倍——报得太灵敏，读数太小，当然要放大回去。
+物理意义：错误与真实灵敏度之比是一个**无量纲比例因子**，对记录数据整体乘该因子即可完成修正。案例中 $100/10 = 10$，幅值放大 10 倍——录入灵敏度偏高导致读数偏小，修正即为放大。
 
 ![修正比例因子的计算公式](/images/calibration-factor-correction/fig4-scale-formula.png)
 
@@ -60,20 +62,24 @@ $$EU_{act} = EU_{rec} \times \frac{S_{rec}}{S_{act}}$$
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-换成分贝视角更便于快速心算。幅值比例 $k$ 对应 $20\lg k$ dB（幅值平方才是功率，所以是 20 不是 10，推导见《[dB 与对数刻度](../../theory/acoustics-basics/decibel-basics.html)》）：
+换算为分贝便于快速估算。幅值比例 $k$ 对应的分贝修正量为：
 
-| 错填、实际 | 比例因子 | 幅值偏差 | 典型场景 |
+$$L = 20\,\lg k = 20\,\lg\!\left(\frac{S_{rec}}{S_{act}}\right)\ \mathrm{dB}$$
+
+系数取 20 而非 10 的原因：功率与幅值的平方成正比，幅值比须先平方再取对数，即 $10\,\lg k^2 = 20\,\lg k$（推导见《[dB 与对数刻度](../../theory/acoustics-basics/decibel-basics.html)》）。工程上常见的几组组合如下：
+
+| 错填值、实际值 | 比例因子 | 修正量 | 典型场景 |
 | --- | --- | --- | --- |
-| **100 到 10 mV/g** | ×10 | +20 dB | 拿错传感器型号（本文明线案例） |
-| **100 到 50 mV/g** | ×2 | +6 dB | 同系列两档灵敏度混用 |
-| **10 到 100 mV/g** | ×0.1 | -20 dB | 反向拿错，读数大 10 倍 |
-| **53.3 到 50 mV/Pa** | ×1.066 | +0.56 dB | 手滑敲错一位的传声器 |
+| **100 与 10 mV/g** | x10 | +20 dB | 拿错传感器型号（本文案例） |
+| **100 与 50 mV/g** | x2 | +6 dB | 同系列两档灵敏度混用 |
+| **10 与 100 mV/g** | x0.1 | -20 dB | 反向拿错，读数大 10 倍 |
+| **53.3 与 50 mV/Pa** | x1.066 | +0.56 dB | 录入笔误的传声器 |
 
 ::: warning 工程注意
-方向别搞反：公式是**错填值除以真实值**，错填值在分子。记反了会把数据错上加错——修正前拿一个已知激励（如敲一下已知质量的校准器）核对方向。另外注意灵敏度单位制陷阱：mV/g 与 mV/(m/s²) 相差 9.81 倍，pC 与 mV 的电荷/IEPE 混淆更是常见，先确认错在"数值"还是"单位制"，再套比例因子。
+方向不可颠倒：公式为**错填值除以真实值**，错填值位于分子。方向记反会使数据错误加倍——修正前应使用已知激励（如声校准器或已知质量的振动校准器）核对修正方向。另需注意灵敏度的单位制差异：mV/g 与 mV/(m/s²) 相差 9.81 倍，pC 与 mV 的电荷式/IEPE 混淆也很常见。应先确认错误属于"数值"还是"单位制"，再应用比例因子。
 :::
 
-## 三、Python 演示：一个因子贯穿时域、谱与分贝
+## 三、Python 演示：同一因子作用于时域、谱与分贝
 
 ```python
 import numpy as np
@@ -94,31 +100,32 @@ print(f"RMS: 错误 {np.sqrt(np.mean(a_wrong**2)):.4f} -> 修正 {np.sqrt(np.mea
 print(f"幅值偏差 {20*np.log10(a_wrong.max()/a_true.max()):.1f} dB")
 
 # 频谱同样整体缩放：50 Hz 谱线幅值比例应严格等于 factor
-A_wrong = np.abs(np.fft.rfft(a_wrong * np.hanning(fs))) * 2 / fs * 4
-A_fixed = np.abs(np.fft.rfft(a_fixed * np.hanning(fs))) * 2 / fs * 4
+# 单边谱折算乘 2/fs，再除以汉宁窗相干增益 0.5（即再乘 2）
+A_wrong = np.abs(np.fft.rfft(a_wrong * np.hanning(fs))) * 2 / fs * 2
+A_fixed = np.abs(np.fft.rfft(a_fixed * np.hanning(fs))) * 2 / fs * 2
 i50 = np.argmax(A_wrong)
 print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixed[i50]/A_wrong[i50]:.1f})")
 ```
 
-输出里最值得看的三组数：错误读数 0.140 g 乘因子 10 后精确回到 1.400 g；幅值偏差严格等于 -20.0 dB，与表格心算一致；50 Hz 谱线比值 10.0 说明**同一个因子原封不动作用于时域、RMS 和每一条谱线**——线性换算不改变任何相对结构，阶次、共振峰形状全部保真。
+输出中的三组关键数值：错误读数 0.140 g 乘因子 10 后精确恢复为 1.400 g；幅值偏差严格等于 -20.0 dB，与上表估算一致；50 Hz 谱线由 0.140 g 恢复至 1.400 g，比值 10.0，与时域峰值一致。这说明**同一比例因子原封不动地作用于时域、RMS 与每一条谱线**——线性缩放不改变任何相对结构，阶次、共振峰形状均保持不变。
 
 ## 四、Testlab 实操六步：Time Signal Calculator
 
-思路就是把第二节的公式落成一行 TSC 公式：新建 trace = 原始通道 × 比例因子。Time Signal Calculator 的启用与函数体系在《[Time Signal Calculator 实用技巧](./time-signal-calculator-tips.html)》里讲过，这里只走校准修正这条流程。
+时域信号计算器（Time Signal Calculator，TSC）的思路是把第二节的公式落实为一行 TSC 语句：新建 trace = 原始通道 x 比例因子。TSC 的启用方法与函数体系在《[Time Signal Calculator 实用技巧](./time-signal-calculator-tips.html)》中已有说明，此处仅走校准修正流程。
 
-1. **装载数据**：Navigator 里右键 .LDSF 文件，选 Add to Input Basket，数据进 Time Data Selection 工作表；
+1. **装载数据**：Navigator 中右键 .LDSF 文件，选 Add to Input Basket，数据进入 Time Data Selection 工作表；
 2. **启用插件**：Tools -> Add-ins 勾选 Time Signal Calculator，公式表出现在工作表底部；
-3. **写公式**：新建 trace，原始数据乘上比例因子（错填值/正确值）；
+3. **写公式**：新建 trace，原始数据乘上比例因子（错填值/真实值）；
 
 ![公式行：原始通道乘以 100/10 的比例因子](/images/calibration-factor-correction/step3-tsc-formula.png)
 
 *（图源：Simcenter Testing Knowledge Base）*
 
 4. **Calculate**：新 trace 生成，橙色显示表示尚未保存；
-5. **删除原通道**：点行号选中整行、Remove Channel(s)。这步别省——不删的话错误数据和修正数据会一起存进新文件，后患无穷；
-6. **Save As**：给修正数据一个新 Run 名，与原始数据分开存放。
+5. **删除原通道**：点行号选中整行、Remove Channel(s)。此步不可省略——否则错误数据与修正数据会一同存入新文件，造成后续数据混用；
+6. **Save As**：为修正数据指定新 Run 名，与原始数据分开存放。
 
-多 Run 批量处理是同一套动作的放大：把所有要修的 Run 一并加进 Input Basket，在 Time Data Selection 切到 **Channels Pivot** 视图——通道横排、Run 竖列，一条公式对所有 Run 同时生效。保存时选 **Use original run name, append:** 加后缀，批量落盘。
+多 Run 批量处理是同一套动作的扩展：把所有待修正的 Run 一并加入 Input Basket，在 Time Data Selection 切换到 **Channels Pivot** 视图——通道横排、Run 竖列，一条公式对所有 Run 同时生效。保存时选 **Use original run name, append:** 加后缀，批量落盘。
 
 ![Channels Pivot 视图：四个 Run 的同一通道一屏排开](/images/calibration-factor-correction/multi-channels-pivot.png)
 
@@ -128,39 +135,39 @@ print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixe
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-## 五、修正前先侦查：当时到底用了什么灵敏度
+## 五、修正前先核查：测量时刻实际生效的灵敏度
 
-动手前先确认"错在哪"。官方工程师在文章评论区给了两个核查入口：
+动手修正前应先确认"错在哪里"。官方工程师在知识库文章评论区给出两个核查入口：
 
-- **Archived Settings**：Navigator 选中 Run，中栏找到 Archived Settings，右键 View Channel Setup——测量时刻生效的完整通道设置原样归档，横向滚动找到 Actual Sensitivity 栏；
-- **Data Properties**：显示窗里右键曲线，选 Data Properties，同样能看到采数时用的灵敏度。
+- **Archived Settings**（归档设置）：Navigator 选中 Run，中栏找到 Archived Settings，右键 View Channel Setup——测量时刻生效的完整通道设置被原样归档，横向滚动即可找到 Actual Sensitivity 栏；
+- **Data Properties**（数据属性）：显示窗中右键曲线，选 Data Properties，同样可以查看采数时使用的灵敏度。
 
-社区还补了一个轻量替代：右键 Throughput，选 **Edit Properties**，可直接改灵敏度、Point ID、方向、Y 轴量纲，还能整表粘贴。两条限制要清楚：只对 SCADAS Mobile 采的数据有效（SCADAS XS 不行），且每个 Run 要单独改。批量任务，还是 Time Signal Calculator 顺手。
+社区还补充了一个轻量替代方案：右键 Throughput 文件，选 **Edit Properties**，可直接修改灵敏度、Point ID、方向、Y 轴量纲，并支持整表粘贴。两条限制需要明确：仅对 SCADAS Mobile 采集的数据有效（不适用于 SCADAS XS），且每个 Run 需单独修改。批量任务仍以 Time Signal Calculator 为宜。
 
 | 修正途径 | 适用范围 | 批量能力 | 备注 |
 | --- | --- | --- | --- |
-| **Time Signal Calculator** | 任意来源时域数据 | 多 Run 一条公式 | 首选；同时改量纲/方向要靠公式组合 |
-| **Edit Properties** | 仅 SCADAS Mobile 数据 | 逐 Run 手改 | 可整表粘贴灵敏度，顺手改 Point ID/方向 |
-| **重新测量** | 任何错误 | - | 过载削波、量程错误等硬件级问题唯一解 |
+| **Time Signal Calculator** | 任意来源时域数据 | 多 Run 一条公式 | 首选；同时修改量纲/方向需公式组合 |
+| **Edit Properties** | 仅 SCADAS Mobile 数据 | 逐 Run 手改 | 可整表粘贴灵敏度，并可同时修改 Point ID/方向 |
+| **重新测量** | 任何错误 | - | 过载削波、量程错误等硬件级问题的唯一解决途径 |
 
-::: tip 怎么选
-- 拿错型号、敲错数字这类**纯灵敏度错误**，走 TSC 比例因子，几分钟救回一批数据
-- 只改少量 Run 且要连带改量纲/方向，用 Edit Properties
-- 数据本身坏了（过载、量程不当），任何系数都救不了，见第六节
+::: tip 选择依据
+- 拿错型号、录入笔误等**纯灵敏度错误**，走 TSC 比例因子，可高效修正一批数据
+- 只改少量 Run 且需连带修改量纲/方向时，用 Edit Properties
+- 数据本身已损坏（过载、量程不当），任何系数均无法恢复，见第六节
 :::
 
-## 六、救得回与救不回的边界
+## 六、可修正与不可修正的边界
 
-TSC 修正只作用于**时域历程**。之前算好的频谱、阶次切片、自功率谱不会跟着变——它们的幅值同样错了，必须用修正后的时域数据重新处理一遍。好在时历是所有后续分析的源头，源头正了，重算一遍谱水到渠成。
+TSC 修正只作用于**时域历程**。此前已计算好的频谱、阶次切片、自功率谱不会随之更新——它们的幅值同样存在错误，必须用修正后的时域数据重新处理。由于时历是所有后续分析的源头，源头修正后重新计算谱即可。
 
-真正救不回的是**硬件层面已经损失的信息**：过载削波砍掉的峰值、量程过大导致的量化粗噪，这些在电压变成数字的那一刻就定型了，任何后处理系数只能缩放、不能还原。判断依据见《[信号过载：削波如何毁掉频谱](../../theory/signal-processing/overload-clipping-distortion.html)》与《[量化与量程](../../theory/signal-processing/gain-range-quantization.html)》。
+真正无法修正的是**硬件层面已损失的信息**：过载削波损失的峰值、量程过大导致的量化噪声，这些在电压转换为数字量的一刻已经定型，任何后处理系数只能缩放、不能还原。判断依据见《[信号过载：削波如何毁掉频谱](../../theory/signal-processing/overload-clipping-distortion.html)》与《[量化与量程](../../theory/signal-processing/gain-range-quantization.html)》。
 
 ::: warning 工程注意
-修完别急着交付：拿一条修正后的数据与同测点正常通道做量级交叉核对（比如悬置上下方加速度、左右对称点），比例因子敲反这种低级错误靠交叉核对十分钟就能暴露。修正记录也要留档——Run 后缀、修正因子、原灵敏度、真实灵敏度四项写进试验记录，半年后有人翻数据时不至于一头雾水。
+修正完成后不宜立即交付：取一条修正后的数据与同测点正常通道做量级交叉核对（如悬置上下方加速度、左右对称点），修正方向敲反这类错误通过交叉核对即可暴露。修正记录应留档——Run 后缀、修正因子、原灵敏度、真实灵敏度四项写入试验记录，以保证数据半年后仍可追溯。
 :::
 
-预防的成本永远低于补救：测试前逐通道校准、能用 **TEDS**（传感器电子数据表，芯片里存着灵敏度，接线自动读入）就用 TEDS、装机完成后截一张 Channel Setup 全景图存档——开头案例里工程师正是靠翻试验现场照片才发现拿错了传感器型号。
+预防的成本低于补救：测试前逐通道校准，支持 **TEDS**（Transducer Electronic Data Sheet，传感器电子数据表，芯片内存储灵敏度，接线后自动读入）的传感器应启用 TEDS，装机完成后保存一张 Channel Setup 截图存档——开篇案例中工程师正是通过翻查试验现场照片才发现拿错了传感器型号。
 
 ## 七、小结
 
-灵敏度错误的本质是尺子刻度错，电压数据完好，比例因子 $S_{rec}/S_{act}$ 一步修正：错填 100 实际 10 就是乘 10（+20 dB），反过来就是乘 0.1。单 Run 走 TSC 六步，多 Run 上 Channels Pivot 批量；修完的只有时历，谱要重算；过载与量化损失不在可救范围内。事前校准加 TEDS，才是让这套补救手艺永远用不上的正解。
+灵敏度错误的本质是换算系数错误，电压数据完好，比例因子 $S_{rec}/S_{act}$ 一步修正：错填 100 实际 10 即乘 10（+20 dB），反向则乘 0.1。单 Run 走 TSC 六步，多 Run 用 Channels Pivot 批量处理；修正只作用于时历，谱需重算；过载与量化损失不在可修正范围内。事前校准与 TEDS 是避免此类事后修正的根本措施。
