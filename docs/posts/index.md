@@ -123,7 +123,7 @@ title: "📖 全部文章"
 
 - [锤击测试实操：力窗、指数窗与双击处理](practice/test-setup/impact-testing-windows.html) — 力窗脉冲外清零削输入噪声、指数窗压未衰减尾巴防泄漏但每压一分就虚报一分阻尼：包络相乘推导出人工阻尼公式，30 Hz/1% 模态加 10% 窗回归阻尼 1.60% 对上理论 1.61%；力谱滚落 3~10 dB 判锤头、双击自动剔除、相干贴 1（反共振除外），阻尼识别优先加记录时间而非加窗
 - [模态拟合入门：稳定图与极点选择](practice/test-setup/modal-curvefitting-start.html) — 拟合器解的是极点估计问题：LSCE 整体估计一次算出全套频率阻尼、稳定图上物理模态连成光柱而计算模态随阶数漂移、频率/阻尼/振型三稳才选、密集模态靠多参考点模态参与解耦；附相关函数 Prony 拟合观察计算模态漂移的 numpy 数值演示
-- [彩色图谱判读：colormap 的正确打开方式](practice/data-processing/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
+- [彩色图谱判读：colormap 五类线型的识别与整改](practice/data-processing/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
 - [加速度积分求位移：为什么双重积分会漂移](practice/data-processing/integrate-acc-to-displacement.html) — 双重积分的 1/(jω)² 对低频平方放大：0.001 m/s² 偏置 8 秒积出 32 mm、线性温漂变 t³/6 立方漂移、1 Hz 噪声位移比 100 Hz 信号大一万倍。官方 FAQ 630 五步流程逐步拆解（DETREND_AC 去趋势→4 倍升采样→Simpson 双重积分→降采样→1~2.5 Hz 高通），附录四张对照图展示跳过每步的实测后果（默认 500 Hz 截止忘改位移几乎归零）；只要级值走频域路线——First bins to clear 清直流或 1 Hz 起算频率段落，numpy 复现不处理时末端漂 1267 mm、频域积分+高通后 10 Hz 谱线 243.5 μm 对上理论 253.3
 - [RPM 信号去毛刺：转速信号的清洗](practice/data-processing/rpm-spike-removal.html) — 转速由脉冲间隔换算 n=60/(P·Δt)，计时相对误差等值反号传给转速：偶发尖峰用 Time Data Editor 直线替换（扭振信息一并抹除）、每转规律毛刺用 TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM 滑窗中位数 MAD 剔除（门槛 3.5、范围 2~100）、接缝误差另用 ZEBRA_MOMENTS_TO_RPM 全局重排；扭振 PPR≥2×最高阶次
 - [斑马带接缝修正：扭振测量的隐形杀手](practice/data-processing/zebra-tape-correction.html) — 缠带收尾的搭接缝每转制造一次假转速跳变，专门污染扭振最关心的低阶段：豁口低估、挤压高估、每转固定角度形状可重复三要素识别；ZEBRA_MOMENTS_TO_RPM 按理论角度全局重排脉冲而随机毛刺先剔后修；附单点几何缺陷经间隔倒数放大 52 倍伪装成扭振的 numpy 复现
