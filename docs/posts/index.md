@@ -150,6 +150,6 @@ title: "📖 全部文章"
 - [FFT 窗函数选择](./testing/fft-window-functions.html) — 从频谱泄漏出发对比四种常用窗函数
 - [FFT 基础流程：从采样率到谱线解释](./testing/fft-flow.html) — 采样率、抗混叠、加窗、平均与谱线判读
 - [传感器与采样配置检查](./testing/sensor-checklist.html) — 加速度计、麦克风、采样率配置检查清单
-- [扭振阶次实操三招：通道组、纵轴量纲与三维动画](practice/test-setup/torsional-orders-tips.html) — tacho 通道组改 Vibration 一份信号两种身份免分线；RPM 波动除以 2*pi*O*f_rot 换角度（±25 RPM @ 2 阶 2600 RPM 折合约 0.275 度峰值），积分前先洗净转速信号；RMS/峰值/峰峰值差 1.414 到 2.828 倍报告必须写明口径；Torsional Node 圆盘动画把扭转 ODS 直观呈现
+- [扭振阶次实操三则：通道组、纵轴量纲与扭振动画](practice/test-setup/torsional-orders-tips.html) — tacho 通道组改 Vibration 一份信号两种通道免分线；RPM 波动除以 2π·O·f_rot 换角度（±25 RPM @ 2 阶 2600 RPM 折合约 0.275 度峰值），积分前先洗净转速信号、积分后去直流；RMS/峰值/峰峰值差 1.414 到 2.828 倍报告必须写明口径；Torsional Node 圆盘动画把扭转 ODS 直观呈现
 
 - [留数与残差：模态理论里最易混的一对术语](theory/signal-processing/residues-vs-residuals.html) — Residue 与 Residual 只差两个字母却是两码事：留数是部分分式极点前的复系数、三因子式（标尺×响应点振型×参考点振型）给出的带标尺振型，模态参数组成员，实模态下纯虚、峰拾取按 |A|=sigma*|ImH(wd)| 直接换算（与圆拟合直径 d=|A|/sigma 同源）；残余项是带外模态在窄带内的渐近贡献——高频退化成常数（残余刚度 UR）、低频退化成 1/w^2（残余质量 LR），渐近系数由 Im(A) 给出，没有频率阻尼、不进振型动画。numpy 双演示：对称化特征分解+峰拾取留数列归一化后还原振型至 1e-4~1e-3（附 eigh 误用非对称阵的陷阱说明），窄带拟合加上下残余项把 20.46% 误差压到 1.97%、LR 渐近理论值与拟合值同量级印证其补偿项本质；Testlab 面板 Residue type 与 Upper/Lower residuals 勾选框的对应关系（手册 15.2.1/15.3.2/15.3.6/18.3 节）
