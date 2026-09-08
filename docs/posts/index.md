@@ -104,8 +104,9 @@
 （测试软件操作、数据处理技巧，持续更新）
 
 
-### 数据处理（11 篇）
+### 数据处理（12 篇）
 
+- [轴承故障早期检测：从包络谱到冲激量的实操链](practice/data-processing/bearing-faults-early-detection.html) — 早期剥落冲击短、能量小、宽带分布，RMS 趋势天然迟钝：特征频率四式从保持架 FTF 推起（Z=9、d/D=0.18、3000 rpm 算得 BPFO 184.5 Hz 全表），包络分析带通锁共振-希尔伯特取包络-包络谱判读三步链与四部件判读表（内圈带 f_r 边带、滚动体带 FTF 边带、外圈无边带），LMS 手册冲激量四输出参数（平均脉冲峰值电平/上升斜率/作用时间/脉冲发生率）与阈值定义链，峭度口径差 3 的跨系统陷阱和"早期峭度高、晚期峭度回落 RMS 接力"的物理对应；numpy 实测健康件峭度 3.05 对早期 4.49、RMS 仅 +57%，包络谱峰精确落 184.5 Hz 且 2 倍频在列
 - [转速信号缺脉冲：识别与修复](practice/data-processing/rpm-missing-pulses.html) — 脉冲计数测速的固有坑：齿/条纹缺失让该处间隔翻倍、转速被低估到一半（3000 rpm 每转跌出 1500 rpm 假 1 阶）；识别三要素每转固定次数/深度一致/几乎只向下，与随机毛刺（无固定位置双向）、接缝误差（缠带专属、固定角度）区分；修正核心两参数 Pulses_per_rev 填标称齿数而非实际值、Number of missing teeth 填缺数（最多 4），Cross level/Slope 定检测沿、Missing pulse correction 常需连后一个畸变脉冲一起修、Pulse correction factor 按 Tn 对 Tn-1 的百分比阈值判缺失；TACHO_PULSE_TO_RPM 离线与 Tracking Setup 在线两条路径，原始脉冲通道永远留底
 - [彩色图谱判读：colormap 五类线型的识别与整改](practice/data-processing/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
 - [加速度积分求位移：为什么双重积分会漂移](practice/data-processing/integrate-acc-to-displacement.html) — 双重积分的 1/(jω)² 对低频平方放大：0.001 m/s² 偏置 8 秒积出 32 mm、线性温漂变 t³/6 立方漂移、1 Hz 噪声位移比 100 Hz 信号大一万倍。官方 FAQ 630 五步流程逐步拆解（DETREND_AC 去趋势→4 倍升采样→Simpson 双重积分→降采样→1~2.5 Hz 高通），附录四张对照图展示跳过每步的实测后果（默认 500 Hz 截止忘改位移几乎归零）；只要级值走频域路线——First bins to clear 清直流或 1 Hz 起算频率段落，numpy 复现不处理时末端漂 1267 mm、频域积分+高通后 10 Hz 谱线 243.5 μm 对上理论 253.3
