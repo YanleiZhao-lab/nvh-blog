@@ -104,8 +104,9 @@
 （测试软件操作、数据处理技巧，持续更新）
 
 
-### 数据处理（12 篇）
+### 数据处理（13 篇）
 
+- [转速扫掠处理：RPM增量、帧长与扫掠率的耦合](practice/data-processing/speed-sweep-processing.html) — 扫掠谱分析里三个量咬合出一个界面上看不到的变量：重叠率 = 1 - (RPM增量/扫掠率)/帧长，增量与帧长是设置、扫掠率是数据固有属性，Overlap 在 Testlab 里根本没有输入框。知识库三组对照：1500-3000 rpm、增量 150、帧长 2 s、分辨率 0.5 Hz 固定，扫 150 rpm/s 得 50% 重叠、37.5 rpm/s 帧间脱开 2 秒（阶次切线红蓝对比直接丢细节）、300 rpm/s 得 75% 重叠算力白烧；汉宁窗削掉帧首尾数据靠重叠补救；numpy 复现三档排帧 overlap=50%/-100%/75%、慢扫处理窗 46.2% 时间无人处理，选参链条帧长定分辨率、增量定密度、扫掠率做平衡
 - [轴承故障早期检测：从包络谱到冲激量的实操链](practice/data-processing/bearing-faults-early-detection.html) — 早期剥落冲击短、能量小、宽带分布，RMS 趋势天然迟钝：特征频率四式从保持架 FTF 推起（Z=9、d/D=0.18、3000 rpm 算得 BPFO 184.5 Hz 全表），包络分析带通锁共振-希尔伯特取包络-包络谱判读三步链与四部件判读表（内圈带 f_r 边带、滚动体带 FTF 边带、外圈无边带），LMS 手册冲激量四输出参数（平均脉冲峰值电平/上升斜率/作用时间/脉冲发生率）与阈值定义链，峭度口径差 3 的跨系统陷阱和"早期峭度高、晚期峭度回落 RMS 接力"的物理对应；numpy 实测健康件峭度 3.05 对早期 4.49、RMS 仅 +57%，包络谱峰精确落 184.5 Hz 且 2 倍频在列
 - [转速信号缺脉冲：识别与修复](practice/data-processing/rpm-missing-pulses.html) — 脉冲计数测速的固有坑：齿/条纹缺失让该处间隔翻倍、转速被低估到一半（3000 rpm 每转跌出 1500 rpm 假 1 阶）；识别三要素每转固定次数/深度一致/几乎只向下，与随机毛刺（无固定位置双向）、接缝误差（缠带专属、固定角度）区分；修正核心两参数 Pulses_per_rev 填标称齿数而非实际值、Number of missing teeth 填缺数（最多 4），Cross level/Slope 定检测沿、Missing pulse correction 常需连后一个畸变脉冲一起修、Pulse correction factor 按 Tn 对 Tn-1 的百分比阈值判缺失；TACHO_PULSE_TO_RPM 离线与 Tracking Setup 在线两条路径，原始脉冲通道永远留底
 - [彩色图谱判读：colormap 五类线型的识别与整改](practice/data-processing/interpreting-colormaps.html) — 五种线型五种病：斜线是阶次、水平线是共振、边带暴露调幅、竖条带是冲击、不穿零曲线族是 PWM 开关频率；交点即问题转速
