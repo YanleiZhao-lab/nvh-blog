@@ -120,8 +120,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（6 篇）
+### 测试操作（7 篇）
 
+- [扫频与步进正弦 MIMO：另一种激励路线](practice/test-setup/mimo-swept-stepped-sine.html) — 正弦激励把全部能量逐频率投放：扫频快但峰值受扫速限制（快扫 10 Hz/s 削峰 35.6%、峰值拖后 2.1 Hz，numpy 状态空间仿真定量复现），步进准但耗时；建立时间 τ=1/(2πζf₀) 定扫速上限、共振区必须 Tabulated 慢扫；Testlab 从 Control 面板（Stepped/Swept、幅值相位双控）到系统辨识（低量级随机辨识 g/V 传递函数、可 Load Last MIMO Acquisition 复用前次）再到采集中实时调速的完整路径
 - [试验-仿真模态对标：Simcenter 3D 中的 MAC 相关分析实操](practice/test-setup/test-simulation-correlation.html) — 仿真 31.2 Hz 对试验 29.4 Hz 还差 6%，模型能不能信要看三个数：MAC 管振型像不像（复共轭内积对任意缩放免疫，单测点极性装反即使 MAC 从 0.994 掩到 0.874）、频率误差管标定准不准、COMAC 管哪个传感器在捣乱（numpy 演示 1-COMAC 残差 0.104 精准锁定反号测点，为次差测点 6 倍）；Simcenter 3D 六步流水线 Sol 103 → 导入试验几何 → 三点对齐 → 75 mm 容差映射 51 传感器 → 0.7 阈值配对 → 热图与 1-COMAC，未配对模态不是垃圾而是待办清单
 - [稳定图进阶技巧：极点选择的工程判断](practice/test-setup/stabilization-diagram-tips.html) — 光柱不成形的三种病因各有解法：字母有列无峰是局部模态被整体求和洗掉，Point filter 按部件过滤+Save Sum/MIF 重建证据链（归一化求和保证跨部件同尺度叠加）；字母稀疏是激振方向与振型不对齐，留数正比激励点振型投影 psi_jk，MIMO 多朝向激振器补齐；字母成簇是搬点质量漂移，1 g 传感器占局部质量 2% 即拉低频率 0.2~0.3 Hz（numpy 两自由度实测），multi-run 分批拟合再拼振型
 - [锤击测试实操：力窗、指数窗与双击处理](practice/test-setup/impact-testing-windows.html) — 力窗脉冲外清零削输入噪声、指数窗压未衰减尾巴防泄漏但每压一分就虚报一分阻尼：包络相乘推导出人工阻尼公式，30 Hz/1% 模态加 10% 窗回归阻尼 1.61% 与理论预测 1.61% 重合；力谱滚落 3~10 dB 判锤头、双击自动剔除、相干贴 1（反共振除外），阻尼识别优先加记录时间而非加窗
