@@ -121,7 +121,7 @@ $$
 
 ## 六、数据处理：曲线拟合、与有限元对账
 
-用宽带随机、正弦类或步进正弦得到的 FRF，经**曲线拟合参数估计器**统一提取模态模型——共振频率、振型、阻尼。曲线拟合的原理与选型（LSCE、Polymax、整体拟合等）见[《模态拟合入门：稳定图与极点选择》](./modal-curvefitting-start.html)。Normal Modes 方案的振型则由调谐直接给出，不走拟合。
+用宽带随机、正弦类或步进正弦得到的 FRF，经**曲线拟合参数估计器**统一提取模态模型——共振频率、振型、阻尼。曲线拟合的原理与选型（LSCE、Polymax、整体拟合等）见[《模态拟合入门：稳定图与极点选择》](../../practice/test-setup/modal-curvefitting-start.html)。Normal Modes 方案的振型则由调谐直接给出，不走拟合。
 
 ![由 GVT 采集的 FRF 计算得到的 F-16 模态振型](/images/gvt-flutter-analysis/fig10.png)
 
