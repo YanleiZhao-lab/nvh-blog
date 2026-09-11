@@ -127,7 +127,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（9 篇）
+### 测试操作（10 篇）
+
+- [波形复现 SAWR：从实测波形到台架输出](practice/test-setup/waveform-replication-sawr.html) — 实测路载直接灌给功放必然失败：链路传函共振处放大十倍反共振处断路，目标波形先低量级系统辨识取倒数得 ITF 、驱动=目标×ITF 再回放迭代；四种控制策略区别全在修正时机（Open Loop 重放定型驱动、Iterative 回放间时域误差修正、Offline/Online Adaptive 按漂移快慢更新 ITF）；频率分辨率隐藏约束——目标时长必须是 1/分辨率的整数倍（3.125 Hz 对应 0.32 s 块，150 s 录音只能取 468/469 块）；验收看目标 vs 实测的 45 度对角线；SCADAS 必需 -V 控制卡与 STOP 环，辨识电压从 0.02/0.06 V 起试；numpy 演示 ITF 一次更新即把共振处 10 倍过冲收敛到 1.000；多输入复现换 TWR 应用
 
 - [振动台选型与使用：推力、位移、承载](practice/test-setup/shaker-table-considerations.html) — 额定推力是裸台成绩单不是试验可用推力：动圈+夹具+试件全算运动质量（400 N 台带 20 kg 试件只剩 1.4 g，numpy 对账）、窄带随机推力按带宽平方根折减（200 Hz 带宽只剩 32%）、铜阻每 100 摄氏度涨 40% 打七折，选型留 15%~20% 余量；性能曲线 g/V 三段受限（低频位移/中频速度/高频力），平均控制救夹具不均匀，Tracked Sine Dwell 裸台传递函数定期体检
 
