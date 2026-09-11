@@ -123,7 +123,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（8 篇）
+### 测试操作（9 篇）
+
+- [振动台选型与使用：推力、位移、承载](practice/test-setup/shaker-table-considerations.html) — 额定推力是裸台成绩单不是试验可用推力：动圈+夹具+试件全算运动质量（400 N 台带 20 kg 试件只剩 1.4 g，numpy 对账）、窄带随机推力按带宽平方根折减（200 Hz 带宽只剩 32%）、铜阻每 100 摄氏度涨 40% 打七折，选型留 15%~20% 余量；性能曲线 g/V 三段受限（低频位移/中频速度/高频力），平均控制救夹具不均匀，Tracked Sine Dwell 裸台传递函数定期体检
 
 - [用户自定义敲击序列：多锤/多点的组织](practice/test-setup/impact-sequence-defined.html) — 敲击序列是锤击试验的分镜表：默认 +1 递增遇整组搬家 5 轮只盖 7/15 点、白敲 8 轮（numpy 对账），User Defined Impact Sequence 在 Measure→All Settings 开启、Edit Points 逐轮填锤与表的点位方向，N_run×N_ch≥N_point 且零重复再开工，参考点先做驱动点查勘防节点失踪
 - [扫频与步进正弦 MIMO：另一种激励路线](practice/test-setup/mimo-swept-stepped-sine.html) — 正弦激励把全部能量逐频率投放：扫频快但峰值受扫速限制（快扫 10 Hz/s 削峰 35.6%、峰值拖后 2.1 Hz，numpy 状态空间仿真定量复现），步进准但耗时；建立时间 τ=1/(2πζf₀) 定扫速上限、共振区必须 Tabulated 慢扫；Testlab 从 Control 面板（Stepped/Swept、幅值相位双控）到系统辨识（低量级随机辨识 g/V 传递函数、可 Load Last MIMO Acquisition 复用前次）再到采集中实时调速的完整路径
