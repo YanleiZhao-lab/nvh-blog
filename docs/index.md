@@ -7,7 +7,7 @@ titleTemplate: 工程研究与知识社区
 hero:
   name: Test
   text: "工程研究与知识社区"
-  tagline: Noise · Vibration · Harshness — 持续学习，持续进步
+  tagline: Noise · Vibration · Harshness · 耐久疲劳 — 121 篇工程文章持续更新
   image:
     src: /back.svg
     alt: Test
