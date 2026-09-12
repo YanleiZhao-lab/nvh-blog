@@ -129,7 +129,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（12 篇）
+### 测试操作（13 篇）
+
+- [几何骨架：试验模型的测点线面组织](practice/test-setup/geometry-skeleton.html) — 数据全对、动画缺角或跳变，病根多在试验前的几何定义：结点（位置+方位）、连线、着色面构成振型数据的地址簿，Point ID 只是地址的一半、Direction 才是另一半。手册 21 章四构件逐个拆解——三种坐标系写法等价、总坐标原点优先放结构对称点、欧拉角是链式旋转（绕 z、绕新 x、绕新 z，次序不可交换，传感器装反=绕 z 转 180 度）、每结点最多 7 个自由度（3 平动+3 转动+1 标尺，声压挂标尺）；numpy 定量演示装反振型腹点一个测点自 MAC 掉到 0.55、装反节点处则 1.00 无感——解释了"部分模态动画怪"的选择性事故；Testlab Geometry 组操作与"先空跑再测量"的防错流程
 
 - [加速度计大全：原理、类型与选型决策](practice/test-setup/accelerometers-comprehensive.html) — 同一悬置点两套系统差十倍（8 g 对 0.8 g）都是"没坏"的传感器：100 mV/g 模态传感器在耐久路面顶穿量程削波压平、10 mV/g 工况传感器做锤击响应只剩几十毫伏 FRF 全毛刺——灵敏度、量程、频响三根红线与工况对表；挂坠类比讲 seismic mass 惯性测力，压电（电荷/IEPE）、压阻、变电容、MEMS 四类感力元件逐个拆开，安装谐振频率与安装方式的耦合、接地回路与电缆噪声"传感器之外"的坑全图解（29 张官方插图）
 - [单端 vs 差分输入：噪声抑制的电路差异](practice/test-setup/single-ended-vs-differential.html) — 同一根梁上全桥干净、四分之一桥"长草"，分水岭在接线模式：单端量线对地、信号噪声一起放大，差分量线对线、反相信号相加减掉共模噪声（暗号两人三脚类比：颠簸共担相消、相对动作保留翻倍）；噪声危害相对信号电平——伏级 ICP 单端无碍、毫伏级应变先天不足，全桥差分/半桥四分之一桥 ICP 单端的对应表、双绞屏蔽 CMRR 有限差分非免死金牌；Testlab 里 Coupling 随 InputMode 联动（Voltage AC/DC 与 Active sensor 自动单端、差分传感器须手改），numpy 实测同一 4mV 60Hz 噪声单端只比信号低 1.8 dB、差分低 38.4 dB
