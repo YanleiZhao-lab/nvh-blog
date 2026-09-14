@@ -112,6 +112,8 @@
 
 ### 耐久与疲劳
 
+- [平均应力修正与 Goodman-Haigh 图：无限寿命的边界在哪里](theory/durability-fatigue/mean-stress-goodman.html) — 幅值同为 150 MPa 的两个零件一个无限寿命一个几万公里开裂：差别在平均应力——静态预载把裂纹"始终绷开"，S-N 曲线疲劳极限只对零均值对称循环成立；Goodman-Haigh 图把交变幅值（纵轴）与平均应力（横轴）放进同一坐标纸，Se-Su 连线与压缩侧平推圈出无限寿命区、±Sy 屈服包络当第二道门；三条修正线三档保守度（Goodman 直线/Gerber 抛物线贴韧性钢/Soderberg 以 Sy 封顶），安全系数闭式 n=1/(σa/Se+σm/Su)，numpy 实算同一点 1.30/1.56/1.13、500 循环批量判定 2 个越界即"99.6% 通过=不通过"；雨流拆循环逐点上图、一次出区资格吊销，Testlab Neo 的 TL_Goodman and Damage calculation 流程与 Tecware ProcessBuilder 直接出 Word 报告，15 张官方插图
+
 - [Miner 线性累积损伤：等效应损怎么算](theory/durability-fatigue/miners-rule-damage.html) — 台架报告里无量纲的"损伤 D=0.87"从哪来：疲劳损伤不可测量、只能记账——恒幅试验把裂纹出现定义为 D=1，S-N 曲线当价目表（每级幅值单价 1/N），每个循环记一笔 n/N；Simcenter 手算示例 0.33+0.50+0.25=1.08 判失效完整走一遍，numpy 8 级程序块谱复算 D=0.4918 且 330 MPa 仅 4 次循环吃掉 38.7% 损伤（幂律下少数大事件主导整本账）；储值卡类比贯穿（只扣不充、大额刷过小额涨价对应顺序盲区），边界两条：不管循环顺序、真实载荷需雨流计数拆解；Testlab Neo 雨流块、Tecware SN 设置与 Damage 流程、塑性区换 Strain Life 的落地锚点，9 张官方插图
 
 - [S-N 曲线与疲劳极限：材料抗疲劳能力的标尺](theory/durability-fatigue/sn-curve-basics.html) — 幅值翻倍损伤翻二十倍的反直觉现象源于双对数幂律 N=C·S^-k：S-N 曲线是 Wöhler 因 1842 年凡尔赛车轴断裂事故开发的“寿命查询表”，三个区间三把尺——塑性区换 E-N 方法、弹性区是主战场、钢有疲劳极限而铝没有（只能按指定循环次数设计）；k 因子经验值焊缝 3/钢 5/铝 7，载荷差 15% 寿命差一倍（numpy 复现 2.01）、幅值翻倍 k=4.3 时损伤倍数 19.7；平均应力拉伸缩短寿命/压缩延长（应力比 R=σmin/σmax 必须随报告给出）、载荷类型与尺寸表面修正后材料曲线才能当零件曲线；6 张 Simcenter 官方插图（Wöhler、试棒机、区间图、线性 vs 双对数、k 因子表）
