@@ -112,6 +112,8 @@
 
 ### 耐久与疲劳
 
+- [疲劳损伤谱 FDS：把载荷谱转成频域损伤指标](theory/durability-fatigue/fatigue-damage-spectrum.html) — RMS 相同的两段载荷破坏势可差十个量级：疲劳损伤对幅值幂律敏感、对频率位置也敏感，PSD 与 RMS 都回答不了"谁更伤、伤在哪个频率"；FDS 把实测振动喂给一排调谐到不同固有频率的虚拟 SDOF 振子（取相对位移，与取绝对加速度的 SRS/MRS 共用一套响应计算），响应做循环计数、位移乘 K 换应力、Miner 逐频率记账，得到"每个频率上攒了多少损伤势"的一张谱；含糖量表类比贯穿，四参数各有职责——Q 定尺子、b 定形状也定结论（钢 5 铝 8 多材料取最小保守）、A 与 K 比较时设 1 互相抵消；numpy 实跑同 RMS 两段激励伪损伤比 1.7e10（b=5）再增至 6.6e16（b=8）验证两个非线性，Testlab Classic Mission Synthesis 的 Excitation->MRS/FDS、Sum/Env FDS 与 Neo 2406 方法库锚点，12 张官方插图
+
 - [Neuber 法则：从名义应力到局部缺口应力的换算](theory/durability-fatigue/neubers-rule.html) — 线性有限元说 600 MPa、材料早就屈服、实测应变是弹性估计的 1.5 倍：缺口根部的真实世界需要 Neuber 法则来对账——"应力×应变能量守恒"的等面积规则，把弹性点从杨氏模量直线沿等能量双曲线搬到 Ramberg-Osgood 曲线上，塑性缓和应力（Kt3 名义 250 MPa 时真实应力 426 而非 750）、放大应变（同工况 1.76 倍），让线性模型预测非线性行为；信用卡账单类比贯穿（线性账单反推非线性现金流），numpy 20 行跑通弹性应力→弹塑性应变逐点换算（名义 100-300 MPa 扫描，名义 100 MPa 时自动退化为不修正），Testlab Neo Strain Life 的 Input Type 三选一（Load/Stress 走 Neuber、实测应变直通）、有限元灵敏度 5.03983 MPa/N 的 Manual 设置与单位兜底档只做相对比较的边界，6 张官方插图
 
 - [平均应力修正与 Goodman-Haigh 图：无限寿命的边界在哪里](theory/durability-fatigue/mean-stress-goodman.html) — 幅值同为 150 MPa 的两个零件一个无限寿命一个几万公里开裂：差别在平均应力——静态预载把裂纹"始终绷开"，S-N 曲线疲劳极限只对零均值对称循环成立；Goodman-Haigh 图把交变幅值（纵轴）与平均应力（横轴）放进同一坐标纸，Se-Su 连线与压缩侧平推圈出无限寿命区、±Sy 屈服包络当第二道门；三条修正线三档保守度（Goodman 直线/Gerber 抛物线贴韧性钢/Soderberg 以 Sy 封顶），安全系数闭式 n=1/(σa/Se+σm/Su)，numpy 实算同一点 1.30/1.56/1.13、500 循环批量判定 2 个越界即"99.6% 通过=不通过"；雨流拆循环逐点上图、一次出区资格吊销，Testlab Neo 的 TL_Goodman and Damage calculation 流程与 Tecware ProcessBuilder 直接出 Word 报告，15 张官方插图
