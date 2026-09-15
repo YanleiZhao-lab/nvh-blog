@@ -1,0 +1,207 @@
+---
+title: "TNR 与 PR：音调噪声比和突出比两个判据"
+---
+
+# TNR 与 PR：音调噪声比和突出比两个判据
+
+> 两台电吹风做跑合对比：A 品牌的谱图上两根阶次线（28 阶、60 阶）的分贝值明显高于 B 品牌那根 159.5 阶线，按"谁的峰高谁吵"的惯例，整改单应该开给 A。可试听结论恰恰相反——A 的音调只在跑合开头响几秒，B 的那根"低分贝"线从头贯穿到尾、怎么都甩不掉。分贝数为什么会"看走眼"？因为人耳判断一根纯音吵不吵，看的不是它自己多高，而是它比紧邻背景**高出多少**。本文讲清两个以此为逻辑的判据——TTNR（音调噪声比，8 dB 判突出）与 PR（突出比，9 dB 判突出）——怎么算、临界带在里面扮演什么角色、为什么绝对分贝和总声级都会误判，以及 Simcenter Testlab 里从光标计算到整场图谱的两条操作路径。
+
+一台产品噪声整改的复盘会上，工程师把两个竞争品牌的电吹风跑合数据投在幕布上：谱彩色图叠加阶次切片，A 品牌的 28 阶与 60 阶线在整条 rpm 轴上都比 B 品牌的 159.5 阶线高出好几个分贝。会议纪要很快写了"优先整改 A"。两周后主观试听却翻案：A 的呜呜声只在起跑阶段明显，随后融入背景；B 有一根细细的哨音从头贯到尾，几位评审都形容"像贴着耳朵的蚊子"。问题不出在测量——两份数据都干净、都经过同一套标定链——出在判读依据：**谱上看得见的峰**和**耳朵听得出的纯音**根本不是一回事。B 的那根线虽然绝对分贝低，但它周围的背景噪声几乎是空的，一根孤零零的谱线立在平地上，想不听见都难。要量化"立在平地上有多显眼"，就需要把纯音与紧邻背景放在一起比较的指标——这正是 TTNR 与 PR 的出发点，也是本文的主线。
+
+::: info 核心概念
+- **纯音（tone）**：频谱中突出于背景的单根谱线或窄带成分，典型来源如涡轮啸叫、齿轮啮合及其边带
+- **临界带（critical band）**：人耳听觉系统约 24 个滤波通道之一的频率宽度（Bark 刻度），纯音能否被听见在这条带内"结算"
+- **TTNR（Tone-to-Noise Ratio，音调噪声比）**：单根纯音与其所在临界带内掩蔽噪声级之差，≥8 dB 判为突出可闻（1 kHz 以下阈值更高）
+- **PR（Prominence Ratio，突出比）**：含纯音的临界带与两侧相邻临界带平均级之差，≥9 dB 判为突出
+:::
+
+## 一、为什么绝对分贝会看走眼
+
+先看一个最直接的数字反例。某 IT 设备的噪声谱总声级 87.6 dB，其中一根纯音只有 81.5 dB——比总级低 6.1 dB。按"低于总级就不显眼"的直觉，这根纯音应该被整体噪声淹没；实际上它清晰可闻、一耳就能挑出来。原因在于：**能不能听见一根纯音，由它与紧邻背景的相对高差决定，与全谱总级无关**。总级是把 0～20 kHz 全部能量压成一个数，里面绝大部分频段与这根纯音的感知毫无关系。
+
+![总声级与纯音可闻性无关：81.5 dB 纯音低于 87.6 dB 总级仍清晰可闻；下图中纯音比紧邻临界带掩蔽级高 11 dB，判为突出](/images/tnr-prominence-ratio/f16_overall_vs_band.png)
+*图 1　上：纯音级低于总声级；下：纯音比紧邻临界带背景高 11 dB，可闻性由这个差值决定（图源：Siemens Simcenter Testing Knowledge Base）*
+
+反过来也成立：谱图上明明看得见一个峰，人耳却可能完全分辨不出来。把纯音埋进足够高的宽带背景里，峰还在谱上，听觉系统却不再把它解析为独立音高——这就是掩蔽（masking）效应在起作用。所以"看谱找峰"和"听音找调"之间隔着一层听觉机理，TTNR 与 PR 做的事，就是把这层机理变成两个可以写进验收标准的 dB 数。
+
+要建立直觉，可以想一个夜市里的场景：摊位招牌的灯泡有一盏在闪。白天日光充足时，招牌整体很亮，那盏闪灯混在里面根本注意不到；深夜市集收摊、四周全黑，同一盏闪灯哪怕瓦数没变，隔着半条街都扎眼。灯泡的"绝对亮度"（类比纯音自身的分贝数）从头到尾没变，变的是**周围环境的亮度**（类比紧邻背景噪声级）——显眼程度只取决于两者的差。TTNR 和 PR 就是把这个"差"按人耳临界带的宽度量出来的两把尺：TTNR 量"这盏灯比它脚下那块地亮多少"，PR 量"这一整排货架比左右两排货架亮多少"。后文凡是遇到"谱上峰很高却不吵、峰很低却贯穿全程"的矛盾，都可以回到这盏闪灯上找答案。
+
+![纯音可闻判据示意：左图纯音相对背景不够高、听不出独立纯音；右图纯音高出背景足够多、被听成distinct音调](/images/tnr-prominence-ratio/f02_audible.gif)
+*图 2　谱上可见的峰（左）与可闻的纯音（右）是两回事：高差不够，峰只是背景的一部分（图源：Siemens Simcenter Testing Knowledge Base）*
+
+## 二、TTNR：纯音与掩蔽级的单挑
+
+### 2.1 三个量：纯音级 T、临界带级 C、掩蔽级 M
+
+TTNR（Tone-to-Noise Ratio，也写作 TNR）的思路是单挑：把纯音自己的级 $T$ 与"剔除纯音后"它所在临界带的背景级比较。计算在一个谱上分四步完成：
+
+1. 计算纯音的级 $T$（图 3 中绿色部分）；
+2. 计算包含纯音的临界带的级 $C$（图 3 中粉色频段，人耳共 24 个临界带，按 Bark 刻度划分）；
+3. 从临界带级 $C$ 中减去纯音级 $T$，并做谱线宽度与带宽的修正，得到掩蔽噪声级 $M$；
+4. 求纯音级与掩蔽级之差（dB），即 TTNR。
+
+![TTNR 计算示意：纯音级 T（绿）与所在临界带（粉）内的掩蔽噪声级 M 之差须达 8 dB 以上才判为突出可闻](/images/tnr-prominence-ratio/f03_ttnr_masking.png)
+*图 3　TTNR：纯音级 T 与临界带内掩蔽级 M 的差值，≥8 dB 判突出（图源：Siemens Simcenter Testing Knowledge Base）*
+
+::: info 核心概念
+- **掩蔽噪声级（masking noise level）M**：纯音所在临界带内、剔除纯音本身后的背景声级；背景够高时人耳无法从带内挑出纯音，这就是"掩蔽"
+:::
+
+这里先给一个具体数字再上公式。设某纯音声压有效值平方为 $p_T^2 = 0.400\ \mathrm{Pa}^2$，其所在临界带内（含纯音）总声压平方为 $0.500\ \mathrm{Pa}^2$，那么背景（掩蔽）部分就是 $0.500 - 0.400 = 0.100\ \mathrm{Pa}^2$。取以 10 为底的对数乘 10：
+
+- 纯音级 $10\lg(0.400/0.000020^2 \cdot 1) \approx 60\ \mathrm{dB}$ 量级（按 20 µPa 参考换算的谱级表达）；
+- 纯音对背景的差 $10\lg(0.400/0.100) = 6.0\ \mathrm{dB}$——不到 8 dB，按判据这根纯音**不算突出**，尽管它在谱上可能相当显眼。
+
+注意两点口径：TTNR 计算用的谱**不做 A 计权**，级通常以 $\mathrm{Pa}^2$（声压平方，功率量）表达；"临界带宽度修正"指把带宽能量折算到与纯音同一尺度时做的积分修正，标准 ECMA-74 与 ISO 7779 给了完整算法。
+
+### 2.2 公式与阈值
+
+下面这个公式回答的问题是："一根纯音要在背景之上高出多少才被听见？"其中 $T$ 对应物理里纯音本身的声压级，$M$ 对应物理里临界带内掩蔽噪声的声压级（从带级 $C$ 中扣除纯音并修正带宽后得到），两者之差就是纯音"单挑"背景的成绩单：
+
+$$
+\mathrm{TTNR} = 10\,\lg\frac{T}{M}\ \ (\mathrm{dB})
+$$
+
+判据：**$\mathrm{TTNR} \ge 8\ \mathrm{dB}$ 时纯音突出可闻**；频率低于 1000 Hz 时阈值还要更高（低频段临界带更窄、听觉更挑剔，标准给出了随频率上升的阈值曲线）。差值可以为负——掩蔽级是临界带内全部能量的合成，若背景厚实，$M$ 完全可能压过 $T$。
+
+![TTNR 定义公式：纯音级 T 与掩蔽级 M 的 dB 差](/images/tnr-prominence-ratio/f04_ttnr_equation.png)
+*图 4　TTNR 公式（图源：Siemens Simcenter Testing Knowledge Base）*
+
+### 2.3 数字实验：六根纯音只差 3 dB 一档
+
+官方给过一个干净的演示：2000 Hz 纯音叠加恒定随机背景，纯音按 3 dB 一档分六档增强。谱图上六根峰全都清晰可见（图 5），但 TTNR 从约 0 dB 排到 13 dB——只有超过 8 dB 的那几根才真正"出得来"，低档位的峰实际上已经熔在背景里听不出了。
+
+![恒定随机背景上六根 2000 Hz 纯音、彼此差 3 dB：谱上六根峰全部可见，但听感上只有高差的几根能被分辨](/images/tnr-prominence-ratio/f05_six_tones.gif)
+*图 5　六档纯音、谱峰全可见（图源：Siemens Simcenter Testing Knowledge Base）*
+
+![TTNR 计算结果：数值从约 0 到 13 dB，超过 8 dB 判 Yes；TTNR Prominent 列给出是/否结论](/images/tnr-prominence-ratio/f06_ttnr_legend.png)
+*图 6　TTNR 结果表：数值档与 Yes/No 档并排（图源：Siemens Simcenter Testing Knowledge Base）*
+
+这个实验值得用 numpy 复算一遍，验证"3 dB 一档、8 dB 阈值"的判据行为。下面构造 2000 Hz 纯音 + 限带随机噪声，用与官方演示同构的临界带扣减法估计 TTNR：
+
+```python
+import numpy as np
+fs, N = 51200, 2**16                     # 采样率与帧长
+f = np.fft.rfftfreq(N, 1/fs)
+band = (f > 1500) * (f < 2600)           # 覆盖 2000 Hz 的分析邻域
+rng = np.random.default_rng(0)
+noise = rng.normal(0, 1, N)
+xn = np.fft.irfft(np.fft.rfft(noise) * band, N)   # 限带背景噪声
+tone = 0.6*np.sin(2*np.pi*2000*np.arange(N)/fs)
+for k in range(6):                        # 纯音 3 dB 一档增强
+    x = xn + (10**(k*3/20))*tone
+    P = np.abs(np.fft.rfft(x))**2 / N     # 功率谱（Pa^2 尺度）
+    line = (f > 1995) * (f < 2005)        # 纯音谱线区
+    Tline, Cband = P[line].sum(), P[band].sum()
+    M = Cband - Tline                     # 掩蔽级 = 带级 - 纯音
+    ttnr = 10*np.log10(Tline/M)
+    print("tone +%2d dB -> TTNR %5.1f dB  prominent: %s"
+          % (k*3, ttnr, 'Yes' if ttnr >= 8 else 'No'))
+```
+实际运行结果（seed=0）：六档从 6.4 dB 单调升到 21.4 dB、每档恰好递增 3.0 dB，第二档（+3 dB，9.4 dB）起越过 8 dB 阈值输出 Yes——与图 6 的“数值档 + Yes/No 档”双列行为完全一致：谱上六档峰全部可见，但只有高出背景 8 dB 以上的几档才会被听成独立纯音。
+
+![TTNR 结果详解图例](/images/tnr-prominence-ratio/f08_keyttnr.png)
+*图 7　TTNR 图例：数值档与 Prominent 是/否档（图源：Siemens Simcenter Testing Knowledge Base）*
+
+## 三、PR：整条临界带的团体赛
+
+### 3.1 从单挑到团体赛
+
+TTNR 拿一根纯音与它自己带内的背景比，前提是纯音能被干净地分离出来。但很多产品吐出的不是一根孤线，而是一簇——齿轮启合就是典型：启合基频一根主音，两侧还对称排开一串边带。逐根算 TTNR 既繁琐又不符合听觉实际（人耳把这一簇听成一个音调群）。PR（Prominence Ratio）换了个打法：不再分离纯音，直接拿含纯音的整条临界带与两侧相邻的两条临界带比，团体赛定胜负：
+
+1. 计算含纯音的临界带 B 的级（图 8 绿色）；
+2. 计算左右相邻两条临界带 A、C 的级（图 8 红色）；
+3. 求带 B 与 A、C 平均值之比（dB）。
+
+![PR 计算示意：含纯音的临界带（绿）与两侧相邻临界带（红）的平均级之差，达 9 dB 以上判突出](/images/tnr-prominence-ratio/f09_pr_bands.png)
+*图 8　PR：中间带 B 对两侧带 A、C 平均级的差（图源：Siemens Simcenter Testing Knowledge Base）*
+
+下面这个公式回答的问题是：这一簇音调连同它的带，比左右邻居整体亮多少？其中 $B$ 对应物理里含纯音临界带的声压平方级，$A$ 与 $C$ 对应物理里左右两条相邻临界带的声压平方级（均以 $\mathrm{Pa}^2$ 表达、不加 A 计权），两侧取平均合成一条本地地平线：
+
+$$
+\mathrm{PR} = 10\,\lg\frac{B}{(A+C)/2}\ \ (\mathrm{dB})
+$$
+
+判据：PR 达到 9 dB 判为突出；同样地，低于 1000 Hz 时阈值要求更高（低频段需大于 9 dB）。
+
+![PR 定义公式：临界带 B 与相邻带 A、C 平均值之比](/images/tnr-prominence-ratio/f10_pr_equation.png)
+*图 9　PR 公式（图源：Siemens Simcenter Testing Knowledge Base）*
+
+![PR 图例说明](/images/tnr-prominence-ratio/f11_keypr.gif)
+*图 10　PR 图例（图源：Siemens Simcenter Testing Knowledge Base）*
+
+::: info 核心概念
+- TTNR 与 PR 的本质区别：TTNR 评估的对象是一根纯音，PR 评估的对象是一整条临界带。成簇出现的音调群（齿轮启合 + 边带、多根谐波）用 PR 更贴合听感
+:::
+
+回到夜市那盖闪灯：TTNR 是这盖灯比它脚下那块地亮多少，PR 则是把整排货架看成一个单元、比左右两排平均亮多少。灯要是成串闪（边带簇），第二种量法显然更接近一眼望去有多扎眼的直觉。
+
+### 3.2 跑合实例：谱图与 PR 图给出相反结论
+
+开篇那对电吹风，正是官方演示的原型。A 品牌两根阶次线（28、60 阶）绝对分贝高，B 品牌 159.5 阶绝对分贝低；谱彩色图上（图 11）A 的线更亮，但 PR 图（图 12）上结论反转：A 的两条音调只在跑合开头 PR 越过 9 dB（红区），随后退回背景；B 的 159.5 阶整条 rpm 区间都压在红区里——从起动到最大转速全程可闻。试听证实的是 PR 图，不是谱图。
+
+![两品牌跑合的谱彩色图与阶次切片：A 品牌 28/60 阶分贝更高，按绝对分贝应判 A 更吵(/images/tnr-prominence-ratio/f12_spectral_orders.png)
+*图 11　谱图视角：绝对分贝上 A 品牌更高（图源：Siemens Simcenter Testing Knowledge Base）*
+
+![PR 图结论反转：A 品牌只在跑合开头突出（红区短），B 品牌 159.5 阶全程压在 9 dB 阈值之上](/images/tnr-prominence-ratio/f13_pr_map.png)
+*图 12　PR 图谱视角：B 品牌的音调整程突出（图源：Siemens Simcenter Testing Knowledge Base）*
+
+把 PR 图的纵轴设成 0～9 dB、超过 9 dB 涂红，是一目了然的工程习惯——红色区域直接就是可闻音调的工况区间。还有一个细节：PR 图上音调越往高频越宽，这是因为人耳临界带在高频段按约 23% 恒百分比展宽，同一条阶次线扫到高频就落在更宽的带里。
+
+![对比总结：上排 A 品牌音调集中在跑合头部，下排 B 品牌 159.5 阶在 PR 图上全程清晰](/images/tnr-prominence-ratio/f14_compare.png)
+*图 13　谱图与 PR 图对照：B 品牌的贯穿型音调只在 PR 图上暴露（图源：Siemens Simcenter Testing Knowledge Base）*
+
+## 四、背景声的三个坑
+
+坑一：把总声级当背景。第一节 87.6 dB 对 81.5 dB 的反例已经说明：总级是全谱能量，背景只取纯音紧邻临界带内的那一份。判可闻性时总级不参与。
+
+坑二：台架上测部件、装机后再判读。实验室里单独测一个螺旋桨部件，四周安静，任何音调都会突出可闻；装到飞机上、埋进发动机与气流的宽带背景里，同一根音调可能完全被掩蔽。音调的可闻性属于整机使用场景，不属于部件本身——单独部件的 TTNR/PR 结论对最终听感没有预测力，测试必须在有真实背景的应用场景下做。
+
+![部件台架试验（左）与装机使用场景（右）：没有真实背景声的部件试验不能预测装机后的音调可闻性](/images/tnr-prominence-ratio/f17_propeller.png)
+*图 14　部件单独测试会高估音调：缺少应用场景的背景掩蔽（图源：Siemens Simcenter Testing Knowledge Base）*
+
+坑三：低频段沿用 8/9 dB。两个阈值只适用于 1000 Hz 以上。低频段临界带更窄、频率分辨更细，同样的 dB 差更容易被听出来，标准对 1000 Hz 以下规定了逐步提高的阈值（TTNR 高于 8 dB、PR 高于 9 dB）。社区里 432 Hz 处 PR 11.83 dB 却仍判 No 的真实提问，正是低频修正曲线在起作用——只记 8/9 两个数，会在低频段得出与软件相反的结论。
+
+(低频段 1000 Hz 以下两个阈值逐步上浮：TTNR 高于 8 dB、PR 高于 9 dB，具体曲线见 ECMA-74 / ISO 7779。)
+
+
+## 五、Testlab 里的两条计算路径
+
+### 5.1 2D 谱线光标法（稳态谱、单点判读）
+
+在 FrontBack 显示中给谱加一个 Single X Cursor，置于纯音峰上，右键光标选 Calculations -> Tone-to-Noise Ratio 或 Prominence Ratio，即得该纯音的 dB 值；对应的 TTNR Prominent / PR Prominent 项直接给出 Yes/No。一个新手容易困惑的点：算 PR 时光标放在纯音峰上未必得到最大值——因为 PR 以临界带为单位结算，光标挪到带内别的位置时两侧背景带的取值随之变化，最大 PR 可能出现在偏离峰顶处。这不是 bug，是团体赛规则的自然结果。
+
+![光标计算 TTNR/PR：Single X Cursor 置于纯音峰，右键选 Calculations](/images/tnr-prominence-ratio/f19_cursor_calc.png)
+*图 16　光标计算路径：加 Single X Cursor 后右键选 Calculations（图源：Siemens Simcenter Testing Knowledge Base）*
+
+### 5.2 3D 图谱法（跑合、时变工况）
+
+对跑合类时变数据走吞吐处理：Tools -> Add-ins 打开 Signature Throughput Processing（36 token）与 Sound Quality Metrics（33 token）；在 Time Data Processing 的 Acquisition Parameters 里把模式设为 Tracking（按 rpm 或时间），Section Settings 中勾选 Prominence Ratio Map / Tone-to-Noise Ratio Map，Calculate 即得随工况演化的 TTNR/PR 彩色图（图 12 即其产物）。要从图谱切阶次切片，再用 Signature Data Post-Processing（同样从 Tools -> Add-ins 打开）。
+
+![Add-ins 中开启 Signature Throughput Processing 与 Sound Quality Metrics](/images/tnr-prominence-ratio/f20_addin.png)
+*图 17　开启两个 add-in（图源：Siemens Simcenter Testing Knowledge Base）*
+
+![Time Data Processing 的 Section Settings 中勾选 PR Map / TTNR Map](/images/tnr-prominence-ratio/f21_section_settings.png)
+*图 18　Section Settings 勾选位置（图源：Siemens Simcenter Testing Knowledge Base）*
+
+### 5.3 标准依据
+
+TTNR 与 PR 的完整算法写在 ECMA-74 与 ISO 7779 两份标准里，面向 IT 设备（计算机、打印机等）的噪声标注与验收；低频段的上浮阈值曲线也由这两份标准给出。
+
+## 六、与音调度 Tonality 的分工
+
+站内《音调度 Tonality》一文讲的是连续量化的音调感（t.u.），与本文两个阈值型判据各管一段：
+
+- 合规验收（IT 设备噪声标注、标准对标）：用 TTNR/PR——标准写死 8/9 dB 阈值，结论是 Yes/No，好写进验收条款；
+- 整改排序与频段定位：用 Tonality——连续量能排序哪根最烦人，且听觉模型版（t.u.HMS）对整体缩放敏感，更贴主观量级；
+- 成簇音调（启合 + 边带）：PR 天然按带结算，比逐根 TTNR 省事；要给这一簇贡献多少音调感排序时再上 Tonality。
+
+常见组合：先用 PR 图谱扫出全部超标工况区间，再对重点频段算 Tonality 定整改优先级。
+
+## 七、小结
+
+绝对分贝量得出能量，量不出显眼。TTNR 与 PR 把判据从纯音多高改写成纯音比紧邻背景高出多少：TTNR 单挑（纯音对带内掩蔽级，8 dB），PR 团体赛（含调带对两侧邻带，9 dB），低频段阈值上浮，部件必须带真实背景测试。Testlab 里稳态谱用光标计算、时变工况用吞吐图谱——两条路径都在谱峰的绝对高度之外，补上决定听感的那个相对高度。
+
+## 一句话记住
+
+纯音吳不吳不看绝对分贝、只看比紧邻背景高出多少：TTNR 拿纯音对带内掩蔽级单挑（8 dB 判可闻）、PR 拿含调临界带对两侧邻带打团体赛（9 dB 判突出），低频阈值上浮、部件须带真实背景测，Testlab 光标算稳态、图谱扫跑合。
