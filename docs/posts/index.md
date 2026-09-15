@@ -148,8 +148,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（13 篇）
+### 测试操作（14 篇）
 
+- [长导线应变测量：SCADAS 与电缆电阻的坑](practice/test-setup/strain-long-cables.html) — 同一套应变片接上 50 米电缆，实测应变比仿真系统性低 2%：片没坏、桥没错，是导线电阻在供电回路里分掉了激励电压——0.2 mm² 铜线每 50 m 单根约 4.3 Ω，350 Ω 桥上即 2.4% 幅值偏差，疲劳幂律再放大成寿命的一成出入；长导线两类坑分开治：噪声类（电磁/静电干扰毫伏级小信号长草）靠编织屏蔽、远离动力线、垂直交叉与全桥差分，电阻类靠带长线标定（shunt 必须贴应变片端）、Bridge Lead Resistance 单根线阻补偿（默认 0.7 Ω 是 LEMO 猪尾线）或 sense 线自动稳压（LEMO 2/5 脚 + ExternalSense=Internal Shunt, Sense Lines，全桥 4 线变 6 线）；花园长水管类比贯穿（沿途水压损耗=分压、被踩=感应噪声），numpy 逐米算清 1~200 m 误差账（10 m 已 0.49%），Testlab Channel Setup Visibility 隐藏字段位置全图解
 - [几何骨架：试验模型的测点线面组织](practice/test-setup/geometry-skeleton.html) — 数据全对、动画缺角或跳变，病根多在试验前的几何定义：结点（位置+方位）、连线、着色面构成振型数据的地址簿，Point ID 只是地址的一半、Direction 才是另一半。手册 21 章四构件逐个拆解——三种坐标系写法等价、总坐标原点优先放结构对称点、欧拉角是链式旋转（绕 z、绕新 x、绕新 z，次序不可交换，传感器装反=绕 z 转 180 度）、每结点最多 7 个自由度（3 平动+3 转动+1 标尺，声压挂标尺）；numpy 定量演示装反振型腹点一个测点自 MAC 掉到 0.55、装反节点处则 1.00 无感——解释了"部分模态动画怪"的选择性事故；Testlab Geometry 组操作与"先空跑再测量"的防错流程
 
 - [加速度计大全：原理、类型与选型决策](practice/test-setup/accelerometers-comprehensive.html) — 同一悬置点两套系统差十倍（8 g 对 0.8 g）都是"没坏"的传感器：100 mV/g 模态传感器在耐久路面顶穿量程削波压平、10 mV/g 工况传感器做锤击响应只剩几十毫伏 FRF 全毛刺——灵敏度、量程、频响三根红线与工况对表；挂坠类比讲 seismic mass 惯性测力，压电（电荷/IEPE）、压阻、变电容、MEMS 四类感力元件逐个拆开，安装谐振频率与安装方式的耦合、接地回路与电缆噪声"传感器之外"的坑全图解（29 张官方插图）
