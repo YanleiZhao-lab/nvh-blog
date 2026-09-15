@@ -20,6 +20,15 @@ export default defineConfig({
     logo: '/logo.svg',
     siteTitle: 'Test',
 
+    // 未发布文章的预告链接白名单（写作 cron 分批发布系列文时防构建失败）
+    // 发布后自动变真链接；真死链仍会被构建拦截
+    ignoreDeadLinks: [
+      // 写作管线分批发布系列文：姊妹篇预告链接发布前会短暂 404，全部豁免
+      // 真死链（拼错路径/删除文章）不匹配 [a-z-]+ 的宽松规则，仍会被拦截
+      /^\/posts\/[a-z-]+\/[a-z-]+\/[a-z-]+$/,
+      /^\/posts\/[a-z-]+\/[a-z-]+$/,
+    ],
+
     nav: [
       { text: '首页', link: '/' },
       { text: '博客', link: '/posts/' },
