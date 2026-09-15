@@ -44,7 +44,7 @@ title: "长导线应变测量：SCADAS 与电缆电阻的坑"
 
 *(图源：Siemens Simcenter Testing Knowledge Base)*
 
-知识库给出的抗干扰清单，每一条都对应上面某个物理机制：提高激励电压，把信号电平抬高、相对压低干扰（代价是自热，见[应变片激励电压怎么选](/posts/practice/test-setup/strain-excitation-voltage.html)）；信号电缆远离一切电力源布线，不得不交叉时**垂直交叉**而不是并行；用全桥差分接线吃满共模抑制（原理详见[单端 vs 差分输入](/posts/practice/test-setup/single-ended-vs-differential.html)）；确认屏蔽层提供到地的低阻路径。四条里最常被违反的是第二条——现场临时拉线，动力缆随手压在信号缆上是最常见的事故起点。
+知识库给出的抗干扰清单，每一条都对应上面某个物理机制：提高激励电压，把信号电平抬高、相对压低干扰（代价是自热，本站将另文专述）；信号电缆远离一切电力源布线，不得不交叉时**垂直交叉**而不是并行；用全桥差分接线吃满共模抑制（原理详见[单端 vs 差分输入](/posts/practice/test-setup/single-ended-vs-differential.html)）；确认屏蔽层提供到地的低阻路径。四条里最常被违反的是第二条——现场临时拉线，动力缆随手压在信号缆上是最常见的事故起点。
 
 ## 三、第二类坑：导线电阻偷走激励电压
 
