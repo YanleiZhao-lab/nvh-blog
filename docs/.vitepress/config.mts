@@ -24,6 +24,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '博客', link: '/posts/' },
       { text: '导航', link: '/nav/' },
+      { text: '关于', link: '/about' },
       { text: '主站', link: 'https://www.nvhtest.cn' },
     ],
 
