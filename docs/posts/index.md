@@ -112,6 +112,8 @@
 
 ### 耐久与疲劳
 
+- [应变寿命法 Strain Life：弹塑性载荷下的疲劳寿命预测](theory/durability-fatigue/strain-life-approach.html) — 台架 47 块就裂、S-N 法算 800 块，差 20 倍的账出在塑性区：孔边实测 8500 微应变对线弹性估计 3400，局部每个循环都在塑性里进出，S-N 价目表整个失效——应变寿命法（E-N）换账本，改盯局部应力-应变回线。三步链路：实测应变逐点配 Ramberg-Osgood 关系解出应力（示例参数下 8000 微应变真实应力仅 431 MPa，线弹性会虚报 1680）、应力应变互画数闭环（转折点包夹成环、残差循环照雨流规则）、应变幅查 Manson-Coffin-Morrow EN 曲线按 n/N 记损（弹性项管高周端、塑性项管低周端，Coffin 1953 与 Manson 1954 各自独立发表）；平均应力用损伤参数 P 的"平行宇宙"补账——PN 曲线由 EN 曲线导出，SWT 压侧整环记零、Morrow 压侧照算只是慢；输出 Life Curve 与寿命块（125.38 块示例、小于 1 即一遍内失效、投影不相交即无限寿命）；回形针类比贯穿（塑性留弯、闭环即一次弯折、回线面积是塑性功），numpy 跑通应变到 P 值换算并复现 SWT 压侧归零，Testlab Neo Process Designer 的 Strain Life 方法与材料库锚点，23 张官方插图
+
 - [疲劳损伤谱 FDS：把载荷谱转成频域损伤指标](theory/durability-fatigue/fatigue-damage-spectrum.html) — RMS 相同的两段载荷破坏势可差十个量级：疲劳损伤对幅值幂律敏感、对频率位置也敏感，PSD 与 RMS 都回答不了"谁更伤、伤在哪个频率"；FDS 把实测振动喂给一排调谐到不同固有频率的虚拟 SDOF 振子（取相对位移，与取绝对加速度的 SRS/MRS 共用一套响应计算），响应做循环计数、位移乘 K 换应力、Miner 逐频率记账，得到"每个频率上攒了多少损伤势"的一张谱；含糖量表类比贯穿，四参数各有职责——Q 定尺子、b 定形状也定结论（钢 5 铝 8 多材料取最小保守）、A 与 K 比较时设 1 互相抵消；numpy 实跑同 RMS 两段激励伪损伤比 1.7e10（b=5）再增至 6.6e16（b=8）验证两个非线性，Testlab Classic Mission Synthesis 的 Excitation->MRS/FDS、Sum/Env FDS 与 Neo 2406 方法库锚点，12 张官方插图
 
 - [Neuber 法则：从名义应力到局部缺口应力的换算](theory/durability-fatigue/neubers-rule.html) — 线性有限元说 600 MPa、材料早就屈服、实测应变是弹性估计的 1.5 倍：缺口根部的真实世界需要 Neuber 法则来对账——"应力×应变能量守恒"的等面积规则，把弹性点从杨氏模量直线沿等能量双曲线搬到 Ramberg-Osgood 曲线上，塑性缓和应力（Kt3 名义 250 MPa 时真实应力 426 而非 750）、放大应变（同工况 1.76 倍），让线性模型预测非线性行为；信用卡账单类比贯穿（线性账单反推非线性现金流），numpy 20 行跑通弹性应力→弹塑性应变逐点换算（名义 100-300 MPa 扫描，名义 100 MPa 时自动退化为不修正），Testlab Neo Strain Life 的 Input Type 三选一（Load/Stress 走 Neuber、实测应变直通）、有限元灵敏度 5.03983 MPa/N 的 Manual 设置与单位兜底档只做相对比较的边界，6 张官方插图

@@ -1,0 +1,224 @@
+---
+title: "应变寿命法 Strain Life：弹塑性载荷下的疲劳寿命预测"
+---
+
+# 应变寿命法 Strain Life：弹塑性载荷下的疲劳寿命预测
+
+> 一枚回形针，轻轻掰一下弹回原样；掰到 60 度松手，它停在 40 度回不去了；在这个塑性状态下来回掰十几次，"啪"一声断了。S-N 应力寿命法只擅长第一种情形——应力应变都停在弹性区、寿命十万次起步；而悬置支架圆角、螺栓孔边、焊缝根部这些"裂纹专业户"，恰恰活在第二、三种情形里：局部每个循环都在塑性里进出，几千次就见裂纹。应变寿命法（Strain Life Approach，又称局部应力应变法、E-N 法）就是为这种低周疲劳定制的：它盯住缺口根部一小块材料的应力-应变回线，用 Manson-Coffin-Morrow 应变-寿命曲线（EN 曲线）记损伤，再用 SWT/Morrow 损伤参数把平均应力算进去。本文沿"测应变、配应力、数回线、记损伤、出寿命块"的完整链路讲一遍，并给 Simcenter Testlab Neo 的对应操作位置。回形针类比贯穿全文：塑性形变留弯、闭环即一次弯折、回线面积是每次弯折耗掉的塑性功。
+
+一轮耐久试验后的复盘会上，问题经常是这样摆上桌的：样件在台架上按实测载荷谱跑了 47 个循环块就裂了，位置在安装孔边缘；用 S-N 曲线加 Miner 记账重算，同一个位置却给出"理论上扛 800 块"。差距接近 20 倍，评审吵不出结果。翻应变片数据才发现：孔边实测应变峰值 8500 微应变，而按线弹性应力除以弹性模量只有 3400 微应变——局部材料早就屈服，每个大循环都在塑性区里进出一趟。应力寿命法的世界观在这里整个失效：它的价目表（S-N 曲线）是拿弹性应力标定的，"应力翻倍损伤翻二十倍"的幂律外推到塑性区就成了算命。需要换一套账本，改用应变记账、用局部应力-应变回线数循环、用专门覆盖弹塑性的材料曲线算寿命——这就是应变寿命法。Simcenter 官方知识库把它与应力寿命的分工一句话讲清：**应力寿命只适用于应力应变保持在弹性区的情形，应变寿命法则同时计入弹性与塑性变形**。
+
+::: info 核心概念
+- **应变寿命法（Strain Life Approach / E-N 法）**：以局部应变幅为记账货币的疲劳寿命预测方法，同时覆盖弹性与塑性变形，适用于低周疲劳与缺口根部
+- **EN 曲线（Manson-Coffin-Morrow 应变-寿命曲线）**：材料级别的"应变幅-致断循环次数"查询表，弹性项与塑性项相加构成总应变幅
+- **迟滞回线（hysteresis loop）**：局部应力对应变画出的闭合环，一个环对应一次完整循环，环面积是每循环耗散的塑性功
+- **损伤参数（Damage Parameter, P）**：把应力与应变打包成单个数、从而把平均应力影响计入损伤计算的量（SWT、Morrow 两种常用公式）
+- **寿命块（Design Point Block）**：实测载荷时间历程整段重复多少次零件失效，应变寿命法的最终单值输出
+:::
+## 一、为什么应力寿命法管不住塑性
+
+把回形针的力学翻译成材料语言，就明白问题出在哪。
+
+低载荷下，材料像一根线性弹簧：应力与应变成正比，比例系数是弹性模量 E（钢约 210000 MPa），卸载后形变完全恢复——弹性行为。载荷升高、局部应力越过屈服强度后，材料开始永久变形，应力-应变关系变成一条弯向应变轴的曲线，卸载后留下残余应变——塑性行为。回形针掰到 60 度停在 40 度，就是塑性留下的"账"。更关键的是第二层：塑性区里加载与卸载走的是不同的曲线，一个完整循环在应力-应变坐标上画出一个闭合环——迟滞回线。环里围住的面积，是这个循环实实在在耗散掉的塑性功；裂纹的萌生与扩展，吃的正是这份能量。回形针断口发烫、掰的地方越来越软，是塑性功在记账的直接证据。
+
+![应力（力除以面积）与应变（伸长量除以原长）是预测零件存活时长的两个基本量](/images/strain-life-approach/fig1-stress-strain.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+实测的应力与应变时间历程往往已经不在一条直线上：应力与应变不再保持线性比例，应变还会随时间留下永久偏置。
+
+![应力（绿）与应变（蓝）时间历程：左图可见应力-应变关系并非始终线性成比例，右图可见永久应变变形随时间累积出偏置](/images/strain-life-approach/fig2-nonlinear-histories.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+把应力对应变画成曲线，两个区域的分界一目了然：低应力段是斜率为 E 的直线（弹性），高应力段弯曲并伴随硬化直至失效（塑性）。
+
+![应力-应变曲线：右侧低应力区应力应变呈线性（弹性，由杨氏模量联系，蓝色区），应力升高后进入非线性塑性区（含颈缩与硬化，红色区）直至失效](/images/strain-life-approach/fig3-elastic-plastic.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+应力寿命法的整个流程——S-N 曲线、Miner 记账——默认零件停在蓝色区。一旦缺口根部进入红色区，驱动疲劳的不再是应力幅而是应变幅（含塑性应变那部分），必须换用应变寿命法：它的原料是**同一位置**的局部应力与应变时间历程对，数的是应力-应变平面上的闭环，价目表换成材料的 EN 曲线。官方把整个流程画成三步：第一步得到局部应力-应变时间历程（蓝），第二步循环计数（紫），第三步用 EN 曲线加平均应力影响算损伤（黄）。
+
+![应变寿命法三步流程：1) 求局部应力-应变时间历程（左，蓝），2) 循环计数（中，紫），3) 用应变寿命 EN 曲线含平均应力影响计算损伤（右，黄）](/images/strain-life-approach/fig4-process.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+一个必须先说清的边界：局部应力-应变时间历程只能预测**测点那一个位置**的寿命，换一个位置就得换一片应变片。想知道结构上其他位置会不会先坏，要么补测更多应变片，要么上有限元模型——但有限元是线性的，输出的弹性应力需要经 Neuber 法则换算成弹塑性应变才能进入本流程（详见[《Neuber 法则》](neubers-rule.html)）。
+## 二、第一步：从实测应变到局部应力-应变历程
+
+起点是使用现场或台架上应变片直接测到的应变时间历程。实验上直接测应变比测应力容易得多——应变片贴上就有，应力却没有对应的传感器。但算疲劳损伤需要同一位置的应力与应变配对，于是缺的那一半——应力——要靠材料本构关系补出来。
+
+![应变寿命法需要同一测点上的局部应力-应变时间历程对](/images/strain-life-approach/fig5-local-histories.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+补这一半用的是 **Ramberg-Osgood 关系**：一条描述应力-应变非线性关系的方程，能覆盖弹性段与塑性硬化段，需要的材料参数只有三个——弹性模量 E、循环硬化系数 K'、循环硬化指数 n'。
+
+![Ramberg-Osgood 在应变寿命流程中的位置：由弹塑性应变时间历程计算局部应力-应变时间历程以供循环计数](/images/strain-life-approach/fig6-ramberg-place.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+先用数值把它的行为摸一遍：设钢 E = 210000 MPa、K' = 1200 MPa、n' = 0.20，代入应变 0.004（4000 微应变），弹性项之外塑性项已不可忽略，总应力约 356 MPa；应变翻倍到 0.008，应力只涨到约 431 MPa——塑性段应力涨得越来越慢、应变涨得越来越快，这正是"塑性缓和应力、放大应变"的曲线语言。
+
+这个公式回答的问题是"给了应变，这个位置的材料应力是多少"——左边总应变对应物理里的实测应变，右边第一项是弹性部分（沿杨氏模量直线，卸载可恢复），第二项是塑性部分（回形针留下的那道"弯"，卸载不恢复）：
+
+$$
+\varepsilon = \frac{\sigma}{E} + \left(\frac{\sigma}{K'}\right)^{1/n'}
+$$
+
+对实测应变时间历程的**每一个点**都用这条关系解出对应应力，就得到同一位置、同一时刻的应力-应变配对序列——官方称之为"局部"应力-应变时间历程。它是后续一切步骤的原料。
+
+![对实测应变时间历程逐点用 Ramberg-Osgood 计算对应应力](/images/strain-life-approach/fig8-ramberg-apply.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+![Ramberg-Osgood 方程：弹性区（左，蓝）与塑性区（右，红）的应力-应变关系，材料参数为杨氏模量、循环硬化指数、循环硬化系数](/images/strain-life-approach/fig7-ramberg-eq.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+## 三、第二步：应力-应变回线数循环
+
+有了配对的应力与应变时间历程，数循环不再到时域里数峰谷，而是把两者**互画**：应力为纵轴、应变为横轴，时间历程在图上走出轨迹。塑性存在时轨迹是弯的，一个完整循环走出一个闭合环——回形针掰过去又掰回来，一个环。官方示例里两个小循环形成两个闭环：转折点 2、3 被 1、4 包住构成环一，5、6 与 4、7 构成环二；没闭合的大环（1、4、7 之间）按残差循环处理（雨流计数一文有展开）。
+
+![循环计数：应力时间历程（左上，绿）与应变时间历程（右下，蓝）互画得到应力-应变图（右上，红），其中出现两个闭环](/images/strain-life-approach/fig10-loops.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+![闭环细节：应力范围、应变范围、应变循环幅值与平均应力都从一个闭环上读出](/images/strain-life-approach/fig11-loop-detail.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+每个闭环直接读出四个数：应力范围、应变范围、应变幅（范围之半）、该循环的平均应力。整段历程数完，输出是一张**应变循环直方图**：纵轴循环幅值从大到小排，横轴累计循环数。官方的小例子：1 个 102 微应变幅的循环加 3 个 100 微应变幅的循环，图上就是"1 个 @102"与"累计 4 个 @100"两个数据点。
+
+![应变循环直方图：纵轴循环幅值降序排列，横轴累计循环数，是循环计数的结果视图](/images/strain-life-approach/fig12-histogram.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+## 四、第三步：EN 曲线记损伤
+
+价目表登场。**Manson-Coffin-Morrow 应变-寿命曲线（EN 曲线）**刻画"某应变幅下材料多少次循环失效"，由试棒（coupon）实验室试验标定，输入是强度性能、延性性能与弹性模量。一条冷知识：方程得名于 L.F. Coffin（纽约州 Niskayuna 的 Knolls 原子动力实验室）与 S.S. Manson（NASA Lewis，克利夫兰），两人于 1953 与 1954 年各自独立发表了应变-寿命关系。
+
+这个公式回答的问题是"这个应变幅的材料试件平均能扛多少次循环"——左边总应变幅对应闭环读出的应变幅，右边第一项是弹性应变项（高周端主导：低幅、长寿命），第二项是塑性应变项（低周端主导：高幅、短寿命），两项相加就是图上的总应变曲线；四个系数是疲劳强度系数、疲劳强度指数、疲劳延性系数、疲劳延性指数，2N 是载荷反向次数（一次完整循环含两次反向）：
+
+$$
+\varepsilon_a = \frac{\sigma'_f}{E}(2N)^b + \varepsilon'_f (2N)^c
+$$
+
+![Manson-Coffin-Morrow 曲线：总应变幅（绿）= 弹性应变项（蓝）+ 塑性应变项（红）；低循环次数端塑性项主导（高幅循环），高循环次数端弹性项主导（低幅循环）](/images/strain-life-approach/fig14-en-curve.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+读图的工程直觉：曲线左端（几次到几千次循环）塑性项主导——回形针那种"每掰一次都留弯"的寿命区间；右端（十万次以上）弹性项主导——S-N 曲线的传统地盘。应变寿命法同时管两端。
+
+损伤记账与 Miner 法则同一套逻辑，只是货币从应力幅换成应变幅：场数据里某应变幅出现 n 次，EN 曲线查得同幅值失效循环数 N，这一级的损伤就是 n 除以 N。官方手算示例：某幅值 2 个循环，EN 曲线给出 10 次失效，损伤 D 等于 2/10 即 0.20——这段载荷整谱可重复 5 次（D 的倒数）才失效。真实历程里有成千上万个不同幅值的循环，逐级算损、全部相加即可（[《Miner 线性累积损伤》](miners-rule-damage.html)一文有展开）。
+
+![损伤计算：场数据同应变幅的循环数 n 与 EN 曲线的失效循环数 N 相比得损伤 D；示例 n=2、N=10，D=0.20，可重复 5 次](/images/strain-life-approach/fig15-damage-calc.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+用 EN 曲线时还有三条边界要知道。其一，**Manson-Coffin-Morrow 方程本身无极限**，做寿命计算需要补两个限制：静强度（一次循环就坏）封上限、疲劳极限（无限循环不坏）封下限。其二，上面 2/10 的例子里两个循环幅值相同但平均应力不同，计算把差异忽略了——这正是下一节要修的偏差。其三，EN 曲线是材料属性，不含缺口、表面、尺寸效应，用在具体零件上要靠"直接测局部应变"来兜住（这也是应变寿命法偏爱实测应变输入的原因）。
+
+## 五、平均应力：损伤参数 P 的"平行宇宙"
+
+同一应变幅，两个循环的寿命可以差好几倍，差别在平均应力：拉伸平均应力把试件"往开里拉"，每个循环的峰值更深入裂纹张开方向，寿命缩短；压缩平均应力把试件"抱住"，裂纹难以张开，寿命延长。回形针版本：先把针掰开 30 度再在其上摆动（拉伸偏置），比围绕 0 度对称摆动同样幅度断得快。
+
+![试件循环：左为正平均应力（拉伸）循环，右为负平均应力（压缩）循环](/images/strain-life-approach/fig16-mean-stress.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+问题是 EN 曲线按零平均应力的循环标定，直接查表等于假装平均应力不存在。解法是引入**损伤参数 P**：一个把应力与应变打包成单个数的量，用 P 值直方图代替应变幅直方图、用 PN 曲线代替 EN 曲线记账。官方给了一个好记的说法——把 P 值体系想成应变损伤计算的"平行宇宙"：PN 曲线之于 EN 曲线，正如 P 值之于应变幅，唯一区别是这个宇宙里平均应力被算进去了。
+
+![损伤参数 P 版本的损伤计算：循环的 P 值配合 PN 曲线得到计入平均应力影响的损伤](/images/strain-life-approach/fig17-damage-param.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+PN 曲线不需要新试验：把 SWT 或 Morrow 公式作用在 EN 曲线上、令平均应力为零，就得到材料的 PN 曲线。
+
+![PN 曲线（蓝）：把损伤参数 P 与失效循环数 N 联系起来的材料曲线](/images/strain-life-approach/fig18-pn-curve.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+同一最大循环，只看应变幅（左，EN 曲线）与看 P 值（右，PN 曲线）给出的寿命不同：拉伸均值时 P 值法寿命更短，压缩均值时更长——方向与直觉一致。
+
+![左：忽略平均应力用 EN 曲线算最大循环寿命；右：用循环 P 值与 PN 曲线计入平均应力影响，预测寿命随之增减](/images/strain-life-approach/fig19-pn-vs-en.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+### 5.1 Smith-Watson-Topper（SWT）
+
+这个公式回答的问题是"把平均应力并进应力后，这个循环的等效损伤强度是多少"——峰值应力等于应力幅加平均应力（对应物理里"裂纹实际被拉到多开"），应变幅取闭环读数，E 是弹性模量，开方让量纲回到应力：
+
+$$
+P_{SWT} = \sqrt{\sigma_{max}\,\varepsilon_a\,E} = \sqrt{(\sigma_a + \sigma_m)\,\varepsilon_a\,E}
+$$
+
+![SWT 方程（左）：用闭环（红）的应力幅、平均应力（洋红虚线）、应变幅与杨氏模量计算损伤参数](/images/strain-life-approach/fig20-swt.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+三种典型行为一眼可验：零均值时根号里退化成应力幅的平方，P 就是原应力幅（不修正）；正均值时峰值应力大于应力幅，P 变大、损伤变多；而当压缩均值比应力幅还大（整个循环都在压侧），根号里变成负数——SWT 判这个循环**零损伤**。这是有意为之的取舍：SWT 只认拉伸均值、忽略压缩均值的贡献。
+
+### 5.2 Morrow
+
+Morrow 参数走应变路线：把弹性项的疲劳强度系数扣掉平均应力再折算成应变。行为上与 SWT 互补：Morrow 在压缩平均应力下也照样累积损伤（只是算得更慢），不像 SWT 直接记零。工程选型上，拉伸均值主导的谱用 SWT 更干脆，压-拉交叠的谱用 Morrow 更平滑。
+
+![Morrow 损伤参数计算：与 SWT 不同，Morrow 生成应变基 P 值，且压缩平均应力下也累积损伤](/images/strain-life-approach/fig21-morrow.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+## 六、输出：寿命曲线与寿命统计
+
+损伤算完，结果以**寿命曲线（Life Curve）**与**寿命统计（Life Statistics）**两种形式给出。寿命曲线上有三个对象：循环直方图（红）、设计点（绿点，由预测失效循环数与最大循环幅值的交点定）、寿命曲线（蓝，把输入历程整体放大缩小一档算一串设计点连成，斜率与材料曲线相近）。
+
+![应变寿命法的 Life Curve 输出：循环直方图（红）、设计点（绿）与按幅值缩放算出的寿命曲线（蓝），由此导出 Life Statistics](/images/strain-life-approach/fig22-life-curves.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+从寿命曲线读出的单值输出叫**寿命块（Design Point Block）**：输入时间历程整段能重复多少次才失效。官方示例 125.38 块——若实测历程长 60 秒，零件可扛 7522 秒的重复加载。两个极端各有含义：块数小于 1（如 0.93）表示一遍都没跑完就失效了——这种通常试验现场早就知道了；直方图幅值投影与寿命曲线不相交、设计点无定义，则意味着无限寿命，怎么重复都不坏。
+
+![Design Point Block 数值输出（橙）：该例输入信号可重复 125.38 次后失效](/images/strain-life-approach/fig23-blocks.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+![Design Point Block 小于 1（0.93）：失效发生在原始输入时间历程的一次施加之内](/images/strain-life-approach/fig24-blocks-lessthan1.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+![幅值投影不与寿命曲线相交时设计点无定义：输入历程可无限次施加而不失效](/images/strain-life-approach/fig25-infinite.png)
+
+*(图源：Siemens Simcenter Testing Knowledge Base)*
+
+别忘了那句边界提醒：寿命块只对**测点位置**成立，别的位置可能更早失效。
+
+## 七、Python 演示：从应变到损伤参数
+
+```python
+import numpy as np
+from scipy.optimize import brentq
+
+E, Kp, npn = 210000.0, 1200.0, 0.20          # 钢的 Ramberg-Osgood 示例参数
+
+def stress_from_strain(eps):                  # 由总应变反解应力
+    return brentq(lambda s: s/E + (s/Kp)**(1/npn) - eps, 0.0, 2*Kp)
+
+eps_a = 0.0080                                # 一个闭环：应变幅 8000 微应变
+sig_a = stress_from_strain(eps_a)             # 对应应力幅
+print(f"eps_a=8000ue -> sig_a={sig_a:.0f} MPa")   # 塑性让应力远低于 E*eps
+
+for sm in (0.0, 150.0, -150.0):               # 平均应力扫描：SWT 损伤参数
+    arg = (sig_a + sm) * eps_a * E
+    p = np.sqrt(arg) if arg > 0 else 0.0      # 压侧整环负值记零损伤
+    print(f"sigma_m={sm:+.0f} MPa -> P_SWT={p:.0f} MPa")
+```
+
+运行要点：8000 微应变按线弹性算是 1680 MPa，Ramberg-Osgood 给出的真实应力幅只有约 431 MPa——塑性"缓和"应力将近四倍，这正是应力寿命法在塑性区失准的数值体现；平均应力扫描中，+150 MPa 均值把 P 抬高一档、-150 MPa 均值把 P 压低一档，而足够深的压缩均值会让根号内变号、P 归零——SWT 的"压侧零损伤"行为在代码里自然浮现。
+
+## 八、Simcenter Testlab 中的位置
+
+- **Testlab Neo Process Designer**：Durability 方向的 **Strain Life** 方法即本文全流程的落地（Input Type 三选一：实测应变直通；载荷或应力输入先走 Neuber 换算，见[《Neuber 法则》](neubers-rule.html)）；输出即 Life Curve 与 Life Statistics（Design Point Block 单值）。
+- **材料库**：EN 曲线参数（疲劳强度系数、指数与疲劳延性系数、指数，加弹性模量与 Ramberg-Osgood 参数）与 SWT/Morrow 选择都在方法属性里配置；PN 曲线由 EN 曲线按所选公式自动导出，无需单独输入。
+- **配套阅读**：官方知识库 "Performing Strain Life Analysis in Simcenter Testlab Neo" 与 "Simcenter Testlab Neo: Strain Life Method" 两篇给出逐步操作；循环计数细节见[《雨流计数》](../signal-processing/rainflow-counting.html)，平均应力的 S-N 侧对照见[《平均应力修正与 Goodman-Haigh 图》](mean-stress-goodman.html)。
+
+## 一句话记住
+
+塑性区的疲劳要盯住局部应力-应变回线：实测应变逐点配 Ramberg-Osgood 应力，闭环即循环、应变幅查 EN 曲线记 n/N 损伤，SWT/Morrow 损伤参数把平均应力算进账，输出就是输入历程能整段重复几次（寿命块）。
