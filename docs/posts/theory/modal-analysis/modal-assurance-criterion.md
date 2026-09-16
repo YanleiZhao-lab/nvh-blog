@@ -30,7 +30,7 @@ $$\mathrm{MAC}_{jl} = \frac{\left|V_j^{H} V_l\right|^{2}}{\left(V_j^{H} V_j\righ
 
 这个公式回答的问题是：如果两个振型确实成比例，比例常数是多少？其中分子 $V_j^{H} V_l$ 对应物理里的“逐点配对乘积之和”，除以 $V_j^{H} V_j$ 相当于把基准振型自身的能量折算成 1——这正是最小二乘意义下最优的那个复数比例因子。
 
-与 MAC 搭配出现的是**模态比例因子（Modal Scale Factor，MSF）**——两个振型之间的最小二乘复数比例常数（Eqn 17-12）：
+与 MAC 搭配出现的是<strong>模态比例因子（Modal Scale Factor，MSF）</strong>——两个振型之间的最小二乘复数比例常数（Eqn 17-12）：
 
 $$\mathrm{MSF}_{jl} = \frac{V_j^{H} V_l}{V_j^{H} V_j}$$
 

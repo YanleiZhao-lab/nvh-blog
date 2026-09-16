@@ -24,19 +24,19 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 按 Simcenter Testing Knowledge Base 的分类，转速信号异常分为三类。
 
-**第一类：偶发的尖峰或掉线。** 转速曲线整体平滑，个别时间点上 RPM 突然升高（spike）或跌落至零附近（dropout）。测试现场通常处于手册所称的恶劣环境（hostile environment）：轴面油污、粉尘使激光反射信号时好时坏，脉冲计数随之出错。台架存在切削液雾或金属屑飞溅的场合尤其常见。
+<strong>第一类：偶发的尖峰或掉线。</strong> 转速曲线整体平滑，个别时间点上 RPM 突然升高（spike）或跌落至零附近（dropout）。测试现场通常处于手册所称的恶劣环境（hostile environment）：轴面油污、粉尘使激光反射信号时好时坏，脉冲计数随之出错。台架存在切削液雾或金属屑飞溅的场合尤其常见。
 
 ![RPM 异常的两种形态](/images/rpm-spike-removal/rpm-anomalies.png)
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-**第二类：每转固定位置上的规律毛刺。** RPM 曲线放大后可见，每一转的同一角度位置都出现一个固定的小尖。其来源不是环境，而是斑马带（zebra tape）或码盘上某一条条纹的间距、宽度存在制造偏差——每转到该角度，脉冲间隔错一次，转速计算随之错一次。这类毛刺的危害在于其严格周期性：它会在频谱上生成真实的阶次成分，与被测信号混叠在一起。
+<strong>第二类：每转固定位置上的规律毛刺。</strong> RPM 曲线放大后可见，每一转的同一角度位置都出现一个固定的小尖。其来源不是环境，而是斑马带（zebra tape）或码盘上某一条条纹的间距、宽度存在制造偏差——每转到该角度，脉冲间隔错一次，转速计算随之错一次。这类毛刺的危害在于其严格周期性：它会在频谱上生成真实的阶次成分，与被测信号混叠在一起。
 
 ![每转固定位置出现的 RPM 毛刺](/images/rpm-spike-removal/spike-per-revolution.png)
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-**第三类：斑马带接缝（butt joint）造成的假扭振。** 斑马带缠绕收尾处若留有豁口，脉冲间隔大于理论值，每转出现一次假的转速跌落（dip）；若两条纹挤压搭接，脉冲间隔小于理论值，每转出现一次假的转速尖峰（spike）。两者都是每转一次的系统性误差，与第二类同源，但成因在搭接处而非单条条纹。接缝误差的成因与修正流程见《[斑马带接缝修正](./zebra-tape-correction.html)》。
+<strong>第三类：斑马带接缝（butt joint）造成的假扭振。</strong> 斑马带缠绕收尾处若留有豁口，脉冲间隔大于理论值，每转出现一次假的转速跌落（dip）；若两条纹挤压搭接，脉冲间隔小于理论值，每转出现一次假的转速尖峰（spike）。两者都是每转一次的系统性误差，与第二类同源，但成因在搭接处而非单条条纹。接缝误差的成因与修正流程见《[斑马带接缝修正](./zebra-tape-correction.html)》。
 
 ![激光与斑马带](/images/rpm-spike-removal/zebra-tape-laser.png)
 
@@ -55,7 +55,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 1. 菜单 **Tools -> Add-ins**，勾选 **Time Data Editor - Standard**。Time Data Selection 工作表上方将增加一排编辑工具按钮。
 2. 在左侧数据集中点亮待处理的转速时域 trace。
 3. 在 Overview 显示区按住鼠标拖拽，框住毛刺前后的一小段。
-4. 按 **[R]** 键执行替换，选中段被一条直线取代。
+4. 按 <strong>[R]</strong> 键执行替换，选中段被一条直线取代。
 
 ![框选毛刺段并按 [R] 替换后的效果](/images/rpm-spike-removal/spike-before-after.png)
 
@@ -80,7 +80,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 每转固定位置出现的毛刺无法逐个手动替换——转速扫到 6000 r/min、采集数十秒数据时，毛刺数量以千计，逐段框选不具可操作性。此时使用 Time Signal Calculator 中的专用函数 **TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM**（该函数自 Testlab Revision 17 引入）。
 
-启用路径：**Tools -> Add-ins** 打开 **Time Signal Calculator**，在界面中点击 **f(x)** 按钮，左侧函数组选择 **Tacho**，找到该函数。
+启用路径：**Tools -> Add-ins** 打开 **Time Signal Calculator**，在界面中点击 <strong>f(x)</strong> 按钮，左侧函数组选择 **Tacho**，找到该函数。
 
 ![函数设置对话框](/images/rpm-spike-removal/spike-removal-dialog.png)
 
@@ -91,7 +91,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 该函数不是滑动平均式的平滑，其判别基准是统计学的：
 
 1. 取一个滑动窗口（默认长度为一转的脉冲数），以窗口内各脉冲间平均转速为基准；
-2. 对窗口内数据计算**中位数绝对偏差 MAD（Median Absolute Deviation）**：
+2. 对窗口内数据计算<strong>中位数绝对偏差 MAD（Median Absolute Deviation）</strong>：
 
 $$\mathrm{MAD} = \operatorname{median}_{i \in W} \Big( \big| n_i - \operatorname{median}_{j \in W} ( n_j ) \big| \Big)$$
 

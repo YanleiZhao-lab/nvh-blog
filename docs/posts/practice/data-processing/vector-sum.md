@@ -15,7 +15,7 @@ title: "矢量合成：把三向振动变成一个可读数"
 矢量合成做的就是这样一件事：对三向数据逐谱线取平方和开根号。以官方文档的例子——$X=5\ \mathrm{g}$、$Y=7\ \mathrm{g}$、$Z=12\ \mathrm{g}$——合成值 14.76 g。一个数，三向能量尽收其中。
 
 ::: info 核心概念
-- **矢量合成（Vector Sum）**：逐谱线对 X、Y、Z 三向做平方和开根号，得到与方向无关的振动总量级，永远不小于最大的单方向分量
+- <strong>矢量合成（Vector Sum）</strong>：逐谱线对 X、Y、Z 三向做平方和开根号，得到与方向无关的振动总量级，永远不小于最大的单方向分量
 - **作用对象是频率函数**：谱（Spectrum）、自功率谱（Autopower）、阶次（Order）、频率剖面（Frequency Profile）都在列；Testlab 里它是导出通道（Derived），不在时域原始数据上算
 - **复数谱线**：含相位的谱线按模平方逐项相加，即模长平方和再开根，相位只进幅值不进方向
 :::
@@ -63,9 +63,9 @@ for name, combo in [("仅 Z", (0, 0, Z)),
 | 分量组合 | 合成值 | 相对仅 Z |
 | --- | --- | --- |
 | **仅 Z = 12 g** | 12.00 g | 0 dB |
-| **Z + X（12, 5）** | 13.00 g | +0.70 dB |
-| **Z + Y（12, 7）** | 13.89 g | +1.27 dB |
-| **X + Y + Z（5, 7, 12）** | 14.76 g | +1.80 dB |
+| <strong>Z + X（12, 5）</strong> | 13.00 g | +0.70 dB |
+| <strong>Z + Y（12, 7）</strong> | 13.89 g | +1.27 dB |
+| <strong>X + Y + Z（5, 7, 12）</strong> | 14.76 g | +1.80 dB |
 
 逐谱线合成之后再对频段内谱线做 RSS，得到的总 RMS 与把矢量合成的物理贯彻到底一致——这也是 Simcenter 知识库对"谱的 RMS"的定义方式：对关注频段内所有谱线幅值（RMS 格式、线性单位）做平方和开根。
 
@@ -149,7 +149,7 @@ for f in (30, 60, 80, 160):
 
 两条时机都能算。测量中实时看：Signature 的 **Online Processing** 工作表，右上角切到 **Derived** 标签。事后补算：**Time Data Processing** 工作表，Channel Processing 区点 **Change Settings**，选 **Derived FS** 标签（这个工作表需要先开 Signature Throughput processing 插件：Tools 菜单的 Add-ins）。
 
-在 Derived 标签里选中 Formula 列首个单元格，点上方的 **F(x)** 按钮，在 Select Function 菜单底部找 VECTOR_SUM——第一次用可能得点一下 New function，让菜单出现三个输入位。函数参数填三向的通道引用，两种写法都行：通道号 CH1 加 CH2 加 CH3，或者测点名加方向写全三向（通道号在 Channel Processing Settings 右上角下拉里可查）。设好后，该三向测点的所有频率函数——谱、自功率谱、阶次、频率剖面——都会自动多出一条合成曲线。
+在 Derived 标签里选中 Formula 列首个单元格，点上方的 <strong>F(x)</strong> 按钮，在 Select Function 菜单底部找 VECTOR_SUM——第一次用可能得点一下 New function，让菜单出现三个输入位。函数参数填三向的通道引用，两种写法都行：通道号 CH1 加 CH2 加 CH3，或者测点名加方向写全三向（通道号在 Channel Processing Settings 右上角下拉里可查）。设好后，该三向测点的所有频率函数——谱、自功率谱、阶次、频率剖面——都会自动多出一条合成曲线。
 
 ### Neo：Process Designer 里的 Block Calculate
 

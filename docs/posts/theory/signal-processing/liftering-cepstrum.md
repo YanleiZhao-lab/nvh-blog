@@ -38,10 +38,10 @@ $$X(f) = S(f)\left(1 + a\,e^{-j2\pi f\tau}\right)$$
 
 
 ::: info 核心概念
-- **倒滤波（Liftering）**：在倒频域对倒频谱做滤波（置零/加权），再逆变换回频域或时域；lifter 一词由 filter 颠倒拼写而来，和 quefrency、cepstrum 同一家族
-- **复倒频谱（Complex Cepstrum）**：$\hat{x}(t) = \text{IFFT}\left[\log X(f)\right]$，对复数谱取对数（幅值和相位都进 log），因此**可逆**
-- **实倒频谱（Real Cepstrum）**：对 $|X(f)|$ 取对数再逆变换——上一篇用的就是它，相位丢弃，不可逆
-- **短通/长通倒滤波（Short-pass / Long-pass Liftering）**：倒频域的低通/高通——保留低倒频段等于保留频域缓变包络（传递路径），保留高倒频段等于保留频域细周期结构（谐波族、回波峰）
+- <strong>倒滤波（Liftering）</strong>：在倒频域对倒频谱做滤波（置零/加权），再逆变换回频域或时域；lifter 一词由 filter 颠倒拼写而来，和 quefrency、cepstrum 同一家族
+- <strong>复倒频谱（Complex Cepstrum）</strong>：$\hat{x}(t) = \text{IFFT}\left[\log X(f)\right]$，对复数谱取对数（幅值和相位都进 log），因此**可逆**
+- <strong>实倒频谱（Real Cepstrum）</strong>：对 $|X(f)|$ 取对数再逆变换——上一篇用的就是它，相位丢弃，不可逆
+- <strong>短通/长通倒滤波（Short-pass / Long-pass Liftering）</strong>：倒频域的低通/高通——保留低倒频段等于保留频域缓变包络（传递路径），保留高倒频段等于保留频域细周期结构（谐波族、回波峰）
 :::
 
 ## 二、推导：回波在倒频域长成什么样

@@ -13,23 +13,23 @@ title: "逐循环平均：发动机工况数据处理"
 - **时域看不清**：发动机转速一直在小幅波动（每个 720° 循环占用的时间并不严格相等），直接按时间切波形，第 50 循环和第 51 循环的燃烧事件对不上位置；
 - **频域抹掉了差异**：FFT 假设信号周期平稳，循环与循环之间的变差（cycle-to-cycle variation）恰恰是非平稳信息，一经平均就消失。
 
-真正的物理基准是**曲轴转角（crank angle）**。四冲程发动机一个完整循环是 2 转 = 720°，无论转速怎么波动，压缩上止点（Top Dead Center, TDC）永远在同一个角度位置。把数据从时域变换到**角域（Angle Domain）**，第 N 个循环和第 N+1 个循环就能严格逐点对齐——逐循环统计才有意义。
+真正的物理基准是<strong>曲轴转角（crank angle）</strong>。四冲程发动机一个完整循环是 2 转 = 720°，无论转速怎么波动，压缩上止点（Top Dead Center, TDC）永远在同一个角度位置。把数据从时域变换到<strong>角域（Angle Domain）</strong>，第 N 个循环和第 N+1 个循环就能严格逐点对齐——逐循环统计才有意义。
 
 ![Free Run (angle) 采集设置：按循环数而非时间截取数据](/images/cycle-cycle-averaging/free-run-angle-settings.png)
 
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **角域（Angle Domain）**：横轴为曲轴转角而非时间的数据表示，转一转 360°、四冲程一个循环 720°
-- **循环变差（Cycle-to-cycle Variation）**：同一工况下相邻循环燃烧结果的差异，缸压峰值波动是直观体现
-- **每转采样数（samples per rev）**：角域重采样的角度增量，决定后续处理的角度分辨率
+- <strong>角域（Angle Domain）</strong>：横轴为曲轴转角而非时间的数据表示，转一转 360°、四冲程一个循环 720°
+- <strong>循环变差（Cycle-to-cycle Variation）</strong>：同一工况下相邻循环燃烧结果的差异，缸压峰值波动是直观体现
+- <strong>每转采样数（samples per rev）</strong>：角域重采样的角度增量，决定后续处理的角度分辨率
 :::
 
 ## 二、Testlab 里的四步操作路径
 
 ### 第 1 步：把数据切成循环
 
-前置准备：在 **Tools → Add-ins** 中加载 **Signature Throughput Processing** 与 **Angle Domain Processing** 两个插件。选中角域数据（放入 input basket 或设为 active run），进入 Time Data Processing 界面，"Change Settings" → "Acquisition Parameters"，把 Measurement Mode 设为 **Tracked**、Tracking Method 设为 **Free Run (angle)**——按转数而不是按时间取数据。界面上填 300，就是取前 300 个循环，升序排列。
+前置准备：在 **Tools → Add-ins** 中加载 **Signature Throughput Processing** 与 **Angle Domain Processing** 两个插件。选中角域数据（放入 input basket 或设为 active run），进入 Time Data Processing 界面，"Change Settings" → "Acquisition Parameters"，把 Measurement Mode 设为 **Tracked**、Tracking Method 设为 <strong>Free Run (angle)</strong>——按转数而不是按时间取数据。界面上填 300，就是取前 300 个循环，升序排列。
 
 再到 "AD Acquisition" 标签页设**每循环 2 转**，这样一个循环由 720° 组成。这一步常被漏掉：四冲程机一个循环是 720°，若按默认 1 转切，缸压曲线会被人为切成两半，压缩行程和排气行程错位对叠，统计结果失效。
 
@@ -53,7 +53,7 @@ title: "逐循环平均：发动机工况数据处理"
 
 想算多缸之间的平均缸压，先做相位对齐：**Angle Domain Validation** 界面给每个通道填 **Cyl Offset**（各缸上止点的角度偏移量），把各缸压缩上止点拉到同一角度。对齐后回到 Time Data Processing → "Channel Processing" → Change Settings → **DerivedAD** 标签页，用 LINAVG 等函数在角域做通道间运算——比如 CH1~CH4 的平均缸压曲线。
 
-除了平均，DerivedAD 里还可以定义 DIFFERENTIATE 之类的函数，对缸压求角域导数，得到**压力升高率（pressure rise rate）** $dP/d\theta$——其峰值是评估燃烧粗暴度（爆震倾向、燃烧噪声）的关键指标。设 $P_k(\theta)$ 为第 $k$ 个循环的缸压曲线、$\Delta\theta$ 为角域采样间隔（由每转采样数决定），采样点 $\theta_i$ 处的导数用中心差分近似：
+除了平均，DerivedAD 里还可以定义 DIFFERENTIATE 之类的函数，对缸压求角域导数，得到<strong>压力升高率（pressure rise rate）</strong> $dP/d\theta$——其峰值是评估燃烧粗暴度（爆震倾向、燃烧噪声）的关键指标。设 $P_k(\theta)$ 为第 $k$ 个循环的缸压曲线、$\Delta\theta$ 为角域采样间隔（由每转采样数决定），采样点 $\theta_i$ 处的导数用中心差分近似：
 
 $$\left(\frac{dP}{d\theta}\right)_{k,i} \approx \frac{P_k(\theta_i+\Delta\theta)-P_k(\theta_i-\Delta\theta)}{2\,\Delta\theta}$$
 
@@ -96,7 +96,7 @@ $$\sigma(\theta) = \sqrt{\frac{1}{N-1}\sum_{k=1}^{N}\left[x_k(\theta) - \bar{x}(
 
 分三步理解：先求每个循环相对平均循环的偏差 $x_k(\theta)-\bar{x}(\theta)$，再对偏差平方取平均（除以 $N-1$ 得无偏估计），最后开方恢复原量纲；$\sigma(\theta)$ 大的角度段就是循环变差集中的区段。
 
-对门区统计得到的每循环峰值序列 $P_1, P_2, \dots, P_N$，同样先算均值 $\mu$ 和标准差 $\sigma$，再归一为**变异系数（Coefficient of Variation, CoV）**：
+对门区统计得到的每循环峰值序列 $P_1, P_2, \dots, P_N$，同样先算均值 $\mu$ 和标准差 $\sigma$，再归一为<strong>变异系数（Coefficient of Variation, CoV）</strong>：
 
 $$\mathrm{CoV} = \frac{\sigma}{\mu}\times 100\%$$
 
@@ -152,7 +152,7 @@ print(f"门区峰值序列: mean={p_max.mean():.2f}  std={p_max.std():.2f}  "
 print(f"散布比 std/mean = {p_max.std()/p_max.mean()*100:.1f}%")
 ```
 
-输出里最值得看两个数：**标准差最大处是 392°**——比峰值位置（374°）滞后了十几度，落在压力陡降段。原因不难理解：±3° 的峰值角度漂移在曲线平缓处几乎不产生差异，但在斜率最陡的地方被放大成最大的逐循环差异——循环变差不是均匀分布在 720° 里的，它集中在燃烧峰两侧的陡峭段。**门区峰值散布比（CoV）5.9%**，与构造参数吻合：±8% 的幅度扰动作用在 60 bar 的燃烧增量上，峰值散布约 $0.08 \times 60 = 4.8$ bar，相对约 75 bar 的峰值总水平，理论散布比 $4.8/75 \approx 6.4\%$，实测 5.9%（有限样本与门内取最大值带来小幅修正）。燃烧研究的经典判据（Heywood）以 IMEP 的变异系数超过 10% 作为驾驶性明显恶化的界限；门区峰值 CoV 可参考同一量级——实测怠速数据若超过 10%，通常伴随可感知的转速波动。
+输出里最值得看两个数：**标准差最大处是 392°**——比峰值位置（374°）滞后了十几度，落在压力陡降段。原因不难理解：±3° 的峰值角度漂移在曲线平缓处几乎不产生差异，但在斜率最陡的地方被放大成最大的逐循环差异——循环变差不是均匀分布在 720° 里的，它集中在燃烧峰两侧的陡峭段。<strong>门区峰值散布比（CoV）5.9%</strong>，与构造参数吻合：±8% 的幅度扰动作用在 60 bar 的燃烧增量上，峰值散布约 $0.08 \times 60 = 4.8$ bar，相对约 75 bar 的峰值总水平，理论散布比 $4.8/75 \approx 6.4\%$，实测 5.9%（有限样本与门内取最大值带来小幅修正）。燃烧研究的经典判据（Heywood）以 IMEP 的变异系数超过 10% 作为驾驶性明显恶化的界限；门区峰值 CoV 可参考同一量级——实测怠速数据若超过 10%，通常伴随可感知的转速波动。
 
 ## 五、小结
 

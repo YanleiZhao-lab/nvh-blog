@@ -15,9 +15,9 @@ title: "谱与自功率谱的区别"
 这不是软件缺陷，而是相位在复数平均中互相抵消的必然结果。
 
 ::: info 核心概念
-- **谱（Spectrum, Sx）**：FFT 输出的复数函数，每根谱线都有幅值和相位（a+ib 形式），只保留 0 Hz 以上的单边（single-sided）部分
-- **自功率谱（Autopower, Gxx）**：谱乘以自身的复共轭（complex conjugate）Gxx = Sx · Sx*，相位被消去，只剩幅值信息，单位变为原单位的平方（如 g²）
-- **自功率线性（Autopower Linear）**：对 Gxx 开平方，恢复线性单位（如 g），"Linear"即指开过方
+- <strong>谱（Spectrum, Sx）</strong>：FFT 输出的复数函数，每根谱线都有幅值和相位（a+ib 形式），只保留 0 Hz 以上的单边（single-sided）部分
+- <strong>自功率谱（Autopower, Gxx）</strong>：谱乘以自身的复共轭（complex conjugate）Gxx = Sx · Sx*，相位被消去，只剩幅值信息，单位变为原单位的平方（如 g²）
+- <strong>自功率线性（Autopower Linear）</strong>：对 Gxx 开平方，恢复线性单位（如 g），"Linear"即指开过方
 :::
 
 ## 二、相位：被丢弃的那一半信息
@@ -153,9 +153,9 @@ Testlab 中的设置：Measurement Function 选 Spectrum，勾选 Phase Referenc
 
 | 需求 | 推荐函数 | 原因 |
 | --- | --- | --- |
-| **只看幅值，需平均** | **Autopower（Linear）** | 相位消去，平均稳定收敛 |
+| **只看幅值，需平均** | <strong>Autopower（Linear）</strong> | 相位消去，平均稳定收敛 |
 | **幅值+相位，单次测量** | Spectrum | 无平均，幅值相位都可靠 |
-| **幅值+相位，需平均（ODS/TPA）** | 相位参考谱 Spectrum | 参考通道统一相位基准 |
+| <strong>幅值+相位，需平均（ODS/TPA）</strong> | 相位参考谱 Spectrum | 参考通道统一相位基准 |
 | **比较不同分辨率的谱** | Autopower + RMS 总量 | 谱线幅值随分辨率变化，RMS 总和不变 |
 
 分辨率的影响单独说明：同一宽带信号分别用 1 Hz 与 8 Hz 分辨率测量（带宽 6000 Hz 时分别对应 6000 条与 750 条谱线），谱线数越多，分摊到每根谱线上的能量越少、单线幅值越低——三种结果都正确，全频段 RMS 总和完全一致。横向对比时要么统一分辨率，要么比较 RMS 总量。

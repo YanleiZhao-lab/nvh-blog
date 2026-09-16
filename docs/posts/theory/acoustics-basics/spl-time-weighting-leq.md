@@ -26,7 +26,7 @@ $$L_p = 20\lg\frac{p}{p_0}$$
 
 实际信号大多非平稳：车内噪声随路面激励起伏，关门声约 30 ms 即结束，怠速时风扇启停使声级缓慢漂移。平均时间太短，读数波动难以记录；太长，瞬态事件被摊薄而无法分辨。标准化做法（IEC 651、ANSI 1.4-1983）将"平均"分解为两个独立设置的参数：
 
-**参数一：频率计权（Frequency Weighting）。** 在求总有效值之前，对声压信号的频谱倍乘一个计权函数。IEC 标准规定了 A、B、C、D 几种计权，均以实验确定的等响曲线为底本——A 计权对应 40 方等响曲线的倒置，B、C 分别对应 70 方、100 方。这一步决定"哪些频率计入"，展开见[《A计权：为什么 40 方等响曲线成了标准》](./a-weighting.html)。
+<strong>参数一：频率计权（Frequency Weighting）。</strong> 在求总有效值之前，对声压信号的频谱倍乘一个计权函数。IEC 标准规定了 A、B、C、D 几种计权，均以实验确定的等响曲线为底本——A 计权对应 40 方等响曲线的倒置，B、C 分别对应 70 方、100 方。这一步决定"哪些频率计入"，展开见[《A计权：为什么 40 方等响曲线成了标准》](./a-weighting.html)。
 
 ![等响曲线族：计权函数的实验底本](/images/spl-time-weighting-leq/fig4-1-equal-loudness.png)
 
@@ -36,13 +36,13 @@ $$L_p = 20\lg\frac{p}{p_0}$$
 
 *（图源：Simcenter Testing Knowledge Base）*
 
-**参数二：时间计权（Time Weighting）。** 对已计权的时域信号做指数平均（Exponential Averaging），得到规定的计权声压级。这一步决定"读数以多快的速度跟随信号变化"，是本文的主题。
+<strong>参数二：时间计权（Time Weighting）。</strong> 对已计权的时域信号做指数平均（Exponential Averaging），得到规定的计权声压级。这一步决定"读数以多快的速度跟随信号变化"，是本文的主题。
 
 ::: info 核心概念
-- **频率计权（Frequency Weighting）**：求 RMS 之前对频谱乘的计权函数（A/B/C/D），决定计入哪些频率
-- **时间计权（Time Weighting）**：对计权后时域信号的指数平均，决定读数跟随变化的速度
-- **有效值声压（RMS Pressure）**：一段时间内声压平方平均的开方；离开平均时长谈 RMS 没有意义
-- **等效声压级（Equivalent Continuous Sound Pressure Level, Leq）**：一段时间 T 内能量平均折算的声压级，回答"这一整段平均多响"
+- <strong>频率计权（Frequency Weighting）</strong>：求 RMS 之前对频谱乘的计权函数（A/B/C/D），决定计入哪些频率
+- <strong>时间计权（Time Weighting）</strong>：对计权后时域信号的指数平均，决定读数跟随变化的速度
+- <strong>有效值声压（RMS Pressure）</strong>：一段时间内声压平方平均的开方；离开平均时长谈 RMS 没有意义
+- <strong>等效声压级（Equivalent Continuous Sound Pressure Level, Leq）</strong>：一段时间 T 内能量平均折算的声压级，回答"这一整段平均多响"
 :::
 
 ## 二、时间计权：从指数平均的递推式推起

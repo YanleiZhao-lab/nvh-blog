@@ -17,7 +17,7 @@ Testlab 界面里大部分工作表是"流程式"的——选通道、设参数�
 - 对某段信号施加低通/带通滤波，单独观察某个频率成分的贡献；
 - 用公式**生成**一个并不存在的信号——正弦、方波、扫频，再换算成 RPM 通道。
 
-启用路径固定两步：菜单 **Tools -> Add-ins** 勾选 **Time Signal Calculator**（占用 26 tokens），它就出现在 Time Data Selection 工作表下方。点 **f(x)** 按钮弹出函数选择器，左侧按用途分组：Conditioning（信号调理类）、Tacho（转速类）、Trigonometry（三角函数）、Statistics（统计类）等。选完函数，参数在公式行内就地填写。
+启用路径固定两步：菜单 **Tools -> Add-ins** 勾选 **Time Signal Calculator**（占用 26 tokens），它就出现在 Time Data Selection 工作表下方。点 <strong>f(x)</strong> 按钮弹出函数选择器，左侧按用途分组：Conditioning（信号调理类）、Tacho（转速类）、Trigonometry（三角函数）、Statistics（统计类）等。选完函数，参数在公式行内就地填写。
 
 ::: info 核心概念
 - **Function1/Function2**：公式里引用的输入通道，可以填通道号（CH1、CH2）或通道名（Tacho、Acc_Left），也可以引用别的公式行的输出
@@ -108,7 +108,7 @@ Trigonometry 与信号生成函数可以按公式生成标准正弦、方波、�
 
 ## 三、Python 演示：毛刺剔除的统计逻辑
 
-Tacho 组毛刺剔除函数的核心判据是**中值绝对偏差 MAD（Median Absolute Deviation）**：对窗口内的数据序列 $x$，MAD 定义为各点到中值的绝对偏差的中值：
+Tacho 组毛刺剔除函数的核心判据是<strong>中值绝对偏差 MAD（Median Absolute Deviation）</strong>：对窗口内的数据序列 $x$，MAD 定义为各点到中值的绝对偏差的中值：
 
 $$\mathrm{MAD} = \mathrm{median}\left(\left| x_i - \mathrm{median}(x) \right|\right)$$
 

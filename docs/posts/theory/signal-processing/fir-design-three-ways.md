@@ -33,10 +33,10 @@ $$h_d(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\, e^{j\omega n}\, d\omega
 三条设计路线，是对"无限长 vs 有限长"这一矛盾的三种不同处理方式。
 
 ::: info 核心概念
-- **正则化频率（Normalized Frequency）**：频率（Hz）除以采样率（Hz），无量纲，滤波器工作范围为 0 至 0.5；单位圆上角频率（rad）= 正则化频率 × 2π
-- **吉布斯现象（Gibbs Phenomenon）**：矩形截断傅里叶级数时，频响间断点附近出现的固定幅度过冲与振铃
-- **频域抽样设计（Frequency Sampling Design）**：在单位圆 N 等分点上直接规定期望频响值，逆 DFT 得到滤波器系数
-- **等波纹逼近（Equiripple Approximation）**：Remez 交换算法的核心思想，使通带和阻带的最大加权误差相等且最小
+- <strong>正则化频率（Normalized Frequency）</strong>：频率（Hz）除以采样率（Hz），无量纲，滤波器工作范围为 0 至 0.5；单位圆上角频率（rad）= 正则化频率 × 2π
+- <strong>吉布斯现象（Gibbs Phenomenon）</strong>：矩形截断傅里叶级数时，频响间断点附近出现的固定幅度过冲与振铃
+- <strong>频域抽样设计（Frequency Sampling Design）</strong>：在单位圆 N 等分点上直接规定期望频响值，逆 DFT 得到滤波器系数
+- <strong>等波纹逼近（Equiripple Approximation）</strong>：Remez 交换算法的核心思想，使通带和阻带的最大加权误差相等且最小
 :::
 
 ## 二、先明确一个约束：线性相位要求冲激响应对称

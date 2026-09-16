@@ -12,7 +12,7 @@ title: "经典冲击脉冲：半正弦/梯形/锯齿的规范谱"
 
 但保真是要付代价的。做 TWR 需要：拿到那件具体产品在真实环境中的实测数据（很多项目根本测不到）、占用样机做迭代学习、多通道设备与试验准备时间。对一个"给电路板验证抗冲击能力"的例行试验来说，这套成本常常不划算。
 
-于是标准脉冲登场：MIL-STD 810H 等规范直接定义了若干**经典冲击脉冲（Classical Shock Pulses）**——半正弦（half-sine）、三角形/锯齿（terminal peak sawtooth）、矩形（rectangle/梯形 trapezoid）等。它们有预先规定的形状、幅值、方向和持续时间，任何实验室、任何振动台都能以高度一致的方式复现。换句话说，经典脉冲牺牲了"像真实波形"，换来了**可重复、可对比、可写进规范**。
+于是标准脉冲登场：MIL-STD 810H 等规范直接定义了若干<strong>经典冲击脉冲（Classical Shock Pulses）</strong>——半正弦（half-sine）、三角形/锯齿（terminal peak sawtooth）、矩形（rectangle/梯形 trapezoid）等。它们有预先规定的形状、幅值、方向和持续时间，任何实验室、任何振动台都能以高度一致的方式复现。换句话说，经典脉冲牺牲了"像真实波形"，换来了**可重复、可对比、可写进规范**。
 
 ![实测冲击脉冲时域波形示例：复杂振荡衰减，形态各异](/images/classical-shock-pulses/fig1.png)
 
@@ -26,7 +26,7 @@ title: "经典冲击脉冲：半正弦/梯形/锯齿的规范谱"
 
 三个脉冲：半正弦、后峰锯齿、矩形，幅值都是 10 g、脉宽都是 11 ms。它们激起的频率成分一样吗？
 
-不一样，而且差别巨大。直觉的钥匙是**波形里的"突变"**：波形的角落越尖锐，高频成分越多。半正弦从零平滑爬升、再平滑回落到零，没有尖锐角落，所以它的能量集中在低频段；后峰锯齿有一个急速回落沿，高频含量显著高于半正弦；矩形脉冲干脆处处是直角（起点阶跃、终点阶跃），在三个形状里高频含量最高、带宽最宽。
+不一样，而且差别巨大。直觉的钥匙是<strong>波形里的"突变"</strong>：波形的角落越尖锐，高频成分越多。半正弦从零平滑爬升、再平滑回落到零，没有尖锐角落，所以它的能量集中在低频段；后峰锯齿有一个急速回落沿，高频含量显著高于半正弦；矩形脉冲干脆处处是直角（起点阶跃、终点阶跃），在三个形状里高频含量最高、带宽最宽。
 
 ![三种经典脉冲对比：后峰锯齿（品红）、半正弦（蓝）、矩形（绿），左为时域波形、右为冲击响应谱，均为 10 g / 11 ms](/images/classical-shock-pulses/fig3.png)
 
@@ -124,10 +124,10 @@ for name, sig in [("半正弦", half_sine(t)), ("后峰锯齿", sawtooth(t)), ("
 *（图源：Siemens Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **经典冲击脉冲（Classical Shock Pulse）**：规范预定义形状/幅值/脉宽的标准脉冲（半正弦、锯齿、矩形等），用于替代实测波形的可复现实验室冲击
-- **前后脉冲（Pre/Post Pulses）**：主脉冲前后的补偿脉冲，使起止加速度/速度/位移全零，并优化振动台行程与速度资源
-- **伪速度冲击响应谱（PVSS，Pseudo Velocity SRS）**：以伪速度（相对位移 × 固有角频率）表示的 SRS，左/中/右三段分别对应位移、速度、加速度限制
-- **速度增量（ΔV）**：加速度脉冲的时间积分，决定低频响应强度：$\Delta V = \int a\,dt$
+- <strong>经典冲击脉冲（Classical Shock Pulse）</strong>：规范预定义形状/幅值/脉宽的标准脉冲（半正弦、锯齿、矩形等），用于替代实测波形的可复现实验室冲击
+- <strong>前后脉冲（Pre/Post Pulses）</strong>：主脉冲前后的补偿脉冲，使起止加速度/速度/位移全零，并优化振动台行程与速度资源
+- <strong>伪速度冲击响应谱（PVSS，Pseudo Velocity SRS）</strong>：以伪速度（相对位移 × 固有角频率）表示的 SRS，左/中/右三段分别对应位移、速度、加速度限制
+- <strong>速度增量（ΔV）</strong>：加速度脉冲的时间积分，决定低频响应强度：$\Delta V = \int a\,dt$
 :::
 
 ## 五、在 Simcenter Testlab 里定义一个冲击试验
@@ -136,7 +136,7 @@ Simcenter Testlab 的振动控制冲击试验流程（Shock Control 工作簿）
 
 1. **启动与建项**：开始菜单 → Simcenter Testlab → Shock Control，新建工程
 2. **配置振动台**：Tools → Options → Shaker 标签 → Configure…，在向导里定义台的推力/行程/速度限制
-3. **通道设置（Channel Setup）**：激活控制通道（ChannelGroupID 设为 Control），设传感器方向、测量量（加速度）、ICP/Charge 输入模式与灵敏度
+3. <strong>通道设置（Channel Setup）</strong>：激活控制通道（ChannelGroupID 设为 Control），设传感器方向、测量量（加速度）、ICP/Charge 输入模式与灵敏度
 4. **Shock Setup 定义参考脉冲**：选择经典脉冲类型，打开 Profile Editor——左侧定义主脉冲（类型、幅值、脉宽、极性），中间定义前后脉冲，右侧设报警/中止限
 5. **检查台面资源**：关闭 Profile Editor 后软件立即给出试验中的最大加速度、速度、位移、推力预估值，与台规格逐一对比，指示灯全绿再往下走
 6. **Self Check**：低量级宽带激励估计传递函数，外推到试验量级并推荐各通道量程（Range/Threshold → Apply suggested）

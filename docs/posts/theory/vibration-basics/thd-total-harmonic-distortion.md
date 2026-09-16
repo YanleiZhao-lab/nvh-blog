@@ -8,7 +8,7 @@ title: "总谐波失真 THD：一句话里的失真全貌"
 
 ## 一、THD 是什么：输出像不像输入，一个数字说了算
 
-**总谐波失真（Total Harmonic Distortion, THD）**是一个随频率变化的函数，用来量化"系统输出复制输入的能力"：THD 越低，输出中的噪声与失真越少。它的测量方法很直接——向系统输入单一频率的正弦信号，测量输出；输出中除了与输入同频的成分外，还可能出现输入频率的整数倍成分（**谐波，Harmonics**）。例如输入 100 Hz 正弦，输出里可能出现 200、300、400 Hz。
+<strong>总谐波失真（Total Harmonic Distortion, THD）</strong>是一个随频率变化的函数，用来量化"系统输出复制输入的能力"：THD 越低，输出中的噪声与失真越少。它的测量方法很直接——向系统输入单一频率的正弦信号，测量输出；输出中除了与输入同频的成分外，还可能出现输入频率的整数倍成分（**谐波，Harmonics**）。例如输入 100 Hz 正弦，输出里可能出现 200、300、400 Hz。
 
 闭环振动控制试验正是这样一个系统。SCADAS 输出的驱动电压经功率放大器（**功放，Amplifier**）驱动振动台（**Shaker**），台面经试验夹具（**Test Fixture**）带动试件，控制加速度计装在台面或试件上反馈实际振动。链条上每个环节都可能产生谐波：
 
@@ -25,14 +25,14 @@ title: "总谐波失真 THD：一句话里的失真全貌"
 上图中输入是干净的单频正弦，输出频谱里除基频外冒出了一串等间距的谱线——基频的整数倍。这些谱线在输入中完全不存在，是系统自己"制造"出来的。
 
 ::: info 核心概念
-- **谐波失真（Harmonic Distortion）**：系统输出中出现输入中不存在的、输入频率整数倍频率成分的现象
-- **基频（Fundamental Frequency）**：与输入正弦同频的输出成分，记作 $f_0$
-- **THD（Total Harmonic Distortion）**：全部谐波能量与基频能量之比的平方根，取值 0 到 1（或 0 到 100%）
+- <strong>谐波失真（Harmonic Distortion）</strong>：系统输出中出现输入中不存在的、输入频率整数倍频率成分的现象
+- <strong>基频（Fundamental Frequency）</strong>：与输入正弦同频的输出成分，记作 $f_0$
+- <strong>THD（Total Harmonic Distortion）</strong>：全部谐波能量与基频能量之比的平方根，取值 0 到 1（或 0 到 100%）
 - **THD+N**：把谐波之间的噪声也计入分子的一种口径，N 即 Noise
 :::
 ## 二、THD 定义式：从 RMS 与正交性分步推出来
 
-Knowledge Base 给出的定义：**THD 等于输出信号中与输入正弦无关的能量，除以输出信号的总能量（或基频能量）**。这个"能量"用 **RMS（Root Mean Square，均方根）**度量。公式不是凭空来的，从大学物理的三个基本事实推起。
+Knowledge Base 给出的定义：<strong>THD 等于输出信号中与输入正弦无关的能量，除以输出信号的总能量（或基频能量）</strong>。这个"能量"用 <strong>RMS（Root Mean Square，均方根）</strong>度量。公式不是凭空来的，从大学物理的三个基本事实推起。
 
 ### 第一步：正弦的 RMS 等于峰值除以根号 2
 
@@ -52,7 +52,7 @@ $$x_{\mathrm{rms}} = \frac{A}{\sqrt{2}} \approx 0.707\,A$$
 
 $$y(t) = \sum_{k=1}^{\infty} A_k \sin(2\pi k f_0 t + \varphi_k)$$
 
-计算 $y^2$ 的周期平均时，交叉项形如 $A_j A_k \sin(j\cdot)\sin(k\cdot)$，$j \ne k$ 时利用积化和差化为两个余弦之差，在整周期上积分恒为零——这就是三角函数的**正交性（Orthogonality）**。于是总均方值等于各分量均方值之和：
+计算 $y^2$ 的周期平均时，交叉项形如 $A_j A_k \sin(j\cdot)\sin(k\cdot)$，$j \ne k$ 时利用积化和差化为两个余弦之差，在整周期上积分恒为零——这就是三角函数的<strong>正交性（Orthogonality）</strong>。于是总均方值等于各分量均方值之和：
 
 $$y_{\mathrm{rms}}^2 = \sum_{k=1}^{\infty} \frac{A_k^2}{2}$$
 
@@ -103,7 +103,7 @@ Knowledge Base 给出的典型数字，按链条逐级叠加：
 | 环节 | 典型 THD | 说明 |
 | --- | --- | --- |
 | **功率放大器** | 0.01 量级（1% 以下） | 电子环节接近线性，规格书常给 0.01 以下 |
-| **功放 + 振动台（无试件）** | 低于 2%，个别尖峰约 10% | 机械环节引入失真 |
+| <strong>功放 + 振动台（无试件）</strong> | 低于 2%，个别尖峰约 10% | 机械环节引入失真 |
 | **功放 + 振动台 + 夹具 + 试件** | 可超 50% | 局部频段显著抬高 |
 
 ![振动台带试件（金色曲线）的 THD 高于裸台（蓝色曲线）](/images/thd-total-harmonic-distortion/fig4.png)
@@ -159,7 +159,7 @@ print("系统B THD = %.3f   (台+夹具+试件)" % thd(y_B))
 
 ## 四、THD 与系统 FRF：一个管失真、一个管增益
 
-评估一套动态系统，THD 之外还要看**频响函数（FRF, Frequency Response Function）**。振动控制系统的 FRF 单位是 g/V：1 V 驱动电压换来多少 g 振动响应。控制理论里它叫**系统增益（System Gain）**——闭环控制靠它预测"要达到目标振动量级，驱动电压该给多少"。
+评估一套动态系统，THD 之外还要看<strong>频响函数（FRF, Frequency Response Function）</strong>。振动控制系统的 FRF 单位是 g/V：1 V 驱动电压换来多少 g 振动响应。控制理论里它叫<strong>系统增益（System Gain）</strong>——闭环控制靠它预测"要达到目标振动量级，驱动电压该给多少"。
 
 THD 与 FRF 通常反相：
 

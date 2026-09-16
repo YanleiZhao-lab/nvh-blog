@@ -39,10 +39,10 @@ $$
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **传递损失（Transmission Loss, TL）**：入射声功率与透射声功率之比的分贝值，隔声性能的本征量，与声源无关
-- **阻抗管（Impedance Tube）**：厚壁钢管内建立平面波声场、用于测量材料声学参数的装置，又称驻波管
-- **平面波假设（Plane Wave Assumption）**：管内声压与质点振速只沿管轴变化，横截面内均匀——一切推导的前提
-- **垂直入射（Normal Incidence）**：声波传播方向与样件表面法线重合，区别于混响室中的随机入射
+- <strong>传递损失（Transmission Loss, TL）</strong>：入射声功率与透射声功率之比的分贝值，隔声性能的本征量，与声源无关
+- <strong>阻抗管（Impedance Tube）</strong>：厚壁钢管内建立平面波声场、用于测量材料声学参数的装置，又称驻波管
+- <strong>平面波假设（Plane Wave Assumption）</strong>：管内声压与质点振速只沿管轴变化，横截面内均匀——一切推导的前提
+- <strong>垂直入射（Normal Incidence）</strong>：声波传播方向与样件表面法线重合，区别于混响室中的随机入射
 :::
 
 ::: warning 工程注意

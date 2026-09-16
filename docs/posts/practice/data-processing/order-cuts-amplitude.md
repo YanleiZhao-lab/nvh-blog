@@ -40,8 +40,8 @@ $$A_{\text{cut}} = \left( \sum_{k=k_1}^{k_2} A_k^{\,2} \right)^{1/2}$$
 以两根相邻谱线各 1.0 m/s² 为例：$A_{\text{cut}} = \sqrt{1.0^2 + 1.0^2} \approx 1.41$ m/s²，而不是算术平均的 1.0。低转速时阶次线密集、谱线分不开，这一求和规则使带宽成为最易产生误差的环节。
 
 ::: info 核心概念
-- **阶次切（Order Cut）**：沿指定阶次带对能量做 RMS 求和，得到幅值随 RPM 的曲线
-- **带宽（Bandwidth）**：求和频带的宽度，决定哪些能量被计入这条阶次
+- <strong>阶次切（Order Cut）</strong>：沿指定阶次带对能量做 RMS 求和，得到幅值随 RPM 的曲线
+- <strong>带宽（Bandwidth）</strong>：求和频带的宽度，决定哪些能量被计入这条阶次
 - **RMS 求和**：带内各谱线平方求和后开方，能量相加而非幅值相加
 :::
 
@@ -175,7 +175,7 @@ $$\Delta L = 20 \lg \frac{A_2}{A_1} = 20 \lg \frac{4.00}{1.73} \approx 7.3 \ \te
 
 ## 五、在 Simcenter Testlab 里切阶次
 
-两种途径：**Signature Throughput Processing** 和**处理光标（Processing Cursor）**。
+两种途径：**Signature Throughput Processing** 和<strong>处理光标（Processing Cursor）</strong>。
 
 ### Signature Throughput Processing
 

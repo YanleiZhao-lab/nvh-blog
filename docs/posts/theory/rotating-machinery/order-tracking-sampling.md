@@ -27,10 +27,10 @@ $$f = k \cdot \frac{n}{60} \quad [\mathrm{Hz}]$$
 同步采样把这件事反过来做：让采样时钟跟随转轴。编码器每转给出固定的脉冲数（PPR），每来一个脉冲采一个点，采样栅格天然按角度均匀。阶次在这个栅格里就是「每转周期数」，与转速解耦。
 
 ::: info 核心概念
-- **定采样（fixed sampling）**：等时间间隔采集，采样率恒定；后续靠转速计曲线插值重采样到角度域
-- **同步采样（synchronous sampling）**：等角度间隔采集，每转采样点数恒定；阶次即「每转周期数」
-- **PPR（pulses per revolution，每转脉冲数）**：转速计或编码器每转输出的脉冲数，决定角度域栅格密度
-- **重采样（resampling）**：按转速-时间曲线把定采样数据插值到等角度栅格，Simcenter Testlab 中由 Order Tracking 模块完成
+- <strong>定采样（fixed sampling）</strong>：等时间间隔采集，采样率恒定；后续靠转速计曲线插值重采样到角度域
+- <strong>同步采样（synchronous sampling）</strong>：等角度间隔采集，每转采样点数恒定；阶次即「每转周期数」
+- <strong>PPR（pulses per revolution，每转脉冲数）</strong>：转速计或编码器每转输出的脉冲数，决定角度域栅格密度
+- <strong>重采样（resampling）</strong>：按转速-时间曲线把定采样数据插值到等角度栅格，Simcenter Testlab 中由 Order Tracking 模块完成
 :::
 
 ## 二、定采样的局限与同步采样的阶次上限
@@ -45,7 +45,7 @@ $$\alpha(t) = 2\pi \int_0^t \frac{n(\tau)}{60}\, \mathrm{d}\tau \quad [\mathrm{r
 
 其中 $\tau$ 为积分哑变量（s）。
 
-代价在插值环节。Simcenter 的实现是先升采样（插值前升采样因子默认 $R = 15$）再做线性插值、最后降采样，插值误差由**信号失真比 SDR（Signal to Distortion Ratio，单位 dB）**刻画（LMS 理论手册 11.1.4 节）：
+代价在插值环节。Simcenter 的实现是先升采样（插值前升采样因子默认 $R = 15$）再做线性插值、最后降采样，插值误差由<strong>信号失真比 SDR（Signal to Distortion Ratio，单位 dB）</strong>刻画（LMS 理论手册 11.1.4 节）：
 
 这个公式回答的问题是：插值这一步会引入多大的失真？其中 $R$ 对应物理里插值前的升采样倍数（把栅格加密多少倍再插），$f_c\%$ 对应物理里抗混叠滤波器截止频率占奈奎斯特频率的比例——比值越大说明插值失真越低于信号，SDR 就是"信号比失真大多少 dB"的定量账单。
 
@@ -87,7 +87,7 @@ PPR 通道**没有抗混叠保护**——它不经过模拟抗混叠滤波器，
 
 ## 三、两条路线怎么选
 
-| 维度 | **定采样 + 重采样** | **同步采样（编码器直采）** |
+| 维度 | **定采样 + 重采样** | <strong>同步采样（编码器直采）</strong> |
 | --- | --- | --- |
 | 采样栅格 | 等时间间隔 | 等角度间隔 |
 | 硬件门槛 | 普通转速计（1 PPR 即可） | 高 PPR 编码器或斑马带 + tacho 通道 |

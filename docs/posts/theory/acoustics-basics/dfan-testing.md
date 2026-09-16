@@ -22,10 +22,10 @@ title: "DFAN直接场声试验：用一圈音箱模拟火箭发射"
 所以各航天机构都要求：发射前在地面复现声环境做鉴定试验（qualification test），确认卫星及大部件能扛过最大预期环境。声试验与随机振动试验互补——振动台推的是机械路径（星箭界面），声试验拍的是空气路径（整个外表面）。
 
 ::: info 核心概念
-- **OASPL（Overall Sound Pressure Level）**：全频带声压级合成值，衡量声环境总能量的单一分贝数
-- **试件 TA（Test Article）**：被试对象，整机试验时是卫星本体，部件试验时是天线、太阳翼等
-- **鉴定试验（qualification test）**：按最大预期环境加裕度做的验证试验，证明"能扛住发射"
-- **混响室（reverberant chamber）**：墙面坚硬且斜置、形成均匀扩散声场的专用声学房间
+- <strong>OASPL（Overall Sound Pressure Level）</strong>：全频带声压级合成值，衡量声环境总能量的单一分贝数
+- <strong>试件 TA（Test Article）</strong>：被试对象，整机试验时是卫星本体，部件试验时是天线、太阳翼等
+- <strong>鉴定试验（qualification test）</strong>：按最大预期环境加裕度做的验证试验，证明"能扛住发射"
+- <strong>混响室（reverberant chamber）</strong>：墙面坚硬且斜置、形成均匀扩散声场的专用声学房间
 :::
 
 ## 二、两条技术路线：RFAN 混响室 vs DFAN 音箱阵
@@ -146,8 +146,8 @@ $$
 
 **声场品质判据**：
 
-- **弥散度检查（Dispersion）**：把平均控制倍频程谱与各单只控制/测量传声器的倍频程谱逐带对比，各带应在 ±3 dB 内——满足则说明声场均匀且接近扩散；
-- **扩散度（Diffusivity）**：Sinc 指示函数（Sinc Indicator Function, SIF）量化实测声场与理论扩散场的接近程度，SIF=1 表示完全扩散。
+- <strong>弥散度检查（Dispersion）</strong>：把平均控制倍频程谱与各单只控制/测量传声器的倍频程谱逐带对比，各带应在 ±3 dB 内——满足则说明声场均匀且接近扩散；
+- <strong>扩散度（Diffusivity）</strong>：Sinc 指示函数（Sinc Indicator Function, SIF）量化实测声场与理论扩散场的接近程度，SIF=1 表示完全扩散。
 
 ![弥散度检查：各传声器倍频程谱与平均谱逐带对比](/images/dfan-testing/fig12.png)
 *（图源：Siemens Simcenter Testing Knowledge Base）*

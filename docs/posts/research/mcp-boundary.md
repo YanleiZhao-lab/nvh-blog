@@ -24,7 +24,7 @@ title: "专业 NVH Skill 与 MCP 服务的边界规划"
 
 以 FFT 链路中最基础的三个关系为例。这三个关系在 Simcenter Testing 知识库中被整理为数字信号处理的"黄金方程"（golden equation），每一步都可以从定义严格导出，也正因如此，它们必须由确定性代码执行，而不是由模型"估计"。
 
-**第一步：带宽由采样率决定。** 奈奎斯特（Nyquist）判据要求采样率至少为最高分析频率的两倍，因此分析带宽（Bandwidth）为
+<strong>第一步：带宽由采样率决定。</strong> 奈奎斯特（Nyquist）判据要求采样率至少为最高分析频率的两倍，因此分析带宽（Bandwidth）为
 
 $$
 F_{\max} = \frac{f_s}{2}
@@ -34,7 +34,7 @@ $$
 
 ![带宽为采样率的一半：奈奎斯特判据要求采样率至少为最高分析频率的两倍（图源：Simcenter Testing Knowledge Base，DSP 基础文章 Figure 7）](/images/mcp-boundary/fig-bandwidth-nyquist.png)
 
-**第二步：谱线数由数据块大小决定。** 对实信号做傅里叶变换，结果共轭对称，有效谱线数（Spectral Lines）为
+<strong>第二步：谱线数由数据块大小决定。</strong> 对实信号做傅里叶变换，结果共轭对称，有效谱线数（Spectral Lines）为
 
 $$
 SL = \frac{N}{2}
@@ -44,7 +44,7 @@ $$
 
 ![每条谱线含幅值（上）与相位（下）两个量；谱线数等于数据块大小的一半（图源：Simcenter Testing Knowledge Base，DSP 基础文章 Figure 10）](/images/mcp-boundary/fig-spectrum-amp-phase.png)
 
-**第三步：频率分辨率由帧长决定。** 相邻谱线间距为带宽除以谱线数，等价于帧长（Frame Size）的倒数：
+<strong>第三步：频率分辨率由帧长决定。</strong> 相邻谱线间距为带宽除以谱线数，等价于帧长（Frame Size）的倒数：
 
 $$
 \Delta f = \frac{F_{\max}}{SL} = \frac{f_s}{N} = \frac{1}{T}
@@ -82,7 +82,7 @@ LLM 负责"理解需求 + 编排流程 + 解释结果"，MCP 工具负责"执行
 
 ## 四、关注点分离
 
-边界规划的核心是**关注点分离（Separation of Concerns）**：
+边界规划的核心是<strong>关注点分离（Separation of Concerns）</strong>：
 
 ```text
 用户需求

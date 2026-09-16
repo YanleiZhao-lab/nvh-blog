@@ -27,8 +27,8 @@ SCADAS 采集卡记录的永远是**电压**。加速度、声压这些工程量
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **灵敏度（Sensitivity）**：传感器输出电压与工程单位之比，单位为电压/EU（mV/g、mV/Pa），由厂家出厂标定给出
-- **工程单位（Engineering Unit, EU）**：被测物理量的单位——g、Pa、m/s²，电压信号经灵敏度换算后的呈现形式
+- <strong>灵敏度（Sensitivity）</strong>：传感器输出电压与工程单位之比，单位为电压/EU（mV/g、mV/Pa），由厂家出厂标定给出
+- <strong>工程单位（Engineering Unit, EU）</strong>：被测物理量的单位——g、Pa、m/s²，电压信号经灵敏度换算后的呈现形式
 - **Actual Sensitivity**：通道设置中实际生效的灵敏度栏，事后核查与修正均围绕它展开
 :::
 
@@ -125,7 +125,7 @@ print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixe
 5. **删除原通道**：点行号选中整行、Remove Channel(s)。此步不可省略——否则错误数据与修正数据会一同存入新文件，造成后续数据混用；
 6. **Save As**：为修正数据指定新 Run 名，与原始数据分开存放。
 
-多 Run 批量处理是同一套动作的扩展：把所有待修正的 Run 一并加入 Input Basket，在 Time Data Selection 切换到 **Channels Pivot** 视图——通道横排、Run 竖列，一条公式对所有 Run 同时生效。保存时选 **Use original run name, append:** 加后缀，批量落盘。
+多 Run 批量处理是同一套动作的扩展：把所有待修正的 Run 一并加入 Input Basket，在 Time Data Selection 切换到 **Channels Pivot** 视图——通道横排、Run 竖列，一条公式对所有 Run 同时生效。保存时选 <strong>Use original run name, append:</strong> 加后缀，批量落盘。
 
 ![Channels Pivot 视图：四个 Run 的同一通道一屏排开](/images/calibration-factor-correction/multi-channels-pivot.png)
 

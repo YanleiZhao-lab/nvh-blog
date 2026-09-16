@@ -48,7 +48,7 @@ $$n_i = \frac{60}{N\,\Delta t_i}\ \mathrm{rpm}$$
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **接缝（Butt joint）**：斑马带两端搭接处，条纹间距偏离理论值的那个位置；每转经过激光一次
+- <strong>接缝（Butt joint）</strong>：斑马带两端搭接处，条纹间距偏离理论值的那个位置；每转经过激光一次
 - **假骤降 / 假尖峰**：豁口让瞬时转速被低估、挤压让它被高估；二者都是每转一次的人工伪影
 - **系统性 vs 随机**：接缝误差每转固定出现，平均不能消除，必须在角度域重新分布脉冲
 :::
@@ -93,7 +93,7 @@ $$\theta_k = k \cdot \frac{360^\circ}{N} \ (\mathrm{mod}\ 360^\circ)$$
 
 每个脉冲按其序号获得理论角度位置，接缝处的间距偏差在整体重排中被几何约束吸收。物理上，重排只承认"第 $k$ 个脉冲对应第 $k$ 个角度格"这一标称几何，不引入任何平滑或滤波，因此扭振信息得以保留。
 
-操作在 **Time Signal Calculator**（Tools → Add-ins 勾选后，工作表上方点 **f(x)**，函数组选 **Tacho**）里完成，函数名 **ZEBRA_MOMENTS_TO_RPM**：
+操作在 **Time Signal Calculator**（Tools → Add-ins 勾选后，工作表上方点 <strong>f(x)</strong>，函数组选 **Tacho**）里完成，函数名 **ZEBRA_MOMENTS_TO_RPM**：
 
 1. **Function1** 指到含接缝误差的转速数据，填通道号或通道名都行；
 2. **Pulses_per_rev** 填带子的标称条纹数；

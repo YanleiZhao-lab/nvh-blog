@@ -35,8 +35,8 @@ f_{\mathrm{mesh}} = N \cdot \frac{n}{60} \quad \mathrm{Hz}
 $$
 
 ::: info 核心概念
-- **啮合频率（Gear Mesh Frequency）**：单位时间内齿对进入啮合的次数，等于齿数乘轴频
-- **啮合阶次（Gear Mesh Order）**：相对参考轴每转的啮合事件数，数值上等于齿数 $N$（齿轮直接装在参考轴上时）
+- <strong>啮合频率（Gear Mesh Frequency）</strong>：单位时间内齿对进入啮合的次数，等于齿数乘轴频
+- <strong>啮合阶次（Gear Mesh Order）</strong>：相对参考轴每转的啮合事件数，数值上等于齿数 $N$（齿轮直接装在参考轴上时）
 - **阶次不变性**：转速变化只改变啮合频率，不改变啮合阶次——这是把齿轮激励从频谱中认出来的依据
 :::
 

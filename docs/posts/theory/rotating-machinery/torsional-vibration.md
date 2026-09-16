@@ -66,7 +66,7 @@ PPR=1 时每个采样点都落在同一转角相位上，测得波动峰峰值�
 | 方案 | PPR 上限 | 优点 | 限制 |
 | --- | --- | --- | --- |
 | **磁电传感器（magnetic pickup）+ 齿轮** | 齿数 | 坚固、便宜、对环境粉尘不敏感 | PPR 被齿数锁定，无法加密 |
-| **光学传感器 + 斑马带/斑马盘（zebra tape/disk）** | 条纹数（可自选） | PPR 可按需要设置得很高 | 接缝（butt joint）会引入假波动 |
+| <strong>光学传感器 + 斑马带/斑马盘（zebra tape/disk）</strong> | 条纹数（可自选） | PPR 可按需要设置得很高 | 接缝（butt joint）会引入假波动 |
 
 同一台四缸机的同一条升速曲线，120 PPR 测得的红色曲线完整记录了一转之内的转速波动，1 PPR 的黑色曲线只剩一条平滑斜线——低 PPR 造成的不是"精度差一点"，而是整个扭振频段的信息缺失。
 
@@ -111,9 +111,9 @@ for order in [2, 30, 60, 61, 90, 119]:
 
 右侧阶次切片包含两条规律。
 
-**其一，转速越低扭振越大。** 转速低意味着两次燃烧之间的时间间隔长，曲轴在间隔内减速得更深，波动幅度更大。对应的推论：缸数越少，每转燃烧事件越少、间隔越长，扭振越大——三缸机大于四缸机，单缸机最严重。
+<strong>其一，转速越低扭振越大。</strong> 转速低意味着两次燃烧之间的时间间隔长，曲轴在间隔内减速得更深，波动幅度更大。对应的推论：缸数越少，每转燃烧事件越少、间隔越长，扭振越大——三缸机大于四缸机，单缸机最严重。
 
-**其二，约 2600 RPM 处有一个突出的峰。** 低转速段扭振随转速升高整体下降，2600 RPM 附近出现逆势凸起的共振包。共振频率与转速的关系为：2 阶激励频率 $f_2 = 2 \times rpm/60$ 随转速线性扫过曲轴扭振固有频率 $f_n$，在 $f_2 = f_n$ 处响应放大。单自由度系统的无量纲放大因子为
+<strong>其二，约 2600 RPM 处有一个突出的峰。</strong> 低转速段扭振随转速升高整体下降，2600 RPM 附近出现逆势凸起的共振包。共振频率与转速的关系为：2 阶激励频率 $f_2 = 2 \times rpm/60$ 随转速线性扫过曲轴扭振固有频率 $f_n$，在 $f_2 = f_n$ 处响应放大。单自由度系统的无量纲放大因子为
 
 $$H(f) = \frac{1}{\sqrt{\left[1 - \left(\dfrac{f}{f_n}\right)^2\right]^2 + \left[2\zeta\,\dfrac{f}{f_n}\right]^2}}$$
 
@@ -152,13 +152,13 @@ print(f"扭振峰值出现在 {rpm[tors.argmax()]:.0f} RPM")
 
 ## 五、Testlab 实操要点
 
-**通道设置一通道两用。** Channel Setup 里把转速通道的 ChannelGroupId 从 Tacho 改成 Vibration，同一通道同时产出转速数据与"振动"数据——无需物理分路接两个通道，即可直接对 throughput 数据做 colormap 和阶次切片。
+<strong>通道设置一通道两用。</strong> Channel Setup 里把转速通道的 ChannelGroupId 从 Tacho 改成 Vibration，同一通道同时产出转速数据与"振动"数据——无需物理分路接两个通道，即可直接对 throughput 数据做 colormap 和阶次切片。
 
-**纵轴量纲可切换。** 右键纵轴、Processing、Integrate (Single)，转速波动积分成扭振角位移（角度）；评估轴系疲劳与联轴器变形时，角位移是更直接的量纲。同一菜单的 Section Scaling 里可切换 RMS / Peak / Peak-Peak 格式。
+<strong>纵轴量纲可切换。</strong> 右键纵轴、Processing、Integrate (Single)，转速波动积分成扭振角位移（角度）；评估轴系疲劳与联轴器变形时，角位移是更直接的量纲。同一菜单的 Section Scaling 里可切换 RMS / Peak / Peak-Peak 格式。
 
-**扭振可做 ODS 动画。** Geometry 工作表的 Torsional node 子工作表里 Add Disc 添加旋转件圆盘节点（输入节点名、半径与朝向），之后扭振的谱、阶次、时域数据都能像普通几何一样做 ODS 动画，用于观察各圆盘之间的相对扭转。
+<strong>扭振可做 ODS 动画。</strong> Geometry 工作表的 Torsional node 子工作表里 Add Disc 添加旋转件圆盘节点（输入节点名、半径与朝向），之后扭振的谱、阶次、时域数据都能像普通几何一样做 ODS 动画，用于观察各圆盘之间的相对扭转。
 
-**斑马带接缝需修正。** 斑马带缠轴收尾处的搭接缝（butt joint）每转产生一次假的转速骤降或尖峰，属于系统性伪影；Testlab Time Signal Calculator 的 ZEBRA_MOMENTS_TO_RPM 函数（Tacho 函数组，需填入 Pulses_per_rev 字段）可以扣除，16A 版本起支持多接缝。接缝与脉冲毛刺的完整清洗流程，另见《[RPM 信号去毛刺：转速信号的清洗](../../practice/data-processing/rpm-spike-removal.html)》。
+<strong>斑马带接缝需修正。</strong> 斑马带缠轴收尾处的搭接缝（butt joint）每转产生一次假的转速骤降或尖峰，属于系统性伪影；Testlab Time Signal Calculator 的 ZEBRA_MOMENTS_TO_RPM 函数（Tacho 函数组，需填入 Pulses_per_rev 字段）可以扣除，16A 版本起支持多接缝。接缝与脉冲毛刺的完整清洗流程，另见《[RPM 信号去毛刺：转速信号的清洗](../../practice/data-processing/rpm-spike-removal.html)》。
 
 ## 六、小结
 

@@ -29,8 +29,8 @@ title: "声级家族全解：LAeq/LAS/LAF/SEL 各是什么"
 图 1 中老式声级计靠指针摆幅指示声级，读数快慢由表针的机械惯性决定；现代数字声级计用算法复现同样的响应特性，模拟时代的旋钮在软件里变成了参数：
 
 ::: info 两个旋钮
-- **时间积分常数（Time Integration Constant）**：又称时间平均帧（Time Averaging Frame），决定读数多快跟随信号变化。选项有快挡（Fast，0.125 s）、慢挡（Slow，1 s）、脉冲挡（Impulse，上升沿 0.035 s / 下降沿 1.5 s）。
-- **频率计权（Weighting）**：求有效值之前对频谱乘的计权函数，有线性（Linear，不计权）、A、B、C 等。A 计权近似人耳的平均频响，是环境与整车噪声测量的默认项。
+- <strong>时间积分常数（Time Integration Constant）</strong>：又称时间平均帧（Time Averaging Frame），决定读数多快跟随信号变化。选项有快挡（Fast，0.125 s）、慢挡（Slow，1 s）、脉冲挡（Impulse，上升沿 0.035 s / 下降沿 1.5 s）。
+- <strong>频率计权（Weighting）</strong>：求有效值之前对频谱乘的计权函数，有线性（Linear，不计权）、A、B、C 等。A 计权近似人耳的平均频响，是环境与整车噪声测量的默认项。
 :::
 
 回到开头那两个纠纷：怠速录音"差 4 dB"是因为一个报的是快挡瞬时读数、一个报的是全工况等效级——前者盯眼前、后者算总账，本来就不是同一个数；关门声"61 对 71"是因为 Slow 挡的 1 秒记忆窗把 50 毫秒脉冲摊到了 20 倍长的时间上，能量被稀释约 10 dB。两个纠纷的共同根源都在时间计权。带着这个结论，下面把两个旋钮逐个展开。
@@ -71,9 +71,9 @@ $$
 
 | **指标** | **时间常数/平均帧** | **上升速度** | **衰减速度** | **适用信号** |
 | --- | --- | --- | --- | --- |
-| **LAF（A 计权快挡）** | 0.125 s | 不足 0.5 s 达满幅 | 约 34.7 dB/s | 快变、瞬态信号 |
-| **LAS（A 计权慢挡）** | 1 s | 约 5 s 达满幅 | 慢于 LAF | 平稳噪声 |
-| **Limpulse（A 计权脉冲挡）** | 上升 0.035 s / 下降 1.5 s | 三者最快 | 三者最慢 | 枪声、冲击等单次事件 |
+| <strong>LAF（A 计权快挡）</strong> | 0.125 s | 不足 0.5 s 达满幅 | 约 34.7 dB/s | 快变、瞬态信号 |
+| <strong>LAS（A 计权慢挡）</strong> | 1 s | 约 5 s 达满幅 | 慢于 LAF | 平稳噪声 |
+| <strong>Limpulse（A 计权脉冲挡）</strong> | 上升 0.035 s / 下降 1.5 s | 三者最快 | 三者最慢 | 枪声、冲击等单次事件 |
 
 Limpulse 的不对称设计有历史原因：它本质是峰值检波器（Peak Detector），35 ms 的上升时间常数让它抓得住枪声、冲击这类毫秒级的突升；1.5 s 的长衰减时间常数让模拟表针慢落，操作者来得及把峰值抄下来。数字时代不需要抄表，但指标保留了下来，用于单次冲击事件的量化与比对。
 
@@ -115,7 +115,7 @@ RMS（Root Mean Square，均方根）与 LAeq 同属线性平均：RMS 对 A 计
 
 ### 累积与瞬时：LAeqT 与 LAeqt
 
-Simcenter Testlab 对 LAeq 提供两种输出（图 6）：**LAeqT（Cumulative，累积）** 从测量起点积分到当前时刻，输出一条随时间收敛的曲线；**LAeqt（Instantaneous，瞬时）** 只在相邻两个输出点之间积分，反映局部声级。图 6 上图为声压时程（红），下图蓝线为 LAeqT、红线为 LAeqt。
+Simcenter Testlab 对 LAeq 提供两种输出（图 6）：<strong>LAeqT（Cumulative，累积）</strong> 从测量起点积分到当前时刻，输出一条随时间收敛的曲线；<strong>LAeqt（Instantaneous，瞬时）</strong> 只在相邻两个输出点之间积分，反映局部声级。图 6 上图为声压时程（红），下图蓝线为 LAeqT、红线为 LAeqt。
 
 ![Testlab 的 LAeqT 累积与 LAeqt 瞬时输出](/images/sound-level-family/fig6_laeq_cumulative_instant.png)
 

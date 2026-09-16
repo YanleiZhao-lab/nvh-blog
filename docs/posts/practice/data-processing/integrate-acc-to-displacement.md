@@ -90,11 +90,11 @@ print(f"\n0.001 m/s² 偏置积分 8 s 的末端漂移: {0.5*0.001*t_end**2*1e3:
 
 | 步骤 | Time Signal Calculator 函数 | 作用 | 跳过的后果（FAQ 附录实测） |
 | --- | --- | --- | --- |
-| **1. 去趋势（detrending）** | DETREND_AC(CHx; 2) | 拟合并减去 2 阶多项式，去掉积分前就存在的漂移和低频趋势 | 结果残留漂移，持续发散 |
-| **2. 升采样（upsampling）** | RESAMPLING(...; 4×fs; ...) | 积分算法（Simpson 等）在 fs/4 以上频率误差大，升 4 倍采样率避开 | 高频段出现锯齿状误差 |
+| <strong>1. 去趋势（detrending）</strong> | DETREND_AC(CHx; 2) | 拟合并减去 2 阶多项式，去掉积分前就存在的漂移和低频趋势 | 结果残留漂移，持续发散 |
+| <strong>2. 升采样（upsampling）</strong> | RESAMPLING(...; 4×fs; ...) | 积分算法（Simpson 等）在 fs/4 以上频率误差大，升 4 倍采样率避开 | 高频段出现锯齿状误差 |
 | **3. 双重积分** | DOUBLEINTEGRATE(...; 1) | 1=Simpson、2=梯形；Simpson 必须配升降采样 | —— |
-| **4. 降采样（downsampling）** | RESAMPLING(...; fs; ...) | 回到原始采样率，同时滤除 fs/4 以上的积分噪声 | 幅值整体偏高或偏低 |
-| **5. 高通滤波（high-pass filtering）** | FILTER_HP(...; 2.5; 2; IIR(1)) | 清掉积分常数和残余低频分量 | 积分常数以直流/低频形式主导结果 |
+| <strong>4. 降采样（downsampling）</strong> | RESAMPLING(...; fs; ...) | 回到原始采样率，同时滤除 fs/4 以上的积分噪声 | 幅值整体偏高或偏低 |
+| <strong>5. 高通滤波（high-pass filtering）</strong> | FILTER_HP(...; 2.5; 2; IIR(1)) | 清掉积分常数和残余低频分量 | 积分常数以直流/低频形式主导结果 |
 
 FAQ 附录的四张对照图，比文字更直观——每张都是"正确结果 vs 少做一步"的叠加显示：
 
@@ -135,7 +135,7 @@ FILTER_HP(DOUBLEINTEGRATE(DETREND_AC(CHx;2);2);2.5;2;IIR(1))
 如果目的只是整体级（Overall Level）或谱级（比如位移 RMS 随转速的趋势），不必碰时域双重积分。频域积分（frequency domain integration）是逐谱线除以 $\omega$，快且稳；需要防备的仍是 0 Hz：Overall Level 从 0 Hz 起积分，直流谱线经 1/ω 放大后主导整个结果。官方给两个对策：
 
 1. **First bins to clear 设 2**：把 0 Hz 和第一根谱线清零再积分，在 Time Data Processing 的 Channel Processing 里设置
-2. **改用频率段落（Frequency Section）**：不积 Overall，直接算 1 Hz～6400 Hz 的 Frequency Section（带宽 6400 Hz 场景），从源头绕开直流
+2. <strong>改用频率段落（Frequency Section）</strong>：不积 Overall，直接算 1 Hz～6400 Hz 的 Frequency Section（带宽 6400 Hz 场景），从源头绕开直流
 
 ![频率段落设置：1 Hz 起算代替含 0 Hz 的 Overall Level](/images/integrate-acc-to-displacement/community-freq-section.jpg)
 *（图源：Simcenter Testing Knowledge Base）*

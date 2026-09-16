@@ -26,9 +26,9 @@ title: "运行模态分析（OMA）：仅用响应数据识别模态参数"
 先把整件事用一个生活类比立起来：**敲钟与听雨**。教堂的钟被敲一下，"嗡"的一声余响按钟自身的固有频率衰减——这是脉冲激励下的自由衰减，钟的音调（频率）与余响消散的快慢（阻尼）都是钟自己的属性。现在换一种方式"听"钟：不敲它，让密集的雨点随机地打在钟上。每一滴雨都是一次微小的随机敲击，钟以自己的余响回应；雨点是杂乱的，但成千上万次余响叠在一起，杂乱部分互相抵消，留下来的恰恰还是钟自己的音调和衰减。OMA 做的就是"从雨声里听出钟"：把两路雨声（响应）做相关运算，等效于把每个雨点激起的余响在时间轴上对齐叠加——输入的随机性被平均掉，浮出的是结构自身的衰减正弦。路面不平对车轮、风力对叶片、海浪对平台，都是"雨点"；相关函数就是那个"对齐叠加"的动作。记住这个图像，后面每一步推导都是在把它数学化。
 
 ::: info 核心概念
-- **OMA（运行模态分析）**：仅用运行状态下响应数据（response-only）识别模态参数的技术总称
-- **NExT（自然激励技术，Natural Excitation Technique）**：白噪声激励下响应间相关函数可表示为衰减正弦之和，从而复用 LSCE、ERA 等经典时域识别算法
-- **随机子空间法（SSI, Stochastic Subspace Identification）**：由输出相关函数构造 Hankel 矩阵，经奇异值分解识别状态空间模型；BR（均衡实现，Balanced Realization）与 CVA（正则变量分析，Canonical Variate Analysis）是两种典型加权方案
+- <strong>OMA（运行模态分析）</strong>：仅用运行状态下响应数据（response-only）识别模态参数的技术总称
+- <strong>NExT（自然激励技术，Natural Excitation Technique）</strong>：白噪声激励下响应间相关函数可表示为衰减正弦之和，从而复用 LSCE、ERA 等经典时域识别算法
+- <strong>随机子空间法（SSI, Stochastic Subspace Identification）</strong>：由输出相关函数构造 Hankel 矩阵，经奇异值分解识别状态空间模型；BR（均衡实现，Balanced Realization）与 CVA（正则变量分析，Canonical Variate Analysis）是两种典型加权方案
 - **PolyMAX**：Simcenter 的频域多参考点模态估计器，稳定图清晰；Testlab OMA 中其拟合对象是互功率谱
 :::
 
@@ -253,7 +253,7 @@ print(f"若不补偿，阻尼比虚读为 {(sigma+sigma_w)/(2*np.pi*f0)*100:.2f}
 
 OMA 与 EMA 的选择，先看输入力能不能测：
 
-| | **EMA（试验模态）** | **OMA（运行模态）** |
+| | <strong>EMA（试验模态）</strong> | <strong>OMA（运行模态）</strong> |
 | --- | --- | --- |
 | **输入** | 已知激励（锤/激振器） | 不可测随机激励 |
 | **拟合对象** | FRF | 互功率谱/相关函数 |

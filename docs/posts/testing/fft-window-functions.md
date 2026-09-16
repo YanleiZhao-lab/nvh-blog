@@ -51,10 +51,10 @@ $$
 因此窗函数的频域形状直接决定了泄漏的分布——主瓣越窄，频率分辨力越好；旁瓣越低，强信号旁边的弱信号越容易被分辨。
 
 ::: info 核心概念
-- **主瓣宽度（main lobe width）**：决定频率分辨力，主瓣越窄越好
-- **旁瓣衰减（sidelobe level）**：决定强信号旁能否看到弱信号，旁瓣越低越好
-- **有效噪声带宽（Effective Noise Bandwidth, ENBW）**：衡量主瓣占用的谱线数，直接影响分辨相近频率的能力
-- **最大幅值误差（maximum amplitude error）**：谱线落在主瓣内不同位置时的最坏幅值偏差
+- <strong>主瓣宽度（main lobe width）</strong>：决定频率分辨力，主瓣越窄越好
+- <strong>旁瓣衰减（sidelobe level）</strong>：决定强信号旁能否看到弱信号，旁瓣越低越好
+- <strong>有效噪声带宽（Effective Noise Bandwidth, ENBW）</strong>：衡量主瓣占用的谱线数，直接影响分辨相近频率的能力
+- <strong>最大幅值误差（maximum amplitude error）</strong>：谱线落在主瓣内不同位置时的最坏幅值偏差
 :::
 
 需要强调的是：对整周期截断的信号（无泄漏），加窗反而会引入畸变。此时应使用矩形窗（不加窗），任何额外的窗都会把原本单一的一条谱线展宽。
@@ -132,14 +132,14 @@ $$
 
 - **哈明窗**：与汉宁窗相比最高旁瓣更低（-43 dB），但旁瓣衰减慢（-20 dB/十个旁瓣），适用的动态范围约 50 dB；
 - **布莱克曼窗**：适用于检测强信号中存在的弱分量；
-- **凯赛窗（Kaiser-Bessel）**：选择性最好，适合区分幅值差别很大的多音信号；随机激励下与汉宁窗相比会引起较大的泄漏误差。
+- <strong>凯赛窗（Kaiser-Bessel）</strong>：选择性最好，适合区分幅值差别很大的多音信号；随机激励下与汉宁窗相比会引起较大的泄漏误差。
 
 ### 3.5 瞬态信号窗：力窗与指数窗
 
 锤击法模态试验中，激励与响应通道使用不同的瞬态窗：
 
-- **力窗（Force window）**：用于激励通道，脉冲作用期间取 1、其余时间取 0，削减力信号通道的杂散噪声；
-- **指数窗（Exponential window）**：$w(t) = e^{-\beta t}$，用于采样时间内未充分衰减的响应信号，强迫末端趋零。注意指数窗会引入附加的人为阻尼，后续模态拟合必须计入其影响；
+- <strong>力窗（Force window）</strong>：用于激励通道，脉冲作用期间取 1、其余时间取 0，削减力信号通道的杂散噪声；
+- <strong>指数窗（Exponential window）</strong>：$w(t) = e^{-\beta t}$，用于采样时间内未充分衰减的响应信号，强迫末端趋零。注意指数窗会引入附加的人为阻尼，后续模态拟合必须计入其影响；
 - **Tukey 窗**：大部分时间接近 1，通过渐变长度（taper length）参数控制两端过渡，用于瞬态事件（如路面冲击、柴油机的 clatter）分析，可避免汉宁窗对瞬态时域幅值的衰减。
 
 ## 四、窗函数校正因子
@@ -148,7 +148,7 @@ $$
 
 用搬家的比方说：气泡膜裹在家具外面，称重时把膜的重量一起去掉了——校正因子就是把「被膜吃掉的那部分」称回来。幅值校正问「单件家具净重多少」，能量校正问「全部家具总重多少」，两种称法不能同时用一把秤。
 
-**幅值校正（amplitude correction）**——恢复单频信号的真实峰值。校正因子为相干增益（coherent gain）的倒数：
+<strong>幅值校正（amplitude correction）</strong>——恢复单频信号的真实峰值。校正因子为相干增益（coherent gain）的倒数：
 
 **导读**：这个公式回答的问题是「窗把正弦峰值平均压低了多少倍」——其中分母 $\sum w(n)$ 对应物理里的「这层膜的平均厚度」：矩形窗为 $N$（膜厚处处为 1 不衰减），汉宁窗为 $N/2$（平均膜厚一半），所以补偿因子恰好是 2。
 
@@ -158,7 +158,7 @@ $$
 
 对汉宁窗，$\sum w(n) = N/2$，故 $K_A = 2$：正弦波加汉宁窗后谱的峰值降为真实幅值的一半，全谱乘 2 即可复原。单频信号的幅值测量必须采用幅值校正。
 
-**能量校正（energy correction）**——恢复宽带信号的总能量（RMS）。校正因子为：
+<strong>能量校正（energy correction）</strong>——恢复宽带信号的总能量（RMS）。校正因子为：
 
 **导读**：这个公式回答的问题是「窗把宽带信号的总能量吃掉了百分之多少」——注意分母是 $\sum w^2(n)$（能量按膜厚的平方计），汉宁窗代入得 1.63：能量口径下的补偿倍数与幅值口径的 2.0 不同，正因为两条账本记的不是同一笔账。
 
@@ -286,9 +286,9 @@ plt.savefig('window_comparison.png', dpi=150)
 
 ## 九、参考
 
-- **LMS Test 测试理论手册（LMS Theory）** — 第 1.3 节"泄漏与加窗"，表 1.1 时窗特性、表 1.2 窗校正因子
+- <strong>LMS Test 测试理论手册（LMS Theory）</strong> — 第 1.3 节"泄漏与加窗"，表 1.1 时窗特性、表 1.2 窗校正因子
 - **Simcenter Testing Knowledge Base** — "Window Types"、"Window Correction Factors"、"Leakage and Windows"
-- **Heinzel et al. (2002)** — *Spectrum and spectral density estimation by the DFT*, with a window performance survey
+- <strong>Heinzel et al. (2002)</strong> — *Spectrum and spectral density estimation by the DFT*, with a window performance survey
 - **Brüel & Kjær Technical Review** — Window functions in FFT analyzers
 
 ## 一句话记住

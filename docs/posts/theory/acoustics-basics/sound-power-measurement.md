@@ -51,29 +51,29 @@ $$L_W = \overline{L_P} + 10\lg\frac{S}{S_0}$$
 
 ### 2.2 从定义出发的五步推导
 
-**第一步：声功率级的定义。**
+<strong>第一步：声功率级的定义。</strong>
 
 $$L_W = 10\lg\frac{W}{W_0}, \qquad W_0 = 10^{-12}\ \mathrm{W}$$
 
 定义只依赖声源辐射的总功率 $W$（单位 W），与任何测点位置无关，这是整个构造的出发点。
 
-**第二步：总功率写成测量面上的声强积分。** 声功率是声强 $I$（Sound Intensity，单位 $\mathrm{W/m^2}$）在闭合测量面上的面积分：
+<strong>第二步：总功率写成测量面上的声强积分。</strong> 声功率是声强 $I$（Sound Intensity，单位 $\mathrm{W/m^2}$）在闭合测量面上的面积分：
 
 $$W = \oint_S I\,\mathrm{d}S \approx \overline{I}\cdot S$$
 
 当测点在测量面上充分采样时，积分可用面上平均声强 $\overline{I}$ 乘以面积 $S$ 代替。这一步把整个面的总能量转化为"可测的平均量乘以面积"。
 
-**第三步：自由场行波中声强与声压的关系。**
+<strong>第三步：自由场行波中声强与声压的关系。</strong>
 
 $$I = \frac{p^2}{\rho c}$$
 
 其中 $\rho c$ 为空气的特性阻抗（characteristic impedance），常温下约取 $400\ \mathrm{Pa\cdot s/m}$。这一步把难以直接测量的声强转换为麦克风可直接测量的声压。
 
-**第四步：代入定义并整理。** 将 $W = \overline{I}\,S = \overline{p^2}\,S/(\rho c)$ 代入定义式：
+<strong>第四步：代入定义并整理。</strong> 将 $W = \overline{I}\,S = \overline{p^2}\,S/(\rho c)$ 代入定义式：
 
 $$L_W = 10\lg\frac{\overline{p^2}\,S}{\rho c\,W_0}$$
 
-**第五步：拆分为声压级项与面积项。** 取参考声压 $p_0 = 20\ \mathrm{\mu Pa}$。参考值的选取在数值上严格自洽：$(20\ \mathrm{\mu Pa})^2 = 4\times10^{-10}$，恰好等于 $400\times10^{-12}$（即 $\rho c\cdot W_0/\mathrm{m^2}$），于是上式恰好拆成：
+<strong>第五步：拆分为声压级项与面积项。</strong> 取参考声压 $p_0 = 20\ \mathrm{\mu Pa}$。参考值的选取在数值上严格自洽：$(20\ \mathrm{\mu Pa})^2 = 4\times10^{-10}$，恰好等于 $400\times10^{-12}$（即 $\rho c\cdot W_0/\mathrm{m^2}$），于是上式恰好拆成：
 
 $$L_W = \overline{L_P} + 10\lg\frac{S}{S_0}$$
 

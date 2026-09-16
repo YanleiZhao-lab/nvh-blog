@@ -15,10 +15,10 @@ NVH 工程中常用总级（Overall Level）描述振动噪声，RMS 本质是�
 区分这两类信号的依据是幅值的**概率分布**。将时域波形按幅值分箱统计出现次数，得到直方图（Histogram）：方波在两端的幅值处堆积、中间为空；高斯随机呈钟形对称；含冲击的信号呈"中部尖峰 + 长尾"形态——绝大多数采样点集中在零附近，少数点延伸到较大幅值处。
 
 ::: info 核心概念
-- **峭度（Kurtosis）**：信号的四阶标准化矩，量化幅值分布相对高斯分布的尖峭或平坦程度
-- **峭度超值（Kurtosis Excess）**：峭度减 3，使高斯分布对应 0，正负号直接指示"比高斯更尖还是更平"
-- **峰值因子（Crest Factor）**：峰值除以 RMS；峭度控制中 Sigma Clipping 的"sigma"即峰值/RMS 倍数
-- **尖峰态（Leptokurtic）/ 平坦态（Platykurtic）**：分布比高斯更尖 / 更平的表述
+- <strong>峭度（Kurtosis）</strong>：信号的四阶标准化矩，量化幅值分布相对高斯分布的尖峭或平坦程度
+- <strong>峭度超值（Kurtosis Excess）</strong>：峭度减 3，使高斯分布对应 0，正负号直接指示"比高斯更尖还是更平"
+- <strong>峰值因子（Crest Factor）</strong>：峰值除以 RMS；峭度控制中 Sigma Clipping 的"sigma"即峰值/RMS 倍数
+- <strong>尖峰态（Leptokurtic）/ 平坦态（Platykurtic）</strong>：分布比高斯更尖 / 更平的表述
 :::
 
 ![正负峭度分布与正态分布比较](/images/kurtosis-signal-statistics/fig9-3-kurtosis-distributions.png)

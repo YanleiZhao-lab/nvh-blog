@@ -84,9 +84,9 @@ Testlab 的 Modal Analysis 工作表里，"Modal Data Selection"页有一个 **P
 这里能看出"归一化求和"设计的用意：各部件求和都除以自身条数，绿红蓝三条曲线才能同尺度叠在一张图上比高低。
 
 ::: info 核心概念
-- **全局模态（Global Mode）**：结构主体参与的模态，几乎在每条 FRF 中都有贡献，求和曲线上成峰
-- **局部模态（Local Mode）**：仅子部件参与的模态，只在少数测点的 FRF 中可见，整结构求和会被全局模态"洗掉"
-- **Point filter（测点过滤器）**：Testlab Modal Data Selection 中按测点名过滤 FRF 子集的字段，按部件重建求和曲线的证据工具
+- <strong>全局模态（Global Mode）</strong>：结构主体参与的模态，几乎在每条 FRF 中都有贡献，求和曲线上成峰
+- <strong>局部模态（Local Mode）</strong>：仅子部件参与的模态，只在少数测点的 FRF 中可见，整结构求和会被全局模态"洗掉"
+- <strong>Point filter（测点过滤器）</strong>：Testlab Modal Data Selection 中按测点名过滤 FRF 子集的字段，按部件重建求和曲线的证据工具
 :::
 
 ## 四、病因二：激振方向与振型不对齐——模态"喂不进去"

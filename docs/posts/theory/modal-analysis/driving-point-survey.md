@@ -18,9 +18,9 @@ title: "驱动点测量：激励点选在节点上会丢模态"
 
 ::: info 核心概念
 - **驱动点 FRF**：激励点与响应点重合的对角线测量，$H_{pp}(\omega)$
-- **跨点 FRF（Cross FRF）**：激励点与响应点不同的非对角线测量，$H_{ij}(\omega)$
-- **节点（Node / Nodal Point）**：某阶振型中位移恒为零的位置；二维结构上节点连成**节线（Nodal Line）**
-- **驱动点勘察（Driving Point Survey）**：在结构多个位置各做一次驱动点测量、对比 FRF 峰的数量，确定最佳激励位置
+- <strong>跨点 FRF（Cross FRF）</strong>：激励点与响应点不同的非对角线测量，$H_{ij}(\omega)$
+- <strong>节点（Node / Nodal Point）</strong>：某阶振型中位移恒为零的位置；二维结构上节点连成<strong>节线（Nodal Line）</strong>
+- <strong>驱动点勘察（Driving Point Survey）</strong>：在结构多个位置各做一次驱动点测量、对比 FRF 峰的数量，确定最佳激励位置
 :::
 
 ## 二、为什么激励点选在节点上会丢模态
@@ -35,7 +35,7 @@ $$
 
 其中极点 $\lambda_k = -\sigma_k + j\omega_{d,k}$（$\sigma_k$ 为第 k 阶阻尼因子，$\omega_{d,k}$ 为有阻尼固有频率，二者量纲均为时间的倒数，常以 Hz 计），$A_{k,ij}$ 是第 k 阶留数（Residue），"*"表示复共轭。推导的关键在留数上，分三步：
 
-**第一步：模态坐标解耦。** 对运动方程 $M\ddot{x} + C\dot{x} + Kx = f$ 作模态变换 $x = \Phi q$（$\Phi$ 为振型矩阵），利用振型正交性把耦合的物理坐标方程拆成一组单自由度模态坐标方程，第 k 阶为
+<strong>第一步：模态坐标解耦。</strong> 对运动方程 $M\ddot{x} + C\dot{x} + Kx = f$ 作模态变换 $x = \Phi q$（$\Phi$ 为振型矩阵），利用振型正交性把耦合的物理坐标方程拆成一组单自由度模态坐标方程，第 k 阶为
 
 $$
 m_k \ddot{q}_k + c_k \dot{q}_k + k_k q_k = \varphi_k^{\mathrm{T}} f
@@ -43,7 +43,7 @@ $$
 
 物理意义：任意位置的响应都能拆成若干阶独立"摆动方式"的叠加，每阶方式有自己独立的模态质量 $m_k$（kg）、模态刚度 $k_k$（N/m）与模态阻尼 $c_k$。
 
-**第二步：频域求解并回收物理坐标。** 只在 j 点施加力 $F_j$ 时，模态坐标频域解为 $Q_k(\omega) = \varphi_k(j) F_j(\omega) / \left[ m_k(\omega_k^2 - \omega^2 + j\,2\zeta_k \omega_k \omega) \right]$，i 点响应是各阶振型系数加权和：
+<strong>第二步：频域求解并回收物理坐标。</strong> 只在 j 点施加力 $F_j$ 时，模态坐标频域解为 $Q_k(\omega) = \varphi_k(j) F_j(\omega) / \left[ m_k(\omega_k^2 - \omega^2 + j\,2\zeta_k \omega_k \omega) \right]$，i 点响应是各阶振型系数加权和：
 
 $$
 X_i(\omega) = \sum_k \varphi_k(i)\, Q_k(\omega) = \sum_k \frac{\varphi_k(i)\,\varphi_k(j)}{m_k(\omega_k^2 - \omega^2 + j\,2\zeta_k \omega_k \omega)} F_j(\omega)
@@ -51,7 +51,7 @@ $$
 
 物理意义：第 k 阶模态对 FRF 的贡献被**两个因子连乘**——响应点看得到多少（$\varphi_k(i)$）、激励点激得起多少（$\varphi_k(j)$）。二者任一为零，这阶模态在该 FRF 中就不出现。
 
-**第三步：部分分式分解得留数。** 把上式分母在极点处展开成 $\frac{A_{k,ij}}{j\omega-\lambda_k} + \frac{A^{*}_{k,ij}}{j\omega-\lambda_k^{*}}$ 的形式，对比系数得（实模态情形）
+<strong>第三步：部分分式分解得留数。</strong> 把上式分母在极点处展开成 $\frac{A_{k,ij}}{j\omega-\lambda_k} + \frac{A^{*}_{k,ij}}{j\omega-\lambda_k^{*}}$ 的形式，对比系数得（实模态情形）
 
 $$
 A_{k,ij} = Q_k \cdot \varphi_k(i) \cdot \varphi_k(j), \qquad Q_k = \frac{1}{2j\, m_k \omega_{d,k}}

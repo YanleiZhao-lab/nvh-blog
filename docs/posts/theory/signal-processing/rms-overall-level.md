@@ -10,7 +10,7 @@ title: "RMS 与总级：从时域到频域的能量守恒"
 
 声压波在正负帕斯卡之间振荡，一个周期内的平均值为零。如果仅以平均值衡量信号强度，将得不到任何有效信息——平均值不是衡量信号能量（做功能力）的统计量。
 
-真正代表信号做功能力的是**均方根值（Root Mean Square, RMS）**：将波形平方（负半周翻为正值）、取平均、再开根号。对时间长度 $T$（单位 s）的连续信号 $x(t)$（单位 Pa 或 g 等），RMS 定义为
+真正代表信号做功能力的是<strong>均方根值（Root Mean Square, RMS）</strong>：将波形平方（负半周翻为正值）、取平均、再开根号。对时间长度 $T$（单位 s）的连续信号 $x(t)$（单位 Pa 或 g 等），RMS 定义为
 
 $$x_{rms} = \sqrt{\frac{1}{T}\int_{0}^{T} x^2(t)\,dt}$$
 
@@ -18,20 +18,20 @@ $$x_{rms} = \sqrt{\frac{1}{T}\int_{0}^{T} x^2(t)\,dt}$$
 
 $$x_{rms} = \frac{A}{\sqrt{2}} \approx 0.707A$$
 
-其物理含义是：幅度为 $0.707A$ 的稳定直流量与该正弦波等效发热，因此 RMS 又称**等效稳态值（equivalent steady state value）**。
+其物理含义是：幅度为 $0.707A$ 的稳定直流量与该正弦波等效发热，因此 RMS 又称<strong>等效稳态值（equivalent steady state value）</strong>。
 
 ![正弦信号的 RMS 是其等效稳态值](/images/rms-overall-level/rms-equivalent-steady-state.png)
 *（图源：Simcenter Testing Knowledge Base）*
 
-频谱里的每条谱线本质上都是一个正弦波，因此谱线同样有 Peak、RMS、Peak-Peak 三种**幅值格式（Amplitude Format）**：峰值格式取 $A$，RMS 格式取 $A/\sqrt{2}$，峰峰值格式取 $2A$。峰值 1.000 g 的谱线，换算为 RMS 格式即 0.707 g——数据本身不变，只是幅值的表达方式不同。
+频谱里的每条谱线本质上都是一个正弦波，因此谱线同样有 Peak、RMS、Peak-Peak 三种<strong>幅值格式（Amplitude Format）</strong>：峰值格式取 $A$，RMS 格式取 $A/\sqrt{2}$，峰峰值格式取 $2A$。峰值 1.000 g 的谱线，换算为 RMS 格式即 0.707 g——数据本身不变，只是幅值的表达方式不同。
 
 ![同一份频谱数据可用不同幅值格式显示，RMS 格式谱线为峰值格式的 0.707 倍](/images/rms-overall-level/amplitude-formats-peak-rms.png)
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
 - **RMS**：信号平方平均后开根号，代表振荡信号的等效稳态能量；正弦波为其峰值的 0.707 倍
-- **幅值格式（Amplitude Format）**：谱线幅值的线性表达方式，分 Peak / RMS / Peak-Peak 三种，属显示层概念，不改变数据本身
-- **总级（Overall Level）**：一个频段内全部谱线平方求和再开根号得到的单一数值，即一个频谱的 RMS
+- <strong>幅值格式（Amplitude Format）</strong>：谱线幅值的线性表达方式，分 Peak / RMS / Peak-Peak 三种，属显示层概念，不改变数据本身
+- <strong>总级（Overall Level）</strong>：一个频段内全部谱线平方求和再开根号得到的单一数值，即一个频谱的 RMS
 :::
 
 ## 二、谱的 RMS：把所有谱线的能量加回去
@@ -45,7 +45,7 @@ $$X_{rms} = \sqrt{\sum_{k=0}^{K} A_k^2}$$
 ![频谱的总级（Overall Level）是单一数值，即整条谱的 RMS](/images/rms-overall-level/rms-of-spectrum-overall.png)
 *（图源：Simcenter Testing Knowledge Base）*
 
-为什么各谱线能量可以直接平方相加？因为不同频率的正弦波相互**正交（orthogonal）**，互不贡献能量，各谱线能量简单叠加——这与分贝计算中的"能量叠加"是同一条物理规律。理论根基是 **Parseval 定理（Parseval's Theorem）**：时域平方的积分等于频域各分量平方之和，因此时域计算 RMS 与频域计算总级殊途同归。
+为什么各谱线能量可以直接平方相加？因为不同频率的正弦波相互<strong>正交（orthogonal）</strong>，互不贡献能量，各谱线能量简单叠加——这与分贝计算中的"能量叠加"是同一条物理规律。理论根基是 <strong>Parseval 定理（Parseval's Theorem）</strong>：时域平方的积分等于频域各分量平方之和，因此时域计算 RMS 与频域计算总级殊途同归。
 
 手动复算时有三项前置条件，任何一项不满足结果即出错：
 
@@ -68,7 +68,7 @@ Simcenter Testlab 在后台统一处理了上述换算：无论屏幕上显示�
 
 ## 三、跟踪总级：让能量随转速变化
 
-怠速抖动、巡航噪声、加速轰鸣——整车的 NVH 问题几乎都随工况变化。单看某一次平均的频谱无法回答"哪个转速能量最大"，于是有了**跟踪总级（Tracked Overall Level）**：按转速或时间切片，每个增量计算一次频谱及其 RMS，再把一串 RMS 对转速画成曲线。
+怠速抖动、巡航噪声、加速轰鸣——整车的 NVH 问题几乎都随工况变化。单看某一次平均的频谱无法回答"哪个转速能量最大"，于是有了<strong>跟踪总级（Tracked Overall Level）</strong>：按转速或时间切片，每个增量计算一次频谱及其 RMS，再把一串 RMS 对转速画成曲线。
 
 例如在 3500 至 4000 RPM 之间每 25 rpm 计算一次频谱，对每张频谱求总级，再将这些 RMS 值对转速绘图。这样即可定量识别能量异常的转速区间——哪个峰值对应哪一阶激励、与主观感受的"轰鸣点"（boom）是否吻合，判断便有了定量依据。相比在彩色云图上目测扫描，这种方法客观得多，也是阶次切片、传递路径分析定位前的常规第一步。
 

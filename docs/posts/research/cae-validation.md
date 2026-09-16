@@ -83,11 +83,11 @@ modal_test_record = {
 
 模态置信判据（Modal Assurance Criterion，MAC）是衡量试验振型与计算振型一致性的核心指标。它可以从向量几何关系分三步导出。
 
-**第一步：振型即复向量。** n 个测点拟合出的振型是一个 n 维复向量 $\boldsymbol{\varphi} \in \mathbb{C}^{n}$，上标 $H$ 表示复共轭转置。物理意义：振型描述各测点同频运动的幅值与相位分布。
+<strong>第一步：振型即复向量。</strong> n 个测点拟合出的振型是一个 n 维复向量 $\boldsymbol{\varphi} \in \mathbb{C}^{n}$，上标 $H$ 表示复共轭转置。物理意义：振型描述各测点同频运动的幅值与相位分布。
 
-**第二步：以内积度量逐点吻合。** 两个振型 $\boldsymbol{\varphi}_t$（试验）与 $\boldsymbol{\varphi}_c$（计算）的复内积为 $\boldsymbol{\varphi}_t^{H}\boldsymbol{\varphi}_c$，它对每个测点的幅值与相位差异同时敏感。若两振型只差一个复数比例常数（模态振型本身的标尺不唯一，这是模态理论的固有性质），则内积的模达到最大。
+<strong>第二步：以内积度量逐点吻合。</strong> 两个振型 $\boldsymbol{\varphi}_t$（试验）与 $\boldsymbol{\varphi}_c$（计算）的复内积为 $\boldsymbol{\varphi}_t^{H}\boldsymbol{\varphi}_c$，它对每个测点的幅值与相位差异同时敏感。若两振型只差一个复数比例常数（模态振型本身的标尺不唯一，这是模态理论的固有性质），则内积的模达到最大。
 
-**第三步：用各自模长归一化。** 分子除以两个向量各自模长的乘积并取模平方，得到 MAC：
+<strong>第三步：用各自模长归一化。</strong> 分子除以两个向量各自模长的乘积并取模平方，得到 MAC：
 
 $$
 \mathrm{MAC}_{tc} = \frac{\left|\boldsymbol{\varphi}_{t}^{H}\boldsymbol{\varphi}_{c}\right|^{2}}{\left(\boldsymbol{\varphi}_{t}^{H}\boldsymbol{\varphi}_{t}\right)\left(\boldsymbol{\varphi}_{c}^{H}\boldsymbol{\varphi}_{c}\right)}
@@ -184,7 +184,7 @@ CAE 模型一旦通过验证，其价值远超单次分析：
 
 - **设计阶段** 预测结构动态特性，减少物理样机
 - **问题排查** 基于可信模型做灵敏度分析，定位优化方向
-- **传递路径分析（TPA）** 用验证过的模型生成逆矩阵
+- <strong>传递路径分析（TPA）</strong> 用验证过的模型生成逆矩阵
 - **优化迭代** 在可信频段内做拓扑/尺寸优化
 
 ::: warning 范围声明

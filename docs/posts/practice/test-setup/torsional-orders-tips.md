@@ -28,7 +28,7 @@ Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 Ch
 按知识库说明，改组后即可从 throughput 数据创建阶次切片（order cuts）与 FFT——彩色图、切片、谱分析全流程可用。
 
 ::: info 核心概念
-- **ChannelGroupId（通道组）**：Testlab 里决定通道身份的字段，控制该通道的数据能进入哪些后处理流程；
+- <strong>ChannelGroupId（通道组）</strong>：Testlab 里决定通道身份的字段，控制该通道的数据能进入哪些后处理流程；
 - **Throughput 数据**：采集时连续写入磁盘的原始时域流，事后可以反复做 FFT、阶次分析。
 :::
 
@@ -43,7 +43,7 @@ Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 Ch
 ![发动机 run-up 的 2 阶扭振切片](/images/torsional-orders-tips/torsional-order-cut.png)
 *（图源：Simcenter Testing Knowledge Base）*
 
-但很多验收规范和耐久评估要的不是"转速抖多少"，而是"轴扭了多少度"。Testlab 里不用导出数据，右键纵轴三步完成：**Processing -> Integrate (Single)**。
+但很多验收规范和耐久评估要的不是"转速抖多少"，而是"轴扭了多少度"。Testlab 里不用导出数据，右键纵轴三步完成：<strong>Processing -> Integrate (Single)</strong>。
 
 ![右键纵轴 Integrate (Single) 将角速度波动积分成角度](/images/torsional-orders-tips/integrate-menu.png)
 *（图源：Simcenter Testing Knowledge Base）*
@@ -140,7 +140,7 @@ print(f"检查 2*1.414*RMS: {2*np.sqrt(2)*rms:.4f} deg = Peak-to-Peak")
 
 1. Geometry worksheet 里创建/导入几何；
 2. 打开 **Torsional node** 子工作表；
-3. 点 **Add Disc...**，填节点名、旋转件半径、圆盘朝向，Apply 后关闭。
+3. 点 <strong>Add Disc...</strong>，填节点名、旋转件半径、圆盘朝向，Apply 后关闭。
 
 ![Add Disc 窗口：节点名、半径与圆盘朝向](/images/torsional-orders-tips/add-disc-window.png)
 *（图源：Simcenter Testing Knowledge Base）*
@@ -151,8 +151,8 @@ print(f"检查 2*1.414*RMS: {2*np.sqrt(2)*rms:.4f} deg = Peak-to-Peak")
 *（图源：Simcenter Testing Knowledge Base）*
 
 ::: info 核心概念
-- **Torsional Node（扭振节点）**：几何模型中代表旋转件的圆盘节点，动画时绕自身轴转动，用于可视化扭振变形；
-- **ODS（Operational Deflection Shape，工作变形）**：工作状态下结构实际变形随时间的分布，扭振动画本质是轴系的扭转 ODS。
+- <strong>Torsional Node（扭振节点）</strong>：几何模型中代表旋转件的圆盘节点，动画时绕自身轴转动，用于可视化扭振变形；
+- <strong>ODS（Operational Deflection Shape，工作变形）</strong>：工作状态下结构实际变形随时间的分布，扭振动画本质是轴系的扭转 ODS。
 :::
 
 ::: warning 工程注意

@@ -26,9 +26,9 @@ Simcenter 官方知识库用图 1 说明同样的道理：同一根圆棒承受�
 第一套是**应变张量**语言：固定一个 xy 坐标系，用 $\varepsilon_x$、$\varepsilon_y$、$\gamma_{xy}$ 三个分量描述。这是 CAE 仿真默认的输出方式。第二套是**主应变**语言：把坐标系转到特定角度，使切应变恰好为零，剩下两个正应变即主应变 $\varepsilon_1$（最大）与 $\varepsilon_2$（最小），外加主方向角。这是试验与疲劳评估常用的语言。
 
 ::: info 核心概念
-- **应变张量（Strain Tensor）**：在给定 xy 坐标系下，用两个正应变与一个切应变描述一点平面应变状态的方法，CAE 仿真的默认输出
-- **主应变（Principal Strain）**：旋转坐标系使切应变为零后的两个正应变，$\varepsilon_1$ 最大、$\varepsilon_2$ 最小，其方向即主方向；零件疲劳寿命由最大应变决定
-- **应变花（Rosette Strain Gauge）**：三枚单轴应变片按固定角度集成于同一基底的传感器，三方向读数联立可解出完整平面应变场
+- <strong>应变张量（Strain Tensor）</strong>：在给定 xy 坐标系下，用两个正应变与一个切应变描述一点平面应变状态的方法，CAE 仿真的默认输出
+- <strong>主应变（Principal Strain）</strong>：旋转坐标系使切应变为零后的两个正应变，$\varepsilon_1$ 最大、$\varepsilon_2$ 最小，其方向即主方向；零件疲劳寿命由最大应变决定
+- <strong>应变花（Rosette Strain Gauge）</strong>：三枚单轴应变片按固定角度集成于同一基底的传感器，三方向读数联立可解出完整平面应变场
 :::
 
 两套语言之间的翻译靠**应变变换**（strain transformation）——任意方向角的线应变都可以由张量分量算出来。这个公式回答的问题是：坐标系转过 $\theta$ 角后，新方向上的线应变是多少？其中 $\varepsilon_x$、$\varepsilon_y$ 对应物理里沿 x、y 的正应变，$\gamma_{xy}$ 是工程切应变，$\theta$ 是新方向相对 x 轴的夹角——温度计类比里，它相当于"换一支角度的温度计后读数怎么变"：
@@ -69,7 +69,7 @@ $$\theta_p = \frac{1}{2} \arctan\!\left(\frac{\gamma_{xy}}{\varepsilon_x - \vare
 
 投入三路测量，回报是多少？官方手册的账本：三路实测应变 + 材料弹性模量 $E$ 与泊松比 $\nu$，可算出**九个输出量**——最大/最小主应力 SS1、SS2，最大/最小主应变 SN1、SN2，主方向角 AG，切应力 SH，工程切应变 SNSH，von Mises 等效应力 ES，双轴比 BR。三换九，投入产出比一比三。
 
-**矩形花（Rectangular，0°-45°-90°）**：两枚片落在 x、y 轴上，第三枚在 45°，见图 7。角度布置让数学最简。
+<strong>矩形花（Rectangular，0°-45°-90°）</strong>：两枚片落在 x、y 轴上，第三枚在 45°，见图 7。角度布置让数学最简。
 
 ![矩形应变花示意图](/images/rosette-strain-gauges/fig7-rectangular.png)
 *(图源：Siemens Simcenter Testing Knowledge Base)*
@@ -78,7 +78,7 @@ $$\theta_p = \frac{1}{2} \arctan\!\left(\frac{\gamma_{xy}}{\varepsilon_x - \vare
 
 $$\gamma_{xy} = 2\varepsilon_{45} - \varepsilon_0 - \varepsilon_{90}, \qquad \varepsilon_x = \varepsilon_0, \quad \varepsilon_y = \varepsilon_{90}$$
 
-**三角花（Delta，0°-60°-120°）**：三枚片相隔 60°、中片对准 y 轴，角度覆盖更宽，见图 8。其张量分量反解同样规则，只是三方向投影的系数阵不同。
+<strong>三角花（Delta，0°-60°-120°）</strong>：三枚片相隔 60°、中片对准 y 轴，角度覆盖更宽，见图 8。其张量分量反解同样规则，只是三方向投影的系数阵不同。
 
 ![三角应变花示意图](/images/rosette-strain-gauges/fig8-delta.png)
 *(图源：Siemens Simcenter Testing Knowledge Base)*
@@ -87,17 +87,17 @@ $$\gamma_{xy} = 2\varepsilon_{45} - \varepsilon_0 - \varepsilon_{90}, \qquad \va
 
 $$\sigma_{1} = \frac{E}{1-\nu^2}\left(\varepsilon_1 + \nu\,\varepsilon_2\right), \qquad \sigma_{2} = \frac{E}{1-\nu^2}\left(\varepsilon_2 + \nu\,\varepsilon_1\right)$$
 
-**叠层（Stacked）与平面（Planar）**：理想情况下三枚片应测"同一点"。叠层把三枚片堆叠在同一点正上方——测的是真正的同点应变，适合应变梯度大的区域，但层层堆叠散热差；平面把三枚片错开排在同一平面——散热好、适合应变梯度小的区域。回到温度计类比：三支温度计挤在同一位置最接近"同点"，但互相挡了彼此的热路；稍微错开各自散热顺畅，代价是测的不再是严格同一点。选哪种，看被测点应变梯度与散热需求。
+<strong>叠层（Stacked）与平面（Planar）</strong>：理想情况下三枚片应测"同一点"。叠层把三枚片堆叠在同一点正上方——测的是真正的同点应变，适合应变梯度大的区域，但层层堆叠散热差；平面把三枚片错开排在同一平面——散热好、适合应变梯度小的区域。回到温度计类比：三支温度计挤在同一位置最接近"同点"，但互相挡了彼此的热路；稍微错开各自散热顺畅，代价是测的不再是严格同一点。选哪种，看被测点应变梯度与散热需求。
 
 ## 四、双轴比与临界平面分析：主应变之外的两问
 
-**双轴比（Biaxiality Ratio）**是主应力的比值（绝对值大者恒在分母，保证取值在 -1 到 1 之间）。这个公式回答的问题是：两个主应力"量级上谁配谁"？其中 $|\sigma_1| > |\sigma_2|$ 的约定对应物理里把大者放分母，使结果可正可负、可直接查表判状态：
+<strong>双轴比（Biaxiality Ratio）</strong>是主应力的比值（绝对值大者恒在分母，保证取值在 -1 到 1 之间）。这个公式回答的问题是：两个主应力"量级上谁配谁"？其中 $|\sigma_1| > |\sigma_2|$ 的约定对应物理里把大者放分母，使结果可正可负、可直接查表判状态：
 
 $$BR = \frac{\sigma_2}{\sigma_1} \quad (|\sigma_1| > |\sigma_2|)$$
 
 三个刻度值对应三种典型状态：$BR = 0$ 是单轴拉/压；$BR = -1$ 是纯剪；$BR = 1$ 是两向等应力（静水拉/压成分）。双轴比是 Testlab ROSETTE 虚拟通道计算的标准输出之一。
 
-**临界平面分析（Critical Plane Analysis）**回答另一类问题：主应变给出的是"某时刻最大的应变"，但疲劳损伤关心的是**哪个方向上累积的损伤最大**。做法是把应变时间历史在 0° 到 170°、每 10° 一个平面上全部算出来（图 9），对每个平面的历程做雨流计数、算损伤，损伤最大的角度就是临界平面。主应变与临界平面各有分工：前者找"最大绝对应变"，后者找"最具损伤潜力的方向"——对多轴非比例加载，两者可能不在同一方向。
+<strong>临界平面分析（Critical Plane Analysis）</strong>回答另一类问题：主应变给出的是"某时刻最大的应变"，但疲劳损伤关心的是**哪个方向上累积的损伤最大**。做法是把应变时间历史在 0° 到 170°、每 10° 一个平面上全部算出来（图 9），对每个平面的历程做雨流计数、算损伤，损伤最大的角度就是临界平面。主应变与临界平面各有分工：前者找"最大绝对应变"，后者找"最具损伤潜力的方向"——对多轴非比例加载，两者可能不在同一方向。
 
 ![临界平面分析：从三路应变算任意角度的应变历程](/images/rosette-strain-gauges/fig9-critical-plane.png)
 *(图源：Siemens Simcenter Testing Knowledge Base)*
@@ -144,7 +144,7 @@ print(f"回代45度: {eps_theta(ex,ey,gxy,45):.1f} ue (应等于 {e45})")
 
 ## 六、Testlab 落地：实时虚拟通道与离线两条路
 
-**实时：Virtual Channels。** 在 Testlab Signature 采集中，Channel Setup 右上角下拉切到 Virtual Channels（图 10），底部出现公式区；点 f(x) 按钮选 Strain gauges 函数组，按花的类型选 delta 或 rectangular（图 11），在 Edit formula arguments 里填三路通道、弹性模量与泊松比（钢的弹性模量 210000 MPa，图 12），确认后时间文件里生成九路 rosette 计算通道（图 13）。
+<strong>实时：Virtual Channels。</strong> 在 Testlab Signature 采集中，Channel Setup 右上角下拉切到 Virtual Channels（图 10），底部出现公式区；点 f(x) 按钮选 Strain gauges 函数组，按花的类型选 delta 或 rectangular（图 11），在 Edit formula arguments 里填三路通道、弹性模量与泊松比（钢的弹性模量 210000 MPa，图 12），确认后时间文件里生成九路 rosette 计算通道（图 13）。
 
 ![Channel Setup 切到 Virtual Channels](/images/rosette-strain-gauges/fig10-virtual-channels.png)
 *(图源：Siemens Simcenter Testing Knowledge Base)*
@@ -158,9 +158,9 @@ print(f"回代45度: {eps_theta(ex,ey,gxy,45):.1f} ue (应等于 {e45})")
 ![时间文件中的九路 rosette 输出通道](/images/rosette-strain-gauges/fig13-neo-results.png)
 *(图源：Siemens Simcenter Testing Knowledge Base)*
 
-**离线：Time Signal Calculator。** 采集后的数据用 TSC 同样的 ROSETTE 函数补算。最大切应变默认不在九个输出里，需手动补一行：最大切应变（张量口径）= (SN1 - SN2)/2，即主应变差除二。
+<strong>离线：Time Signal Calculator。</strong> 采集后的数据用 TSC 同样的 ROSETTE 函数补算。最大切应变默认不在九个输出里，需手动补一行：最大切应变（张量口径）= (SN1 - SN2)/2，即主应变差除二。
 
-**Testlab Neo Process Designer。** 方法库 Combined Methods 区有两种现成方法：Rosette（0-45-90 与 0-60-120）算主应变/主应力/切应变/切应力/角度/双轴比等；Critical Plane（0-45-90 与 0-60-120）按 0° 到 170° 每 10° 输出应变历程，接上损伤计算即可定位最危险角度。通道指定支持通道号（C1、C2、C3）或 DOF ID 通配（如 \*45\* 匹配 45° 通道名），填弹性模量与泊松比后运行；多个 rosette 就建多个方法、用 Pass 方法各分一路。图 13 也是 Neo 处理结果的典型视图：最大主应变（绿）、最小主应变（红）与角度（蓝）随时间变化一目了然。
+<strong>Testlab Neo Process Designer。</strong> 方法库 Combined Methods 区有两种现成方法：Rosette（0-45-90 与 0-60-120）算主应变/主应力/切应变/切应力/角度/双轴比等；Critical Plane（0-45-90 与 0-60-120）按 0° 到 170° 每 10° 输出应变历程，接上损伤计算即可定位最危险角度。通道指定支持通道号（C1、C2、C3）或 DOF ID 通配（如 \*45\* 匹配 45° 通道名），填弹性模量与泊松比后运行；多个 rosette 就建多个方法、用 Pass 方法各分一路。图 13 也是 Neo 处理结果的典型视图：最大主应变（绿）、最小主应变（红）与角度（蓝）随时间变化一目了然。
 
 ## 七、小结
 
