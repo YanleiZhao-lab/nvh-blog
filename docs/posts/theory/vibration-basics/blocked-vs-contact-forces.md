@@ -92,7 +92,7 @@ $$\{F_{3c}\} = [H_{33}]^{-1} \{A_3\}$$
 | 工况数据 | 接收端界面点加速度 | 接收端（或整机）指示点加速度 |
 | 结果属性 | 随接收端改变 | 不随接收端改变 |
 
-在位法的独特困难：装配状态下悬置点、螺栓孔的可接近性差，"源输出端"的 FRF 激励与响应测量都比自由状态麻烦得多。Simcenter 生态的对策是用 Q-source 校准体积声源配合互易定理批量获取传递函数，相关展开见[声学量 Q：体积加速度的物理意义](theory/acoustics-basics/acoustic-quantity-q.html)；对更复杂的装配场景，官方另有 Obtaining Invariant Loads: Practical Examples 专文。
+在位法的独特困难：装配状态下悬置点、螺栓孔的可接近性差，"源输出端"的 FRF 激励与响应测量都比自由状态麻烦得多。Simcenter 生态的对策是用 Q-source 校准体积声源配合互易定理批量获取传递函数，相关展开见[声学量 Q：体积加速度的物理意义](../acoustics-basics/acoustic-quantity-q.html)；对更复杂的装配场景，官方另有 Obtaining Invariant Loads: Practical Examples 专文。
 
 ### 3.3 阻断力的使用铁律
 
@@ -117,7 +117,7 @@ $$\{F_{3c}\} = [H_{33}]^{-1} \{A_3\}$$
 
 官方实验还给出一个值得注意的工程细节：试验台架上用电动激振器给源施加已知激励，从而把"力的真值"掌握在手里——阻断力的预测精度是在这种可控条件下对账出来的。这也提示，阻断力标定试验的价值随"源被复用的次数"增长：同一个源要接三个不同接收端，阻断力一次测量三处受用。
 
-进一步，阻断力是**组件级 TPA（Component TPA）与虚拟样机装配的货币**：源库与接收端库都以阻断力/界面 FRF 为共同语言，任意组合即可拼出虚拟 TPA 模型，不必每次都造物理样机。当组合系统的 FRF 也拿不到时，可用[基于 FRF 的子结构耦合 FBS](theory/modal-analysis/frf-based-substructuring.html)逐谱线合成，Simcenter Testlab 的 Virtual Prototype Assembly 即为此设计。
+进一步，阻断力是**组件级 TPA（Component TPA）与虚拟样机装配的货币**：源库与接收端库都以阻断力/界面 FRF 为共同语言，任意组合即可拼出虚拟 TPA 模型，不必每次都造物理样机。当组合系统的 FRF 也拿不到时，可用[基于 FRF 的子结构耦合 FBS](../modal-analysis/frf-based-substructuring.html)逐谱线合成，Simcenter Testlab 的 Virtual Prototype Assembly 即为此设计。
 
 ## 五、numpy 复现：两种力的对账实验
 
@@ -204,9 +204,9 @@ print("阻断力   -> 新组合 ST   相对误差: %.1e" % rel_err(v6_blocked, v
 ## 六、Testlab 落地位置
 
 - **力的估计**：Simcenter Testlab Transfer Path Analysis 工作簿中，工况力反演（矩阵求逆/悬置刚度法）在 Operating Data 阶段选择力估计方法；阻断力在位反演对应 Source Contribution Analysis / Component TPA 相关插件
-- **组件库与虚拟装配**：Virtual Prototype Assembly（VPA）把台架测得的源阻断力与新接收端 FRF 组合，直接预测装配响应（详见[虚拟样机装配 VPA](theory/modal-analysis/virtual-prototype-assembly.html)）
+- **组件库与虚拟装配**：Virtual Prototype Assembly（VPA）把台架测得的源阻断力与新接收端 FRF 组合，直接预测装配响应（详见[虚拟样机装配 VPA](../modal-analysis/virtual-prototype-assembly.html)）
 - **子结构合成**：组合系统 FRF 拿不到时，用 FRF Based Substructuring 逐谱线合成（Testlab 中 Tools → Add-ins → FRF Based Substructuring）
-- **时域试听**：阻断力驱动的虚拟 TPA 模型可经 Time Domain TPA 回放每条路径的"声音"，见[时域 TPA](practice/data-processing/time-domain-tpa.html)
+- **时域试听**：阻断力驱动的虚拟 TPA 模型可经 Time Domain TPA 回放每条路径的"声音"，见[时域 TPA](../../practice/data-processing/time-domain-tpa.html)
 
 ## 七、小结
 
