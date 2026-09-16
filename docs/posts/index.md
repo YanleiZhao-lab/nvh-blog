@@ -159,7 +159,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（15 篇）
+### 测试操作（16 篇）
+
+- [SCADAS RS 实战技巧六则：自定义显示、自动调零、数字IO、模板、离线配置与试验编排](practice/test-setup/scadas-rs-tips.html) — 独立运行的采集前端如何"配置一次、现场零思考"：Monitor 的 Custom 页自建仪表盘/XY图盯关键量，Auto zeroing 让应变通道每次采集自动归零（Zeroing 列逐通道豁免非应变量），REC 主机四通道数字 IO 接台架急停做振动超限联锁，Topology→Save As 存模板场场复用，Configuration Builder 生成 .nfec 在 Testlab Neo 离线模式预配全部通道，Schedule Designer（2506+免费）把 Run-up/30/50/80 kph 四工况排成序列由 Recorder App 逐步引导，Download and Export 工具批量搬数据并转格式
 
 - [应变片原理与选型：金属箔式、阻值、温度补偿](practice/test-setup/strain-gauge-basics.html) — 同一 5 V 供桥下 120 Ω 片自热 208 mW、350 Ω 片 71 mW 差近三倍，高温车间里贴 120 Ω 片的通道漂移不是片坏是焦耳热：应力测不了就测应变乘模量换回去，而应变小到 10^-6 量级，靠"电阻丝被拉长变细电阻变大"这个朴素效应放大——橡皮筋类比贯穿形变→电阻→电压全链条；电阻定律 R=ρL/A 与灵敏系数 ε=(ΔR/R)/GF 两条物理定律打底（350 Ω 片 100 με 只有 0.07 Ω、万分之二），惠斯通电桥双分压器把不平衡变成电压、差分结构天然抵消共模漂移；官方实例一笔算到底（350 Ω 桥 5 V 供桥 ΔR=0.07 Ω 得 250 μV、折算 100 με），四分之一/半桥/全桥工作臂数翻倍输出翻倍（250/500/1000 μV）而应变读数不变——多贴片买的是信噪比与温度补偿、弯拉分离能力；选型三张对表：阻值看自热与导线占比、温度补偿三道防线（自补偿片/相邻臂哑片/数值扣除）、供桥电压权衡放大与热误差；贴片方向 90 度之差测到的是泊松应变、载荷方向未知用应变花；Testlab VB8 卡内补桥臂、Channel Setup 桥型/GF/阻值设置与 Virtual Channels 实时计算锚点，numpy 三种桥型输出账一次对清
 
