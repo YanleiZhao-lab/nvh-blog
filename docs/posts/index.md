@@ -34,7 +34,9 @@
 - [吉布斯现象：为什么陡峭滤波器会振铃](theory/signal-processing/gibbs-phenomenon.html) — 时域突变需要无限带宽，实测必然截断，边沿就留下约 9% 的振铃过冲：截断量决定振铃时长、滤波器陡度决定振铃幅度，压振铃要靠缓滚降 Bessel 而不是加带宽
 - [峭度：表征信号冲击特性的统计量](theory/signal-processing/kurtosis-signal-statistics.html) — RMS 只反映能量平均、峰值易被毛刺带偏，冲击信息集中在幅值分布尾部：峭度以四次方矩放大尾部贡献，方波 1/正弦 1.5/高斯 3（不减 3 口径），Testlab 吞吐处理算"减 3"版而振动控制用"不减 3"版；滑动帧峭度超值定位咔哒异响（同峰值短/长点击差近一个数量级），Kurtosis Control 3~12 复现路谱峰值分布、Sigma Clipping 限制峰值/RMS 保护试件
 
-### 声学基础（28 篇）
+### 声学基础（29 篇）
+
+- [残余声强与声压残余声强指数：声强测量的底噪](theory/acoustics-basics/residual-intensity-index.html) — 同一探头同一天两次声强扫描声功率差 2 dB，问题常出在测量链自己：两通道零点几度相位失配在均匀声压场里伪造出随声压级涨落的"假声强"（残余声强），固定不变的特征量是级差 δpIo=Lp−L_In=10lg(kd/φe)——kd 是声波走过隔离垫间距累积的相位，每倍频程掉 3 dB 使低频最先失效；12 mm 垫 0.3° 失配的探头 63 Hz 处 δpIo 仅 4.3 dB，扣精度安全余量 χ（精密/工程级 10 dB、观察级 7 dB）后 Ld 为负、全带失效，2 kHz 以上才判 PASS；互谱法仿真复现 10lg(kd/φe) 闭环（500 Hz 仿真值与理论同为 13.26 dB）；换 50 mm 长垫低频抬升但高频上限跌到 1.25 kHz；探头受冲击/换垫/换前放后 δpIo 必须进耦合腔复标，它属于"这一对通道"而非探头型号
 
 - [TNR 与 PR：音调噪声比和突出比两个判据](theory/acoustics-basics/tnr-prominence-ratio.html) — 电吹风 28 阶线分贝更高却输给竞争品牌那根贯穿全程的 159.5 阶哨音：可闻性不看绝对分贝、只看纯音比紧邻背景高出多少。TTNR 单挑（纯音对带内掩蔽级，8 dB 判突出，1 kHz 以下阈值上浮）；PR 团体赛（含调临界带对两侧邻带，9 dB 判突出）——宽带背景里峰不显、平地上孤线却刺耳，两种判据都按 Bark 临界带结算；低频要更高差额、部件必须带真实背景测；与音调度分工（阈值型判合规、连续型排整改）；ECMA-74 与 ISO 7779 标准依据，Testlab 光标单点计算与 Signature Throughput 跑合图谱两条路径
 - [抖动强度 Fluctuation Strength：慢变调制的声品质](theory/acoustics-basics/fluctuation-strength.html) — dBA 不变乘客却抱怨"嗡——嗡——像晕船"：能量没变，变的是响度包络以每秒四次慢慢起伏。抖动强度（vacil）量化 20 Hz 以下慢调制的"晃动感"，锚点声 1 kHz/60 dB 纯音、4 Hz、100% 调制 = 1 vacil；近似式 F≈ΔL/(f_mod/4+4/f_mod) 的分母由均值不等式在 4 Hz 处最小——敏感峰是数学性质不是经验拟合；ΔL 是被瞬态掩蔽压缩后的有效掩蔽深度（锚点反推仅约 2 dB），不是包络峰谷差；与粗糙度（asper，15～300 Hz、70 Hz 敏感）按调制频率分界，调制频率=边带间距×转频，降速会把同一机械调制从"糙"拖进"晃"区；积化和差给出边带指纹、调制阶次彩色图谱对照、numpy 希尔伯特包络谱实测 4 Hz 定位与敏感曲线扫描；双风扇拍频/怠速半阶/鼓风机晃音三类排查路线，Testlab Sound Quality Metrics 的 Fluctuation Strength 勾选位置
