@@ -159,7 +159,9 @@
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（17 篇）
+### 测试操作（18 篇）
+
+- [应变片激励电压怎么选：灵敏度与自热的平衡](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张官方插图
 
 - [SCADAS RS 实战技巧六则：自定义显示、自动调零、数字IO、模板、离线配置与试验编排](practice/test-setup/scadas-rs-tips.html) — 独立运行的采集前端如何"配置一次、现场零思考"：Monitor 的 Custom 页自建仪表盘/XY图盯关键量，Auto zeroing 让应变通道每次采集自动归零（Zeroing 列逐通道豁免非应变量），REC 主机四通道数字 IO 接台架急停做振动超限联锁，Topology→Save As 存模板场场复用，Configuration Builder 生成 .nfec 在 Testlab Neo 离线模式预配全部通道，Schedule Designer（2506+免费）把 Run-up/30/50/80 kph 四工况排成序列由 Recorder App 逐步引导，Download and Export 工具批量搬数据并转格式
 
