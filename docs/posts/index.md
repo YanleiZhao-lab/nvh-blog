@@ -166,7 +166,7 @@ title: "📖 全部文章"
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（18 篇）
+### 测试操作（19 篇）
 
 - [应变片激励电压怎么选：灵敏度与自热的平衡](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张公开资料插图
 
@@ -182,6 +182,8 @@ title: "📖 全部文章"
 - [加速度计大全：原理、类型与选型决策](practice/test-setup/accelerometers-comprehensive.html) — 同一悬置点两套系统差十倍（8 g 对 0.8 g）都是"没坏"的传感器：100 mV/g 模态传感器在耐久路面顶穿量程削波压平、10 mV/g 工况传感器做锤击响应只剩几十毫伏 FRF 全毛刺——灵敏度、量程、频响三根红线与工况对表；挂坠类比讲 seismic mass 惯性测力，压电（电荷/IEPE）、压阻、变电容、MEMS 四类感力元件逐个拆开，安装谐振频率与安装方式的耦合、接地回路与电缆噪声"传感器之外"的坑全图解（29 张公开资料插图）
 - [单端 vs 差分输入：噪声抑制的电路差异](practice/test-setup/single-ended-vs-differential.html) — 同一根梁上全桥干净、四分之一桥"长草"，分水岭在接线模式：单端量线对地、信号噪声一起放大，差分量线对线、反相信号相加减掉共模噪声（暗号两人三脚类比：颠簸共担相消、相对动作保留翻倍）；噪声危害相对信号电平——伏级 ICP 单端无碍、毫伏级应变先天不足，全桥差分/半桥四分之一桥 ICP 单端的对应表、双绞屏蔽 CMRR 有限差分非免死金牌；Testlab 里 Coupling 随 InputMode 联动（Voltage AC/DC 与 Active sensor 自动单端、差分传感器须手改），numpy 实测同一 4mV 60Hz 噪声单端只比信号低 1.8 dB、差分低 38.4 dB
 - [波形复现 SAWR：从实测波形到台架输出](practice/test-setup/waveform-replication-sawr.html) — 实测路载直接灌给功放必然失败：链路传函共振处放大十倍反共振处断路，目标波形先低量级系统辨识取倒数得 ITF 、驱动=目标×ITF 再回放迭代；四种控制策略区别全在修正时机（Open Loop 重放定型驱动、Iterative 回放间时域误差修正、Offline/Online Adaptive 按漂移快慢更新 ITF）；频率分辨率隐藏约束——目标时长必须是 1/分辨率的整数倍（3.125 Hz 对应 0.32 s 块，150 s 录音只能取 468/469 块）；验收看目标 vs 实测的 45 度对角线；SCADAS 必需 -V 控制卡与 STOP 环，辨识电压从 0.02/0.06 V 起试；numpy 演示 ITF 一次更新即把共振处 10 倍过冲收敛到 1.000；多输入复现换 TWR 应用
+
+- [SCADAS RS 菊花链供电与数据链：UPS/REC 单元级联规则](practice/test-setup/rs-daisy-chain-power.html) — 同一条链接两台 UPS 手册允许、再并一个交直流适配器却会烧单元：电源在链上单向流动，UPS 只向下游供电、多台 UPS 各管各的下游段互不顶牛，而两个无隔离电源的电压差直接形成无限制环流。彩灯串类比贯穿（中途再接一个插头=远端补 UPS、拔插头全串熄=断链缆下游全断、但 REC 断电前保存数据）；三条硬规则：REC 必须由 UPS 直供且调节单元不得垫在 UPS 与 REC 之间、每链吞吐 1.7 MSa/s 上限/REC 总计 7.8 MSa/s、PC 只能从 REC 的以太网/Wi-Fi 进不得挂调节单元；功耗账一表算清（REC 基本 21.5 W 满配 49.65 W、UPS 缓冲 58.4 Wh 带 5 单元、负载超 82 W 电池停充 75 W 以下恢复、低温放电限制与 UN 3481 运输边界）；开关机次序（主 UPS 按钮开机、REC 安全关机保存数据）与接地规则（10 m 分界），最后压成规划一条链的六步清单
 
 - [振动台选型与使用：推力、位移、承载](practice/test-setup/shaker-table-considerations.html) — 额定推力是裸台成绩单不是试验可用推力：动圈+夹具+试件全算运动质量（400 N 台带 20 kg 试件只剩 1.4 g，numpy 对账）、窄带随机推力按带宽平方根折减（200 Hz 带宽只剩 32%）、铜阻每 100 摄氏度涨 40% 打七折，选型留 15%~20% 余量；性能曲线 g/V 三段受限（低频位移/中频速度/高频力），平均控制救夹具不均匀，Tracked Sine Dwell 裸台传递函数定期体检
 
