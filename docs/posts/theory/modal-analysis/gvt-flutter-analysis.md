@@ -1,5 +1,6 @@
 ---
 title: "地面共振试验 GVT 与颤振分析：首飞前给全机做模态"
+author: "@NVH_Z"
 ---
 
 # 地面共振试验 GVT 与颤振分析：首飞前给全机做模态
@@ -211,3 +212,7 @@ V= 140.0 m/s  f= 5.88/ 7.97 Hz  sigma=-0.100/+0.050 1/s  FLUTTER
 ## 一句话记住
 
 颤振边界 = 结构模型 × 气动模型：GVT 用全机模态试验把结构模型钉在地上——随机扫全景、正弦精调关键模态、衰减补阻尼、MAC 对账 FE；弯扭两阶聚合的频率与阻尼就是命门，测准了，颤振试飞才敢逐点扩包线。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

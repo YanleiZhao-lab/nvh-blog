@@ -1,5 +1,6 @@
 ---
 title: "正弦控制闭环参数：压缩因子、扫频速率与估计周期数"
+author: "@NVH_Z"
 ---
 
 # 正弦控制闭环参数：压缩因子、扫频速率与估计周期数
@@ -175,3 +176,6 @@ Testlab 的做法是在 Sine Setup 工作表右侧点 Tabulated 按钮，打开 
 
 闭环像纱门闭门器：压缩因子定每步修几分之一、扫频速率定留多少时间、估计周期数定测多准再修；共振附近过修正就加大压缩因子，低频采不满周期就放慢扫频，噪声大就多测几个周期——三参数按频段分设，试验不中止也不超考核。
 
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

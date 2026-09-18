@@ -1,5 +1,6 @@
 ---
 title: "Neuber 法则：从名义应力到局部缺口应力的换算"
+author: "@NVH_Z"
 ---
 
 # Neuber 法则：从名义应力到局部缺口应力的换算
@@ -165,3 +166,7 @@ Neuber 法则的输入输出关系一句话可以说完：弹性应力历程进�
 ## 一句话记住
 
 Neuber 法则用"应力乘应变能量守恒"把弹性点搬到 Ramberg-Osgood 曲线上：塑性缓和应力、放大应变，缺口件疲劳由应变主导——线性有限元加 Neuber 换算，就能喂饱应变寿命法。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

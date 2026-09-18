@@ -1,5 +1,6 @@
 ---
 title: "FFT窗函数选择"
+author: "@NVH_Z"
 ---
 
 # FFT窗函数选择
@@ -294,3 +295,7 @@ plt.savefig('window_comparison.png', dpi=150)
 ## 一句话记住
 
 窗函数是给采样缝裹膜：矩形窗裸装最省空间但碎屑洒一路，汉宁窗标准膜通用，平顶窗三层厚膜量幅值最准却占三个多车位——先问要分辨还是要幅值，再查校正因子把膜吃掉的补回来。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

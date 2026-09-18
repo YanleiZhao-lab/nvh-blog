@@ -1,5 +1,6 @@
 ---
 title: "长导线应变测量：SCADAS 与电缆电阻的坑"
+author: "@NVH_Z"
 ---
 
 # 长导线应变测量：SCADAS 与电缆电阻的坑
@@ -144,3 +145,7 @@ sense 线的代价是布线量：一枚全桥应变片从 4 根线变成 6 根�
 ## 一句话记住
 
 长导线两手抓：噪声用屏蔽、间距、差分挡在外面；电阻压降用长线标定、线阻补偿或 sense 线把桥路电压补回来——50 m 电缆 2% 的偏差不算大，乘上疲劳幂律就是寿命的一成。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

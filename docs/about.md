@@ -28,7 +28,7 @@ next: false
 
 ## 联系方式
 
-- **邮箱**：[874012217@qq.com](mailto:874012217@qq.com)
+- **邮箱**：[admin@nvhtest.cn](mailto:admin@nvhtest.cn)
 - **GitHub**：[github.com/YanleiZhao-lab](https://github.com/YanleiZhao-lab)
 - **论坛**：[forum.nvhtest.cn](https://forum.nvhtest.cn/)（站内私信 Victor）
 - **内容合作 / 勘误**：邮箱标题注明「博客-主题」

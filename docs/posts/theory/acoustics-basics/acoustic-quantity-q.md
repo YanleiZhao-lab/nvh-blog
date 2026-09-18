@@ -1,5 +1,6 @@
 ---
 title: "声学量Q：体积加速度的物理意义"
+author: "@NVH_Z"
 ---
 
 # 声学量Q：体积加速度的物理意义
@@ -193,3 +194,7 @@ print(f"\nQ 若减半: SPL 下降 {spl_half:.1f} dB —— 灵敏度填错直接
 ## 一句话记住
 
 Q 是声学世界的"力"：表面加速度的面积分（高频要细分防相位相消），声源属性不随环境变；靠互易性把"12 点轮流敲"并成"耳位一次激励、12 点并行收"，量纲同为 1/m² 的 A/Q 就是 P/F。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "FFT 基础流程：从采样率到谱线解释"
+author: "@NVH_Z"
 ---
 
 # FFT 基础流程：从采样率到谱线解释
@@ -278,3 +279,7 @@ FFT 的每条谱线上有两个量：幅值与相位；谱线数等于数据块�
 - **Bendat & Piersol** — Random Data: Analysis and Measurement Procedures
 - **Brüel & Kjær** — Primer on FFT analysis
 - **Siemens Simcenter Testing Knowledge Base** — Digital Signal Processing 基础系列
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

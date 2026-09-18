@@ -1,5 +1,6 @@
 ---
 title: "H1、H2、Hv：频响函数的三种估计子及其适用条件"
+author: "@NVH_Z"
 ---
 
 # H1、H2、Hv：频响函数的三种估计子及其适用条件
@@ -177,3 +178,7 @@ $$
 ## 一句话记住
 
 FRF 是估出来的：H1 认噪声在输出端、H2 认噪声在输入端、Hv 两头认账，|H1|/|H2| 等于相干把三种估计子锁在一起——峰上谁都准，谷里看假设，锤击选 H1、激振器选 Hv，判断依据始终是相干曲线。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "任务合成 Mission Synthesis：从用户载荷到台架谱"
+author: "@NVH_Z"
 ---
 
 # 任务合成 Mission Synthesis：从用户载荷到台架谱
@@ -149,3 +150,7 @@ for E2 in (1.10, 1.15, 1.25, 1.50, 2.00):
 ## 一句话记住
 
 规范谱是别人的病历，任务合成是给自己的设备写处方：实测基座载荷算 FDS、串行累加并行取大合成全寿命损伤，反演等损伤 PSD 台架谱——幅值换时长的汇率是 $E^b$，量级只加 15%~25%，别把弹性区循环推进塑性区。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

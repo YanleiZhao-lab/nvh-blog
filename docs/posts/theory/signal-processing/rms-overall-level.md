@@ -1,5 +1,6 @@
 ---
 title: "RMS 与总级：从时域到频域的能量守恒"
+author: "@NVH_Z"
 ---
 
 # RMS 与总级：从时域到频域的能量守恒
@@ -132,3 +133,7 @@ RMS 是能量的语言：单条谱线谈 RMS 格式，整条谱谈总级，随�
 ## 一句话记住
 
 RMS 是能量的语言：电热毯不看电流摆幅看等效发热档，谱线用 RMS 格式、整谱合成总级须过线性单位、RMS 格式、能量校正三道关；Parseval 定理保证时域频域对得上账——对不上时先查这三件事，而不是怀疑数据。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

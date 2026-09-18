@@ -1,5 +1,6 @@
 ---
 title: "轴心轨迹图 Orbit Plot：从波形到轴心运动"
+author: "@NVH_Z"
 ---
 
 # 轴心轨迹图 Orbit Plot：从波形到轴心运动
@@ -236,3 +237,7 @@ X/Y 两通道的尺度（灵敏度）与滤波带宽必须一致，否则轨迹�
 - **内环/双环 = 次同步失稳**，先确认约 0.45X 油膜涡动，一旦频率锁定一阶临界（whip）立即停机
 - 键相点是轨迹的时间刻度：点漂移量直接量化非同步成分占比
 - Testlab 的 Rotor Dynamics 插件（2021.2 以上，88 tokens）从时域数据一键出轨迹、中心位置、全谱瀑布与极坐标图，慢转补偿功能可剔除轴本身的不圆度干扰
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

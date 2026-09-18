@@ -1,5 +1,6 @@
 ---
 title: "测量后才发现灵敏度设错了：校准因子事后修正"
+author: "@NVH_Z"
 ---
 
 # 测量后才发现灵敏度设错了：校准因子事后修正
@@ -171,3 +172,7 @@ TSC 修正只作用于**时域历程**。此前已计算好的频谱、阶次切
 ## 七、小结
 
 灵敏度错误的本质是换算系数错误，电压数据完好，比例因子 $S_{rec}/S_{act}$ 一步修正：错填 100 实际 10 即乘 10（+20 dB），反向则乘 0.1。单 Run 走 TSC 六步，多 Run 用 Channels Pivot 批量处理；修正只作用于时历，谱需重算；过载与量化损失不在可修正范围内。事前校准与 TEDS 是避免此类事后修正的根本措施。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

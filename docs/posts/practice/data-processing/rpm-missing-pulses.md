@@ -1,5 +1,6 @@
 ---
 title: "转速信号缺脉冲：识别与修复"
+author: "@NVH_Z"
 ---
 
 # 转速信号缺脉冲：识别与修复
@@ -176,3 +177,7 @@ print(f"修正后缺齿处转速: {fixed[::P][0]:.1f} rpm")
 ## 一句话记住
 
 缺齿把脉冲间隔拉长一倍、转速被倒数关系压低一半，形成每转一次、深度一致、只向下的假 1 阶坑；修正时 Pulses_per_rev 填标称齿数、missing teeth 填缺数，跨空缺按理论几何重算，原始脉冲永远留底。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

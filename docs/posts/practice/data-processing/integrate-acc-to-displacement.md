@@ -1,5 +1,6 @@
 ---
 title: "加速度积分求位移：为什么双重积分会漂移"
+author: "@NVH_Z"
 ---
 
 # 加速度积分求位移：为什么双重积分会漂移
@@ -186,3 +187,7 @@ print(f"位移谱 10 Hz 幅值: {abs(D[i10]*H[i10])/len(t)*2*1e6:.1f} um (理论
 ## 六、小结
 
 积分漂移不是软件 bug，是 $1/(j\omega)^2$ 对低频平方放大的数学必然：偏置变 $t^2$，线性漂移变 $t^3$，1 Hz 噪声比 100 Hz 信号位移大一万倍。判断标准就三条——积分前 DETREND_AC 去趋势、积分后 1～2.5 Hz 高通清积分常数、Simpson 积分前后各配一次 4 倍升降采样；只要级值就绕开时域，用清零首两根谱线或 1 Hz 起算的频域段落。默认 500 Hz 截止忘改、把残余低频干扰当作位移交差，是这条路上最常见的两类错误。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

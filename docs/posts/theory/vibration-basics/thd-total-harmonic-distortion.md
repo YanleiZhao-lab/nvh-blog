@@ -1,5 +1,6 @@
 ---
 title: "总谐波失真 THD：一句话里的失真全貌"
+author: "@NVH_Z"
 ---
 
 # 总谐波失真 THD：一句话里的失真全貌
@@ -202,3 +203,7 @@ THD 把"输出像不像输入"压缩成一条随频率变化的曲线，判读�
 - 口径先行：谐波取几次、是否含噪声（THD 还是 THD+N）、分母是什么，三件事对齐再比较数值；
 - THD 与 FRF 反相：低增益频段失真占比高；治理顺序是先消物理来源（夹具共振、偏心、摩擦），再调控制参数；
 - Testlab 里在线勾选、离线用 Offline Sine Data Reduction，THD 曲线是难控频段诊断与设备健康监测的第一手证据。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

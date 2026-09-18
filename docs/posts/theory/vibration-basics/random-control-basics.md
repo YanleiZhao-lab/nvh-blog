@@ -1,5 +1,6 @@
 ---
 title: "随机振动控制入门：闭环与均衡"
+author: "@NVH_Z"
 ---
 
 # 随机振动控制入门：闭环与均衡
@@ -179,3 +180,7 @@ Testlab Random Control 的对应位置：Output Level Schedule 表逐级填能�
 ## 一句话记住
 
 规范给 PSD、控制点测 PSD、驱动谱等于参考谱除以系统响应平方；均衡给初值、闭环每帧半量修正、能量百分比爬量级——台面谱平了，试验才算数。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

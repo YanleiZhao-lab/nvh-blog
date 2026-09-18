@@ -1,5 +1,6 @@
 ---
 title: "阶次切线幅值：怎样取才是对的"
+author: "@NVH_Z"
 ---
 
 # 阶次切线幅值：怎样取才是对的
@@ -206,3 +207,7 @@ $$\Delta L = 20 \lg \frac{A_2}{A_1} = 20 \lg \frac{4.00}{1.73} \approx 7.3 \ \te
 ## 一句话记住
 
 阶次切不是读一根谱线，而是端走一块能量：RMS 求和决定了账怎么算，带宽决定了哪些能量算进来——先看 colormap 再定带宽，带宽随谁走选模式，报告里注明设置，切线数值才有意义。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

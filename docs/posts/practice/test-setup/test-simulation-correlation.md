@@ -1,5 +1,6 @@
 ---
 title: "试验-仿真模态对标：Simcenter 3D 中的 MAC 相关分析实操"
+author: "@NVH_Z"
 ---
 
 # 试验-仿真模态对标：Simcenter 3D 中的 MAC 相关分析实操
@@ -180,3 +181,7 @@ MAC 矩阵（行=试验，列=仿真）
 ## 一句话记住
 
 对标三步走：先对齐坐标系、再配对模态、最后读数——MAC 管振型像不像、频率误差管标定准不准、COMAC 管哪个测点在捣乱；未配对的模态不是垃圾数据，是两侧各自的待办清单。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "声全息：用空间傅里叶变换定位噪声源"
+author: "@NVH_Z"
 ---
 
 # 声全息：用空间傅里叶变换定位噪声源
@@ -231,3 +232,7 @@ $$I = \frac{1}{2}\, \mathrm{Re}\{p \cdot v^*\}$$
 ## 一句话记住
 
 声全息 = 近场测复声压 + 空间 FFT 把声场拆成平面波；辐射圆外的损耗波带着亚波长细节贴着源指数衰减（池塘里不外传的水花），向源反演时按指数补回换来分辨率、噪声也被同倍率放大，维纳滤波 $S/N$（略低于 15 dB 起步）决定补到哪收手。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

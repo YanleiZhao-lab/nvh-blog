@@ -1,5 +1,6 @@
 ---
 title: "Time Signal Calculator：时域公式处理实用技巧"
+author: "@NVH_Z"
 ---
 
 # Time Signal Calculator：时域公式处理实用技巧
@@ -164,3 +165,7 @@ print(f"30 Hz 正弦的理论 RMS = 1.5/sqrt(2) = {1.5/np.sqrt(2):.3f}")
 ## 五、小结
 
 Time Signal Calculator 的价值不在函数数量，而在"可组合"：滤波、运算、生成、转速换算在一个公式表里串成处理链，测试数据的大部分后天补救都能在这里完成。判断标准就一条——**能在数据端解决的，不动测试资源**：重新跑一次整车转毂试验的成本，远高于把公式表配置并验证一遍的投入。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

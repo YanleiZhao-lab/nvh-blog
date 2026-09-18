@@ -1,5 +1,6 @@
 ---
 title: "谱与自功率谱的区别"
+author: "@NVH_Z"
 ---
 
 # 谱与自功率谱的区别
@@ -171,3 +172,7 @@ Testlab 中的设置：Measurement Function 选 Spectrum，勾选 Phase Referenc
 ## 七、小结
 
 只要幅值，用 Autopower——平均越多越准。要相位，用 Spectrum，但平均前必须用触发等措施保证相位一致，否则幅值不可信；既要相位又要平均，用相位参考谱，参考通道选结构上振动最活跃的点。分辨率不同的谱不比较谱线幅值，比较 RMS 总量。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "希尔伯特变换与包络分析：轴承故障诊断"
+author: "@NVH_Z"
 ---
 
 # 希尔伯特变换与包络分析：轴承故障诊断
@@ -195,3 +196,7 @@ $$\mathrm{Kurtosis} = \frac{1}{N\,\sigma^{4}} \sum_{i=1}^{N}\left(x_i - \bar{x}\
 ## 六、小结
 
 包络分析是轴承故障诊断的标准流程：带通锁定共振载波、希尔伯特解调取包络、包络谱对准特征频率。判读要点三条——主峰对准哪个特征频率、谐波是否成族、边带结构指向哪个部件。冲击类指标（冲激量、峭度）用于趋势监测，包络谱用于故障定位，两者配合使用。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "倒频谱进阶：基于 liftering 的回波分离与消除方法"
+author: "@NVH_Z"
 ---
 
 # 倒频谱进阶：基于 liftering 的回波分离与消除方法
@@ -246,3 +247,6 @@ Simcenter Testlab 没有倒频谱的一键功能，Data Calculator 公式串是�
 
 对数把"源乘路径"拆成"源加路径"：回波折叠成倒频轴 $k\tau$ 处的等间距峰，首峰幅值就是反射系数 $a$；开槽置零再逆变换，回波即除、源可重建——检测用实倒频谱，重建必须保留相位。
 
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

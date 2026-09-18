@@ -1,5 +1,6 @@
 ---
 title: "基于 FRF 的子结构耦合 FBS：不装起来就能预测装配体的频响"
+author: "@NVH_Z"
 ---
 
 # 基于 FRF 的子结构耦合 FBS：不装起来就能预测装配体的频响
@@ -166,3 +167,7 @@ FBS 的逻辑链条：部件 FRF 各自测好（自由-自由）+ 两条装配�
 ## 一句话记住
 
 FBS 是频域的法兰对接：两段管子各自的接口特性表（部件 FRF，自由-自由测得）加上"对接面水压相等、流量相等相反"两条装配条件，不真接起来也能算出整条管线的频响；误差不在公式在测量——接口 FRF 一旦含噪，求逆就把它放大。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

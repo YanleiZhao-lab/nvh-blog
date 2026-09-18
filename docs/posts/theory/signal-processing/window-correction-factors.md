@@ -1,5 +1,6 @@
 ---
 title: "窗函数修正系数：幅值校正 vs 能量校正"
+author: "@NVH_Z"
 ---
 
 # 窗函数修正系数：幅值校正 vs 能量校正
@@ -193,3 +194,7 @@ print(f"true:   peak = 1.0000, rms = {np.sqrt(np.mean(x**2)):.4f}")
 ## 六、小结
 
 判据有三条：读单条谱线幅值选幅值校正，算能量与 RMS 用能量校正；Testlab 的 Automatic 默认已按数据类型分配，不应随意改为 Fixed；RMS 计算软件永远在后台换用能量校正值，图上曲线面积不同而 RMS 相同属于正常行为。手工计算 RMS 时，须自行完成「线性格式、RMS 幅值格式、能量校正」三项前置换算。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "动刚度、柔度与导纳：一族 FRF 的换算关系"
+author: "@NVH_Z"
 ---
 
 # 动刚度、柔度与导纳：一族 FRF 的换算关系
@@ -231,3 +232,7 @@ Simcenter Testlab 里六种形式之间切换不需要重新计算：右键点�
 ## 一句话记住
 
 六种 FRF 是同一个复函数的六张面孔：正演一族靠乘除 $\mathrm{j}\omega$ 在位移、速度、加速度之间换汇率，反演一族靠取倒数把“每力多少响应”倒成“每响应多少力”；低频读刚度线、高频读质量线、共振峰正演是峰反演是谷——换算不出错，六张面孔才对得上同一台结构。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

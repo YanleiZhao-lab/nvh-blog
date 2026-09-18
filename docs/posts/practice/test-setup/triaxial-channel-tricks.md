@@ -1,5 +1,6 @@
 ---
 title: "三向加速度计通道设置技巧"
+author: "@NVH_Z"
 ---
 
 # 三向加速度计通道设置技巧
@@ -182,3 +183,7 @@ print(f"两路 X 信号的相关系数: {np.corrcoef(veh[0], raw[0])[0,1]:+.1f} 
 - **灵敏度**：逐通道照标定单填，三个方向不相等是常态而非异常
 
 这五条全过，再去处理采集参数、量程等设置。方向错了而幅值正常的数据，比量程错了、数据明显异常的数据更具误导性。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

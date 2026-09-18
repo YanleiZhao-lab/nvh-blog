@@ -1,5 +1,6 @@
 ---
 title: "抖动强度 Fluctuation Strength：慢变调制的声品质"
+author: "@NVH_Z"
 ---
 
 # 抖动强度 Fluctuation Strength：慢变调制的声品质
@@ -149,3 +150,7 @@ for f in [1, 2, 4, 8, 16, 70]:
 ## 一句话记住
 
 dBA 称能量，vacil 称晃法：包络 20 Hz 以下听得出"忽大忽小"、4 Hz 最烦——$F \approx \Delta L/(f/4+4/f)$ 里那对倒数把敏感峰钉死在 4 Hz；看到对称边带先量间距，反算调制频率再决定归 vacil 还是 asper。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "RPM 信号去毛刺：转速信号的清洗"
+author: "@NVH_Z"
 ---
 
 # RPM 信号去毛刺：转速信号的清洗
@@ -174,3 +175,7 @@ $$P \ge 2 \, O_{\max}$$
 ## 一句话记住
 
 转速是由“按表时间差”换算出来的，计时错一点、毛刺就按比例出现：偶发毛刺用 Time Data Editor 手动替换，规律毛刺用 MAD 统计剔除，接缝误差用 ZEBRA 函数全局重排；任何修正前先另存原始数据——转速是全场的基准轴。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

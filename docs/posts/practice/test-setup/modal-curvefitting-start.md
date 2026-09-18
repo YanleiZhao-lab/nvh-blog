@@ -1,5 +1,6 @@
 ---
 title: "模态拟合入门：稳定图与极点选择"
+author: "@NVH_Z"
 ---
 
 # 模态拟合入门：稳定图与极点选择
@@ -148,3 +149,6 @@ for N in (2, 4, 6, 8, 10):
 
 模态拟合 = 定阶数、解极点、辨真假：物理模态在稳定图上是不随阶数移动的竖直稳定线，计算模态只是拟合器吞噪声的垫背；选极点先看稳定线、再对照峰位、最后回代综合曲线，阶数宁多勿少让假的自己漂走。
 
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

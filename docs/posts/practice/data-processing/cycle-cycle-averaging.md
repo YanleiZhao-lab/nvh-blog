@@ -1,5 +1,6 @@
 ---
 title: "逐循环平均：发动机工况数据处理"
+author: "@NVH_Z"
 ---
 
 # 逐循环平均：发动机工况数据处理
@@ -157,3 +158,7 @@ print(f"散布比 std/mean = {p_max.std()/p_max.mean()*100:.1f}%")
 ## 五、小结
 
 逐循环分析的关键只有一句：**先到角域，再谈统计**。时域切循环对不齐相位，频域平均抹掉变差，角域是唯一能让第 N 循环与第 N+1 循环逐点对齐的域。操作上记住三件事：AD Acquisition 里把每循环设成 2 转（四冲程）；统计认准带 AD 后缀的标签页；多缸运算前先做 Cyl Offset 对齐。拿到每循环峰值序列后，变异系数（CoV）比平均值更能说明燃烧品质。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

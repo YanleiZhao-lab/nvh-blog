@@ -1,5 +1,6 @@
 ---
 title: "吉布斯现象：为什么陡峭滤波器会振铃"
+author: "@NVH_Z"
 ---
 
 # 吉布斯现象：为什么陡峭滤波器会振铃
@@ -244,3 +245,7 @@ Sigma-Delta 型模数转换器常配很陡的抗混叠滤波器，容易让人�
 ## 一句话记住
 
 吉布斯现象是有限带宽对突变信号的必然找零误差：突变需要无限频率成分，带宽只管振铃时长（主瓣约 1/2f_max，加带宽就变短），滤波器形状才管振铃幅度（越陡越响，砖墙 18%、缓滚降近乎无）——测瞬态选缓滚降 Bessel，看频谱则不必担心它。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

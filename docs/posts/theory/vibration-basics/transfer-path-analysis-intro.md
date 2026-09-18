@@ -1,5 +1,6 @@
 ---
 title: "传递路径分析TPA入门：把整车噪声拆成一条条可量化的传递路径"
+author: "@NVH_Z"
 ---
 
 # 传递路径分析TPA入门：把整车噪声拆成一条条可量化的传递路径
@@ -225,3 +226,7 @@ Path Specific 视图把每条路径分解为"加速度—位移—力—FRF—�
 ## 一句话记住
 
 TPA 把噪声拆成“源—路径—目标”：每条路径贡献 = 工况力 × 传递函数（复数），矢量求和须对上实测总级；排序先核相位—反相抵消时拆“最大贡献”反升噪声；软悬置用刚度法，硬连接用矩阵求逆并盯条件数。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

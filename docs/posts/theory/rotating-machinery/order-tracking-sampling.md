@@ -1,5 +1,6 @@
 ---
 title: "阶次跟踪两种采样：定采样 vs 同步采样"
+author: "@NVH_Z"
 ---
 
 # 阶次跟踪两种采样：定采样 vs 同步采样
@@ -142,3 +143,7 @@ print("3 阶幅值: |A| = %.3f (理论值 1.000)" % abs(est))
 ## 一句话记住
 
 阶次是"每转的周期数"：定采样按时间录像、靠转速曲线重采样进角度域，同步采样按角度拍照、PPR 直接定阶次上限（PPR/2 再留十倍余量）；低速段最先丢信息，先算最低转速再定角度分辨率。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "单端 vs 差分输入：噪声抑制的电路差异"
+author: "@NVH_Z"
 ---
 
 # 单端 vs 差分输入：噪声抑制的电路差异
@@ -131,3 +132,7 @@ for name, x in [("单端", se), ("差分", diff)]:
 ## 一句话记住
 
 单端量"线对地"、噪声信号一起放大；差分量"线对线"、反相信号相加减掉共模噪声——低电平传感器配差分，Testlab 里 Coupling 随 InputMode 联动，全桥差分、ICP 单端。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

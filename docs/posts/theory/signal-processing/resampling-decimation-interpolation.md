@@ -1,5 +1,6 @@
 ---
 title: "重采样：降采样的频率折叠、升采样的镜像与任意比率的实现代价"
+author: "@NVH_Z"
 ---
 
 # 重采样：降采样的频率折叠、升采样的镜像与任意比率的实现代价
@@ -173,3 +174,7 @@ print(f"插零升采样: 镜像峰 {f3[np.argmax(X3*mask)]:.0f} Hz")
 - 分数比率固定为先升后降，先降后升丢失的频带无法找回
 - 角度域分辨率按全程最低转速确定，高速段自然富余
 :::
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

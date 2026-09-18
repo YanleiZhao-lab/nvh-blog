@@ -1,5 +1,6 @@
 ---
 title: "声强法测声功率：双传声器探头与 ISO 9614 扫描"
+author: "@NVH_Z"
 ---
 
 # 声强法测声功率：双传声器探头与 ISO 9614 扫描
@@ -182,3 +183,7 @@ print(f"声功率级      Lw = {Lw:.1f} dB re 1 pW")
 ## 一句话记住
 
 声压是水位、声强是流量、声功率是泉眼出水量：把机器用封闭面包住，法向声强有进有出、稳态干扰正负抵消，净积分只剩机器本身——所以车间里也能测声功率；探头不过是用两支传声器的压差近似欧拉方程里的速度，垫长决定「割线近似」还灵不灵。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

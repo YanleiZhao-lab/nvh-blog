@@ -1,5 +1,6 @@
 ---
 title: "模态指示函数 MIF：FRF 矩阵逐谱线特征值分析与重根判据"
+author: "@NVH_Z"
 ---
 
 # 模态指示函数 MIF：FRF 矩阵逐谱线特征值分析与重根判据
@@ -153,3 +154,7 @@ print(f"非共振区基线: MIF1 中位数 {np.median(mif[:,0]):.2f}, MIF2 中�
 ## 一句话记住
 
 单条 FRF 数峰会漏模态也数不出重根；MIF 把整个 FRF 矩阵逐谱线压成特征值曲线，第几条曲线同时凹陷，该频率就至少埋着几颗模态——判重根前先确认参考输入数不小于疑似重数，复模态场景改看 CMIF 的峰。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "传感器与采样配置检查"
+author: "@NVH_Z"
 ---
 
 # 传感器与采样配置检查
@@ -244,3 +245,7 @@ $$O_{\max} = \frac{\mathrm{PPR}}{2}$$
 ---
 
 > 本清单基于 Simcenter Testing Knowledge Base 相关条目与 NVH 工程实践整理；不同测试规范（如 GB/T 18697、ISO 5128）可能有额外要求，执行时以项目规范为准。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

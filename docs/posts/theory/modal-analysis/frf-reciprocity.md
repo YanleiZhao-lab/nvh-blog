@@ -1,5 +1,6 @@
 ---
 title: "FRF 互易性：换激励点与响应点，结果为什么不变"
+author: "@NVH_Z"
 ---
 
 # FRF 互易性：换激励点与响应点，结果为什么不变
@@ -172,3 +173,7 @@ print(f"非对称K f=12.5Hz: |H12|={abs(H[0,1]):.4e} | H21={abs(H[1,0]):.4e} 比
 ## 一句话记住
 
 互易性说的是“路认结构不认方向”：留数分解 $Q_k\psi_i\psi_j$ 里乘法可交换，FRF 矩阵天然对称——锤击只测一行或一列，拟合完用振型对参预因子做正比校验，声学路径用 Q-source 反着测一次顶十二次；陀螺与声振耦合这些“单行道”上它才失效。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

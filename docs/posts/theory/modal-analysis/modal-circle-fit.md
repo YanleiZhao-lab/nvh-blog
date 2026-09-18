@@ -1,5 +1,6 @@
 ---
 title: "圆拟合法：复平面上的SDOF模态参数估计"
+author: "@NVH_Z"
 ---
 
 # 圆拟合法：复平面上的SDOF模态参数估计
@@ -209,3 +210,7 @@ LMS 理论手册把参数估计方法按"自由度数—域—估计策略—输
 ## 一句话记住
 
 模态参数全写在复平面那段圆弧上：点走得最快处是固有频率（最大角度间距），张角半角正切给出阻尼，直径乘阻尼因子就是留数——用整段圆弧做几何测量，比盯住一条谱线多出一位有效数字。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

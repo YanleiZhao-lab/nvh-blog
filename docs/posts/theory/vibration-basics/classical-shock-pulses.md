@@ -1,5 +1,6 @@
 ---
 title: "经典冲击脉冲：半正弦/梯形/锯齿的规范谱"
+author: "@NVH_Z"
 ---
 
 # 经典冲击脉冲：半正弦/梯形/锯齿的规范谱
@@ -151,3 +152,7 @@ Simcenter Testlab 的振动控制冲击试验流程（Shock Control 工作簿）
 ## 一句话记住
 
 形状定带宽（半正弦低频、锯齿高频、矩形最宽）、脉宽定低频（$\Delta V$ 与时长成正比）、前后脉冲定台面可行性——经典冲击 = 规范形状 × 台面资源账。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

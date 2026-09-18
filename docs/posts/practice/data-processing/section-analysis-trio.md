@@ -1,5 +1,6 @@
 ---
 title: "切片分析三件套：频率切片、阶次切片与倍频程切片"
+author: "@NVH_Z"
 ---
 
 # 切片分析三件套：频率切片、阶次切片与倍频程切片
@@ -171,3 +172,7 @@ Simcenter Testlab 中切片功能的落点在 Time Data Processing 工作簿：A
 ## 一句话记住
 
 切片是从三维谱阵里取二维证据：总级记总数、频率切片守定频、阶次切片追斜线、倍频程切片对耳口径——先想清楚要回答什么问题，再决定往哪个方向切、切多宽。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

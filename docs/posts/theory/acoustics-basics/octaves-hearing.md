@@ -1,5 +1,6 @@
 ---
 title: "倍频程：人耳的频率分辨与计权"
+author: "@NVH_Z"
 ---
 
 # 倍频程：人耳的频率分辨与计权
@@ -215,3 +216,7 @@ print(f"\n总级: {lin:.1f} dB  ->  {dBA:.1f} dB(A)")
 ## 一句话记住
 
 人耳按对数分辨频率，倍频程就按等比分带：频带宽度随中心频率等比增长，白噪声才呈现每带约 3 dB 的阶梯；A 计权再按耳朵敏感度逐带打折——分贝域做加减、能量合成回线性域求和再取对数，两张图就不再打架。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

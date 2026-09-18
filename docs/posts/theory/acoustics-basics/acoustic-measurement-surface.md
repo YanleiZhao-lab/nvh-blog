@@ -1,5 +1,6 @@
 ---
 title: "声学测量表面：包络面选择与测点布置"
+author: "@NVH_Z"
 ---
 
 # 声学测量表面：包络面选择与测点布置
@@ -119,3 +120,7 @@ for N in (4, 8, 12, 20):
 ## 一句话记住
 
 测声功率先搭面：面型贴形状、距离保 F2 小于探头 Ld、点数按 N > C·F4² 核算、可信度过 F1–F4 体检——测量面是定义的一部分，换面即换定义，报数必须连面一起报。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

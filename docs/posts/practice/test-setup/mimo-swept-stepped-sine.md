@@ -1,5 +1,6 @@
 ---
 title: "扫频与步进正弦 MIMO：另一种激励路线"
+author: "@NVH_Z"
 ---
 
 # 扫频与步进正弦 MIMO：另一种激励路线
@@ -224,3 +225,7 @@ for r in [0.5, 1, 2, 5, 10]:
 ## 一句话记住
 
 正弦 MIMO 把全部激励能量逐频率投放：扫频快但峰值受扫速限制（共振区必须慢扫，快扫削峰、拖峰），步进准但耗时；建立时间 τ = 1/(2*pi*ζ*f0) 决定扫速上限，闭环控制靠系统辨识彩排，多次扫程才能算出有意义的相干。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

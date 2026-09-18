@@ -1,5 +1,6 @@
 ---
 title: "FIR 与 IIR 滤波器：相位线性与实现代价"
+author: "@NVH_Z"
 ---
 
 # FIR 与 IIR 滤波器：相位线性与实现代价
@@ -256,3 +257,7 @@ Simcenter Testlab 中在 Time Signal Calculator 的 Conditioning 组调用 FILTE
 ## 一句话记住
 
 FIR 是直行传送带：输出只看输入、恒定时延 (N-1)/2、永不失稳；IIR 是回旋转盘：输出反馈自身、低阶高陡但时延随频率变、可能发散——实时选 IIR，重相位选 FIR 或零相位滤波，多通道要么全滤要么全不滤。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

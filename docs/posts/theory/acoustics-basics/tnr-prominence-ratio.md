@@ -1,5 +1,6 @@
 ---
 title: "TNR 与 PR：音调噪声比和突出比两个判据"
+author: "@NVH_Z"
 ---
 
 # TNR 与 PR：音调噪声比和突出比两个判据
@@ -205,3 +206,7 @@ TTNR 与 PR 的完整算法写在 ECMA-74 与 ISO 7779 两份标准里，面向 
 ## 一句话记住
 
 纯音吳不吳不看绝对分贝、只看比紧邻背景高出多少：TTNR 拿纯音对带内掩蔽级单挑（8 dB 判可闻）、PR 拿含调临界带对两侧邻带打团体赛（9 dB 判突出），低频阈值上浮、部件须带真实背景测，Testlab 光标算稳态、图谱扫跑合。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

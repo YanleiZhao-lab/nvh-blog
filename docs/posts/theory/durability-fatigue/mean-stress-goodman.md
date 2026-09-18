@@ -1,5 +1,6 @@
 ---
 title: "平均应力修正与 Goodman-Haigh 图：无限寿命的边界在哪里"
+author: "@NVH_Z"
 ---
 
 # 平均应力修正与 Goodman-Haigh 图：无限寿命的边界在哪里
@@ -231,3 +232,7 @@ Goodman-Haigh 图把"平均应力如何改写疲劳寿命"变成一张几何图�
 ## 一句话记住
 
 交变幅值是"撕纸的劲"、平均应力是"始终绷着的劲"：Goodman-Haigh 图用 $S_e$、$S_u$、$S_y$ 三个常数圈出无限寿命区，全部雨流循环落区内才算数——一次出界，资格吊销。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

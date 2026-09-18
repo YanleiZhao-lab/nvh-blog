@@ -1,5 +1,6 @@
 ---
 title: "彩色图谱判读：colormap 五类线型的识别与整改"
+author: "@NVH_Z"
 ---
 
 # 彩色图谱判读：colormap 五类线型的识别与整改
@@ -184,3 +185,7 @@ $$f = l \, f_{sw} \pm j \, f_e, \qquad l = 1, 2, 3, \ldots; \;\; j = 0, 1, 2, \l
 | **5 查全程** | 条带是否只在个别转速段出现 | 冲击类问题，锁定间隙配合部位 |
 
 最后一条经验：colormap 用 dB 显示往往比线性幅值更容易判读——dB 压缩了动态范围，弱线索（边带、高阶线）才能从大片强色里显现。Testlab 里右键 Y 轴改格式即可。判读是定位，不是定量；锁定了线和转速，下一步用阶次切片（order cut）、阶次跟踪（order tracking）把幅值随转速的曲线拉出来，才是整改决策的定量依据。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

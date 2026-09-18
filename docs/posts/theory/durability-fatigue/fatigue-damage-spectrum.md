@@ -1,5 +1,6 @@
 ---
 title: "疲劳损伤谱 FDS：把载荷谱转成频域损伤指标"
+author: "@NVH_Z"
 ---
 
 # 疲劳损伤谱 FDS：把载荷谱转成频域损伤指标
@@ -200,3 +201,7 @@ FDS 把"振动有多伤"从一句直觉变成一张可比较、可合成、可�
 ## 一句话记住
 
 FDS 是振动的"含糖量表"：一排虚拟振子试吃激励、逐频率记损伤账——RMS 相同破坏势差百万倍，比较时 A=K=1 对消、Q 固定当尺子，b 最较真（钢 5 铝 8 取小保守），谱形变了结论就变。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "倒频谱：齿轮箱边带与谐波族的检测方法"
+author: "@NVH_Z"
 ---
 
 # 倒频谱：齿轮箱边带与谐波族的检测方法
@@ -244,3 +245,7 @@ $$q_{max} = \frac{1}{\Delta f}$$
 ## 一句话记住
 
 倒频谱是“听节奏”的数学：对数把谱峰高度拉平（等于只问队形不问嗓门），逆 FFT 把等间距谱线族折叠成单根峰——峰的位置是间距的倒数（1/48 Hz=20.8 ms 找啮合、1/4 Hz=250 ms 找缺陷边带），峰高是那族结构的总强度，峰高趋势是故障发展的方向。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

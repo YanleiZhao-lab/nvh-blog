@@ -1,5 +1,6 @@
 ---
 title: "冲激响应函数：FRF 的时域镜像与质量验证"
+author: "@NVH_Z"
 ---
 
 # 冲激响应函数：FRF 的时域镜像与质量验证
@@ -162,3 +163,7 @@ print("IRF 误差峰值 %.2e (h 峰值 %.2e)" % (e.max(), np.abs(np.fft.irfft(H,
 ## 一句话记住
 
 FRF 与冲激响应一本账两种记法：IFFT 翻回时域，等幅尾巴查干扰、空白后回声查反射、满篇毛草查平均；健康时峰距读频率、包络回归读阻尼——频域看不清的，时域一眼见分晓。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

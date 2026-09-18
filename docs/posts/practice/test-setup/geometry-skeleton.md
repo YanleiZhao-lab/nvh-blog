@@ -1,5 +1,6 @@
 ---
 title: "几何骨架：试验模型的测点线面组织"
+author: "@NVH_Z"
 ---
 
 # 几何骨架：试验模型的测点线面组织
@@ -148,3 +149,7 @@ Simcenter Testlab 里几何骨架在 **Testlab Modal Analysis** 工作簿的 Geo
 ## 一句话记住
 
 几何骨架是振型数据的地址簿：结点是站台（位置加方位）、连线是线路、自由度是发车方向，欧拉角管朝向对不上时的转角——地址写对一个不错，动画与对标才取得出正确的数据；先空跑核对，再正式开测。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

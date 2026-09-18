@@ -1,5 +1,6 @@
 ---
 title: "模态试验与 CAE 对标怎样组织验证记录"
+author: "@NVH_Z"
 ---
 
 # 模态试验与 CAE 对标怎样组织验证记录
@@ -194,3 +195,7 @@ CAE 模型一旦通过验证，其价值远超单次分析：
 ---
 
 > 本文整理 CAE 模型验证的通用流程，相关性指标定义与判读依据 Simcenter Testing 理论手册第十八章"模态验证"；具体项目和行业规范（如航空航天 V&V、汽车 N&V）需结合对应标准执行。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

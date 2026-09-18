@@ -1,5 +1,6 @@
 ---
 title: "模态超复性与相位共线性：复模态的两个判据"
+author: "@NVH_Z"
 ---
 
 # 模态超复性与相位共线性：复模态的两个判据
@@ -149,3 +150,7 @@ MOV 低不一定说明振型不可用：先查激振力方向符号（单一输�
 ## 一句话记住
 
 正则模态是齐步走（相位非 0° 即 180°），复模态是人浪（相位逐点滞后、节线爬行）；MPC 看形——复平面里像不像一条直线，MOV 验骨——附加质量降频是否处处成立；先 MOV 排错误，再 MPC 定真假。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

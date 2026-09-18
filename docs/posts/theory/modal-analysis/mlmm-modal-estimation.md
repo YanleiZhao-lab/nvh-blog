@@ -1,5 +1,6 @@
 ---
 title: "MLMM 最大似然模态模型：从最小二乘到迭代优化"
+author: "@NVH_Z"
 ---
 
 # MLMM 最大似然模态模型：从最小二乘到迭代优化
@@ -242,3 +243,7 @@ MLMM 并非以新算法取代旧算法，而是将 Polymax 的快速（线性 LS
 ## 一句话记住
 
 MLMM 是模态拟合的量体裁衣：线性化 LS 按统一尺码裁床（快但共振峰被压矮），ML 按噪声方差 $\sigma_k^2$ 给每条谱线定权（迭代但统计最优）；Polymax 出初值与稳定图、MLMM 高斯-牛顿精修参数并附置信区间——轻阻尼不必用，重阻尼声腔内饰车与要写 ± 的报告必用。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

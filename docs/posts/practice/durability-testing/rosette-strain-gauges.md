@@ -1,5 +1,6 @@
 ---
 title: "应变花 Rosette：三片应变片读出整个平面应变场"
+author: "@NVH_Z"
 ---
 
 # 应变花 Rosette：三片应变片读出整个平面应变场
@@ -173,3 +174,7 @@ print(f"回代45度: {eps_theta(ex,ey,gxy,45):.1f} ue (应等于 {e45})")
 ## 一句话记住
 
 单轴片只见一个方向的投影、会低估最大应变，应变花用三片定角读数反解整个平面应变场：张量分量一行算出、莫尔圆给出主应变与主方向，三路读数换九个输出，疲劳评估认主应变、临界平面找最伤角度。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

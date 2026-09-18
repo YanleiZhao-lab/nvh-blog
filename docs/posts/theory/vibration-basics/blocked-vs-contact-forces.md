@@ -1,5 +1,6 @@
 ---
 title: "阻断力 vs 接触力：TPA 两种力的本质区别"
+author: "@NVH_Z"
 ---
 
 # 阻断力 vs 接触力：TPA 两种力的本质区别
@@ -215,3 +216,7 @@ print("阻断力   -> 新组合 ST   相对误差: %.1e" % rel_err(v6_blocked, v
 ## 一句话记住
 
 接触力是"二人转"：源与接收端合演的界面力，只配原接收端、换搭档作废；阻断力是"清唱"：源的不变载荷，必须连同源一起上车，却换任何接收端都不改口——排查现车用接触力，交付载荷与虚拟装配用阻断力。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

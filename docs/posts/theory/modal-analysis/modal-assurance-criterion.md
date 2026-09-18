@@ -1,5 +1,6 @@
 ---
 title: "模态置信判据MAC：评估振型一致性的定量指标"
+author: "@NVH_Z"
 ---
 
 # 模态置信判据MAC：评估振型一致性的定量指标
@@ -155,3 +156,7 @@ MAC 只比较形状；两阶模态在物理上是否相关，还必须把频率�
 ## 一句话记住
 
 振型是向量，MAC 是只看方向、不看长度的夹角余弦平方：对复数缩放免疫，对角线验一致性、非对角验独立性；数字不合格先查测点布置（空间混叠），MSF 只在 MAC 高时才有引用价值。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

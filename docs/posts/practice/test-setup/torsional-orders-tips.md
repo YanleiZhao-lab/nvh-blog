@@ -1,5 +1,6 @@
 ---
 title: "扭振阶次实操三则：通道组、纵轴量纲与扭振动画"
+author: "@NVH_Z"
 ---
 
 # 扭振阶次实操三则：通道组、纵轴量纲与扭振动画
@@ -162,3 +163,7 @@ Add Disc 时填的半径要和真实旋转件一致——圆盘的视觉转动�
 ## 五、小结
 
 三个操作要点的适用边界：通道组改 Vibration 解决 tacho 数据进不了谱分析的流程问题，不改动硬件接线；纵轴 Integrate 解决量纲问题，RPM 波动除以 $2\pi O f_{rot}$ 换算成角度，前提是转速信号已清洗、积分后已去直流；Section Scaling 解决口径问题，RMS、峰值、峰峰值相差 1.414 到 2.828 倍，报告中必须注明；Torsional Node 解决表达问题，用一段可旋转的动画呈现扭振沿轴系的分布。操作都在右键菜单里，但每个菜单项背后是一次量纲换算或一次数据身份切换——知道自己在换什么，比记住点哪里更重要。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

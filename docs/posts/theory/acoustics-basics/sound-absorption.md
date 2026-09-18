@@ -1,5 +1,6 @@
 ---
 title: "声吸收：吸声系数与混响室法"
+author: "@NVH_Z"
 ---
 
 # 声吸收：吸声系数与混响室法
@@ -211,3 +212,7 @@ for f, t0, t1, da, a in zip(freqs, T_empty, T_sample, A_with - A_empty, alpha):
 ## 一句话记住
 
 吸声系数 α 是入射声能被摩擦"吃掉"的份额，随频率变化；多孔材料像消波堤，高频短浪易碎、低频长浪难缠——最优布置在离壁 λ/4 的速度波腹处；阻抗管测垂直入射、混响室测随机入射，选型认准入射条件。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

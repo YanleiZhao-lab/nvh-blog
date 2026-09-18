@@ -1,5 +1,6 @@
 ---
 title: "伪随机激励：将激振能量对齐傅里叶网格的模态测试信号"
+author: "@NVH_Z"
 ---
 
 # 伪随机激励：将激振能量对齐傅里叶网格的模态测试信号
@@ -169,3 +170,7 @@ Siemens 以一组飞机驱动点（Driving-point）FRF 对比了猝发随机与 
 ## 六、小结
 
 选择激励信号的判据有三条：能量是否覆盖分析频带、是否天然免泄漏、功放电压上限内有效能量有多高。伪随机 + Schroeder 相位三项均满足，代价是需要信号源与采集同步（激振器测试的标配功能）。锤击法仍用 H1 估计 + 力窗/指数窗；宽带随机适用于快速普查，仍用汉宁窗 + 谱平均；当目标是高保真 FRF，即模态对标、航空结构地面共振试验（Ground Vibration Test, GVT）、修改预测时，伪随机是应优先考虑的方案。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

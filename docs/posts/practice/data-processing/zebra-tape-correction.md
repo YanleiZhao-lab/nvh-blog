@@ -1,5 +1,6 @@
 ---
 title: "斑马带接缝修正：识别与消除每转一次的转速伪影"
+author: "@NVH_Z"
 ---
 
 # 斑马带接缝修正：识别与消除每转一次的转速伪影
@@ -166,3 +167,7 @@ print(f"接缝误差是真实扭振的 {abs(err[::n_stripe].max()) / 8.0:.1f} �
 ## 一句话记住
 
 接缝是卷尺上那处固定刻度误差：每转一次、固定角度、方向一致的系统性偏差，被取倒数运算放大后伪装成低阶扭振；平均与滤波都无效，唯一的修法是 ZEBRA_MOMENTS_TO_RPM 按理论角度把脉冲重排回几何本位。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

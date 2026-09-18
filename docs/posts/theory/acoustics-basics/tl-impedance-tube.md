@@ -1,5 +1,6 @@
 ---
 title: "阻抗管法测隔声：驻波管里的传递损失"
+author: "@NVH_Z"
 ---
 
 # 阻抗管法测隔声：驻波管里的传递损失
@@ -223,3 +224,7 @@ for f in freqs:
 ## 一句话记住
 
 阻抗管把隔声测量简化成"数行波"：四个传声器分出入射 $A$ 与透射 $C$，两种负载解出不依赖末端的二端口矩阵，TL 就是 $20\,\lg|A/C|$——样件自身的本事；管径定频率上限，密封与锥度修正定数据可信度。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

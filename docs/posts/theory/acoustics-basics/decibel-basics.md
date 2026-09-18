@@ -1,5 +1,6 @@
 ---
 title: "dB 与对数刻度：为什么声学量都用分贝"
+author: "@NVH_Z"
 ---
 
 # dB 与对数刻度：为什么声学量都用分贝
@@ -209,3 +210,7 @@ dB 的要点归纳为三条：
 3. **加减在能量域做**：叠加、修正、计权、距离衰减，都是能量域的运算。
 
 看到"降 3 dB"的要求，对应的物理含义是"能量减半"；看到"78 dB(A)"，应追问声压还是声功率、测点距离多少、什么声学环境。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

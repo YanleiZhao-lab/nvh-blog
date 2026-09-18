@@ -1,5 +1,6 @@
 ---
 title: "时频分析方法选择：STFT、小波变换与 Wigner-Ville 分布"
+author: "@NVH_Z"
 ---
 
 # 时频分析方法选择：STFT、小波变换与 Wigner-Ville 分布
@@ -206,3 +207,7 @@ print(f"真实猝发时长 = 0.020 s —— 长窗把 {0.25/0.020:.0f} 倍于真
 ## 一句话记住
 
 时频分析是给声音拍电影：STFT 全片一档快门，频率分辨率 $\Delta f=1/T$ 与时间定位不可兼得；小波暗处长曝、亮处短曝，恒百分比带宽 $\Delta f/f$ 常数；Wigner-Ville 分辨率最高但双线性自带"鬼影"干涉项——工程判读默认谱图，多分量慎用 WVD。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

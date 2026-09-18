@@ -1,5 +1,6 @@
 ---
 title: "NVH指标体系与工程解释"
+author: "@NVH_Z"
 ---
 
 # NVH指标体系与工程解释
@@ -212,3 +213,7 @@ NVH 指标像天气预报：声压级是温度计直读的气温，响度、尖�
 ---
 
 > 本文为研究笔记，指标阈值和经验值仅供参考，具体项目需结合测试规范和目标值分析。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

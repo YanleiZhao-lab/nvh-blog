@@ -1,5 +1,6 @@
 ---
 title: "A计权：为什么 40 方等响曲线成了标准"
+author: "@NVH_Z"
 ---
 
 # A计权：为什么 40 方等响曲线成了标准
@@ -194,3 +195,7 @@ A 不是唯一的计权。同一族还有 B、C、D 三条，区别在于所依�
 ## 一句话记住
 
 麦克风记账不问频率，人耳天生偏爱 1 k~4 kHz：A 计权就是那张按 40 方等响曲线定的“汇率表”——1 kHz 为零、低频重贬、4 kHz 微升，逐谱线在能量域换算后合成；低频源的总值被低估、啸叫源的总值反被抬高，读 dBA 前先看能量在哪个频段。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

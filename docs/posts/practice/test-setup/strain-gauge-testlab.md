@@ -1,5 +1,6 @@
 ---
 title: "应变片测量实操：Testlab 通道设置与桥路"
+author: "@NVH_Z"
 ---
 
 # 应变片测量实操：Testlab 通道设置与桥路
@@ -216,3 +217,7 @@ print(f"GF 抄成 2.1 时标准应变偏小: {(1 - e21/e2)*100:.1f}%")
 ## 一句话记住
 
 应变通道上电前先对三样：桥型、供桥、R 与 GF 按标定单逐片填；测前 Balance 加 Zero 记静息基线、Shunt 拿标准磝码校秤，测中开 Shunt Sequence 前后留档——四件事做完，毫伏级小信号才敢信。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

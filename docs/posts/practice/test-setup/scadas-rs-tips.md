@@ -1,5 +1,6 @@
 ---
 title: "SCADAS RS 实战技巧六则：自定义显示、自动调零、数字IO、模板、离线配置与试验编排"
+author: "@NVH_Z"
 ---
 
 # SCADAS RS 实战技巧六则：自定义显示、自动调零、数字IO、模板、离线配置与试验编排
@@ -159,3 +160,7 @@ SCADAS RS 的独立运行哲学是"配置一次、现场零思考"：显示盯�
 ---
 
 *来源：[Simcenter SCADAS RS: Assorted Tips and Tricks](https://community.sw.siemens.com/s/article/Simcenter-SCADAS-RS-Assorted-Tips-and-Tricks)（Siemens Simcenter Testing Knowledge Base，2026-08-01），全文消化重写，配图为官方原图。视频补充：[Zero Before Acquisition](https://youtu.be/M9UtYL5ZIW8)、[Schedule Designer & Export Tool](https://youtu.be/uqXhf2ZFFJw)。*
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

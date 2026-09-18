@@ -1,5 +1,6 @@
 ---
 title: "模态振型验证三指标：MPC、MPD 与 MOV"
+author: "@NVH_Z"
 ---
 
 # 模态振型验证三指标：MPC、MPD 与 MOV
@@ -155,3 +156,7 @@ check("flipped", psi_flipped)
 ## 七、小结
 
 频率阻尼依靠稳定图锁定，振型依靠指标验证：MPC 检查共线性、MPD 给出相位散布角、MOV 用质量灵敏度符号识别计算模态。读数时记住三条：MOV 接近 100% 是物理模态的底线；单一输入点全模态 MOV 集体偏低时先查激振力方向符号；MPC 低而 MPD 小，是局部测点问题而非整条振型问题。验证未通过的振型，不应进入后续的灵敏度分析和修改预测——误差会沿模态模型传递放大。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

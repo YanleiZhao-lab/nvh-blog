@@ -1,5 +1,6 @@
 ---
 title: "加速度计大全：原理、类型与选型决策"
+author: "@NVH_Z"
 ---
 
 # 加速度计大全：原理、类型与选型决策
@@ -269,3 +270,7 @@ for name, g in cases:
 ## 一句话记住
 
 加速度计是顶着重物的挂坠：挂坠甩多狠正比于加速度（灵敏度换算），挂得多紧决定高频能测多准（安装刚度与固有频率三分之一）；选型四问——测不测静态、耐不耐温度、峰值多大、频带多宽——分别导向 PR/VC、PE、灵敏度量程对表、平直段核查，而 IEPE 用普通电缆、PE 用低噪声电缆是现场最容易踩的那颗钉子。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

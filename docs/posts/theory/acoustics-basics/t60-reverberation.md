@@ -1,5 +1,6 @@
 ---
 title: "混响时间T60：房间声学的衰减常数"
+author: "@NVH_Z"
 ---
 
 # 混响时间T60：房间声学的衰减常数
@@ -215,3 +216,7 @@ print(f"T60 估计值 = {60 / -k:.3f} s（真值 {T60_true} s）")
 ## 一句话记住
 
 T60 是房间声学的"体温"：声能像浴缸里的水，容积 V 是库存、吸声量 A 是排水口，对数让指数衰减拉成直线，于是一个 $T_{60}=0.161\,V/A$ 把可测的时间换算成不可测的吸收——测不够 60 dB 就用 T20/T30 沿直线外推，逐倍频程给出才算测完。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

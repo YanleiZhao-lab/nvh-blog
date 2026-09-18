@@ -1,5 +1,6 @@
 ---
 title: "清晰度指数与语言干扰级：语言频带内的可懂度评价"
+author: "@NVH_Z"
 ---
 
 # 清晰度指数与语言干扰级：语言频带内的可懂度评价
@@ -182,3 +183,7 @@ print(f"{'轰鸣 SNR':>8} " + " ".join(f"{v:6.1f}" for v in snr_r) + f" {snr_r.m
 ## 一句话记住
 
 总级 dB(A) 把全频段能量汇成一个数，会稀释语言频带的处境；AI 逐带算“语言比背景高多少”、按重要性加权求和，SIL 直接取语言频带几个带级的平均——评价“话能不能说清”，只看 500 Hz～4 kHz 频带内的余量。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

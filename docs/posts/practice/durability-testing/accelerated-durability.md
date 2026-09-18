@@ -1,5 +1,6 @@
 ---
 title: "加速耐久试验的得与失：时间压缩的代价"
+author: "@NVH_Z"
 ---
 
 # 加速耐久试验的得与失：时间压缩的代价
@@ -202,3 +203,7 @@ cycles=1000, top 80 cycles (8.0%) -> 99.6% of total damage
 ## 一句话记住
 
 加速耐久三条路：抬量级吃幂律红利（15% 换一半时间）但不许换 S-N 三区、提速率防温升 6 ℃ 与谱外共振、删循环最安全（7% 循环=99.5% 损伤，保损伤压缩 3 倍起），多轴相位是删减时唯一不能碰的红线。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

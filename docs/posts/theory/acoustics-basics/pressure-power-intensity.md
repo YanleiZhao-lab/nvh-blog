@@ -1,5 +1,6 @@
 ---
 title: "声压、声功率、声强：定义、分贝换算与选用判据"
+author: "@NVH_Z"
 ---
 
 # 声压、声功率、声强：定义、分贝换算与选用判据
@@ -166,3 +167,7 @@ print(f"同时开  : {LpAB:.1f} dB（叠加后仅比 B 高 1.8 dB）")
 
 ## 一句话记住
 声压是温度计（哪里响）、声功率是暖气片额定功率（声源发多少）、声强是热流（往哪流多少）；三个量都写 dB 但参考值不同，73 dB 声功率级与 78 dB 声压级可以同时成立——比之前先问一句：这是哪个量的分贝。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

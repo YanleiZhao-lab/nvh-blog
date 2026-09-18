@@ -1,5 +1,6 @@
 ---
 title: "隔声量测量：传声损失TL的实验室方法"
+author: "@NVH_Z"
 ---
 
 # 隔声量测量：传声损失TL的实验室方法
@@ -224,3 +225,7 @@ for leak in [0.0, 0.01, 0.03, 0.05, 0.25]:
 ## 一句话记住
 
 隔声量是拦水坝漏水的账：TL 把透射能量比压成分贝，但账要按面积算——1% 的全通泄漏就能把 30 dB 的好材料拖到 19.6 dB，所以先封孔、再看 TL 曲线、按件选对阻抗管、双室声强、双混响室三种测法。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "音调度 Tonality：纯音成分的定量评价"
+author: "@NVH_Z"
 ---
 
 # 音调度 Tonality：纯音成分的定量评价
@@ -263,3 +264,7 @@ for db in (30, 40, 50, 60):
 ## 一句话记住
 
 纯音烦不烦，看的不是总级而是它比紧邻背景突出多少：经典音调度用纯音响度占比 $W_N$ 给出 0~1 的相对读数，心理声学音调度（t.u.HMS）用听觉模型给出随响度增长的绝对强度与频段分布——合规判据交给 TTNR/PR 的 8/9 dB 阈值，整改排序交给 Tonality。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

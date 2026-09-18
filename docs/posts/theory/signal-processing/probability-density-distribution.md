@@ -1,5 +1,6 @@
 ---
 title: "概率密度与概率分布：时域统计的完整画像"
+author: "@NVH_Z"
 ---
 
 # 概率密度与概率分布：时域统计的完整画像
@@ -149,3 +150,7 @@ for name, x in signals.items():
 ## 一句话记住
 
 直方图给幅值"清点人口"，除以级宽得密度（看形状：浴缸是正弦、钟形是随机、尖峰长尾是冲击），逐级累加得分布（读百分点与超标时间）——RMS 相同的信号，画像可以完全不同。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

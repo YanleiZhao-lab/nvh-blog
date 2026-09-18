@@ -1,5 +1,6 @@
 ---
 title: "声功率测量：半球包络法与K1/K2修正"
+author: "@NVH_Z"
 ---
 
 # 声功率测量：半球包络法与K1/K2修正
@@ -260,3 +261,7 @@ for d in [15, 10, 6, 4, 3]:                  # 总声级与背景级的差
 ## 一句话记住
 
 声压级像桌面照度、随测点起落，声功率像灯泡瓦数、只属于声源：包络面上做能量平均、再补上表面积这笔账，距离与方位自动对消；背景级差不足 6 dB 或 K2 修正压不住时，换场地比硬修更可靠。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

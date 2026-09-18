@@ -1,5 +1,6 @@
 ---
 title: "峭度：表征信号冲击特性的统计量"
+author: "@NVH_Z"
 ---
 
 # 峭度：表征信号冲击特性的统计量
@@ -165,3 +166,7 @@ for name, s in [("正弦", sine), ("方波", square), ("高斯", gauss), ("咔�
 ## 六、小结
 
 峭度量化的是 RMS 与峰值都无法描述的信息：能量在幅值上的分布形状。诊断侧，滑动帧峭度超值可用于定位咔哒、咯吱、齿轮点蚀等冲击事件；试验侧，Kurtosis Control 与 Sigma Clipping 使随机振动试验能同时控制谱形、冲击密度与峰值上限。两条实用判据：峭度超值明显为正，信号含冲击成分；实测工况峭度明显大于 3，纯高斯随机试验的冲击考核不足。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

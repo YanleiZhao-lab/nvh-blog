@@ -1,5 +1,6 @@
 ---
 title: "站群建设记录：从内容前台到工程社区"
+author: "@NVH_Z"
 ---
 
 # 站群建设记录：从内容前台到工程社区
@@ -103,3 +104,7 @@ services:
 ---
 
 > 本文随站群建设持续更新，作为架构决策的记录基线。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

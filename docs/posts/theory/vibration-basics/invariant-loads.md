@@ -1,5 +1,6 @@
 ---
 title: "不变载荷：与装配无关的载荷提取"
+author: "@NVH_Z"
 ---
 
 # 不变载荷：与装配无关的载荷提取
@@ -160,3 +161,7 @@ for name, ZR in [("柔软 k=2e4", 2e4/(1j*w)),
 ## 一句话记住
 
 接触力随搭档变、阻断力/自由速度/体积加速度不随搭档变：先定连接界面、再判强弱耦合，弱耦合直接测（刚性台测阻断力、柔软吊测自由速度）、强耦合 in-situ TPA 反演；接口往源划分离彻底、往接收端划精度高，权衡完写进载荷谱。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

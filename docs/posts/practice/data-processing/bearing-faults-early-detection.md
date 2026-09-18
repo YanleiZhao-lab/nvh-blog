@@ -1,5 +1,6 @@
 ---
 title: "轴承故障早期检测：从包络谱到冲激量的实操链"
+author: "@NVH_Z"
 ---
 
 # 轴承故障早期检测：从包络谱到冲激量的实操链
@@ -256,4 +257,6 @@ print(f"envelope spectrum peak: {peak:.1f} Hz (theory BPFO = 184.5 Hz)")
 
 早期故障=稀疏的微秒级冲击：能量太小（RMS 不动）、频谱太宽（谱线不见），但每一锤都敲响结构共振这面锣——带通锁锣音、取包络数锤点，包络谱对特征频率表定位部件；峭度先动报警、RMS 后动确认，降速复测里峰跟着转速走的才是真故障。
 
+---
 
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

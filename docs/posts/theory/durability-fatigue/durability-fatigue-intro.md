@@ -1,5 +1,6 @@
 ---
 title: "耐久与疲劳：从载荷历程到损伤累积的工程框架"
+author: "@NVH_Z"
 ---
 
 # 耐久与疲劳：从载荷历程到损伤累积的工程框架
@@ -176,3 +177,7 @@ Simcenter 体系里这条链路各环节都有对应工具位置：
 ## 一句话记住
 
 疲劳损伤靠记账：S-N 曲线给出每级应力幅的"总寿命"，雨流计数把乱波形拆成一笔笔循环，Miner 法则按 n_i/N_i 逐级扣减——D 到 1 就断，顺序不管、分散要防。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

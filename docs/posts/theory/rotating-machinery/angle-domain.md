@@ -1,5 +1,6 @@
 ---
 title: "角度域：把时间轴换成转轴看信号"
+author: "@NVH_Z"
 ---
 
 # 角度域：把时间轴换成转轴看信号
@@ -183,3 +184,7 @@ Simcenter 手册对谐波去除的 nr_of_cycles_for_avg 参数同样给出该定
 ## 一句话记住
 
 变速列车上数接缝：秒表量出忽长忽短，里程表恢复等距。转速积成转角，阶次替代频率、每转点数替代采样率、循环平均替代谱平均——激励事件随转轴重复，就到转轴坐标系里分析它。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

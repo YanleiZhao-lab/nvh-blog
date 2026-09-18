@@ -1,5 +1,6 @@
 ---
 title: "主分量谱 PCS：多参考数据的降维视图"
+author: "@NVH_Z"
 ---
 
 # 主分量谱 PCS：多参考数据的降维视图
@@ -145,3 +146,7 @@ print("虚拟相干:   ", np.round(abs(cross)**2/(Sp*np.diag(S[:, :, i]).real), 
 ## 一句话记住
 
 主分量谱就是给多参考数据"分声部"：每根谱线上把互谱矩阵对角化，特征值谱的断崖数出独立源、$[U]$ 的列给出每个源的分布形状，再配虚拟相干切出各源贡献——四通道的乱麻，一次分解归队。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

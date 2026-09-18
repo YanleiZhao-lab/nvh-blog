@@ -1,5 +1,6 @@
 ---
 title: "论文复现实验记录模板"
+author: "@NVH_Z"
 ---
 
 # 论文复现实验记录模板
@@ -181,3 +182,7 @@ papers/
 ---
 
 > 本文模板适配本博客的 VitePress 格式，可直接作为 `posts/research/` 下的文章模板使用。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

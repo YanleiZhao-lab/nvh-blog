@@ -1,5 +1,6 @@
 ---
 title: "虚拟相干展开：多输入系统的归因工具"
+author: "@NVH_Z"
 ---
 
 # 虚拟相干展开：多输入系统的归因工具
@@ -168,3 +169,7 @@ ch4: γ²v(PC1)=0.723  γ²v(PC2)=0.277  和=1.000
 - **Simcenter Testlab 帮助文档** - Principal Component Analysis / Virtual Coherence 相关处理方法
 - 本站《[主分量谱 PCS：多参考数据的降维视图](/posts/theory/signal-processing/principal-component-spectrum.html)》 - PCS 的完整推导与 CMIF 的关系
 - 本站《[相干函数：评估频响测量质量的统计指标](/posts/theory/signal-processing/coherence-function.html)》 - 四种相干的定义与低相干成因分析
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

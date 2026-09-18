@@ -1,5 +1,6 @@
 ---
 title: "稳定图进阶技巧：极点选择的工程判断"
+author: "@NVH_Z"
 ---
 
 # 稳定图进阶技巧：极点选择的工程判断
@@ -207,3 +208,7 @@ print("传感器/局部质量比: %.1f%%" % (100*0.001/m2))
 ## 一句话记住
 
 稳定图上光柱不成形，先查三件事：字母有列无峰查部件（局部模态被洗掉，Point filter 重建求和）；字母稀疏松散查激振方向（留数正比激励点振型投影，MIMO 多朝向补齐）；字母成簇查搬点（传感器质量移动频率，multi-run 分批拟合再拼振型）。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

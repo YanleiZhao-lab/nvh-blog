@@ -1,5 +1,6 @@
 ---
 title: "时域 TPA：把每条路径的贡献做成可以听的声音"
+author: "@NVH_Z"
 ---
 
 # 时域 TPA：把每条路径的贡献做成可以听的声音
@@ -172,3 +173,7 @@ TPA Result Type 属性的取值有三类，对应回放时看到的三种时间�
 ## 一句话记住
 
 频域 TPA 是总谱、时域 TPA 是调音台：同步等采样率的时间历史驱动频域模型，FFT 相乘再逆变换把每条路径变回声音；Replay 里开关路径、对比模型、Eavesdropping 看实时谱——dB 降没降看图，好不好听用耳。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

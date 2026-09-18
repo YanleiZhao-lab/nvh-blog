@@ -1,5 +1,6 @@
 ---
 title: "FRF 累加与综合：模态模型的两条使用路径"
+author: "@NVH_Z"
 ---
 
 # FRF 累加与综合：模态模型的两条使用路径
@@ -177,3 +178,7 @@ FRF 累加与综合是模态模型的验收工序，不是可选项。累加把�
 ## 一句话记住
 
 FRF 累加是验钞机——把几十条 FRF 的峰叠成一张对账单，拟合频率逐峰对号，多报的无峰、漏报的有峰；FRF 综合是复印机——用模态模型把曲线印回来与原件对比，corr 查形状、error 查幅值，互易恒等式还能补印没测过的那条 FRF。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

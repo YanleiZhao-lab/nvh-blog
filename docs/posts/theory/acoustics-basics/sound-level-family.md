@@ -1,5 +1,6 @@
 ---
 title: "声级家族全解：LAeq/LAS/LAF/SEL 各是什么"
+author: "@NVH_Z"
 ---
 
 # 声级家族全解：LAeq/LAS/LAF/SEL 各是什么
@@ -269,3 +270,7 @@ Classic 的跟踪增量由转速步长等跟踪参数决定，输出点之间可
 - 换算核心只有一条：LAE = LAeqT + 10 lg (T/T0)；分贝永远回平方域平均，不能算术平均。
 - 时间常数决定读数性格：Fast 125 ms 贴信号、Slow 1 s 求稳、Impulse 35 ms 与 1.5 s 快上慢下；测脉冲用 Slow 挡必偏低。
 - 报告任何声级数字，四个信息缺一不可：指标名、计权、时间常数或平均帧、积分时长。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

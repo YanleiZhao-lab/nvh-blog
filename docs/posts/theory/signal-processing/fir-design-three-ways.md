@@ -1,5 +1,6 @@
 ---
 title: "FIR 滤波器设计三路线：单窗、频域抽样与 Remez 交换"
+author: "@NVH_Z"
 ---
 
 # FIR 滤波器设计三路线：单窗、频域抽样与 Remez 交换
@@ -202,3 +203,7 @@ sampling-transition   0.0109  -31.6
 ## 一句话记住
 
 理想频响的冲激响应无限长，工程只付得起有限长：单窗法用平滑包络抹平截断边沿（指标不能分开设）、频域抽样把频响钉在格点上（格点间靠插值、窄带选频最强）、Remez 把三项指标写进一张公差表解出最短长度——同一矛盾的三种付账方式，验收条款严格就选 Remez。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

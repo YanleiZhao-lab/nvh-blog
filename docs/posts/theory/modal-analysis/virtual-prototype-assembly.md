@@ -1,5 +1,6 @@
 ---
 title: "虚拟样机装配 VPA：把各部件的试验模态装配成整机"
+author: "@NVH_Z"
 ---
 
 # 虚拟样机装配 VPA：把各部件的试验模态装配成整机
@@ -140,3 +141,7 @@ VPA 的价值链条是：部件级试验模态（准）+ 连接件台架参数�
 ## 一句话记住
 
 VPA 是模态空间的积木拼装：部件模态模型是量好形状的积木，连接件是标定过的拼插口，拼装前就能算出整机模态；全模态基下与物理域严格等价，截断误差靠静态补偿项兜底。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

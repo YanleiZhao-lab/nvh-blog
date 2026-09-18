@@ -1,5 +1,6 @@
 ---
 title: "转速扫掠处理：RPM增量、帧长与扫掠率的耦合"
+author: "@NVH_Z"
 ---
 
 # 转速扫掠处理：RPM增量、帧长与扫掠率的耦合
@@ -141,3 +142,7 @@ for sr in [150, 37.5, 300]:                    # 三档扫掠率 rpm/s
 ## 一句话记住
 
 扫掠谱分析里帧长吃时间、增量定步距、扫掠率是先天事实，三者相除即重叠率——大于零才有重叠护住窗函数削掉的数据，为负就是空洞；50% 到 75% 是工程甜点区。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

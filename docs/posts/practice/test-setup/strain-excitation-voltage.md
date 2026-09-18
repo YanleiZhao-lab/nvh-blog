@@ -1,5 +1,6 @@
 ---
 title: "应变片激励电压怎么选：灵敏度与自热的平衡"
+author: "@NVH_Z"
 ---
 
 # 应变片激励电压怎么选：灵敏度与自热的平衡
@@ -158,3 +159,6 @@ A x3   -> 11.02 V (sqrt(A) growth)
 
 应变片是比例传感器：信号随供桥电压线性变好、自热按平方变坏，$V_{max}=\sqrt{R\,A\,T\,\lambda}$ 把平衡点写成一条式子——高阻、大栅、贴金属可以给足电压，小栅、叠层花、贴塑料必须降额；拿不准就加压后盯零点，稳了再校零、再测量。
 
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

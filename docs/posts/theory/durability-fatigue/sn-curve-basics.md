@@ -1,5 +1,6 @@
 ---
 title: "S-N 曲线与疲劳极限：材料抗疲劳能力的标尺"
+author: "@NVH_Z"
 ---
 
 # S-N 曲线与疲劳极限：材料抗疲劳能力的标尺
@@ -135,3 +136,7 @@ S-N 曲线不是一条“确定的线”，而是对一片散布数据的拟合�
 ## 一句话记住
 
 S-N 曲线是材料的“寿命查询表”：幅值越低寿命越长，钢在疲劳极限以下趋于无限寿命而铝没有；双对数规律下幅值翻倍损伤翻二十倍——用前先查 R 比、载荷类型与修正口径。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

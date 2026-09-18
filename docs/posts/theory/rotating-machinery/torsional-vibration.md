@@ -1,5 +1,6 @@
 ---
 title: "扭转振动：旋转机械角速度波动的基本概念、测量判据与阶次诊断"
+author: "@NVH_Z"
 ---
 
 # 扭转振动：旋转机械角速度波动的基本概念、测量判据与阶次诊断
@@ -179,3 +180,7 @@ print(f"扭振峰值出现在 {rpm[tors.argmax()]:.0f} RPM")
 ## 一句话记住
 
 扭振是叠加在平均转速上的角速度波动，像骑车一圈两次发力带来的"一顿一顿"：测它靠每转足够多的脉冲（PPR 至少 2 倍于最高关心阶次），看它认准点火阶次与逆势凸起的共振包，断它靠扭振峰与噪声峰转速对齐。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "从FRF提取阻尼：3dB带宽法的原理、误差来源与Testlab游标"
+author: "@NVH_Z"
 ---
 
 # 从FRF提取阻尼：3dB带宽法的原理、误差来源与Testlab游标
@@ -206,3 +207,7 @@ Q = 25 的共振峰半功率带宽只有 4 Hz，df = 2 Hz 的谱线直读误差�
 ## 一句话记住
 
 阻尼藏在峰宽里：$Q = f_0/(f_2-f_1)$ 一除即得，但先查三件事——带宽内至少 5 条谱线（分辨率）、指数窗的账要扣（$\zeta_{\mathrm{eq}} = \zeta + 1/(2\pi f_0\tau)$）、峰两侧能找到干净的 -3dB 穿越点（模态不密）；三关全过，手动游标与曲线拟合只在精度上有别。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

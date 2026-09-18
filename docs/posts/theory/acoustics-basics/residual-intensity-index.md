@@ -1,5 +1,6 @@
 ---
 title: "残余声强与声压残余声强指数：声强测量的底噪"
+author: "@NVH_Z"
 ---
 
 # 残余声强与声压残余声强指数：声强测量的底噪
@@ -193,3 +194,7 @@ print(f"δpIo 仿真值 = {10*np.log10(I_ref/abs(I_RI)):.2f} dB，"
 ## 一句话记住
 
 声强表的底噪叫残余声强：两通道零点几度的相位失配伪造成一股随声压涨落的"假流量"；固定的是级差 δpIo = 10lg(kd/φe)，低频 kd 塌陷使它每倍频程掉 3 dB——扣掉精度安全余量 χ 才是可用下限，探头动过就得进耦合腔重标。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

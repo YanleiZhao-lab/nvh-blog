@@ -1,5 +1,6 @@
 ---
 title: "声级计读数里的时间：时间计权与等效声压级"
+author: "@NVH_Z"
 ---
 
 # 声级计读数里的时间：时间计权与等效声压级
@@ -202,3 +203,7 @@ $$L_{AE} = L_{Aeq,T} + 10\,\lg T$$
 ## 一句话记住
 
 声级计读数里的差异不是误差而是口径：指数平均是带漏孔的水缸，缸的大小就是时间常数（Impulse 茶杯、Fast 水桶、Slow 水缸），Leq 则把整段时间的能量倒进一口大缸一次称重——先说清用哪口缸，再谈数字。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "声场指数与动态性能指数：声强法测量的质量判据"
+author: "@NVH_Z"
 ---
 
 # 声场指数与动态性能指数：声强法测量的质量判据
@@ -257,3 +258,7 @@ for band, C in [("1-4k 倍频程带(精密级)", 57), ("250-500 倍频程带(精
 ## 一句话记住
 
 声强数据的验收是一条链：相位失配定死区（$\delta_{pIo}$），扣掉安全余量得工作范围（$L_d$，判据 $L_d-F_2>0$），再看声场本身——F3 与 F2 差超 3 dB 先除外源，$N>C F_4^2$ 定测点数；逐频带查，低频最先出局。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

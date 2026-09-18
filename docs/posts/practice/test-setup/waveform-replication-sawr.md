@@ -1,5 +1,6 @@
 ---
 title: "波形复现 SAWR：从实测波形到台架输出"
+author: "@NVH_Z"
 ---
 
 # 波形复现 SAWR：从实测波形到台架输出
@@ -178,3 +179,7 @@ print(f"共振180Hz: H={H[i180]:.1f}倍, Round1响应={resp1[i180]:.1f}, Round2�
 ## 一句话记住
 
 SAWR 把实测波形当目标、把控制点反馈当判据：先低量级辨识频响、取倒数得 ITF，驱动等于目标乘 ITF，回放后按误差迭代修正、按漂移快慢选修正时机——学舌的鹦鹉不在乎嗓音标准，只在乎学得像。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

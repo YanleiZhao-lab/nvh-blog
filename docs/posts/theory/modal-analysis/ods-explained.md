@@ -1,5 +1,6 @@
 ---
 title: "ODS工作变形：不测激励力的运行状态变形分析"
+author: "@NVH_Z"
 ---
 
 # ODS工作变形：不测激励力的运行状态变形分析
@@ -223,3 +224,7 @@ ODS 是工况下的真实变形，不是结构属性。工程判断顺序：先�
 ## 一句话记住
 
 ODS 是“运行状态的变形快照”，蹦床照片不等于蹦床脾气：先看动画定位哪里动得大，再用 MAC 对照振型确认是不是某阶模态主导；换工况变形会变，要阻尼、要改结构预测，就得回到模态分析。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

@@ -1,5 +1,6 @@
 ---
 title: "功率谱密度 PSD：随机信号为什么必须用它"
+author: "@NVH_Z"
 ---
 
 # 功率谱密度 PSD：随机信号为什么必须用它
@@ -155,3 +156,7 @@ $$
 - 能量集中在单根谱线（阶次谐波、共振正弦）→ Autopower，幅值即判据
 - 无法判断时改变一次频率分辨率：幅值随之变化的是随机信号，应使用 PSD；幅值不变的是正弦信号，应使用 Autopower
 - 任何谱先做 RMS 求和再对比总量——这是唯一对分辨率、对格式都免疫的判据
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

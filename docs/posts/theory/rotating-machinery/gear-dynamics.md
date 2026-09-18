@@ -1,5 +1,6 @@
 ---
 title: "齿轮动力学：啮合阶次、边带与故障特征"
+author: "@NVH_Z"
 ---
 
 # 齿轮动力学：啮合阶次、边带与故障特征
@@ -165,3 +166,7 @@ print('安装偏心 k=1:', order_spectrum(62.0, 1.0, m=0.6))   # 61/62/63 阶
 ## 一句话记住
 
 齿数即阶次（传动链按速比折算出分数阶），主阶 ±k 的对称伴线是每转 k 次调幅的指纹（阶次域量间距：2 查椭圆、1 查同心），宽带竖纹是间隙敲击——先认线、再量边、后查间隙。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

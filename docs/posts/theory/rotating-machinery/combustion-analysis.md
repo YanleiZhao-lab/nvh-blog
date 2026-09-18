@@ -1,5 +1,6 @@
 ---
 title: "燃烧分析：缸压与放热率的测量链路"
+author: "@NVH_Z"
 ---
 
 # 燃烧分析：缸压与放热率的测量链路
@@ -254,3 +255,7 @@ polytropic n = 1.319 (true 1.320)
 ## 一句话记住
 
 缸压曲线是一只被点了火的手风琴：多变压缩是风箱本来的演奏，Rassweiler-Withrow 用减法把燃烧多出来的那一部分剪出来累加成 MFB，CA50 标出烧到一半的时刻；采集端记住角域 0.1 度与每循环 2 转，分析端记住循环变差才是常态、包络与逐循环统计才有工程意义。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

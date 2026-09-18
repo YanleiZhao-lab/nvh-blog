@@ -1,5 +1,6 @@
 ---
 title: "用户自定义敲击序列：多锤/多点的组织"
+author: "@NVH_Z"
 ---
 
 # 用户自定义敲击序列：多锤/多点的组织
@@ -148,3 +149,7 @@ print("总敲击数 =", 5 * 5, "| 一键流转 ≈", base + 25 * 0.5,
 ## 一句话记住
 
 敲击序列就是锤击试验的分镜表：默认 +1 只会顺号翻页，布点一跳跃就丢点；用 User Defined Impact Sequence 把"哪轮、哪个锤、哪些表"开机前排死，轮数乘通道数盖满测点再开工。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

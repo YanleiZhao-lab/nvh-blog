@@ -1,5 +1,6 @@
 ---
 title: "量化与量程：ADC 位数如何决定动态范围"
+author: "@NVH_Z"
 ---
 
 # 量化与量程：ADC 位数如何决定动态范围
@@ -119,3 +120,7 @@ Simcenter Testlab 的 Acquisition Setup 界面左下角有电平指示条，以�
 | 增益 | Gain | ADC 前的模拟放大倍数 | 系统按量程自动匹配 |
 
 结论：<strong>位数决定台阶总数，量程决定台阶宽度，增益决定信号能占满多少台阶。</strong>动态范围不是采集卡单方面的性能参数，而是"硬件位数 × 量程设置"共同决定的结果。排查底噪异常高的测试数据时，应首先核查该通道当时的量程设置。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

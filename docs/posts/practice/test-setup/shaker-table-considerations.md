@@ -1,5 +1,6 @@
 ---
 title: "振动台选型与使用：推力、位移、承载"
+author: "@NVH_Z"
 ---
 
 # 振动台选型与使用：推力、位移、承载
@@ -207,3 +208,7 @@ DUT   20 kg -> 总运动质量   30 kg, 可达峰值 1.4 g
 ## 一句话记住
 
 振动台是一名举重运动员：低频比蹲深（位移）、中频比起身速度、高频比挺举极限（F=B·L·I）；运动质量全算、窄带按平方根折减、温升再打七折，最后留 15%~20% 余量，并用裸台 g/V 传递函数定期体检。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

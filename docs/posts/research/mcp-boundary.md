@@ -1,5 +1,6 @@
 ---
 title: "专业 NVH Skill 与 MCP 服务的边界规划"
+author: "@NVH_Z"
 ---
 
 # 专业 NVH Skill 与 MCP 服务的边界规划
@@ -142,3 +143,7 @@ MCP 工具（确定性计算：FFT / 模态 / 指标）
 ---
 
 > 本文为架构规划笔记，文中公式与判据对齐 Simcenter Testing 知识库（DSP 基础、旋转机械专册）与理论手册第十八章，具体 MCP 工具实现随工程需求迭代。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

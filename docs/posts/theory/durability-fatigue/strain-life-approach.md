@@ -1,5 +1,6 @@
 ---
 title: "应变寿命法 Strain Life：弹塑性载荷下的疲劳寿命预测"
+author: "@NVH_Z"
 ---
 
 # 应变寿命法 Strain Life：弹塑性载荷下的疲劳寿命预测
@@ -222,3 +223,7 @@ for sm in (0.0, 150.0, -150.0):               # 平均应力扫描：SWT 损伤�
 ## 一句话记住
 
 塑性区的疲劳要盯住局部应力-应变回线：实测应变逐点配 Ramberg-Osgood 应力，闭环即循环、应变幅查 EN 曲线记 n/N 损伤，SWT/Morrow 损伤参数把平均应力算进账，输出就是输入历程能整段重复几次（寿命块）。
+
+---
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
