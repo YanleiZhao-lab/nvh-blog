@@ -166,7 +166,7 @@ title: "📖 全部文章"
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（21 篇）
+### 测试操作（22 篇）
 
 - [应变片激励电压怎么选：灵敏度与自热的平衡](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张公开资料插图
 
@@ -198,6 +198,8 @@ title: "📖 全部文章"
 - [SCADAS RS 调节单元选型：电桥/传感器/通用/热电偶八大卡件](practice/test-setup/rs-conditioning-modules.html) — 传感器定卡、带宽定型、通道定量：B24-120/B24-350 补桥臂阻值错一档满盘皆输（numpy 定量复现：350 Ω 片接 120 Ω 补臂，零应变失衡 1223 mV、灵敏度掉 24%），S24 供电一开全开（不耐电的变送器别与 ICP 同卡），U12 通道隔离对付复杂接地、U12-E 带宽 20.7 kHz 收高频，TC20 按 ITS-90 自动线性化（冷端勿受气流）、大量 K 型走 TCK8 CAN 扩展 64 通道，DI 管 CAN/脉冲/GNSS、ECAT 给台架控制器喂实时数据（周期 <100 μs 同步 <1 μs），最后用吞吐（每链 1.7 MSa/s）与功耗（82 W 停充线）两本账验收整条链；调音台通道条类比贯穿（幻象供电=ICP、DI 盒=通道隔离、RIAA 均衡=热电偶线性化）
 
 - [SCADAS RS 系统连接全解：Wi-Fi AP/客户端/以太网/SFTP 四条通道](practice/test-setup/rs-system-connection.html) — “能连上”却“找不到”是两件事：REC 面向三类访问需求（配置/采数/搬数）各开通道，四扇门各有钥匙——Wi-Fi 接入点自带门牌（SSID 带序列号 SCADAS-RS-2.4/5.0-nnn、默认密码、最多 4 客户端、5 GHz 硬件已备尚未支持），客户端模式拿钥匙开别人的门（配置外部 SSID+密码、防公司网 DHCP 准入拦截），1 Gb 以太网是实体正门（Testlab Neo 前端模式点名走它+拷数主干道，numpy 对账 128 GB 以太网 18 分钟对 Wi-Fi 68 分钟），SFTP 是公司网禁光 LLMNR/WS-Discovery/SSDP/NBNS 后的天窗；看不见设备时先查 PC 的 SSDP 服务再试机身 APIPA IP，拷数别与录制抢 SSD 吞吐，密码策略 8 字符+特殊字符+大写、签名固件防篡改，多台 REC 同场先改 SSID 防连错；房门钥匙类比贯穿
+
+- [SCADAS RS 引脚输出与布线：数字IO/脉冲/CAN/GNSS 接口定义](practice/test-setup/rs-pinout-wiring.html) — 数字接口接线错误设备不报、结果悄悄错：转速乱跳、CAN 挂到第四条整组消失、GNSS 轨迹漂出车道，病根都在引脚表与布线图。三种 15 针连接器物理同尺寸后缀不同，插错不坏硬件但信号全乱；单端脉冲主针 8 备用 2 和 4、差分成对 7 加 8，一个连接器可走三路；编码器参考脉冲按需接；numpy 演示单端计数 1800 rpm、正交四倍频 1799.5、B 相接反方向翻转而转速不变；CAN 四总线满载多耗 10.25 W 且端接在外、GNSS 天线按力矩拧紧、UPS 远程开关窗口 6.5 至 60 V；配电箱空开标签类比贯穿，接线前 8 项对表清单
 
 ### 耐久试验（3 篇）
 
