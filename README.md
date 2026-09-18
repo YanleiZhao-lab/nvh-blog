@@ -34,3 +34,7 @@ docker compose up -d --build
 ## 写作
 
 飞书知识库写文章 → Elog 同步 → GitHub Actions 自动构建部署
+
+## 内容许可
+
+本博客全部原创文章采用 **[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans)**（署名—非商业性使用—禁止演绎）许可：禁止搬运、改写、翻译与商业使用；引用的 Siemens Simcenter 官方插图版权归原权利人所有。
