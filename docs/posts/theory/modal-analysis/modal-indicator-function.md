@@ -28,7 +28,7 @@ MIF 不依赖单条曲线，而是考察整个矩阵。它逐谱线计算：该�
 
 ![各阶 MIF 在不同频率上的局域极小：第 n 条曲线出现凹陷，指示该频率上至少有 n 阶模态](/images/modal-indicator-function/mif_multiplicity.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 二、推导：从"共振处响应虚部主导"到特征值问题
 
@@ -78,7 +78,7 @@ $$[H_R]^T[H_R]\,F = \mu\left([H_R]^T[H_R] + [H_I]^T[H_I]\right)F$$
 
 ![逐谱线特征值问题的构造：方阵维数等于输入自由度数](/images/modal-indicator-function/mif_eigen_eq.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 两个适用性限制
 - MIF 的判读前提是实模态。结构存在强阻尼连接、局部大阻尼元件时模态呈复模态特性，响应相位不再保持 90° 滞后关系，实部谷底无法完全归零，MIF 数值偏高、凹陷变浅，判读结果不可靠（手册 18.7 节：振型相位偏离 0°/180° 即指示复模态，原因或是结构上存在局部阻尼元件，或是测量与数据处理不良）。此时应改用 CMIF（复模态指示函数，Complex Mode Indicator Function）：对 FRF 矩阵逐谱线做奇异值分解（Singular Value Decomposition, SVD），奇异值曲线的**峰**指示模态，对复模态系统同样适用。

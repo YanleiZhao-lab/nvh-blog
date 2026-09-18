@@ -20,7 +20,7 @@ author: "@NVH_Z"
 
 ![应变测量系统的长电缆与低电平信号易受动力线干扰](/images/strain-excitation-voltage/fig1-strain_wires.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - **激励电压（Excitation Voltage）**：加在应变电桥供电端的电压，应变片输出与它成正比，故称比例式传感器；典型范围 1-10 V
@@ -40,7 +40,7 @@ author: "@NVH_Z"
 
 ![应变片的栅面积：敏感栅走线往复围成的区域](/images/strain-excitation-voltage/fig2-grid_area.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这三条性质合在一起，就能回答“最多允许加多少伏”——超过这个限度，热量散不出去，轻则误差超差，重则栅丝烧断。
 
@@ -52,7 +52,7 @@ $$V_{max} = \sqrt{R \cdot A \cdot T \cdot \lambda}$$
 
 ![最大激励电压估算式（RATY 式）](/images/strain-excitation-voltage/fig3-equation.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 四个参数的典型取值：$R$ 常见 120 Ω、350 Ω、1000 Ω；$A$ 即图 2 高亮的栅面积（单位 mm²）；$T$ 是应变片周围允许的温度梯度，典型值 0.75 °C/mm（温差 1 °C 与 1 K 数值相等，只是零点差 273.15）；$\lambda$ 钢约 50 W/(m·K)、塑料约 0.05 W/(m·K)。注意单位搭配：面积取 mm²、导热取 W/(mm·K) 时结果直接是伏特。
 
@@ -60,7 +60,7 @@ $$V_{max} = \sqrt{R \cdot A \cdot T \cdot \lambda}$$
 
 ![六种典型配置的最大允许激励电压算例](/images/strain-excitation-voltage/fig4-table.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 表格本身就是一份“降额清单”，值得逐行读：
 
@@ -78,7 +78,7 @@ $$V_{max} = \sqrt{R \cdot A \cdot T \cdot \lambda}$$
 
 ![栅面积越大散热越快](/images/strain-excitation-voltage/fig5-gauge.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 **阻值选高**。350 Ω 优于 120 Ω：同电压下发热只有约三分之一，容许电压还更高。350 Ω 片通常物理尺寸也更大，与“栅面积选大”互相成全。1000 Ω 片在塑料、复合材料上更有优势。
 
@@ -86,7 +86,7 @@ $$V_{max} = \sqrt{R \cdot A \cdot T \cdot \lambda}$$
 
 ![叠层与平面应变花：叠层三层挤在一起，散热差](/images/strain-excitation-voltage/fig6-stacked_rosette.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 **基体材料认命**。理想世界片都贴在金属上；现实里塑料构件躲不开，那就用最低的激励电压——1 V 甚至更低，并接受信噪比的损失（用差分输入、短导线、屏蔽把它补回来）。
 
@@ -96,7 +96,7 @@ $$V_{max} = \sqrt{R \cdot A \cdot T \cdot \lambda}$$
 
 ![通电后热致视在应变随时间稳定](/images/strain-excitation-voltage/fig7-stabilization.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 由此得到两条实操准则：
 

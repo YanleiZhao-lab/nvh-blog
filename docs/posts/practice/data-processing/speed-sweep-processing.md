@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 转速扫掠处理：RPM增量、帧长与扫掠率的耦合
 
-> 同一台设备、同一段升速数据，两位工程师处理出的阶次切线一条平滑一条带着锯齿状缺口——差的不是数据，是处理参数。扫掠工况下做谱分析，RPM 增量、帧长（Framesize）、扫掠率（Sweep Rate）三个量咬合在一起，共同决定了一个界面上看不到的量：重叠率（Overlap）。本文用 Simcenter 官方知识库的三组对照案例，把同一组设置在三档扫掠速度下分别产生 50% 重叠、出现数据空洞、75% 重叠的机制讲透，并给出参数选择的工程判据。
+> 同一台设备、同一段升速数据，两位工程师处理出的阶次切线一条平滑一条带着锯齿状缺口——差的不是数据，是处理参数。扫掠工况下做谱分析，RPM 增量、帧长（Framesize）、扫掠率（Sweep Rate）三个量咬合在一起，共同决定了一个界面上看不到的量：重叠率（Overlap）。本文用 公开技术资料的三组对照案例，把同一组设置在三档扫掠速度下分别产生 50% 重叠、出现数据空洞、75% 重叠的机制讲透，并给出参数选择的工程判据。
 
 ## 一、为什么同一组数据能处理出不同的结果
 
@@ -48,11 +48,11 @@ $$
 
 ![Testlab 采集参数：Tracking and Triggering 菜单，最小 1500 rpm、最大 3000 rpm、增量 150 rpm](/images/speed-sweep-processing/fig1.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ![Testlab 采集参数：FS Acquisition 菜单，分辨率 0.5 Hz、帧长 2 秒](/images/speed-sweep-processing/fig2.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### 情形一：中速扫掠，50% 重叠
 
@@ -60,7 +60,7 @@ $$
 
 ![中速扫掠（150 rpm/s）：上图转速-时间曲线，下图处理帧的排布，相邻帧 50% 重叠](/images/speed-sweep-processing/fig3.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### 情形二：慢速扫掠，出现数据空洞
 
@@ -68,13 +68,13 @@ $$
 
 ![慢速扫掠（37.5 rpm/s）：按增量与帧长取帧后，帧间出现未被处理的数据段](/images/speed-sweep-processing/fig4.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 知识库给了一组阶次切线的对照：高重叠处理的曲线（蓝色）连续光滑，有空洞处理的曲线（红色）在缺口处跳变、丢失细节——两条曲线来自同一段数据。
 
 ![同一段数据两种处理：蓝线为高重叠处理的阶次曲线，红线为存在处理空洞的结果](/images/speed-sweep-processing/fig5.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### 情形三：快速扫掠，75% 重叠
 
@@ -82,7 +82,7 @@ $$
 
 ![快速扫掠（300 rpm/s）：相邻帧 75% 重叠](/images/speed-sweep-processing/fig6.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ## 四、参数怎么选：一条设计链
 

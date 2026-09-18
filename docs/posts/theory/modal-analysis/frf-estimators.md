@@ -29,7 +29,7 @@ $$
 
 ![理想线性系统的频域输入输出关系：输出谱等于输入谱乘以频响函数矩阵](/images/frf-estimators/lms-theory-p41-frf-definition.png)
 
-*（图源：LMS 振动/噪声测试与分析系统《Theory and Background》理论手册，第 41 页）*
+*（图源：网络官方公开资料）*
 
 问题在于实测的 $x(t)$、$y(t)$ 总混有噪声：力锤测到的力除真实激励外还含压电传感器的电噪声；加速度信号除结构响应外还含背景振动。直接拿两帧含噪谱相除，得到的不是 $H$，而是被噪声污染的混合量。三种估计子的差别，就在于对噪声位置采用哪种假设：
 
@@ -72,15 +72,15 @@ $$
 
 ![H1 估计的噪声模型：噪声 N 仅叠加在输出端，Y(k) = H(k)X(k) + N(k)](/images/frf-estimators/lms-theory-p42-h1-model.png)
 
-*（图源：LMS 振动/噪声测试与分析系统《Theory and Background》理论手册，第 42 页）*
+*（图源：网络官方公开资料）*
 
 ![H2 估计的噪声模型：噪声 M 仅混在输入端，Y = H(X - M)](/images/frf-estimators/lms-theory-p43-h2-model.png)
 
-*（图源：LMS 振动/噪声测试与分析系统《Theory and Background》理论手册，第 43 页）*
+*（图源：网络官方公开资料）*
 
 ![Hv 估计的噪声模型：输入输出两端同时含噪，Y - N = H(X - M)](/images/frf-estimators/lms-theory-p43-hv-model.png)
 
-*（图源：LMS 振动/噪声测试与分析系统《Theory and Background》理论手册，第 43 页）*
+*（图源：网络官方公开资料）*
 
 三个估计子并非三个孤立的世界。下面这条恒等式回答的问题是：H1 与 H2 的幅值差异由什么决定？其中相干函数对应物理里两端噪声总量的统计指标；信噪比越好（相干越接近 1），两种称重策略的读数越一致。
 

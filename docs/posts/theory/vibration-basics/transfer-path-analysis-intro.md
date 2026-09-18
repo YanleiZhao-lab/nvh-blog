@@ -55,7 +55,7 @@ $$P_i(f) = F_{o,i}(f) \cdot \left(\frac{P}{F}\right)_i(f)$$
 
 $$\frac{P}{F} = \frac{\mathrm{Pa}}{\mathrm{N}} = \frac{\mathrm{N/m^2}}{\mathrm{N}} = \frac{1}{\mathrm{m^2}}, \qquad \frac{A}{Q} = \frac{\mathrm{m/s^2}}{\mathrm{m^3/s^2}} = \frac{1}{\mathrm{m^2}}$$
 
-两者都化为 $1/\mathrm{m^2}$。据此，传统上需要对 4 个悬置 × 3 个方向逐一敲击得到的 12 条 $P/F$，可以用一个 Q-source 放在声学响应点、悬置点贴加速度计，**一次测量**同时获得全部 12 条传递函数（Simcenter Testing Knowledge Base 对此有专门论述）。
+两者都化为 $1/\mathrm{m^2}$。据此，传统上需要对 4 个悬置 × 3 个方向逐一敲击得到的 12 条 $P/F$，可以用一个 Q-source 放在声学响应点、悬置点贴加速度计，**一次测量**同时获得全部 12 条传递函数（公开技术资料 对此有专门论述）。
 
 ## 三、切一刀定义路径：切口位置决定模型结构
 
@@ -64,7 +64,7 @@ $$\frac{P}{F} = \frac{\mathrm{Pa}}{\mathrm{N}} = \frac{\mathrm{N/m^2}}{\mathrm{N
 以一辆卡车为例。切口绕发动机划：四个悬置 × 每个三个平动方向 = **12 条结构声路径**。
 
 ![发动机四个悬置被定义为源，跨过切口的 4 个连接点 × 3 方向 = 12 条路径](/images/transfer-path-analysis-intro/twelve_path_tpa.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 切口也可以绕驾驶室划：发动机连同车架成为"源"，跨越驾驶室悬置的连接成为路径—5 个连接点 × 3 方向 = **15 条结构声路径**。切口还可以划在内饰面板上，得到 5 条**空气声路径**（每个面板一条，用 $Q$ 和 $P/Q$）。
 
@@ -91,7 +91,7 @@ TPA 结果最常用的展示是<strong>贡献量图（Contribution Display）</s
 3. **其余条**：各条路径的贡献量，按大小排序。
 
 ![贡献量图：顶条为实测总级，第二条为计算总级，其余为各路径贡献](/images/transfer-path-analysis-intro/contribution_display.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 **计算总级与实测不吻合，说明存在未识别到的重要路径**—这是 TPA 自带的质量校验。对账吻合之后，路径排序才有意义。
 
@@ -143,7 +143,7 @@ $$F_o(f) = k(f) \cdot x(f) = k(f) \cdot \left( \frac{a_a(f)}{(j2\pi f)^2} - \fra
 其中 $a_a$、$a_p$ 分别为主动侧、被动侧加速度（$\mathrm{m/s^2}$），$j$ 为虚数单位；频域双重积分等价于除以 $(j2\pi f)^2$，因此 $x$ 的单位为 m，动刚度 $k$ 的单位为 N/m。注意 $k$ 应使用随频率变化的**复动刚度**（含阻尼相位滞后），而非静态刚度。
 
 ![主动侧与被动侧加速度双重积分相减得位移，乘以悬置刚度得工况力](/images/transfer-path-analysis-intro/mount_stiffness.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 该方法的适用前提是悬置足够"软"—两侧位移差明显，积分误差在差值中占比小。橡胶悬置、液压悬置满足此条件。
 
@@ -160,7 +160,7 @@ $$\{A_o\} = \left[\frac{A}{F}\right] \{F_o\} \quad \Longrightarrow \quad \{F_o\}
 $$\{F_o\} = \left( [H]^{\mathrm{T}} [H] \right)^{-1} [H]^{\mathrm{T}} \{A_o\}, \qquad [H] = \left[\frac{A}{F}\right]$$
 
 ![指示点加速度与路径力构成 FRF 矩阵，工况加速度反解工况力](/images/transfer-path-analysis-intro/matrix_force2.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 只用一条 FRF 直接相除不可行—FRF 在反共振点趋近于零，其倒数趋于无穷，反演力在该频率发散；而且单条 FRF 忽略了路径间的交叉耦合。正确做法是把所有路径的原点 FRF、交叉 FRF 组成矩阵**整体求解**：同一频率在所有 FRF 中同时趋零的概率大幅降低。指示 FRF 的数量通常取路径数的两倍左右，并监控每个频率点的条件数（condition number）—条件数越小，解越稳定。
 

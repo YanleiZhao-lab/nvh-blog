@@ -15,7 +15,7 @@ author: "@NVH_Z"
 
 ![调谐式消振器：刚性质量经弹簧与阻尼器连接到结构](/images/tuned-absorber-design/fig-tuned-absorber.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 三条整改路线的取舍：
 
@@ -47,7 +47,7 @@ $$\bar{\delta} = \frac{m\,\omega^{2}}{-m\,\omega^{2} + j\,\omega\,c + k}\,\bar{x
 
 ![作用在消振器附着点的力](/images/tuned-absorber-design/eq20-76.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 写成解析形式：
 
@@ -71,7 +71,7 @@ $$m_{\mathrm{eff}}(\omega) = \frac{(k + j\,\omega\,c)\,m}{-m\,\omega^{2} + j\,\o
 
 ![消振器最佳调谐频率](/images/tuned-absorber-design/eq20-78.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 即 $\omega_a = \omega_n/(1+\mu)$，**有意调低于**结构固有频率 $\omega_n$，不是正好调到共振频率。原因：装上吸振器后单峰分裂为双峰，$\mu$ 越小双峰越拢，$\mu$ 越大双峰越开；按上式调谐能让两个新峰恰好等高。
 
@@ -79,7 +79,7 @@ $$m_{\mathrm{eff}}(\omega) = \frac{(k + j\,\omega\,c)\,m}{-m\,\omega^{2} + j\,\o
 
 ![消振器最佳阻尼比](/images/tuned-absorber-design/eq20-80.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 手册形式为 $\zeta_a = \sqrt{3\mu/\left(8(1+\mu)^{3}\right)}$（Den Hartog 原式，阻尼比以结构固有频率 $\omega_n$ 为参考）；若以消振器自身调谐频率 $\omega_a$ 为参考，同一阻尼系数对应 $\zeta_a = \sqrt{3\mu/\left(8(1+\mu)\right)}$，两种写法等价。阻尼太小，双峰尖锐且调谐点外响应被放大；阻尼太大，等效质量的增大效应被削弱，压峰能力下降。最优值使双峰等高且最小，这是优化问题"最坏点最小化"（minimax）的解析解。
 
@@ -91,7 +91,7 @@ $$m_{\mathrm{eff}}(\omega) = \frac{(k + j\,\omega\,c)\,m}{-m\,\omega^{2} + j\,\o
 
 ![结构等效质量计算式](/images/tuned-absorber-design/eq20-81.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 写成解析形式：
 

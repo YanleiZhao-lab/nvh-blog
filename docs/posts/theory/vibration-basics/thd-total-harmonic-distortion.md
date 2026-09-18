@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 总谐波失真 THD：一句话里的失真全貌
 
-> 给一个系统输入单频正弦，理想情况下输出应该还是同一频率的正弦——只是幅值与相位有所改变。实际系统输出里往往混进了输入中并不存在的 2 倍、3 倍、4 倍频成分，这就是谐波失真。总谐波失真（Total Harmonic Distortion, THD）把全部谐波能量与基频能量之比压缩成一个数字，随频率逐点画出，就能回答"这套系统在哪些频段会把试验做得走样"。本文以 Simcenter Testing Knowledge Base 的 THD 专题为底本：从 RMS 与正交性出发分步推导 THD 定义式，澄清 THD 与 THD+N 的口径差异，给出振动台系统的典型量级（功放 0.01、裸台 2%、带试件可超 50%）与五类失真来源，解释 THD 高的频段为什么难控，最后给出 Simcenter Testlab 的在线与离线测量入口。
+> 给一个系统输入单频正弦，理想情况下输出应该还是同一频率的正弦——只是幅值与相位有所改变。实际系统输出里往往混进了输入中并不存在的 2 倍、3 倍、4 倍频成分，这就是谐波失真。总谐波失真（Total Harmonic Distortion, THD）把全部谐波能量与基频能量之比压缩成一个数字，随频率逐点画出，就能回答"这套系统在哪些频段会把试验做得走样"。本文以 公开技术资料 的 THD 专题为底本：从 RMS 与正交性出发分步推导 THD 定义式，澄清 THD 与 THD+N 的口径差异，给出振动台系统的典型量级（功放 0.01、裸台 2%、带试件可超 50%）与五类失真来源，解释 THD 高的频段为什么难控，最后给出 Simcenter Testlab 的在线与离线测量入口。
 
 ## 一、THD 是什么：输出像不像输入，一个数字说了算
 
@@ -14,14 +14,14 @@ author: "@NVH_Z"
 闭环振动控制试验正是这样一个系统。SCADAS 输出的驱动电压经功率放大器（**功放，Amplifier**）驱动振动台（**Shaker**），台面经试验夹具（**Test Fixture**）带动试件，控制加速度计装在台面或试件上反馈实际振动。链条上每个环节都可能产生谐波：
 
 ![正弦振动控制系统的组成：SCADAS 输出经功放驱动振动台，夹具与试件在台面上，控制加速度计反馈](/images/thd-total-harmonic-distortion/fig1.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 上图是正弦振动控制系统的组成：信号发生与闭环控制、功放、振动台、夹具、试件、控制加速度计各为一环。每一环的 THD 低，整条链路的 THD 才低；而**THD 低的系统更容易控制**——正弦试验中 THD 随频率逐点不同，有的频段好控、有的频段难控，根源就在这里。
 
 谐波失真的直观图景：
 
 ![谐波失真：输入单频正弦，输出中出现输入中没有的谐波成分](/images/thd-total-harmonic-distortion/fig2.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 上图中输入是干净的单频正弦，输出频谱里除基频外冒出了一串等间距的谱线——基频的整数倍。这些谱线在输入中完全不存在，是系统自己"制造"出来的。
 
@@ -76,7 +76,7 @@ $$\mathrm{THD} = \sqrt{0.20^2 + 0.10^2 + 0.05^2} = \sqrt{0.0525} \approx 0.229 =
 THD 通常在一个频率范围（例如 20 到 2000 Hz）上逐点计算：输入正弦扫过整个范围，每个频率记录一个 THD 值。数字谱测量中，"能量"通过对某频带或主谐波附近求 RMS 得到。测完连成曲线：
 
 ![某系统的 THD 随频率变化曲线](/images/thd-total-harmonic-distortion/fig3.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 上图中 THD 不是一条水平线：某些频段失真大、某些频段干净。做正弦试验时遇到的"这段频率死活控不平"，先看 THD 曲线——十有八九在难控频段 THD 正冲着峰值。
 
@@ -108,7 +108,7 @@ Knowledge Base 给出的典型数字，按链条逐级叠加：
 | **功放 + 振动台 + 夹具 + 试件** | 可超 50% | 局部频段显著抬高 |
 
 ![振动台带试件（金色曲线）的 THD 高于裸台（蓝色曲线）](/images/thd-total-harmonic-distortion/fig4.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 上图两条曲线对比同一振动台：蓝色是功放加裸台的 THD，大部分频段低于 2%、少数尖峰约 10%；金色是加上夹具与试件后的整机 THD，多个频段显著抬升。测量口径：输入取 SCADAS 输出 DAC 电压（V），输出取控制加速度计振动（g），系统传递量为 g/V。
 
@@ -165,7 +165,7 @@ print("系统B THD = %.3f   (台+夹具+试件)" % thd(y_B))
 THD 与 FRF 通常反相：
 
 ![振动控制系统的 THD（蓝色，左轴）与 FRF（绿色，右轴，g/V）叠加：增益高处 THD 低](/images/thd-total-harmonic-distortion/fig5.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 上图把同一系统的 THD 与 FRF 叠画：**系统增益高的频段 THD 低**——基频响应幅度大，谐波被"淹没"在高幅值输出里；反过来，**THD 高的频段增益低**——振动响应本身小，谐波占比就显眼。物理上这是一体两面：低增益频段往往对应结构反共振或隔离区，此时残余的摩擦、偏心力矩产生的谐波在输出中占比升高。
 
@@ -182,7 +182,7 @@ THD 与 FRF 通常反相：
 THD 与 FRF 在 Simcenter Testlab（原 LMS Test.Lab）中都可以**在线**和**离线**两种方式计算：
 
 ![Sine Setup 工作表右下角的 Measurements 区：勾选 THD 与 FRF](/images/thd-total-harmonic-distortion/fig6.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 **在线测量**：正弦控制（Sine Control）的 Sine Setup 工作表右下角 Measurements 区勾选 THD 与 FRF，试验进行中这两个函数自动存入 Testlab 工程文件，试验结束后同样保留。
 

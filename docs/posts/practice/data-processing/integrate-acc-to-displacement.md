@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 加速度积分求位移：为什么双重积分会漂移
 
-> 手里只有加速度信号，交的报告却要位移——悬架行程、部件间隙、动画变形都绕不开。直接 DOUBLEINTEGRATE 一下，得到的位移动辄几米，明显失真。这篇从积分的数学定义拆解漂移的来源，给出 Simcenter 官方 FAQ 630 的五步处理流程和频域积分替代路线，每一步跳过会出什么后果都有实测图对照。
+> 手里只有加速度信号，交的报告却要位移——悬架行程、部件间隙、动画变形都绕不开。直接 DOUBLEINTEGRATE 一下，得到的位移动辄几米，明显失真。这篇从积分的数学定义拆解漂移的来源，给出 相关技术资料 FAQ 630 的五步处理流程和频域积分替代路线，每一步跳过会出什么后果都有实测图对照。
 
 ## 一、工程场景：为什么总在积分
 
@@ -100,16 +100,16 @@ print(f"\n0.001 m/s² 偏置积分 8 s 的末端漂移: {0.5*0.001*t_end**2*1e3:
 FAQ 附录的四张对照图，比文字更直观——每张都是"正确结果 vs 少做一步"的叠加显示：
 
 ![未做 DETREND_AC：漂移残留，结果持续发散](/images/integrate-acc-to-displacement/faq630_p4_1.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![未升采样：Simpson 积分在 fs/4 以上产生锯齿误差](/images/integrate-acc-to-displacement/faq630_p4_2.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![未加高通：积分常数以低频/直流形式主导结果](/images/integrate-acc-to-displacement/faq630_p5_2.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![高通截止留在默认 500 Hz：低频被滤光，位移几乎为零](/images/integrate-acc-to-displacement/faq630_p5_3.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 完整公式（Simpson 嵌套版，原文照录，fs=16384 Hz 场景）：
 
@@ -139,12 +139,12 @@ FILTER_HP(DOUBLEINTEGRATE(DETREND_AC(CHx;2);2);2.5;2;IIR(1))
 2. <strong>改用频率段落（Frequency Section）</strong>：不积 Overall，直接算 1 Hz～6400 Hz 的 Frequency Section（带宽 6400 Hz 场景），从源头绕开直流
 
 ![频率段落设置：1 Hz 起算代替含 0 Hz 的 Overall Level](/images/integrate-acc-to-displacement/community-freq-section.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 图谱域还有一个顺手的技巧：扭振（torsional vibration）分析里转速波动阶次想换成角度位移显示，右键 Y 轴 → Processing → Integrate (Single)，一步完成（与旋转机械手册 TIP 2 的操作一致）；峰值/RMS/峰峰值（peak-to-peak）在同一菜单的 Section Scaling 里切换。
 
 ![2 阶扭振阶次：转速波动经右键 Integrate (Single) 直接转成角度显示](/images/integrate-acc-to-displacement/rot_p46_0.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 五、Python 复现：预处理决定漂移与否
 

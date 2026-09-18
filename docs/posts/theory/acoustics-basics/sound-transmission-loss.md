@@ -18,7 +18,7 @@ author: "@NVH_Z"
 
 ![声波到达屏障后被吸收、透射或反射](/images/sound-transmission-loss/fig1-barrier-fate.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这个公式回答的问题是：透过去的声能占打过来的声能多大比例？其中 $W_t$ 对应物理里穿过屏障到达另一侧的声功率，$W_i$ 对应入射到屏障表面的总声功率——它是一个 0 到 1 之间的线性比值，还没换算成分贝：
 
@@ -51,7 +51,7 @@ TL 是频率的函数，这是选材与评估的前提。同一只消声器，�
 
 ![传声损失随频率变化，同一消声器在2050Hz衰减10dB而3500Hz几乎不衰减](/images/sound-transmission-loss/fig2-tl-vs-freq.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 二、覆盖率与开孔对传声损失的影响
 
@@ -61,13 +61,13 @@ TL 是频率的函数，这是选材与评估的前提。同一只消声器，�
 
 ![材料覆盖率对传声损失的影响，3%裸露即显著降低TL](/images/sound-transmission-loss/fig3-coverage.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 <strong>开孔泄漏。</strong> 在声学处理上开孔同样降低有效 TL，高频段尤为明显。对比全覆盖、1% 开孔、5% 开孔三种工况：1% 的小孔即造成可观的 TL 损失；孔面积继续扩大到 5% 时的增量损失，小于第一个孔造成的影响。
 
 ![开孔泄漏对传声损失的影响，高频段损失尤为明显](/images/sound-transmission-loss/fig4-holes.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这个公式回答的问题是：材料没全覆盖、还开了孔，整块板的等效隔声量还剩多少？其中 $\varepsilon$ 对应物理里泄漏（裸露或开孔）面积占总面积的比例，$10^{-\mathrm{TL}_0/10}$ 对应覆盖区按标称 TL 折算的透射系数，两项按面积加权相加就是整块板平均漏掉多少：
 
@@ -103,7 +103,7 @@ TL 与声源无关，可用扬声器等实验室声源测量，无需在实车�
 
 ![阻抗管示意，样件安装于管中间](/images/sound-transmission-loss/fig5-impedance-tube.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这个公式回答的问题是：阻抗管里四个传声器测到的声压和振速，怎么跟样件的隔声属性挂上钩？其中 $p_1,v_1$ 与 $p_2,v_2$ 对应物理里样件两侧（入射侧与透射侧）的声压和质点振速，传递矩阵的四个系数 $T_{11}$ 至 $T_{22}$ 表征样件自身的声学属性——把样件抽象成一个二端口，入口状态乘以矩阵就得到出口状态：
 
@@ -159,13 +159,13 @@ $$
 
 ![混响室与消声室布置，样件装于两室之间](/images/sound-transmission-loss/fig9-two-room-intensity.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 该方法的附加产出是**透射声强云图**：扫描得到样件表面的声强分布，可直接定位透射通道。整车前壁板隔声排查时，云图能指出过孔、缝隙等漏声位置，与 TL-频率曲线配合使用。
 
 ![前壁板透射声强云图，直接定位漏声位置](/images/sound-transmission-loss/fig11-intensity-map.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 双混响室声压法：建筑与部件规范测量
 
@@ -185,7 +185,7 @@ $$
 
 ![双混响室法布置，两侧各测平均声压级](/images/sound-transmission-loss/fig13-two-room-pressure.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: tip 方法选择原则
 - 消声器、进排气管道、小材料样品：**阻抗管法**，样件小、频率分辨率高

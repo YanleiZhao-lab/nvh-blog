@@ -13,7 +13,7 @@ author: "@NVH_Z"
 
 ![模拟信号被切成离散台阶，就近归档](/images/gain-range-quantization/quantize-steps.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 原始信号与量化后信号之间的幅值差称为**量化误差**（quantization error），也称量化失真。该误差产生于数据链路的最前端，后续的信号处理算法无法将其消除。
 
@@ -45,13 +45,13 @@ $$
 
 ![信号幅值占量程的比例决定可用台阶数](/images/gain-range-quantization/bins-voltage.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 极端情形：0.001 V 信号进入 10 V 量程的 16 位系统，可用台阶仅约 6 档。此时正弦波被量化为台阶状波形，频谱中出现不属于原信号的杂散分量——量化误差不再表现为噪声，而是确定性的失真。
 
 ![信号远小于量程时的大幅量化误差](/images/gain-range-quantization/fig7.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这种情况在 NVH 实测中并不少见：例如怠速工况下测变速箱近场噪声，声级计输出仅几十毫伏，而通道仍保持上一轮全油门试验的量程；或锤击法测铸铁支架 FRF 时，响应通道信号很小而力通道按高冲击设置。两种情况下测量底噪均偏高，小信号分辨率受量化误差限制。
 
@@ -68,7 +68,7 @@ $$
 
 ![输入信号电平与系统自动施加的增益对照](/images/gain-range-quantization/fig8-gain-chart.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 需要注意：Simcenter Testlab 中增益在后台施加，软件界面显示的仍是 0.001 V 的正弦波，看似量程未变，实际系统内部按满量程量化，显示时再将增益除回。<strong>增益改变的是信号占满量程的程度，不改变量程本身。</strong>
 
@@ -101,7 +101,7 @@ Simcenter Testlab 的 Acquisition Setup 界面左下角有电平指示条，以�
 
 ![Testlab 中的量程指示条](/images/gain-range-quantization/fig11.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 手动设置量程在工况多变时效率较低，常用自动量程：先执行 start ranging 观察信号，hold level 锁定当前电平，再 set ranges 自动落位，系统自动选择恰好包住信号的量程并匹配增益。
 

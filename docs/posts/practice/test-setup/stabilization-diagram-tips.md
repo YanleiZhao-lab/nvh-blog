@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 稳定图进阶技巧：极点选择的工程判断
 
-> 稳定图上明明有一列笔直的字母，FRF 叠加曲线上却找不到对应的峰——这列字母是选还是不选？反过来，谱峰清晰的位置字母却稀稀拉拉，又该怎么办？稳定图入门篇讲的是"找竖直光柱"，真实试验里光柱常常不给面子：局部模态被整体求和稀释、激振器方向不对付、移动加速度计带来的质量漂移，都会让稳定图"长歪"。本文把 Simcenter 官方知识库的进阶技巧展开：分部件过滤重建 FRF 和、激振方向与模态振型的对齐关系、多次搬传感器造成的频率漂移与 multi-run 对策，每一条都对应一种"稳定图不清"的具体病因。
+> 稳定图上明明有一列笔直的字母，FRF 叠加曲线上却找不到对应的峰——这列字母是选还是不选？反过来，谱峰清晰的位置字母却稀稀拉拉，又该怎么办？稳定图入门篇讲的是"找竖直光柱"，真实试验里光柱常常不给面子：局部模态被整体求和稀释、激振器方向不对付、移动加速度计带来的质量漂移，都会让稳定图"长歪"。本文把 公开技术资料的进阶技巧展开：分部件过滤重建 FRF 和、激振方向与模态振型的对齐关系、多次搬传感器造成的频率漂移与 multi-run 对策，每一条都对应一种"稳定图不清"的具体病因。
 
 ## 一、为什么光柱会失灵：三种典型现场
 
@@ -17,7 +17,7 @@ author: "@NVH_Z"
 
 场面三：测点 60 个，加速度计只有 20 个，分三轮搬点测完。稳定图上每阶模态位置不再是一列字母，而是一簇字母——同一阶模态"散"成了三四个略有差异的极点。这不是噪声，是试验方法本身引入的系统性问题。
 
-这三个场面分别对应官方知识库总结的三类病因：**局部模态与整体模态混叠**、**激振方向与振型不对齐**、**搬移加速度计的质量漂移**。下面逐一拆解，先从稳定图本身的工作方式说起。
+这三个场面分别对应公开技术资料总结的三类病因：**局部模态与整体模态混叠**、**激振方向与振型不对齐**、**搬移加速度计的质量漂移**。下面逐一拆解，先从稳定图本身的工作方式说起。
 
 ## 二、稳定图在做什么：软件如何"猜"模态
 
@@ -27,13 +27,13 @@ author: "@NVH_Z"
 
 ![稳定图基本形态：一列 s 字母对准 FRF 求和的峰](/images/stabilization-diagram-tips/fig1.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 两点入门篇之外的操作细节值得强调。第一，叠加在稳定图上的测量函数只是**视觉辅助**：可以是单条 FRF 求和，也可以叠加全部个体 FRF，但参与字母计算的永远是全部 FRF 数据，求和曲线只帮助解读字母、不参与拟合。第二，Testlab 计算的 FRF 求和是"归一化"的——除以求和所用的 FRF 条数。这不是无关紧要的细节：不同部件的 FRF 条数可能相差一个数量级，不除条数的话，各部件求和曲线的幅值根本不在同一尺度上，没法叠加比较（后文第四节正是靠这一点）。
 
 ![叠加求和与叠加全部个体 FRF 两种视图](/images/stabilization-diagram-tips/fig3.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 但真实试验里，"强光柱 + 清晰峰"的组合并不总出现。接下来的三节各讲一种病因与对策。
 
@@ -47,13 +47,13 @@ FRF 求和把所有测点一锅烩：全局模态的贡献条条都在、越加�
 
 ![带多个子部件的试验结构](/images/stabilization-diagram-tips/fig5.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 全局弯曲模态几乎每条 FRF 都有贡献，转向盘横向局部模态只在少数测点可见——两类模态在"多少条 FRF 里有表现"上截然不同。
 
 ![全局弯曲模态与转向盘局部模态对比](/images/stabilization-diagram-tips/fig6.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### 对策：按部件过滤再求和
 
@@ -64,23 +64,23 @@ Testlab 的 Modal Analysis 工作表里，"Modal Data Selection"页有一个 **P
 
 ![Point filter 按部件名过滤 FRF](/images/stabilization-diagram-tips/fig7.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 过滤后切换到 Polymax 拟合页，按 **Save Sum/MIF** 把该部件的 FRF 求和存成一个命名函数；再回到稳定图显示，点顶部 **Data Explorer** 图标，从 Polymax Band 文件夹把存好的求和函数拖进稳定图显示区叠加。
 
 ![Save Sum/MIF 保存部件 FRF 求和](/images/stabilization-diagram-tips/fig8.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ![Data Explorer 把求和拖到稳定图上](/images/stabilization-diagram-tips/fig9.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 官方案例的效果：全部 375 条 FRF 的总求和（蓝色）与转向盘部件求和（红色）在 38 Hz 都没有峰，而发动机部件求和（绿色）在该处出现明确峰值——这列字母对应的很可能是发动机的局部模态，选它的信心立刻不同。
 
 ![发动机部件求和出现总求和看不到的峰](/images/stabilization-diagram-tips/fig10.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这里能看出"归一化求和"设计的用意：各部件求和都除以自身条数，绿红蓝三条曲线才能同尺度叠在一张图上比高低。
 
@@ -96,13 +96,13 @@ Testlab 的 Modal Analysis 工作表里，"Modal Data Selection"页有一个 **P
 
 ![扭转模态与垂向模态的主运动方向](/images/stabilization-diagram-tips/fig11.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 官方案例的对照很有说服力：同一结构，只用一个方向的参考激振器时，某阶模态位置没有清晰的"s"列；引入第二个激振器、且其方向与该阶振型方向一致后，同一位置出现强光柱。
 
 ![单激振器与双激振器稳定图对比](/images/stabilization-diagram-tips/fig12.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 要理解"方向对齐"为什么如此关键，可以从留数的构成看。单点激励下第 $k$ 阶模态在某测点的 FRF 留数与振型系数的关系是
 
@@ -128,13 +128,13 @@ $$A_{ijk} \propto \psi_{ik}\,\psi_{jk}$$
 
 ![搬点测试的稳定图：字母成簇](/images/stabilization-diagram-tips/fig14.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 作为对照，若所有 FRF 一次同时测得（无搬点），每阶模态就是干净的一列。
 
 ![一次测完的稳定图：字母成列](/images/stabilization-diagram-tips/fig15.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### 对策：Multi-Run Modal
 
@@ -142,11 +142,11 @@ $$A_{ijk} \propto \psi_{ik}\,\psi_{jk}$$
 
 ![multi-run 分别拟合再拼合振型](/images/stabilization-diagram-tips/fig16.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这个思路的本质：与其让拟合器在"同一阶模态、三套频率"的矛盾数据里强行折中（结果就是字母成簇、阻尼虚高），不如承认每批数据内部自洽、各自拟合，最后只在振型层面拼接。振型是相对量，拼接不引入频率折中问题。
 
-一个实用推论：预算允许时，一次性布够传感器（或分批但每批保留一组公共参考点做衔接）优于事后 multi-run 补救。相关操作细节见官方知识库 "Simcenter Testlab: Multi-Run Modal" 专题。
+一个实用推论：预算允许时，一次性布够传感器（或分批但每批保留一组公共参考点做衔接）优于事后 multi-run 补救。相关操作细节见公开技术资料 "Simcenter Testlab: Multi-Run Modal" 专题。
 
 ::: warning 工程注意
 簇状字母列不等于噪声大。看到字母成簇，先问试验流程：是否搬过传感器？若每批数据独立拟合时同一阶模态频率整齐，即可确认是质量漂移而非结构问题。把簇当成"阻尼大"的信号去拟合，会得到虚高的阻尼估计。

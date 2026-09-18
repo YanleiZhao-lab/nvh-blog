@@ -38,11 +38,11 @@ Conditioning 组里的 FILTER_LP、FILTER_HP、FILTER_BP 分别对应低通（lo
 
 ![Time Signal Calculator 的滤波函数列表](/images/time-signal-calculator-tips/filter-list.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![滤波函数的参数菜单：类型、方法、阶数、截止频率](/images/time-signal-calculator-tips/filter-formula-menu.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 两个容易出问题的细节：
 
@@ -79,11 +79,11 @@ Tacho 组函数服务于旋转机械分析。上一篇讲过 TACHO_MOMENTS_SPIKE
 
 ![两行公式造出虚拟转速通道：先生成 8 Hz 方波，再换算成 RPM](/images/time-signal-calculator-tips/create-tacho-rpm.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![上：原始数据 colormap 中 8 Hz 谐波族竖条带；下：谐波滤除后的干净图谱](/images/time-signal-calculator-tips/harmonics-removed.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 注意启用条件：HARMONIC_FILTER 除了 Time Signal Calculator（26 tokens）之外，还需在 **Tools -> Add-ins** 中同时勾选 **Harmonic Removal**（15 tokens）插件，否则函数不可用。
 

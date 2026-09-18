@@ -27,7 +27,7 @@ author: "@NVH_Z"
 $$\eta = \frac{1}{Q}, \qquad \zeta = \frac{1}{2Q}, \qquad \eta \approx 2\zeta$$
 
 ::: info 核心概念
-- <strong>品质因子 $Q$（quality factor）</strong>：共振峰尖锐程度的度量，$Q = f_0/(f_2-f_1)$。Simcenter 官方知识库将 quality factor 与 damping factor 视为同一量，本文遵循此约定
+- <strong>品质因子 $Q$（quality factor）</strong>：共振峰尖锐程度的度量，$Q = f_0/(f_2-f_1)$。公开技术资料将 quality factor 与 damping factor 视为同一量，本文遵循此约定
 - <strong>阻尼比 $\zeta$（damping ratio）</strong>：临界阻尼的百分比，$\zeta = 1/(2Q)$
 - <strong>损耗因子 $\eta$（loss factor）</strong>：$\eta = 1/Q$，小阻尼下 $\eta \approx 2\zeta$
 - **方向性**：$Q$ 增大表示阻尼减小；$\zeta$ 与 $\eta$ 增大表示阻尼增大——汇报数据前先确认对方采用哪种量值
@@ -61,7 +61,7 @@ $$Q = \frac{f_0}{f_2 - f_1}, \qquad \zeta = \frac{f_2 - f_1}{2f_0} = \frac{1}{2Q
 
 ![阻尼比估计的半功率(3dB)带宽法:在FRF幅频峰两侧找到-3dB穿越点f1、f2, Q=f0/(f2-f1)](/images/damping-from-frf/half-power-bandwidth.png)
 
-*（图源：Simcenter Testing Knowledge Base，理论手册图 15-5）*
+*（图源：网络官方公开资料）*
 
 推导链从小阻尼单自由度（SDOF）系统的位移导纳（receptance，单位 m/N）出发：
 
@@ -136,13 +136,13 @@ print("真值: Q=25.0, zeta=2.00%")
 
 ![锤击测试的加速度响应(左上)乘以指数窗(中)后完全衰减到零(右下),以避免泄漏](/images/damping-from-frf/exponential-window-signal.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 Simcenter Testlab 的指数窗以衰减参数定义：窗从 1.0 开始，衰减参数（0%~100%）指定测量结束时窗值衰减到初值的百分比；衰减参数 100% 等效于不加窗（矩形窗）——信号能在采样时间内自然衰减到零时应优先采用 100%：
 
 ![不同衰减参数下指数窗的形状对比](/images/damping-from-frf/exponential-window-decay-params.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 但指数窗给信号叠加了人为衰减，使响应看起来衰减得更快，相当于附加了阻尼，FRF 峰变宽，3dB 法读出的阻尼偏高。理论手册明确提示：加指数窗会在测量数据中附加人为的阻尼，在随后的模态分析处理中应仔细计入其影响。
 
@@ -179,7 +179,7 @@ for tau in (np.inf, 0.4, 0.1):   # 窗时间常数：无窗/温和/激进
 
 ![对信号施加指数窗使其看起来衰减更快,等效于附加阻尼](/images/damping-from-frf/exponential-window-added-damping.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 两条处理出路：其一，让模态曲线拟合器自动扣除窗效应——Simcenter Testlab 的模态拟合器会利用记录在数据中的指数窗衰减参数，自动移除其影响并报告正确的模态阻尼；其二，用 R18 及以上版本的阻尼游标，其读数已自动修正指数窗影响。手动 3dB 法读到的始终是结构与窗的合计值。
 

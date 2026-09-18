@@ -27,12 +27,12 @@ $$
 其中 $f_0$ 为基频（Hz）。谐波幅值仅按 $1/k$ 衰减、级数不终止，因此理想方波需要无限带宽；理想脉冲同样如此。缺少无穷多的高次谐波，垂直的边沿就无法重建。
 
 ![常见信号的时域波形（左）与等效频率内容（右）：方波与脉冲的频谱延伸到无穷](/images/gibbs-phenomenon/fig1-signal-frequency-content.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 而任何采集系统的带宽都是有限的。用有限的频率内容去描述需要无限频率内容的信号，时域上就会在阶跃/过渡处留下振铃伪影——过冲、下冲围绕真实信号波动。这就是吉布斯现象。
 
 ![方波边沿处的吉布斯振铃：过冲与下冲围绕真实信号波动](/images/gibbs-phenomenon/fig2-ringing-square-wave.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 整车测试中这类信号常见：悬架过减速带或坑洞的冲击力、安全带张紧器点火的爆炸脉冲、变速箱换挡瞬间的作用力阶跃、关门砰击声。它们的共同点是都含突变，理论频率内容均延伸到无穷。
 
@@ -45,7 +45,7 @@ $$
 一个重要的反面情形：**纯正弦信号不会出现吉布斯现象**。对单频正弦加低通滤波，只要截止频率高于信号频率，什么都不会发生——因为没有频率内容被截断。吉布斯现象只在信号的一部分频率内容被移除时才出现。
 
 ![同一组低通滤波器对方波（产生振铃）与同频正弦（无影响）的不同效果](/images/gibbs-phenomenon/fig6-sine-no-gibbs.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 二、振铃时长由频率截断程度决定
 
@@ -54,7 +54,7 @@ $$
 持续时间的控制因素是频率内容的截断程度。以方波为例：把奇次谐波截到 2000 Hz，边沿变缓、振铃出现；截到 750 Hz，更多谐波被丢弃，边沿更缓、振铃持续时间更长。
 
 ![方波频谱低通截断：截掉的谐波越多，时域振铃持续越久、边沿越缓](/images/gibbs-phenomenon/fig5-truncation-duration.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这一规律可以从部分和（partial sum）的数学形式直接看出。只保留前 N 个奇次谐波时，重建信号为：
 
@@ -180,15 +180,15 @@ for name, filt in [("砖墙(陡)", wall), ("高斯(缓)", gauss)]:
 工程中对应两款经典滤波器：Bessel 与 Butterworth。两者可以设计成相同的 3 dB 截止点，但 Bessel 滚降（roll-off）更缓、Butterworth 更陡——而 Butterworth 本身就是按固定过冲特性设计的。
 
 ![Bessel 与 Butterworth 滤波器形状对比：3dB 点相同，滚降一缓一陡](/images/gibbs-phenomenon/fig7-bessel-vs-butterworth.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![同一方波过两种滤波器：缓滚降的 Bessel 几乎无振铃，陡峭的 Butterworth 振铃明显](/images/gibbs-phenomenon/fig8-filter-shape-ringing.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 前置振铃（pre-ringing）出现与否取决于滤波器的实现方式：模拟滤波器是因果系统，脉冲响应在激励到来之前为零，不可能产生前置振铃；数字滤波器工作在零相位（zero phase）模式时——数据先正向、再反向各滤波一次以消除相位畸变——等效的非因果脉冲响应就会在突变之前留下振铃。上例中砖墙滤波在边沿前下探到 -1.18，正是这种非因果形状的表现。
 
 ![左：无前置振铃的方波；右：出现前置振铃的方波（零相位数字滤波所致）](/images/gibbs-phenomenon/fig13-pre-ringing.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 | 控制量 | 由什么决定 | 规律 |
 | --- | --- | --- |
@@ -222,7 +222,7 @@ SCADAS 默认的抗混叠滤波器很陡，遇到方波类信号振铃明显。T
 | **LPFilterOrder** | 滤波器阶数 | 越低越缓，2 阶是最缓档 |
 
 ![方波信号：默认抗混叠滤波(红)振铃明显，追加二阶 Bessel(绿)后大幅收敛](/images/gibbs-phenomenon/fig12-testlab-bessel.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 注意这套低通设置依赖硬件支持——Simcenter SCADAS 的 VB8-E 与 V8-E 系列采集卡可用，其他卡型请查产品资料页或咨询本地支持。
 

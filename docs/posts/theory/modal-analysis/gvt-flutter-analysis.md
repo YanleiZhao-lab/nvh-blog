@@ -15,7 +15,7 @@ author: "@NVH_Z"
 
 ![Collar 图：弹性力、惯性力与气动力三力交互，交汇中心即颤振问题](/images/gvt-flutter-analysis/fig1.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 颤振不能靠试飞"摸着石头过河"——那是在拿飞机赌命。工程路线分三步：
 
@@ -25,7 +25,7 @@ author: "@NVH_Z"
 
 ![颤振试飞按飞行数据点逐点扩展包线（右图为数据点分布）](/images/gvt-flutter-analysis/fig2.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 只有 GVT 与颤振试飞都成功完成，适航当局（如 FAA）才为该构型签发型号合格证——而且每出一个新的结构改型（换发动机、加外挂、改油量布局），这套验证流程就要重来一遍。
 
@@ -37,13 +37,13 @@ GVT 不是工程师兴之所至的敲击，它是产品研制"V 字模型"右端
 
 ![V 模型：GVT 位于产品研制流程右端的收口位置](/images/gvt-flutter-analysis/fig3.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 GVT 的持续时间从几天到几周不等，取决于机体大小、通道数量、以及**构型数量**。构型是最大的变量：外挂、副油箱、任务载荷的种类与油量状态组合，凡是对结构质量分布影响大到可能改变颤振特性的，都得单独测一遍。一架战斗机的外挂与燃油构型可能有十余种组合——构型每加一种，试验周期就延长一截，首飞日程的风险就多一分。
 
 ![不同外挂与燃油构型可能都需要单独 GVT](/images/gvt-flutter-analysis/fig4.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 正因窗口期金贵，**试验前规划**（pretest planning）至关重要：若有限元模型已就绪，可用它预先优化激振器与加速度计的数量、位置，并核验边界条件模拟方案，把机上时间压到最短。GVT 的"边界条件"是专门课题：飞机用起落架支撑、气囊支撑或软悬挂等方式接地，支撑体系自身的刚体模态必须与弹性模态充分分离，不干扰目标频带——试验规程中通常把这一项列为开工前的必检项。
 
@@ -53,13 +53,13 @@ GVT 的持续时间从几天到几周不等，取决于机体大小、通道数�
 
 ![发动机上的侧向（左）与垂向（下方）激振器](/images/gvt-flutter-analysis/fig5.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 无论配置如何，共同的要求是：**激励能量必须在全频段、全结构上足够**，各测点响应的信噪比才撑得起模态识别。可选的激励信号覆盖两大类：
 
 ![GVT 可选激励信号：正弦类与随机类](/images/gvt-flutter-analysis/fig6.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 - **随机类**：猝发随机（burst random）等，测 FRF 后曲线拟合，速度快；
 - **正弦类**：扫频正弦（swept sine）、步进正弦（stepped sine）与 Normal Modes 调谐，能量集中、信噪比高、可控激励幅值。
@@ -88,13 +88,13 @@ Normal Modes 测试的目标更进一步：**把某一特定模态隔离成单�
 
 ![李萨如图：共振时为圆（上，绿），非共振时为斜线（下，红）](/images/gvt-flutter-analysis/fig7.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 多激振器场合，各响应之间的相位必须同时统筹——激振器与响应之间是耦合的，激励相位矩阵要整体评估。早年这靠试验操作员盯着控制台上的一排李萨如图手工调，如今软件已能自动完成调谐，并把李萨如图、振型动画、幅值相位等信息同屏呈现。
 
 ![Normal Modes 软件界面：下方为各驱动点的李萨如图显示](/images/gvt-flutter-analysis/fig8.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 正因为此类测试耗时，通常只对颤振预测最关键的 2～3 阶模态使用。另一个必做的动作是**改变激励幅值**：同一模态在若干幅值下重复调谐，看模态参数是否漂移——这是在线性范围内取参数的直接证据。颤振预测对阻尼极其敏感，线性范围内阻尼识别不准，预测边界就不可信。
 
@@ -104,7 +104,7 @@ Normal Modes 测试的目标更进一步：**把某一特定模态隔离成单�
 
 ![由指数衰减曲线计算模态阻尼](/images/gvt-flutter-analysis/fig9.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这个衰减信号正是对数减幅率（log-decrement）的舞台。下面的公式回答的问题是：一段衰减振荡里，阻尼比藏在哪？其中 $x_n$ 对应物理里衰减波形的第 $n$ 个峰值，对数相邻峰之比 $\delta_{\log}$ 每周期消掉多少幅度，只取决于系统阻尼：
 
@@ -126,7 +126,7 @@ $$
 
 ![由 GVT 采集的 FRF 计算得到的 F-16 模态振型](/images/gvt-flutter-analysis/fig10.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 GVT 的特殊之处在于**数据要在现场立刻消化**：拆台之前，试验模态必须与有限元预测当场比对，确认没有明显出入，设备才能撤。比对的两件工具：
 
@@ -135,7 +135,7 @@ GVT 的特殊之处在于**数据要在现场立刻消化**：拆台之前，试
 
 ![试验模态与分析模态之间的 MAC 矩阵，对角线接近 1 表示一致](/images/gvt-flutter-analysis/fig11.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 对账不过关就进入**模型修正迭代**：以试验为准更新有限元模型（质量、刚度、连接刚度），直至模态对齐。对账通过前还有一个前提要自查：试验状态必须真实代表分析模型的构型——质量属性（载荷、油量）与边界条件（支撑方式）一致，且刚体模态不侵入弹性模态频带。
 

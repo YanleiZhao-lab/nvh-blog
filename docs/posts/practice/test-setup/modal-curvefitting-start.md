@@ -60,11 +60,11 @@ $$h_{ij}(t) = \sum_{k=1}^{N} \left( A_{ijk}\, e^{\lambda_k t} + A^{*}_{ijk}\, e^
 
 ![稳定图](/images/modal-curvefitting-start/stability-diagram.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![最小二乘误差图](/images/modal-curvefitting-start/ls-error-chart.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 软件中每个极点符号的亮度对应稳定程度，同一频率处，与上一阶数相比频率、阻尼、振型都满足判据的极点符号最亮，只满足部分判据的符号较暗。可信的物理模态应对应一条自低阶到高阶持续满足判据的竖直稳定线，而不是孤立出现的单个极点。
 

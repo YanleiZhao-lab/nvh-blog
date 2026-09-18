@@ -37,10 +37,10 @@ author: "@NVH_Z"
 质量轴与旋转轴**平行错开**。此时整个转子的质心整体偏向一侧，旋转时各截面的离心力指向同一个方向，合成一个作用于质心平面的合力。手册的判据表述：主质量轴相对旋转轴平行偏移（displaced parallel）。
 
 ![静不平衡：质量轴与旋转轴平行错开](/images/balancing-static-dynamic/fig5-static-unbalance.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![不平衡公式各项的几何含义：轴截面上的不平衡质量与偏心距](/images/balancing-static-dynamic/fig6-unbalance-terms.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 静不平衡的检测不依赖旋转：转子架在刀口支承上不转，重的一侧自然转向下方，"静态"即可发现，这也是名称的由来。校正只需在**一个平面**上加去重或配重，把质心拉回旋转轴，使偏心距 $e$ 归零（图 6 中 $r_e = 0$）。
 
@@ -49,7 +49,7 @@ author: "@NVH_Z"
 两个平面上各有一个**等量的不平衡质量，相位相差 180°**。合成质心仍然落在旋转轴上（静不平衡为零），但旋转时两个等大反向的离心力组成一对力偶。手册的判据表述：旋转轴穿过主质量轴，但两者不平行（intersects, not parallel）。
 
 ![耦合不平衡：两个质量位于不同平面、相位相差180度](/images/balancing-static-dynamic/fig8-coupled-unbalance.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 耦合不平衡在静止状态无任何征兆，低速下力偶引起的倾摆也不明显，转速升高后逐渐显现。校正必须在**两个平面**上配重——力偶无法被单个平面上的合力抵消，单面校正无解。
 
@@ -58,7 +58,7 @@ author: "@NVH_Z"
 实际转子最常见的不平衡形态，是静不平衡与耦合不平衡的**叠加**。手册的判据表述：主质量轴与旋转轴既不相交叉不平行（not crossing and not parallel）。
 
 ![动不平衡是静不平衡与耦合不平衡的组合](/images/balancing-static-dynamic/fig9-dynamic-unbalance.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 表现上，转子同时承受合成离心力与力偶矩，运行时整体倾摆（tilt / wobble）。校正同样需要两个平面。
 
@@ -101,7 +101,7 @@ $$
 离心力等于不平衡量乘以角速度平方。由此得到两个标度规律：**不平衡量翻倍，离心力翻倍；转速翻倍，离心力翻四倍**。
 
 ![不平衡量与转速增大时离心力的变化](/images/balancing-static-dynamic/fig7-force-vs-rpm.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ```python
 import numpy as np
@@ -159,7 +159,7 @@ print(f"还原校验: 静+耦合 = {abs(U_static + U_couple):.2f} 应等于 {abs
 校正平面（correction plane）是转子上加/去重的具体截面位置。选单面还是双面，取决于不平衡的形态：
 
 ![单校正平面与双校正平面在轴上的位置](/images/balancing-static-dynamic/fig10-single-dual-plane.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 **单面平衡**只在转子的一个平面上加配重，原理上只能消除静不平衡——对力偶无能为力。适合轴向尺寸短、不平衡基本集中在单个截面的盘类零件：飞轮、离合器压盘总成、冷却风扇叶轮。
 

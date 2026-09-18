@@ -85,10 +85,10 @@ print("理论值  : 100Hz 幅值 1.000 | 250Hz 幅值 0.500")
 伪随机信号的频域谱线分布与时域波形见下面两图：连续宽带随机在整个频带上形成连续"地毯"，任何单根谱线上的能量有限；伪随机将同样的总能量集中到有限根离散谱线上，每根谱线的幅度可精确设定并逐线抬高，信噪比优势即来源于此。
 
 ![伪随机与宽带随机的频域形态对比](/images/pseudo-random-excitation/pr-vs-random-spectrum.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![多正弦信号的时域波形](/images/pseudo-random-excitation/multisine-time.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 工程注意
 LMS 理论手册对系统分析（频响函数测量）的窗函数推荐为：汉宁窗用于随机激励的参考通道和响应通道；**矩形窗只用于伪随机激励的参考通道和响应通道**；力窗与指数窗用于锤击法。若测伪随机时误用汉宁窗，等于对已周期化的信号再施加一次人为调幅，幅值和相位均会失真，这是 Testlab 使用者常见的参数残留错误。
@@ -128,17 +128,17 @@ for name, ph in (("随机相位  ", ph_rand), ("Schroeder ", ph_schr)):
 同为 50 个分量，随机相位波峰因子为 3.06，Schroeder 相位降至 1.89：峰值从 15.3 降至 9.5，RMS 保持 5.0 不变。在相同功放电压上限下，Schroeder 版本的有效激励电压为随机相位版本的 3.06/1.89 ≈ 1.62 倍，即提高约 60%。Simcenter Testlab 中的伪随机信号即采用 Schroeder 相位，可在不触发过载的前提下提高激励电平。
 
 ![Schroeder 相位压低波峰因子](/images/pseudo-random-excitation/schroder-crest.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![同等过载裕度下可抬高的激励电平](/images/pseudo-random-excitation/excitation-level.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 四、谱平均与周期平均：两种噪声抑制路径
 
 存在噪声即需平均。频域的<strong>谱平均（Spectral Averaging）</strong>为常用方法：线性平均或指数平均，随机激励、猝发随机均依赖它，SNR 越差所需帧数越多。伪随机因信噪比本身较高，所需平均次数少，测试时间相应缩短。
 
 ![谱平均设置](/images/pseudo-random-excitation/spectral-averaging.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 伪随机还有第二条噪声抑制路径：<strong>周期平均（Cyclic Averaging）</strong>，即时域平均。由于激励信号每帧完全相同（确定性波形），结构响应在瞬态衰减之后也逐帧重复。操作流程为：先施加若干<strong>延迟块（Delay Blocks）</strong>使结构进入稳态周期响应，然后从每帧激励的同一时刻起采集、逐帧作时域平均。噪声与激励无固定相位关系，在平均中相互抵消；响应信号因帧帧相干而随平均次数增加趋于干净。该流程分为内环（单次采集内的周期平均）与外环（重复整个采集），Allemang 与 Phillips 在 IMAC 会议论文中给出了完整的误差分析。
 
@@ -150,20 +150,20 @@ for name, ph in (("随机相位  ", ph_rand), ("Schroeder ", ph_schr)):
 周期平均对工况还有细分：半稳态工况（转速漂移）先用 RPM 自适应重采样（阶次跟踪思路）再作同步平均；严格稳态工况直接从时间块起点同步平均。
 
 ![周期平均流程](/images/pseudo-random-excitation/cyclic-averaging.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 五、工程验证：飞机全机驱动点 FRF
 
 Siemens 以一组飞机驱动点（Driving-point）FRF 对比了猝发随机与 Schroeder 正弦伪随机，判据为相干函数。结果方向明确：猝发随机工况的相干函数在多个频段出现明显下凹；伪随机 + Schroeder 正弦的相干函数整体接近 1.0，共振峰附近也无塌陷。
 
 ![猝发随机工况的相干函数](/images/pseudo-random-excitation/coherence-burst-random.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![伪随机 + Schroeder 正弦工况的相干函数](/images/pseudo-random-excitation/coherence-pseudo-random.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![实测案例对比](/images/pseudo-random-excitation/coherence-case.jpg)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 该结论对整车与动力总成测试同样成立：车身模态、副车架模态等高价值测试中，试件准备耗时以天计，更换激励信号使相干函数从 0.9 提升至 0.99，可明显改善后续与有限元模型对标的相关性。
 

@@ -68,12 +68,12 @@ MAC 很少单独使用，一般以矩阵形式出现：行和列各放一组振�
 AutoMAC 非对角元素高，还有一种经典判读用途：区分真共振峰与振型交叉点。两条复模态指示函数（Complex Mode Indicator Function，CMIF）曲线在两个共振峰之间出现交叉时，高阶 CMIF 可能出现一个小的峰：
 
 ![一阶与二阶 CMIF 曲线示例：两共振峰之间的交叉点处高阶 CMIF 出现小峰](/images/modal-assurance-criterion/cmif-curves-example.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 判别方法：在交叉点两侧各取数据（如频率 a、b 处）计算 MAC 矩阵。矩阵接近幺矩阵（单位阵），说明模态未变、该峰是真实共振峰；矩阵变为反对角阵，说明模态发生了交换，该峰属于交叉点而非新模态：
 
 ![CMIF 跟踪与 MAC 矩阵判别：MAC 接近幺矩阵则为共振峰，反对角阵则为交叉点](/images/modal-assurance-criterion/cmif-cross-mac.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 数值的陷阱
 非对角 MAC 高不一定是拟合错误。两个物理上独立的模态，如果测点全布置在它们振型相似的区域（比如都集中在节点附近），算出的 MAC 照样偏高。此时应先核查测点布置，再核查算法。
@@ -149,7 +149,7 @@ AutoMAC 前三阶：
 MAC 也有明确的适用边界：它不能判断一个 ODS（工作振型，Operating Deflection Shape）与某阶振型的相似是否出于巧合。手册明确提示：一个频率为 56 Hz 的 ODS 与固有频率 200 Hz 的模态振型不存在任何关联，尽管二者形状可能看起来相近：
 
 ![Simcenter 理论手册对 ODS 与振型巧合相似的提示（17.4 节）](/images/modal-assurance-criterion/ods-56hz-note.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 MAC 只比较形状；两阶模态在物理上是否相关，还必须把频率和激励条件放在一起判断。
 

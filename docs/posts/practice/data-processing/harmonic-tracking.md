@@ -87,11 +87,11 @@ for name, est in cases:
 
 ![原始转速迹线：脉冲间隔换算的 rpm-时间函数](/images/harmonic-tracking/rpm-trace.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![采样再采样：三次样条逼近边界条件得到光滑的转速函数估计](/images/harmonic-tracking/rpm-resample.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 一个贯穿全文的类比在这里引入：**转速迹线是地图，跟踪算法是按图索骥的导航**。地图上每条街道（每个采样点的转速）标错一点，单看无妨；但导航是积分式的——走过的每一步误差都累进里程，几公里后你已经站在完全错误的路口。系统性的地图偏差（每条街都偏北 1 度）让终点偏出几公里；一次看错路标（单点毛刺）只是走了一小段冤枉路，回到正道即可。后面选 HC 参数时这张地图还要再用一次。
 
@@ -175,11 +175,11 @@ lam= 3000: 邻阶4.5污染   4.9% | 阶跃收敛   76 ms
 
 ![三种谐波置信因子下的滤波器带宽特性对比（手册图 13-1）](/images/harmonic-tracking/hc-bandwidth.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![滤波带宽按频率与按阶次定义时的行为差异（手册图 13-2）](/images/harmonic-tracking/bandwidth-vs-order.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 手册还给出一条先验判据：对间隔密集的两个正弦波，分辨能力与总观察时间成反比——**观察时间应取最小频率间隔的倒数**。25 Hz 间隔对应 40 ms 观察时间，远短于实际数据长度，所以本例在 $\lambda=3000$ 下仍能获得 4.9% 的干净分离。反过来，若两阶在全程最低转速下的频率间隔缩到 2 Hz，观察时间需 0.5 s——瞬变幅值在 0.5 s 内早已变化，此时分辨率与瞬变跟踪物理上不可兼得，只能分段处理或换更密的转速迹线（回到第二节：更密的 PPR 让地图更准，量化锯齿更小）。
 

@@ -50,11 +50,11 @@ $$
 
 ![调制阶次与边带：阶次域中未调制（上）与被调制（下）的同一根阶次](/images/fluctuation-strength/fig2-sidebands-order-domain.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ![彩色图谱上 62 阶两侧的对称伴线：边带间距 2 对应调制源每转作用 2 次](/images/fluctuation-strength/fig1-sidebands-colormap.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这里要把"阶次域间距"换算成"时间域晃多快"，才能知道该归抖动强度还是粗糙度管：调制频率 = 边带间距（每转次数）× 转频。同样一个 2 次/转的调制，1800 rpm 时转频 30 Hz，调制频率 60 Hz——落在粗糙度区；降到 600 rpm 怠速附近，转频 10 Hz，调制频率 20 Hz——恰好压在抖动与粗糙的分界线上，轰鸣开始"一涨一落"。低速工况的调制阶次问题更容易以"晃"的形式被感知，这不是心理作用，是调制频率随转速同步下滑的结果。
 

@@ -15,7 +15,7 @@ ADC 按固定间隔对模拟信号取样。采样之后，信号中高于带宽�
 
 ![采样率不足时，高频信号在采样后呈现为低频正弦](/images/aliasing/aliasing-time-domain.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 混叠的风险在于它**不产生任何报警**。波形看起来正常，频谱上也有一个清晰的峰，只是频率和幅值都是错的。如果不做预防，混叠数据从采集到报告的整个流程中都可能不被发现。
 
@@ -48,7 +48,7 @@ $$
 
 ![超过带宽的频率成分以带宽频率为轴镜像折叠](/images/aliasing/alias-mirroring.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 对于任意真实频率 $f$，采样后观测到的混叠频率 $f_{\text{alias}}$ 为
 
@@ -62,7 +62,7 @@ LMS 理论手册用"折叠线"描述同一件事：Nyquist 频率 $f_n$ 的各�
 
 ![实际频率与采样后观测频率对照表（带宽 100 Hz）](/images/aliasing/alias-table.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ```python
 # 混叠频率计算：真实频率 vs 采样后观测频率
@@ -97,7 +97,7 @@ print(f"1700 Hz 与 300 Hz 采样序列最大偏差: {err:.1e}")
 
 ![实际抗混叠滤波器在带宽处 -3 dB 滚降，过渡带内幅值已不可信](/images/aliasing/anti-aliasing-filter.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 由此得到一个关键的工程结论：**从 80% 带宽到带宽之间的区间不可信**——这里的幅值已被滤波器压低，而过渡带内折回来的混叠成分也可能落在这一区间。真正无混叠的分析范围是从 0 到 80% 带宽，这个区间称为频率范围 Span：
 
@@ -109,7 +109,7 @@ $$
 
 ![镜像成分全部落在 80% 带宽与带宽之间，0 到 80% 带宽为无混叠的 Span](/images/aliasing/alias-span-mirror.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 Simcenter SCADAS 硬件内置抗混叠滤波器，不需要额外配置；Simcenter Testlab 中可以在 Tools -> Options -> General -> Frequency 中将显示切换为 Span，让所有界面直接按可信带宽显示，避免误读 80% 到 100% 带宽之间的数据。
 
@@ -151,7 +151,7 @@ Simcenter SCADAS 硬件内置抗混叠滤波器，不需要额外配置；Simcen
 谱上出现解释不通的低频峰、时域波形"变圆变钝"、降采样后出现新峰——应首先怀疑混叠：把带宽加倍重新测量。花十分钟重测，可避免沿错误方向的整轮排查。
 :::
 
-（图源：Simcenter Testing Knowledge Base）
+（图源：网络官方公开资料）
 
 ---
 

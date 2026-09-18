@@ -17,13 +17,13 @@ author: "@NVH_Z"
 
 ![C-TPA 需要的源、接收端、悬置组件数据总览：不变载荷定义在连接界面（编号 2）](/images/invariant-loads/fig1.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 把这些组件数据用 FBS 拼装成整机并预测目标点响应，就是 C-TPA 的全部流程：
 
 ![用 FBS 对源-接收端系统做虚拟装配并预测目标点响应](/images/invariant-loads/fig6.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 但 C-TPA 的精度对输入数据质量极其敏感，小误差会在最终预测里被放大；而所有输入数据中最难获取、也最容易出错的，就是源的不变载荷。本文剩下的内容都围绕一个问题：怎么拿到高质量的不变载荷。
 
@@ -57,14 +57,14 @@ $$F_{\mathrm{blocked}} = \frac{v_{\mathrm{free}}}{Y_A}$$
 
 ![弱耦合两组件的互动：右侧弹簧刚度远大于左侧，一侧近似刚性、另一侧近似自由](/images/invariant-loads/fig2.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 - **直接测阻断力**：把源连到一个比它硬得多的接收端上，在连接界面用测力计抄电阻断力。限制在低频：再硬的结构到高频也会出现共振，“刚性”假设在共振之后失效。
 - **直接测自由速度**：把源连到一个比它软得多的支撑上，用加速度计在界面测速度再积分。限制在高频：再软的悬浮到低频也会变硬（悬浮弹簧刚度随频率下降而减小），“自由”假设在低频失效。
 
 ![直接测量阻断力的布置示意：刚性接收端+界面测力计](/images/invariant-loads/fig3.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 换算关系 $F_{\mathrm{blocked}} = v_{\mathrm{free}}/Y_A$ 意味着两条直接法可以互补：低频用刚性台测阻断力，高频用柔软支撑测自由速度，中间通过源阻抗换算拼接。
 
@@ -74,13 +74,13 @@ $$F_{\mathrm{blocked}} = \frac{v_{\mathrm{free}}}{Y_A}$$
 
 ![强耦合两组件的互动：各弹簧刚度与质量相近，运动相互牵连](/images/invariant-loads/fig4.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 此时用 in-situ TPA（在位传递路径分析）间接估计阻断力：不拆装配，在耦合状态下测接收端上若干指示点的响应 $a_4$ 和传递函数 $H_{24}$，用矩阵求逆反演阻断力：
 
 ![用 in-situ TPA 估计阻断力的布置示意：耦合状态下测指示点响应与传递函数，矩阵求逆反演](/images/invariant-loads/fig5.png)
 
-*（图源：Siemens Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这个矩阵求逆公式回答的问题是：已知接收端指示点的响应和激励到指示点的传递函数，界面上作用了多大的力？其中 $a_4$ 对应物理里的指示点响应向量（加速度），$H_{24}$ 对应每个界面力到每个指示点的传递函数矩阵，乘上伪逆矩阵就是最小二乘意义下的阻断力估计：
 
@@ -156,7 +156,7 @@ for name, ZR in [("柔软 k=2e4", 2e4/(1j*w)),
 
 ## 六、Testlab 中的位置
 
-这套工作流在 Simcenter Testlab 里有完整的对应：想预测虚拟装配的系统表现，用 Virtual Prototype Assembly 创建源/接收端/悬置组件库并做 FBS 拼装；在位阻断力估计的矩阵求逆在 Transfer Path Analysis 相关功能中完成；体积加速度（声学源强 Q）的估计属于 ASQ 工具集；轮心/重心的虚拟点变换是 VPT 功能。文中案例的完整工程实施可参考 Simcenter 官方知识库文章《Obtaining Invariant Loads: Practical Examples》（KB000073710）。
+这套工作流在 Simcenter Testlab 里有完整的对应：想预测虚拟装配的系统表现，用 Virtual Prototype Assembly 创建源/接收端/悬置组件库并做 FBS 拼装；在位阻断力估计的矩阵求逆在 Transfer Path Analysis 相关功能中完成；体积加速度（声学源强 Q）的估计属于 ASQ 工具集；轮心/重心的虚拟点变换是 VPT 功能。文中案例的完整工程实施可参考 公开技术资料文章《Obtaining Invariant Loads: Practical Examples》（KB000073710）。
 
 ## 一句话记住
 

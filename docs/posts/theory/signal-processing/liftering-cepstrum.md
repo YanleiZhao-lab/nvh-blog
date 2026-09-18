@@ -199,23 +199,23 @@ Simcenter Testlab 没有倒频谱的一键功能，Data Calculator 公式串是�
 
 ![LOG10 函数选择](/images/liftering-cepstrum/log10-function.png)
 
-*Data Calculator 的 Select Function 面板里找 LOG10（图源：Simcenter Testing Knowledge Base）*
+*Data Calculator 的 Select Function 面板里找 LOG10（图源：网络官方公开资料）*
 
 3. 逆变换：第二条公式选 **FFT_INVERSE**，作用于上一步的 log 输出，Point Id 起个有意义的名字
 
 ![IFFT 公式](/images/liftering-cepstrum/ifft-formula.png)
 
-*第二条公式：FFT_INVERSE 作用于 log 结果（图源：Simcenter Testing Knowledge Base）*
+*第二条公式：FFT_INVERSE 作用于 log 结果（图源：网络官方公开资料）*
 
 ![Calculate 执行](/images/liftering-cepstrum/datacalc-calculate.png)
 
-*公式串就绪后点 Calculate，结果出现在 Data Set 列表（图源：Simcenter Testing Knowledge Base）*
+*公式串就绪后点 Calculate，结果出现在 Data Set 列表（图源：网络官方公开资料）*
 
 输出在 Navigator 里以 **AutoCorrelation** 类型出现——这不是计算错误，IFFT 结果在 Testlab 里即按该类型标识。拖入 Front/Back 显示，X 轴下限设零（双边谱负半轴是镜像），放大 Y 轴——峰在零点附近很尖，不放大难以观察。
 
 ![FrontBack 显示](/images/liftering-cepstrum/frontback-display.gif)
 
-*倒频谱拖入 Front/Back 显示：零点尖峰加镜像谱是数学产物，属正常（图源：Simcenter Testing Knowledge Base）*
+*倒频谱拖入 Front/Back 显示：零点尖峰加镜像谱是数学产物，属正常（图源：网络官方公开资料）*
 
 这条链路产出的是**实/功率倒频谱**，用于检测和趋势监测完全够用。要做本文第三节的 liftering 重建（回波消除），必须保留相位走复倒频谱全链路——Data Calculator 的函数作用于幅值类数据，相位保持这一环在 Classic 界面里没有现成通道，工程上更实际的做法是把时间数据导出，在 Python/MATLAB 里完成"FFT、log（幅值加解卷绕相位）、编辑、exp、IFFT"，再将处理后的信号导回 Testlab 继续后续分析。
 

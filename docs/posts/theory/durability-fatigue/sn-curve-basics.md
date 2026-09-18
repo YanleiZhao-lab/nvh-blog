@@ -13,9 +13,9 @@ author: "@NVH_Z"
 
 这把标尺的历史本身就是被事故逼出来的。1842 年法国凡尔赛，机车车轴在日常行驶的低应力循环下意外断裂，五十余人遇难。德国工程师 August Wöhler（1819～1914）为调查此事故开发了反复加载试验装置，系统绘制载荷水平与致断循环次数的关系——他发现裂纹在轴表面缓慢萌生、长大，到临界尺寸后突然快速扩展导致断裂，而这些载荷水平远低于材料的强度极限和屈服强度。对当时的观察者而言，车轴什么时候突然断裂看似无法预测；直到 S-N 曲线出现，循环应力与寿命的关系才可以被一致地预估。
 
-![图1：August Wöhler（1819～1914）因调查铁路车轴失效开发了 S-N 曲线（Siemens Simcenter Testing Knowledge Base）](/images/sn-curve-basics/fig1-wohler.png)
+![图1：August Wöhler（1819～1914）因调查铁路车轴失效开发了 S-N 曲线（Siemens 公开技术资料）](/images/sn-curve-basics/fig1-wohler.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>S-N 曲线（S-N Curve / Wöhler 曲线）</strong>：交变应力幅值与致断循环次数的关系曲线，通常横纵轴均取对数刻度，是疲劳寿命预测的查询表
@@ -27,13 +27,13 @@ author: "@NVH_Z"
 
 S-N 曲线的原料是金属试棒（coupon）的成组恒幅循环试验：把一批同材料、同工艺的小试棒装上轴向疲劳试验机，每组固定一个应力幅值循环加载直到裂纹或断裂，记录致断次数；换一个应力级再来一组，把 (S, N) 点对画到双对数坐标上。工程上通常要求至少 5 个应力水平、每级 3 次重复，才能拟合出一条可用的曲线。
 
-![图2：用金属试棒循环试验机生成 S-N 曲线（Siemens Simcenter Testing Knowledge Base）](/images/sn-curve-basics/fig2-coupon-machine.png)
+![图2：用金属试棒循环试验机生成 S-N 曲线（Siemens 公开技术资料）](/images/sn-curve-basics/fig2-coupon-machine.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
-![图3：典型 S-N 曲线：应力幅值越高、致断循环次数越少（Siemens Simcenter Testing Knowledge Base）](/images/sn-curve-basics/fig3-sn-curve.png)
+![图3：典型 S-N 曲线：应力幅值越高、致断循环次数越少（Siemens 公开技术资料）](/images/sn-curve-basics/fig3-sn-curve.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 曲线的功能就是一张查询表：知道应力幅值，顺着虚线查到对应的致断次数。绝大多数 S-N 曲线从左上向右下倾斜——幅值高的循环寿命短，幅值低的循环寿命长。有一个容易忽略的细节：疲劳试验里循环的频率本身不进入结果——决定寿命的只有循环次数，不是加载快慢。但在真实结构上频率会间接起作用：当载荷频率与结构固有频率重合时，谐振放大应力幅值，寿命随之缩短——这是 NVH 与耐久交叉的地方：共振区的振动放大等于把载荷谱向高应力段搬运。
 
@@ -41,9 +41,9 @@ S-N 曲线的原料是金属试棒（coupon）的成组恒幅循环试验：把�
 
 一条完整的 S-N 曲线可以划出塑性、弹性、无限寿命三个区间，分界由三个关键应力值给出：
 
-![图4：S-N 曲线上的强度极限、屈服强度与疲劳极限（Siemens Simcenter Testing Knowledge Base）](/images/sn-curve-basics/fig4-regions.png)
+![图4：S-N 曲线上的强度极限、屈服强度与疲劳极限（Siemens 公开技术资料）](/images/sn-curve-basics/fig4-regions.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 - <strong>强度极限（Ultimate Strength）</strong>：一个循环就失效的应力水平，对应曲线最左上端
 - <strong>屈服强度（Yield Strength）</strong>：塑性区与弹性区的分界，这两个值都可以由静态拉伸试验直接得到
@@ -65,9 +65,9 @@ S-N 曲线的原料是金属试棒（coupon）的成组恒幅循环试验：把�
 
 因为 S-N 曲线实际上是双对数图。在线性坐标上看同一条曲线，才能意识到应力与寿命的关系有多么陡峭：线性坐标里“看起来还行”的幅值余量，在寿命轴上是几个数量级的压缩。
 
-![图5：同一条 S-N 曲线在线性（左）与双对数（右）坐标上的样貌（Siemens Simcenter Testing Knowledge Base）](/images/sn-curve-basics/fig5-log-vs-linear.png)
+![图5：同一条 S-N 曲线在线性（左）与双对数（右）坐标上的样貌（Siemens 公开技术资料）](/images/sn-curve-basics/fig5-log-vs-linear.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 用具体数字感受这种敏感性。这个公式回答的问题是：弹性区内给定应力幅值 S，平均能循环多少次？其中 N(S) 对应物理里该幅值下的平均致断循环次数，k 对应双对数曲线的斜率（注：本文 k 为寿命对应力的斜率指数，与 Basquin 形式中的幅值指数 m 互为倒数，k=1/m），C 是由试验拟合的常数：
 
@@ -81,9 +81,9 @@ k 越大，曲线越陡，幅值的小变化被放大成寿命的巨大变化。
 
 $$\frac{N(S_1)}{N(S_2)} = \left(\frac{S_2}{S_1}\right)^{k}$$
 
-![图6：k 因子与应力水平、疲劳寿命的换算表（Siemens Simcenter Testing Knowledge Base）](/images/sn-curve-basics/fig6-kfactor-table.png)
+![图6：k 因子与应力水平、疲劳寿命的换算表（Siemens 公开技术资料）](/images/sn-curve-basics/fig6-kfactor-table.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这个换算关系直接支撑了加速耐久试验的合理性：把载荷提高一小截（保证失效模式不变），寿命就能大幅缩短，从而把试验时间压缩到工程可接受的范围。反过来它也是精度警报：载荷测量差 15%，寿命预测差一倍——这就是耐久载荷谱测量对量程与标定精度“锻而不舍”的根源。
 

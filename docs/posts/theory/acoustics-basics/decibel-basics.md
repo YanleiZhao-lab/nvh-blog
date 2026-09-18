@@ -53,7 +53,7 @@ $$
 
 ![功率类量与幅值类量的 dB 定义公式](/images/decibel-basics/db-equations.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 系数相差一倍的原因可从定义推导。功率正比于幅值的平方（例如声功率正比于 $p^2$），对数运算将平方指数提到系数上：
 
@@ -96,7 +96,7 @@ NVH 报告中 dB 使用频繁，经常出现混用。这三个量虽然都可表
 
 ![声压、声功率、声强度虽然物理量不同，但都可以表达为分贝](/images/decibel-basics/db-three-quantities.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 手册用暖气片作类比：房间里每处的温度（对应声压）随位置变化；暖气片每小时发出的热量（对应声功率）是它自己的属性；热流的密度和方向（对应声强）描述能量如何传播。
 
@@ -176,7 +176,7 @@ $$
 
 ![A 计权曲线：1 kHz 处 0 dB，低频大幅衰减，1k–6 kHz 略有放大](/images/decibel-basics/db-a-weighting-curve.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 曲线的关键特征：
 
@@ -207,13 +207,13 @@ $$
 
 ![Simcenter Testlab 中以 Amplitude 格式显示的频谱](/images/decibel-basics/db-example-spectrum.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 在 Simcenter Testlab 里核对：右键 Y 轴 → Format → dB/Level，谱图即切换成 dB 显示。
 
 ![手工计算结果与 Testlab 显示一致](/images/decibel-basics/db-result-check.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 数值一致的前提是所选参考值与软件一致。如果单位制中参考值被修改过（或对比的是其他系统），同一个 1.084 Pa 会给出完全不同的 dB 数。这就是为什么必须强调：**报告中的 dB 必须带参考值才有意义**。
 

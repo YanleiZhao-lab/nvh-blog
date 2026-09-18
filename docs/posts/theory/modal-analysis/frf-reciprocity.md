@@ -25,7 +25,7 @@ $$H_{ij}(\omega) = H_{ji}(\omega)$$
 
 ![9 个测点、锤子加三向加速度计的试验布置](/images/frf-reciprocity/modal-setup.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 打个生活里的比方。互易性像城市里两点之间的**打车账单**：从 A 小区到 B 写字楼，与从 B 写字楼回到 A 小区，同一条路、同样的里程表读数，价格一样——路程是两个地点之间的属性，不关心你从哪头出发。FRF 也一样：它是结构上两个自由度之间的传递属性，由结构自身（质量、刚度、阻尼的分布）决定，“谁是激励、谁是响应”只是给这条路径标了行驶方向，不改变路径本身。当然，这个类比有边界：出租车遇到单行道会绕路，而结构上的“单行道”（陀螺项、声振耦合等不对称因素）也会让来回价格分家——什么时候会分家，第四章的失效清单专门回答。记住这个比喻往下读：换激励点与响应点，只是换了个方向走同一条路。
 
@@ -82,24 +82,24 @@ $$A_{k,mn} = \frac{A_{k,mj} \, A_{k,nj}}{A_{k,jj}}$$
 
 ![27 个输入对 27 个输出的完整测量表](/images/frf-reciprocity/io-table.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 - **移加速度计**（锤固定敲 $F_{1z}$）：三向加速度计每挪一个点，就同时填满该点在行中的三个元素。9 个点测完，一行齐了，只需 9 次测量。
 - **移动锤子**（加速度计固定）：锤单向敲击每敲一个点只填一列中的一个元素。要凑齐完整列，必须在每个测点沿 x、y、z 三个方向都敲——平板中间做不到垂直面内敲击，这正是社区文章里"roving hammer 得不到完整振型"的坑。
 
 ![互易性保证：完整一行或一列即可](/images/frf-reciprocity/row-or-column.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![移加速度计：9 次测量填满一行](/images/frf-reciprocity/roving-accel-complete.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 互易性的价值在这里显形：因为 $H_{ij}=H_{ji}$，这"一行"同时就是矩阵的一列，两种方案在数学上等价，工程上选省事的那种——但前提是别把单方向锤击当成了完整测量。
 
 ![移动锤子单向敲击：凑不出完整行或列](/images/frf-reciprocity/roving-hammer-incomplete.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 应用二：互易性校验是模态数据质量的常规检查项
 

@@ -39,7 +39,7 @@ $$\left(H_\mathrm{re} - \frac{A}{2\sigma}\right)^2 + H_\mathrm{im}^2 = \left(\fr
 
 ![拟合圆参数与模态参数间的关系](/images/modal-circle-fit/fig15-6-circle-fit.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>圆拟合法（Circle Fit）</strong>：在复平面上对共振区数据点拟合圆，从圆的几何参数反推模态频率、阻尼、留数的 SDOF 估计方法
@@ -170,15 +170,15 @@ CMIF（复模态指示函数，Complex Mode Indicator Function）可在此发挥
 
 ![CMIF 曲线选模态频率](/images/modal-circle-fit/fig15-7-cmif-peaks.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![CMIF 与增强 FRF](/images/modal-circle-fit/fig15-8-cmif-enhanced-frf.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![一阶与二阶 CMIF 的交叉效应](/images/modal-circle-fit/fig15-9-cmif-crossing.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 五、方法选型：圆拟合在参数估计家族里的位置
 

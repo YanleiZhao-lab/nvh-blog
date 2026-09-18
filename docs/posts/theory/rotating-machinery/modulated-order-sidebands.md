@@ -13,7 +13,7 @@ author: "@NVH_Z"
 
 ![62阶调制阶次的彩色图谱](/images/modulated-order-sidebands/fig7_colormap.png)
 
-*62 阶啮合阶次每转被调制两次，产生 60、64 阶边带（图源：Simcenter Testing Knowledge Base）*
+*62 阶啮合阶次每转被调制两次，产生 60、64 阶边带（图源：网络官方公开资料）*
 
 初学者常见的误判，是按阶次数值反查部件——去系统里寻找"60 齿的齿轮"和"64 齿的齿轮"，而整机中并不存在这两个部件。边带不是独立的物理事件，而是主阶被调制后的数学产物：**60 阶和 64 阶的能量来自 62 齿啮合本身**。
 
@@ -29,11 +29,11 @@ author: "@NVH_Z"
 
 ![偏心齿轮副](/images/modulated-order-sidebands/fig8_eccentric.png)
 
-*齿轮 1 正圆，齿轮 2 偏心椭圆（图源：Simcenter Testing Knowledge Base）*
+*齿轮 1 正圆，齿轮 2 偏心椭圆（图源：网络官方公开资料）*
 
 ![偏心导致每转两次推拉](/images/modulated-order-sidebands/fig9_pushpull.png)
 
-*中心距每转变化两次，啮合力随之被调制（图源：Simcenter Testing Knowledge Base）*
+*中心距每转变化两次，啮合力随之被调制（图源：网络官方公开资料）*
 
 物理过程：齿轮 2 每转一圈，椭圆轮廓使实际中心距经历两个"远-近"循环。中心距变化引起啮合间隙变化，啮合冲击的强度每转起伏两次。若齿轮为正圆，中心距恒定，图中绿色曲线为平线，不发生调制。
 
@@ -121,11 +121,11 @@ print(f"理论边带幅值 m/2 = {m/2:.3f}")
 
 ![未调制与调制的阶次域对比](/images/modulated-order-sidebands/fig10_orderdomain.png)
 
-*上图：正圆齿轮，能量集中单阶；下图：偏心齿轮，能量分配到边带（图源：Simcenter Testing Knowledge Base）*
+*上图：正圆齿轮，能量集中单阶；下图：偏心齿轮，能量分配到边带（图源：网络官方公开资料）*
 
 ![能量集中的单阶与分散的边带](/images/modulated-order-sidebands/fig11_energy.png)
 
-*单阶幅值高于调制后的边带族——能量分散使峰值下降（图源：Simcenter Testing Knowledge Base）*
+*单阶幅值高于调制后的边带族——能量分散使峰值下降（图源：网络官方公开资料）*
 
 手册还明确指出：齿轮制造商可以出于这一目的主动控制偏心量（Gear manufacturers can control the eccentricity, just for this purpose）。这与离合器从动盘开螺旋槽、变速箱壳体加阻尼的处理思路一致——以分散能量代替单纯消减峰值。
 

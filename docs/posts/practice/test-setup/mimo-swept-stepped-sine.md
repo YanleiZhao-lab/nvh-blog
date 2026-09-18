@@ -15,11 +15,11 @@ author: "@NVH_Z"
 
 第一类是**轻阻尼、高信噪比要求**的试验。阻尼比 0.5% 的模态，半功率带宽只有约 1 Hz（带宽等于两倍阻尼比乘固有频率），随机激励在这个 1 Hz 里分到的能量很少，峰值处信噪比不足，FRF 峰值被低估。第二类是**幅值必须严格受控**的试验：脆性试件、带非线性连接的部件，或者验收规范直接写了"指定频率、指定加速度级"（如典型的 1 g 定频检测）——开环激励的幅值随结构阻抗起伏，根本无法保证。
 
-正弦激励的答案很直接：任何时刻只激励一个频率，全部激励功率集中在这一条谱线上。Simcenter 官方知识库的总结一针见血：扫频测试耗时更短，但激励能量是"摊开"的；步进正弦耗时更长，但每个频率都被充分激励（Figure 1）。
+正弦激励的答案很直接：任何时刻只激励一个频率，全部激励功率集中在这一条谱线上。公开技术资料的总结一针见血：扫频测试耗时更短，但激励能量是"摊开"的；步进正弦耗时更长，但每个频率都被充分激励（Figure 1）。
 
 ![扫频与步进正弦对比：扫频省时间，步进在每个频率上能量更集中](/images/mimo-swept-stepped-sine/fig1.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 两类正弦的具体差别：
 
@@ -85,7 +85,7 @@ Simcenter Testlab 的 MIMO Swept and Stepped Sine 是 Structure Acquisition 目�
 
 ![双激振器扫频/步进正弦试验布置示例](/images/mimo-swept-stepped-sine/fig2.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 启动入口在 Testlab Structure Acquisition 文件夹的"MIMO Swept and Stepped Sine Testing"图标。通道设置（Channel Setup）工作表里，除了常规的传感器标定与测点信息，要做闭环正弦测试至少定义一个<strong>控制通道（Control）</strong>与一个<strong>参考通道（Reference）</strong>。控制通道选力或加速度，两种组合测出的传递特性含义不同：
 
@@ -98,7 +98,7 @@ MIMO Sine Setup 工作表右上角的控制面板集中了主要试验参数（F
 
 ![MIMO Sine Setup 工作表的控制面板：模式、控制策略、扫速、频率范围、扫数](/images/mimo-swept-stepped-sine/fig4.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 - **MIMO sine mode**：Stepped 或 Swept，对应步进/扫频；
 - **Control strategy**：No Control（开环，输出不随响应调整）、Amplitude/Phase（幅值相位双控）、Amplitude（仅幅值控制）。闭环控制根据控制通道的实测与目标谱的偏差实时修正输出；
@@ -111,17 +111,17 @@ MIMO Sine Setup 工作表右上角的控制面板集中了主要试验参数（F
 
 ![Tabulated 扫速编辑器：按频段分别设置周期数与扫速](/images/mimo-swept-stepped-sine/fig5.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 步进正弦的 Frequency Ranges 菜单（Figure 5）定义各频段的步距——共振区 0.1 Hz、其它区域 1 Hz 这样的非均匀布置是标准做法。值得注意的是，Polymax 模态拟合器支持非等间隔频率分辨率的 FRF，步进正弦的变步距数据可以直接进拟合流程。
 
 ![步进正弦 Frequency Ranges 菜单：分频段设置步距，共振区加密](/images/mimo-swept-stepped-sine/fig6.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### 关键参数二：扫数与相干
 
-Number of Sweeps 设为 2 及以上时，每次扫程用**不同的激振器相位组合**重复。这一点和随机 MIMO 用多次平均估计 FRF 的逻辑一致：多次扫程平均之后才能算出有统计意义的 FRF 与相干。官方文档特别提醒：只扫一次时没有平均，相干在每个频率上都完美等于 1——这个 1 不含任何信息，与《[相干函数](../../theory/signal-processing/coherence-function.html)》里"单帧相干恒为 1"是同一回事。相干此时衡量的是多次扫程的**重复性**：越接近 1，系统越接近线性时不变、激励越稳定。
+Number of Sweeps 设为 2 及以上时，每次扫程用**不同的激振器相位组合**重复。这一点和随机 MIMO 用多次平均估计 FRF 的逻辑一致：多次扫程平均之后才能算出有统计意义的 FRF 与相干。相关技术文档特别提醒：只扫一次时没有平均，相干在每个频率上都完美等于 1——这个 1 不含任何信息，与《[相干函数](../../theory/signal-processing/coherence-function.html)》里"单帧相干恒为 1"是同一回事。相干此时衡量的是多次扫程的**重复性**：越接近 1，系统越接近线性时不变、激励越稳定。
 
 ### 关键参数三：参考谱与安全
 
@@ -129,7 +129,7 @@ Source Parameters 面板打开各输出通道后，在 MIMO Sine Setup 底部的
 
 ![Edit Reference Profile：逐激振器输入频率-幅值目标谱](/images/mimo-swept-stepped-sine/fig7.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 Safety 区的 Advanced 设置里，OverloadAction 建议改为 Increase Range：扫到共振峰时响应可能突增，软件自动升量程避免试验中断，比默认的停机更稳妥。
 
@@ -141,7 +141,7 @@ System Identification（2206 版之前叫 SelfCheck）是正式试验前的强�
 
 ![System Identification 工作表：低量级随机信号辨识系统传递特性](/images/mimo-swept-stepped-sine/fig8.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 对正弦 MIMO 有个实用技巧：如果该试件已经做过一次正弦采集，System Verification 工作表左上角可选 Load Last MIMO Acquisition，直接用上一次试验的实测数据代替低量级随机辨识。前次实测的响应特性比低量级宽带辨识更接近真实，目标谱的跟踪也更准。
 
@@ -149,7 +149,7 @@ System Identification（2206 版之前叫 SelfCheck）是正式试验前的强�
 
 ![试验进行中的操作按钮：Hold/Release 暂停，扫频中可实时调速](/images/mimo-swept-stepped-sine/fig9.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ## 五、数值演示：扫速吃掉了多少峰值
 

@@ -8,7 +8,7 @@ author: "@NVH_Z"
 > 台架上标定的 S-N 曲线对应等幅对称循环，而整车路试采集的载荷谱是大小循环叠加、均值漂移的复杂历程。雨流计数（Rainflow Counting）的作用，是把这样的历程分解为一系列具有特定值域与均值的等幅循环，分解结果可直接代入 Miner 准则计算累计损伤，进而预估构件寿命。本文从一维计数讲到雨流的四点法与残数处理，并附可复现的 numpy 演示。
 
 ![典型的载荷-时间历程](/images/rainflow-counting/load-time-history.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 一、疲劳分析为什么不用频谱
 
@@ -23,7 +23,7 @@ NVH 工程师的直觉是"看谱"：FFT、自功率谱、colormap。但频率成
 整个处理分两步：第一步**计数**，把时间历程压缩为事件序列；第二步**直方图**，把事件按量级分箱统计出现次数。时间波形从此退出后续流程，剩下的是一份"载荷事件记录"。
 
 ![数据迹线中的典型事件](/images/rainflow-counting/typical-events.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>事件（Event）</strong>：时间历程中一次产生疲劳损伤的基本动作，如一个峰、一次跨级、一个值域
@@ -39,21 +39,21 @@ NVH 工程师的直觉是"看谱"：FFT、自功率谱、colormap。但频率成
 把数据迹线的折返点分成峰（极大值）与谷（极小值），统计各载荷量级上的出现次数，可以只统计峰、只统计谷或两者都统计。
 
 ![峰-谷计数](/images/rainflow-counting/peak-valley-counting.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 跨越量级计数
 
 统计信号幅值跨越不同量级线的次数，分向上（正向）跨越与向下（负向）跨越，可选择统计正向、负向或双向跨越。计数栅顶线可按纵坐标物理单位给定，也可按测量量程的百分比给定。它与峰值计数有严格的换算关系：**正向跨越某量级的次数，等于高于该量级的峰数减去高于该量级的谷数**——跨级计数可以从峰-谷计数结果导出。
 
 ![跨越量级计数](/images/rainflow-counting/level-crossing.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 单值域计数：对小变化敏感
 
 统计连续峰谷之间的差值，顺序升值取正、降值取负。问题在手册图 14-9 里清楚可见：一个大循环上叠加小纹波时，单值域计数把历程拆成一串小值域，直方图堆在低值域端，大循环被"化整为零"。让信号先滤掉小变化再计数，结果完全变样。**对信号的小变化十分敏感**是这一方法的固有局限。
 
 ![单值域计数对信号的小变化十分敏感](/images/rainflow-counting/range-pair-sensitivity.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 一维计数的局限
 峰值、跨级、单值域都只记"单一事件"，丢掉了事件之间的配对关系：一个 200 MPa 的峰跟着 -50 MPa 的谷，与跟着 +150 MPa 的谷，在直方图里无法区分，损伤贡献却差别很大。二维计数法补上的正是这一维信息。
@@ -64,7 +64,7 @@ NVH 工程师的直觉是"看谱"：FFT、自功率谱、colormap。但频率成
 单值域计数的改进是值域对计数：不把信号拆成连续的许多小值域，而是理解为一个"主体"变化（主值域）与叠加其上的小循环（值域对）；一对极值分隔的值域小于规定值域 $R$ 时，将其从值域计数中剔除。雨流计数正是这一原理与单值域计数原理相结合的产物。
 
 ![值域对计数](/images/rainflow-counting/range-pair-counting.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 三、二维计数：From-to、Range-mean 与雨流
 
@@ -79,7 +79,7 @@ $$R = C - A, \qquad m = \frac{A + C}{2}$$
 结果落进一张值域-均值二维直方图。均值这一维在疲劳评估中不可省略：平均应力拉则折寿、压则延寿，Goodman 修正以它为输入。
 
 ![Range-mean 计数直方图](/images/rainflow-counting/range-mean-counting.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 雨流计数：三步流程
 
@@ -88,7 +88,7 @@ $$R = C - A, \qquad m = \frac{A + C}{2}$$
 <strong>第 1 步：压缩成峰-谷序列。</strong> 计数只看峰谷值，先做值域滤波（设置门坎 $R$，单位与载荷一致，常按量程百分比给定）：某峰之后信号回落超过 $R$ 才算有效峰，随后的谷要回升超过 $R$ 才算有效谷。手册图 14-14 里 $e_3$ 被剔除，是因为信号降到 $e_4$ 时回落量不足——它只是主变化上的一个小纹波。
 
 ![值域滤波：载荷历程压缩为峰-谷序列](/images/rainflow-counting/range-filter.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 <strong>第 2 步：全序列值域对扫描（四点法）。</strong> 取连续四个极值点 $s_1, s_2, s_3, s_4$，检验中间两个极值（$s_2$、$s_3$）构成的值域是否被两端（$s_1$、$s_4$）覆盖——判据写成：
 
@@ -101,10 +101,10 @@ $$|s_3 - s_2| \le |s_2 - s_1| \quad \text{且} \quad |s_3 - s_2| \le |s_4 - s_3|
 手册给了一个六极值的例子：从 $s_1$ 开始的四点组不满足判据，移到 $s_2$、$s_3$ 仍不满足，直到 $s_3$ 到 $s_6$ 才计出第一个值域对；剩下四点再也拆不出"对"，成为残数，按 from-to 记单个半循环。
 
 ![雨流扫描示例：找出第一个值域对](/images/rainflow-counting/rainflow-example-scan.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![雨流示例：残数按单值域计数](/images/rainflow-counting/rainflow-example-residue.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: tip 方法名称的由来
 把载荷历程旋转 90 度（时间轴竖直向下），想象雨滴沿峰谷"屋檐"流淌：小屋顶上流下的雨滴构成小循环，能一路流过大起伏的构成大循环。雨滴的每条流径对应一个循环——名字来自 Matsuishi 与 Endo 的原始比喻，四点法判据是它的算法化。

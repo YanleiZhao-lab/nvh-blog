@@ -68,19 +68,19 @@ $$\Delta\alpha_{\max} = \frac{360^\circ \times 500/60}{2000} = 1.5^\circ$$
 
 ![120 PPR 采样下，60 阶以上区域（深蓝）已无任何阶次信息](/images/order-tracking-sampling/max-order-ppr.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 PPR 通道**没有抗混叠保护**——它不经过模拟抗混叠滤波器，阶次超出 PPR/2 的成分同样会折叠进来混充低阶。因此实际选型普遍再乘 10 倍安全系数：测 60 阶，选 600 PPR 的编码器或斑马带。
 
 ![同一次 RPM 升速测量：1 PPR（黑）未捕捉到扭振，120 PPR（红）捕捉到每转之内的转速波动](/images/order-tracking-sampling/torsional-ppr-compare.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 上图说明 PPR 不足的直接后果：扭振是每转之内的转速波动，1 PPR 每转只给一个转速样本，转内波动完全丢失；120 PPR 才能还原转内波动。高 PPR 的实现通常靠光电传感器配合斑马带或斑马盘——每条白线对应一个脉冲，PPR 由条纹密度决定：
 
 ![斑马盘：40 刻度与 100 刻度两种规格](/images/order-tracking-sampling/zebra-disk-ppr.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ::: warning 工程注意
 同步采样最易被忽略的风险在低速段。每转点数固定，转速升高时等效时间采样率同步升高，高频信息只会更充裕；真正的损失在低速，若角度分辨率按最低转速设计过粗，角度域信息在低速段已经丢失，转回时间域也无法恢复。选 PPR 前先计算：关心的最高阶次乘 2，再乘安全系数。

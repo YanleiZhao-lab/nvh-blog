@@ -40,7 +40,7 @@ AI 最初是为**通话私密性**提出的参数——办公室、开放式工�
 
 ![AI 的图形计算法：1/3 倍频程谱画在计权图版上，谱线上方的计权点数占比即 AI](/images/articulation-index/fig7-7-ai-nomogram.png)
 
-*（图源：Simcenter Testing Knowledge Base 中文理论手册 图7-7）*
+*（图源：网络官方公开资料）*
 
 图算法的解析表述可分三步写出。
 
@@ -72,7 +72,7 @@ AI 与可懂度的换算有实测曲线支撑。工程上的锚点：**完全私
 
 ![句子可懂度随清晰度指数的变化曲线](/images/articulation-index/fig7-8-intelligibility.png)
 
-*（图源：Simcenter Testing Knowledge Base 中文理论手册 图7-8）*
+*（图源：网络官方公开资料）*
 
 ::: warning 两种算法结果不可直接对比
 - **标准方法**（Beranek 路线）：AI 值域 0～100%
@@ -106,7 +106,7 @@ PSIL 的经典用途是查图回答"该噪声环境下，面对面交谈需要�
 
 ![不同 PSIL 背景噪声下面对面交谈距离与容易程度的关系](/images/articulation-index/fig7-9-sil-distance.png)
 
-*（图源：Simcenter Testing Knowledge Base 中文理论手册 图7-9）*
+*（图源：网络官方公开资料）*
 
 ## 四、Python 数值演示：相同总级、不同频谱
 

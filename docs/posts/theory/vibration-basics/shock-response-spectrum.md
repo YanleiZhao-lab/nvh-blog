@@ -17,7 +17,7 @@ SRS 把这套逻辑标准化：用一组线性单自由度（Single Degree of Fr
 
 ![多自由度系统模型：基座上安装一排不同固有频率的单自由度振子，各自输出最大响应构成 SRS](/images/shock-response-spectrum/mdof-model.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>SRS（冲击响应谱）</strong>：一组同阻尼、不同固有频率的线性单自由度振子对同一基座冲击输入的最大响应，随固有频率画出的曲线
@@ -66,7 +66,7 @@ $$H(\omega) = \frac{\omega_n^2 + 2j\zeta\omega_n\omega}{\omega_n^2 - \omega^2 + 
 
 ![倍频程滤波器组：SRS 计算中振子固有频率按分数倍频程分布，相邻振子响应拼接成谱](/images/shock-response-spectrum/octave-filter-bank.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 工程注意
 低频段谱值对**记录长度**高度敏感。振子周期长、衰减慢（Q=10 时自由衰减需几十个周期才可忽略），如果采集记录在响应尚未衰减完时截止，FFT 法会在记录尾部截断残余振荡，低频谱值严重失真。经验法则：记录时长至少取最低分析频率对应周期的 10 倍以上，让每个振子的残余响应自然衰减到峰值以下。
@@ -78,7 +78,7 @@ SRS 按取峰方式分三种。同一冲击、同一组振子，只是"取哪个
 
 ![SRS 三种类型：正最大谱、负最大谱与 Maximax 谱的关系](/images/shock-response-spectrum/srs-three-types.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 | 谱类型 | 取值规则 | 特点 | 适用场景 |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ maximax 是包络，永远不低于正/负谱，作为设计输入最保守，�
 
 ![Simcenter Testlab 中 SRS 分析参数设置界面：谱类型、倍频程数、Q 值与频率范围](/images/shock-response-spectrum/srs-params.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: tip 选择原则
 - 对比两条 SRS 曲线，**先核对 Q 值和频率间隔是否一致**——Q=10 对 Q=50 的比较没有意义

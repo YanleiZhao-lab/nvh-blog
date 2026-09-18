@@ -7,7 +7,7 @@ next: false
 
 # 关于本站
 
-**NVH Test**（www.nvhtest.cn）是围绕 **NVH 工程**（Noise / Vibration / Harshness，噪声、振动与声振粗糙度）搭建的个人技术站群：博客 + 论坛 + 刷题 + 技能库 + 监控一体，内容以 Simcenter Testlab 官方知识库与 LMS 理论手册为底料，消化重写、公式推导与 Python 演示齐备。
+**NVH Test**（www.nvhtest.cn）是围绕 **NVH 工程**（Noise / Vibration / Harshness，噪声、振动与声振粗糙度）搭建的个人技术站群：博客 + 论坛 + 刷题 + 技能库 + 监控一体，内容以 Simcenter Testlab 公开技术资料与 LMS 理论手册为底料，公式推导与 Python 演示齐备。
 
 ## 站点地图
 
@@ -22,8 +22,8 @@ next: false
 
 ## 内容说明
 
-- **资料来源**：Simcenter Testing Knowledge Base（community.sw.siemens.com）、LMS Test.Lab 理论手册（刘馥清编译）、SimCenter 官方论坛；插图尽量采用官方原图并逐张标注来源
-- **写作原则**：消化重组而非翻译，与源文档表述不重合；公式从定义出发分步推导；代码演示固定随机种子、可复现
+- **资料来源**：网络官方公开资料；插图来自公开渠道并逐张标注
+- **写作原则**：独立撰写、复核后再发布；公式从定义出发分步推导；代码演示固定随机种子、可复现
 - **勘误与讨论**：内容错误欢迎到[论坛](https://forum.nvhtest.cn/)发帖指出，也接受合理的内容建议
 
 ## 联系方式

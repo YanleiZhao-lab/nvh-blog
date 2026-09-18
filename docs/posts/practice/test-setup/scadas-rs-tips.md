@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # SCADAS RS 实战技巧六则：自定义显示、自动调零、数字IO、模板、离线配置与试验编排
 
-> 手边有一台 SCADAS RS 却总在重复手工操作？官方知识库的这篇 Tips 合集给出了六个立即可用的答案：监控页不够用就自建仪表盘；应变测量忘了调零就设自动零；试件振动超标要自动停台架就接数字 IO；每场试验重配通道就存模板；硬件不在身边也能用配置文件离线搭链路；一整天的试验序列用 Schedule Designer 编排成"傻瓜式引导"。本文全文消化重写，六招逐一展开，每招配官方截图。
+> 手边有一台 SCADAS RS 却总在重复手工操作？公开技术资料的这篇 Tips 合集给出了六个立即可用的答案：监控页不够用就自建仪表盘；应变测量忘了调零就设自动零；试件振动超标要自动停台架就接数字 IO；每场试验重配通道就存模板；硬件不在身边也能用配置文件离线搭链路；一整天的试验序列用 Schedule Designer 编排成"傻瓜式引导"。本文经整理与复核，六招逐一展开，每招配官方截图。
 
 ## 一、为什么值得花十分钟读这篇
 
@@ -21,7 +21,7 @@ Recorder App 采集时默认提供条图（strip chart）和统计显示，展�
 
 ![Recorder App 的 Monitor 区最右侧 Custom 标签页，用户可在此创建自定义显示](/images/scadas-rs-tips/figure04.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 Custom 区域支持三类显示：
 
@@ -41,19 +41,19 @@ SCADAS RS 可以把这件事变成全自动。在 Recorder App 主菜单打开 *
 
 ![Recorder App 主菜单中的 Recording Setup 入口](/images/scadas-rs-tips/figure01.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 把 **Auto zeroing** 开关打开：
 
 ![Recording Setup 中的 Auto zeroing 开关](/images/scadas-rs-tips/figure02.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 一场测量里通常混有非应变通道（麦克风、加速度计、温度），它们不需要也不能清零。在 **Offset Calibration** 区域的 **Zeroing 列**，逐通道勾选哪些参与自动调零：
 
 ![Offset Calibration 的 Zeroing 列：逐通道选择是否自动清零](/images/scadas-rs-tips/figure03.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这样配置一次，之后每次按采集键，应变通道自动归零、其他通道原样保留——"忘调零"这类事故从流程上消失。
 
@@ -63,19 +63,19 @@ SCADAS RS 主机（REC 单元）自带**四通道数字输入/输出端口**：
 
 ![SCADAS RS REC 单元上的四通道数字 IO 端口](/images/scadas-rs-tips/figure05.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 数字输出的典型用法：当某通道**幅值超限**、或**采集结束时**，输出一个电压信号给外部设备。在 Recording Setup 的 **Digital IO** 标签页定义四个引脚各自的行为：
 
 ![Digital IO 端口的设置界面](/images/scadas-rs-tips/figure06.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 触发条件不限于单一通道超限，软件支持多种条件组合评估：
 
 ![数字 IO 触发条件的设置菜单](/images/scadas-rs-tips/figure07.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 官方给出的经典场景：**振动超限自动关闭试验台架**——把数字输出接到台架急停回路，RS 检测到振动超过阈值立即发信号停机，不等操作员反应。这在无人值守耐久试验里是廉价而可靠的安全层。
 
@@ -87,19 +87,19 @@ SCADAS RS 主机（REC 单元）自带**四通道数字输入/输出端口**：
 
 ![Topology 区的 Save As：把当前测量设置存为模板](/images/scadas-rs-tips/figure09.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 **调用模板**：主菜单点 **Templates** 图标，出现模板列表，选中后按底部 **Load Template** 激活：
 
 ![模板列表与 Load Template 按钮](/images/scadas-rs-tips/figure10.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 模板管理入口（Topology 与 Templates 两个图标）见下图：
 
 ![主菜单中的 Topology 与 Templates 图标](/images/scadas-rs-tips/figure08.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 同一台试件的多轮试验、同型号产品的出厂检测，都适合模板化——配置差异收敛为"选哪个模板"。
 
@@ -111,19 +111,19 @@ Windows 搜索 "scadas rs" 启动工具：
 
 ![Windows 搜索启动 SCADAS RS Configuration Builder](/images/scadas-rs-tips/figure11.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 从右侧模块库把采集模块**拖拽**到左侧测量链（默认已带 UPS 和 REC 主机）：
 
 ![从模块库拖拽调理模块到测量链](/images/scadas-rs-tips/figure12.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 配好后点 **Save** 生成 .nfec 文件。在 Simcenter Testlab Neo 启动采集时选择 **离线模式（work offline）**并加载这个文件，就能在无硬件环境下完成通道设置、公式编写等全部准备工作：
 
 ![Testlab Neo 离线模式加载 .nfec 配置文件](/images/scadas-rs-tips/figure13.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 到现场接上真硬件，配置即插即用——把"现场调试时间"换成了"办公室准备时间"。
 
@@ -135,13 +135,13 @@ PC 端独立程序，把一整天的试验定义成**任务序列**。官方例�
 
 ![Schedule Designer：定义 Run-up 与三个定速工况的任务序列](/images/scadas-rs-tips/figure13.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 序列传到 SCADAS RS 后，Recorder App 会**逐个引导**执行：做完一个提示下一个，可配自动保存，还有完成状态的实时跟踪：
 
 ![Recorder App 按序列引导执行每个试验](/images/scadas-rs-tips/figure14.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 司机不需要记"下一个该跑什么工况"——App 说什么跑什么，数据自动归档到对应任务名下。
 
@@ -151,7 +151,7 @@ PC 端独立程序，把一整天的试验定义成**任务序列**。官方例�
 
 ![Download and Export 工具：批量下载与格式导出](/images/scadas-rs-tips/figure15.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ## 一句话记住
 
@@ -159,7 +159,7 @@ SCADAS RS 的独立运行哲学是"配置一次、现场零思考"：显示盯�
 
 ---
 
-*来源：[Simcenter SCADAS RS: Assorted Tips and Tricks](https://community.sw.siemens.com/s/article/Simcenter-SCADAS-RS-Assorted-Tips-and-Tricks)（Siemens Simcenter Testing Knowledge Base，2026-08-01），全文消化重写，配图为官方原图。视频补充：[Zero Before Acquisition](https://youtu.be/M9UtYL5ZIW8)、[Schedule Designer & Export Tool](https://youtu.be/uqXhf2ZFFJw)。*
+*来源：网络官方公开资料，经整理与复核。*
 
 ---
 

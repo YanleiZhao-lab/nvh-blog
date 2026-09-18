@@ -35,7 +35,7 @@ author: "@NVH_Z"
 
 ![OMA 总体流程：时域响应数据计算相关函数/互功率谱，曲线拟合得模态参数](/images/operational-modal-analysis/oma-process.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 二、理论基础：随机激励下的互相关函数与自由衰减同构
 
@@ -187,13 +187,13 @@ $$
 
 ![不同时滞数对互功率谱的影响](/images/operational-modal-analysis/oma-time-lags.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 时滞数过少与过多各有问题：太少导致密集模态漏检，太多则尖刺干扰拟合。Quick Function 窗口可以对选定的响应/参考对预览互功率谱和互相关（加窗/不加窗对照），是调参的主要手段。案例试算后把设置写进 Run 名（如 Oper Pre-Processing 0_5Hz_1%），几组设置各算一遍、看哪组稳定图最干净，是常规操作。
 
 ![Quick Function 窗口对照加窗与不加窗的互相关，确定指数窗百分比](/images/operational-modal-analysis/oma-exp-window.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 指数窗：泄漏抑制与阻尼补偿
 
@@ -240,13 +240,13 @@ print(f"若不补偿，阻尼比虚读为 {(sigma+sigma_w)/(2*np.pi*f0)*100:.2f}
 
 ![运行状态下滑雪板的四阶模态振型](/images/operational-modal-analysis/oma-modeshapes.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 振型之外，EMA 的验证工具链在 OMA 里同样可用：用识别出的模态模型合成互功率谱，与实测互功率谱叠画对比——合成曲线复现了实测曲线的全部主要动力学特征，说明主要模态没有漏掉，模型可信。
 
 ![合成互功率谱与实测对比验证](/images/operational-modal-analysis/oma-synthesis.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 一个常见疑问：PolyMAX 识别出的振型数值普遍偏小，是否做了归一化？Simcenter 工程师在文章评论区的回复是：模态振型可以任意缩放而不改变形状，默认输出未缩放未归一化，需要改标定可在模态验证工作表里操作，保存为新处理。
 

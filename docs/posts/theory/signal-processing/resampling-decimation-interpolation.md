@@ -31,7 +31,7 @@ author: "@NVH_Z"
 正确的流程分两步。手册的算例：原始信号以 1 kHz 采样，许可分析带宽 500 Hz，信号含 8 Hz 和 325 Hz 两个谱分量。降采样因子 5 意味着新采样率 200 Hz、新许可带宽 100 Hz。325 Hz 超出了新带宽，必须先用低通滤波器把数据的谱成分限制在 100 Hz 以内，再每隔 5 点取 1 点。滤波后保留的 8 Hz 分量每周期仍有 125 个采样点，描述充分。
 
 ![降采样前先低通滤波保留 8 Hz 分量](/images/resampling-decimation-interpolation/downsample-filter-keep.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 不做滤波直接抽点的后果可以定量计算。降采样等价于数字域的第二次采样，采样定理同样生效：新采样率 $f_s' = f_s / n$（单位 Hz），新许可带宽为 $f_s'/2$，任何高于 $f_s'/2$ 的成分都会折叠进带宽内：
 
@@ -40,7 +40,7 @@ $$f_{fold} = \left| f - k \cdot f_s' \right|, \quad k \in \mathbb{Z}$$
 其中 $f$ 为原信号中的频率成分（Hz），k 为使折叠结果落在 $0 \sim f_s'/2$ 内的整数。325 Hz 以新采样率 200 Hz 为模折叠：$|325 - 2 \times 200| = 75$ Hz，正好落入 100 Hz 带宽内。手册的结论是：325 Hz 的分量折叠到 75 Hz 处，给出严重失真的结果——而且折叠不改变能量，虚假谱峰的幅值与原高频成分相当（见第六节的数值验证）。
 
 ![不滤波的后果：325 Hz 折叠成 75 Hz 虚假谱峰](/images/resampling-decimation-interpolation/downsample-aliasing-fold.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 工程注意
 自写脚本处理数据时，降采样前必须自行完成数字低通滤波——`x[::n]` 一行代码抽点后，谱上新出现的低频峰即折叠进来的高频成分。Testlab 的重采样功能内置了抗混叠滤波，但更换工具链时这一步不会自动完成。被滤除的频率成分在降采样后无法恢复，动手前应先确认关心的频带确实位于新带宽以内。
@@ -63,12 +63,12 @@ $$f_{img} = \left| k \cdot f_s \pm f \right|, \quad k = 1, 2, \dots$$
 其中 $f$ 为原谱成分的频率（Hz），$f_s$ 为原采样率（Hz），取落在新带宽 $0 \sim f_s'/2$ 内的结果。时域上看，插零使波形出现严重失真；频域上看，是镜像成分占据了新腾出来的高频空间。
 
 ![因子 4 升采样：插零后时域失真、频域出现镜像](/images/resampling-decimation-interpolation/zero-stuff-mirror.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 后置低通滤波器的作用就是滤除这些镜像，只保留原带宽内的谱成分。滤波后的信号保持原有的谱成分不变，但每周期采样点数变为原来的 n 倍，时域波形随之平滑。手册的例子：临界采样（critically sampled，即采样率刚好大于每周期 2 个采样点）的正弦波做因子 10 的升采样后，时域描述明显改善——信息量没有变化，改变的只是表示方式。
 
 ![升采样滤波后：临界采样正弦波获得平滑时域表示](/images/resampling-decimation-interpolation/upsample-filtered.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 四、分数比率与任意比率：升在前、降在后
 
@@ -81,14 +81,14 @@ $$f_{img} = \left| k \cdot f_s \pm f \right|, \quad k = 1, 2, \dots$$
 2. 再做因子 5 的降采样，配截止 400 Hz 的低通——300 Hz 以内的成分全部保留。
 
 ![分数比率重采样的正确顺序](/images/resampling-decimation-interpolation/fractional-resample.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 若顺序颠倒，先做因子 5 的降采样，低通必须切在 200 Hz——200 至 300 Hz 之间的成分先被滤除，后续的升采样无法恢复。判据可以概括为：<strong>先升后降，中间的滤波器才有足够的带宽可选；先降后升，信息已经丢失。</strong>
 
 当要求的采样率不容易用整数升采样和降采样的组合表达时，重采样软件会自动确定优化的中间采样率和运算顺序。极端情况如 8192 Hz 转 8000 Hz（数字音频硬件重放）：理论上可通过 125 倍升采样与 128 分之一降采样的组合实现，但计算代价过高。实际做法是"高因子预升采样 + 线性插值"：先以较高的因子 a 做**插值前升采样**（LMS 软件默认值 15），再对升采样后的密集点做线性插值，直接落到目标采样栅格上；最后以整数因子 b 降采样（要求 b 低于居先的升采样因子 a），或由插值过程本身直接完成降采样。
 
 ![任意比率：预升采样后线性插值到目标采样点](/images/resampling-decimation-interpolation/arbitrary-rate-interp.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 线性插值的精度有量化指标——<strong>信号失真比 SDR（Signal to Distortion Ratio）</strong>，取决于插值前升采样因子 R 和滤波器截止频率（相对耐奎斯特频率的百分比 $f_c\%$）：
 
@@ -105,7 +105,7 @@ $$SDR = 10 \log_{10} \left( \frac{80 R}{\pi \cdot f_c\% / 100} \right) \ \mathrm
 变换的输入是跟踪信号——光电式、磁电式或电涡流探头给出的转速脉冲串，转换为转速（rpm）-时间函数，积分后得到转角-时间函数 $\alpha(t)$。
 
 ![转速脉冲串积分成转角-时间函数](/images/resampling-decimation-interpolation/tacho-angle-domain.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 从时域转换至角度域时，要求角度域分辨率 $\Delta\alpha$ 恒定。角度间隔对应的时间间隔随转速变化，因此本质上仍是一次插值——只是插值位置由转速曲线决定，不再均匀。$\Delta\alpha$ 的选取判据是**按最低转速计算**：数据的信息损失首先发生于最低转速处。阈值公式为：
 
@@ -114,7 +114,7 @@ $$\Delta\alpha_{\max} = \frac{360^\circ \times \mathrm{rpm}_{\min}}{60 \, F_s}$$
 其中 $\mathrm{rpm}_{\min}$ 为全程最低转速（r/min），$F_s$ 为采样率（Hz），分母 60 完成每分钟到每秒的换算。手册算例：最低转速 500 rpm、采样率 2000 Hz，则 $\Delta\alpha_{\max} = 360 \times 500/(60 \times 2000) = 1.5^\circ$。取小于阈值的角度增量只会产生更多角度域数据点而不增加信息（超量处理）；取大于阈值的增量则导致低转速段的信息损失，且转换回原域后无法恢复。
 
 ![时域到角度域的转换步骤](/images/resampling-decimation-interpolation/adaptive-resample-steps.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 无论固定还是自适应重采样，质量控制要点一致：所加的有限冲激响应（FIR）低通滤波器应有**足够的阻带抑制**（把镜像和折叠压到足够低）、**足够小的通带波纹**（原谱成分不被改变），同时滤波器阶数不能高到计算时间不可接受。
 

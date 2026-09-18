@@ -36,7 +36,7 @@ $$M_s \ddot{u} + C_s \dot{u} + K_s u + G\, p = F_s$$
 
 ![声振耦合系统的结构侧运动方程（手册 15.2.5 节）](/images/vibro-acoustic-modal-analysis/eq-structure.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 2.2 声学侧：非直接形式的声学方程
 
@@ -52,7 +52,7 @@ $$M_f \ddot{p} + C_f \dot{p} + K_f p - G^T \ddot{u} = F_q$$
 
 ![声学域的非直接声学方程与声压-体积加速度矩阵（手册 15.2.5 节）](/images/vibro-acoustic-modal-analysis/eq-fluid.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 2.3 联立：不对称的二阶系统
 
@@ -62,7 +62,7 @@ $$\begin{bmatrix} M_s & 0 \\ -G^T & M_f \end{bmatrix} \begin{bmatrix} \ddot{u} \
 
 ![声振耦合系统的完整二阶模型（手册 15.2.5 节）](/images/vibro-acoustic-modal-analysis/eq-coupled-full.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 考察质量块与刚度块的构成：$G$ 出现在右上角，$-G^T$ 出现在左下角。两者互为转置且差一个负号——**耦合项一个作用于位移（刚度块位置）、一个作用于加速度（质量块位置），矩阵结构天然不对称**。这就是手册所述"描述声振特性的二阶模型，它明显地有不对称性"。
 
@@ -80,7 +80,7 @@ $$\begin{bmatrix} M_s & 0 \\ -G^T & M_f \end{bmatrix} \begin{bmatrix} \ddot{u} \
 
 ![声振作用的互易原理（手册 15.2.5 节）](/images/vibro-acoustic-modal-analysis/eq-reciprocity.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这是 Q-source 声学传递函数测量的理论依据。传统 ATF（声学传递函数，Acoustic Transfer Function）测量在悬置点用力锤逐点激励、耳侧放置传声器，每条路径需激励一次；改用 Q-source 放置在耳侧、悬置点布置加速度计的方式，一次测量即可获得全部路径——$P/F$ 与 $A/Q$ 量纲都约化为 $1/\text{m}^2$，两者等价。
 
@@ -98,7 +98,7 @@ $$\begin{bmatrix} M_s & 0 \\ -G^T & M_f \end{bmatrix} \begin{bmatrix} \ddot{u} \
 
 ![模态参数的获取流程（手册图 15-1）](/images/vibro-acoustic-modal-analysis/fig15-1-modal-model.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 实测数据的组织上有一个天然优势：声振试验天然是多参考的。结构激励点、声学激励点（如果有多个 Q-source 位置）构成参考自由度组；响应侧加速度计与传声器混布。多输入整体估计方法（LSCE、FDPI、CMIF 等）适用于这样的数据结构——密频耦合模态的解耦，依靠的是模态参与因子在多个参考点之间的独立变化。
 
@@ -116,7 +116,7 @@ $$\begin{bmatrix} M_s & 0 \\ -G^T & M_f \end{bmatrix} \begin{bmatrix} \ddot{u} \
 
 ![参数估计方法分类·续（手册表 15.1）](/images/vibro-acoustic-modal-analysis/table15-1-part2.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 方法选型与纯结构模态相同：快速筛查用单自由度法，正式识别采用多参考整体估计，重阻尼内饰车（声腔阻尼显著高于金属结构）可考虑 MLMM 等带迭代优化的方法。
 

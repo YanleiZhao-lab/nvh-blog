@@ -22,7 +22,7 @@ NVH 工程中常遇到一类信号：主观评价能察觉异响，数据分析�
 LMS 理论手册第三章指出：用自相关检测湮没在噪声中的周期信号，"这种方法优于线性平均，它不要求有同步触发信号。对某些脉冲型的信号做分析时，利用自相关函数也许比利用频域函数能获得更好的结果。"
 
 ![LMS 理论手册自相关章节原文](/images/autocorrelation-noise-detection/lms-autocorr-section.png)
-*LMS 理论手册第三章 3.1 节自相关原文：定义式、性质与工程用途（图源：Simcenter Testing Knowledge Base）*
+*LMS 理论手册第三章 3.1 节自相关原文：定义式、性质与工程用途（图源：网络官方公开资料）*
 
 ## 二、从定义出发：自相关在计算什么
 
@@ -90,10 +90,10 @@ $$F^{-1}\{X(k)X^*(k)\} = \sum_{m=0}^{N-1} x(m)\, x^*\big((m-n)\bmod N\big)$$
 用 FFT 算相关得到的是<strong>循环相关（Circular Correlation）</strong>——手册第九章专门图示说明：数据块的最后一个值会绕回接到第一个值，延时按循环计数。工程信号并非首尾相接的周期序列，直接逆 FFT 会在大时延处把数据尾部与头部错搭，产生虚假相关。
 
 ![循环相关示意](/images/autocorrelation-noise-detection/circular-autocorr-diagram.png)
-*循环相关：数据末值绕回首值相衔接，FFT 法算出的相关天然带此假设（图源：Simcenter Testing Knowledge Base）*
+*循环相关：数据末值绕回首值相衔接，FFT 法算出的相关天然带此假设（图源：网络官方公开资料）*
 
 ![循环相关计算式](/images/autocorrelation-noise-detection/lms-circular-formulas.png)
-*延时一个采样的循环相关计算式与延时为零的取值（图源：Simcenter Testing Knowledge Base）*
+*延时一个采样的循环相关计算式与延时为零的取值（图源：网络官方公开资料）*
 
 标准处理方法是**补零到 2N**：信号长 N，尾部补 N 个零后再做 FFT、取模方、逆 FFT，缠绕成分被推到负时延区，正时延部分即为线性自相关的无偏结果。
 

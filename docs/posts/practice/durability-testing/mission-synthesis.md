@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 任务合成 Mission Synthesis：从用户载荷到台架谱
 
-> 同一个电子产品按通用规范谱做振动试验一次通过，装到客户的新车型上却在保修期内批量开裂——问题多半不在产品，而在那张"祖传"的试验谱。规范谱是几十年前从旧车型、旧路面数据归纳出来的默认曲线：对新一代平台，它可能过于严酷（逼着产品过设计），也可能过于温和（现场提前失效），风险是双向的。本文用一台需要经受铁路运输、三个地区路面使用的设备作例子，把 Simcenter 官方的任务合成（Mission Synthesis）流程走一遍：定义任务剖面、采集基座现场数据、用疲劳损伤谱 FDS 与最大响应谱 MRS 量化每个环境的"破坏势"、按串并行规则合成全寿命总损伤、反演出等损伤的台架 PSD 谱，并用夸大因子判断加速度试验有没有"加过头"。
+> 同一个电子产品按通用规范谱做振动试验一次通过，装到客户的新车型上却在保修期内批量开裂——问题多半不在产品，而在那张"祖传"的试验谱。规范谱是几十年前从旧车型、旧路面数据归纳出来的默认曲线：对新一代平台，它可能过于严酷（逼着产品过设计），也可能过于温和（现场提前失效），风险是双向的。本文用一台需要经受铁路运输、三个地区路面使用的设备作例子，把 相关技术资料的任务合成（Mission Synthesis）流程走一遍：定义任务剖面、采集基座现场数据、用疲劳损伤谱 FDS 与最大响应谱 MRS 量化每个环境的"破坏势"、按串并行规则合成全寿命总损伤、反演出等损伤的台架 PSD 谱，并用夸大因子判断加速度试验有没有"加过头"。
 
 ## 一、为什么"祖传谱"越来越靠不住
 
@@ -17,7 +17,7 @@ author: "@NVH_Z"
 
 ![任务合成流程：从现场实测振动数据到加速振动台架谱](/images/mission-synthesis/fig2-process.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 值得先说清楚一条边界：任务合成的目标是推导**对组件等疲劳损伤的输入**，而不是复现组件上每个位置的精确损伤。这个取舍带来两个直接好处——不需要组件的详细模型；不同设计方案的组件可以对着同一条输入谱做对比试验。
 
@@ -27,7 +27,7 @@ author: "@NVH_Z"
 
 ![产品寿命期环境流程图：铁路运输必经，三个地区按实际销售使用其一](/images/mission-synthesis/fig7-mission.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这张图上每一格，将来都对应一段实测数据、一张 FDS 谱和一个重复次数。图里还藏着后面合成时要用的关键区分：**有些环境是"或"的关系**（产品只会卖到三个地区之一，亚太/欧盟/美国的坏路它只经历其中一种），**有些是"且"的关系**（铁路运输加上使用地的高速与越野，每台产品都要经历）。这个区分决定了合成时取最大还是求和，第三节会展开。
 
@@ -39,7 +39,7 @@ author: "@NVH_Z"
 
 ![一系列调到不同固有频率的 SDOF 振子承受实测振动，各自产生以自身固有频率为主的响应](/images/mission-synthesis/fig14-sdof.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 这排振子不是物理装置，而是"待测设备的通用替身"：任何真实结构在某个频率附近的响应行为，都可以用对应调谐的 SDOF 近似。输入加速度经过每个振子相当于经过一个窄带滤波器，输出一段以该振子固有频率为主的响应时程。对这段响应做不同的后处理，就得到两张谱：
 
@@ -48,7 +48,7 @@ author: "@NVH_Z"
 
 ![FDS 计算链：加速度测量经 SDOF 组产生各频率响应时程，循环计数加材料曲线换算成逐频率累积损伤](/images/mission-synthesis/fig15-fds.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>FDS（Fatigue Damage Spectrum，疲劳损伤谱）</strong>：逐频率累积疲劳损伤的谱，台架 PSD 反演的目标函数
@@ -87,7 +87,7 @@ $$D_{\text{bench}} = D_{\text{field}} \;\Longleftrightarrow\; \left(\frac{A_{\te
 
 ![夸大因子、材料曲线斜率 b 与时间缩减因子对照表](/images/mission-synthesis/fig28-exagg.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ## 六、加速的边界：三条红线
 
@@ -101,7 +101,7 @@ $$D_{\text{bench}} = D_{\text{field}} \;\Longleftrightarrow\; \left(\frac{A_{\te
 
 ![透视表中高亮表头行即可叠加对比同一测点所有方向的 MRS](/images/mission-synthesis/fig30-pivot.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ## 七、numpy 数值演示：233 小时压到 76 小时，损伤一分不少
 

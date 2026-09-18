@@ -11,7 +11,7 @@ author: "@NVH_Z"
 
 ![图1](/images/accelerometers-comprehensive/fig1.png)
 
-*变速箱箱体上安装的加速度计，蓝线接入 Simcenter SCADAS 采集硬件完成模态试验（图源：Siemens Simcenter Testing Knowledge Base）*
+*变速箱箱体上安装的加速度计，蓝线接入 Simcenter SCADAS 采集硬件完成模态试验（图源：网络官方公开资料）*
 
 ## 一、为什么加速度计像个挂在车上的挂坠
 
@@ -32,7 +32,7 @@ author: "@NVH_Z"
 
 ![图2](/images/accelerometers-comprehensive/fig2.png)
 
-*加速度计规格书示例：灵敏度、量程与频响是三项核心选型参数（图源：Siemens Simcenter Testing Knowledge Base）*
+*加速度计规格书示例：灵敏度、量程与频响是三项核心选型参数（图源：网络官方公开资料）*
 
 ### 2.1 灵敏度：电压摆幅与噪声地板的拉锯
 
@@ -46,7 +46,7 @@ $$
 
 ![图3](/images/accelerometers-comprehensive/fig3.png)
 
-*不同型号加速度计与其灵敏度（图源：Siemens Simcenter Testing Knowledge Base）*
+*不同型号加速度计与其灵敏度（图源：网络官方公开资料）*
 
 灵敏度选高还是选低，本质是"信号够不够大"与"会不会顶穿量程"的拉锯：
 
@@ -59,7 +59,7 @@ $$
 
 ![图4](/images/accelerometers-comprehensive/fig4.png)
 
-*灵敏度乘量程等于传感器最大输出电压（图源：Siemens Simcenter Testing Knowledge Base）*
+*灵敏度乘量程等于传感器最大输出电压（图源：网络官方公开资料）*
 
 传感器能承受的加速度上限（如 ±500 g peak）与采集系统能接收的电压上限（如 ±10 V）是两条独立的红线，实际可用范围由更紧的那条决定。传感器满量程输出 5 V 而采集卡只有 ±1 V 档位时，物理上没超传感器上限的振动也会把 ADC 顶饱和。选型时把"灵敏度 × 量程"先乘出来，与采集系统的电压档位对一遍。
 
@@ -67,13 +67,13 @@ $$
 
 ![图5](/images/accelerometers-comprehensive/fig5.png)
 
-*三只传感器的频响对比：Sensor 3 平直段最宽（图源：Siemens Simcenter Testing Knowledge Base）*
+*三只传感器的频响对比：Sensor 3 平直段最宽（图源：网络官方公开资料）*
 
 回到挂坠：挂坠和挂绳本身就是一个"质量-弹簧"系统，有自己的固有频率。激励频率逼近固有频率时，同样的加速度会激励出格外大的摆动（共振放大），频响曲线不再平直——Sensor 1、2、3 三条曲线在各自固有频率前的抬升就是这个原因。规定"单一灵敏度换算"有效的前提，是只在平直段内使用。
 
 ![图6](/images/accelerometers-comprehensive/fig6.png)
 
-*加速度计的可用带宽：取平直段，高频端远离自身共振峰（图源：Siemens Simcenter Testing Knowledge Base）*
+*加速度计的可用带宽：取平直段，高频端远离自身共振峰（图源：网络官方公开资料）*
 
 工程惯例是可用上限取固有频率的约三分之一，保证幅值误差在可忽略范围。低频端的限制则来自另一处：IEPE 传感器内置恒流源供电，信号骑在直流偏置上，必须用高通滤波把偏置与信号分离，低频截止由此产生——压电原理决定了它测不了真正的 0 Hz（静态重力），这正是下一节四类传感器分野的关键。
 
@@ -85,53 +85,53 @@ $$
 
 ![图7](/images/accelerometers-comprehensive/fig7.png)
 
-*压电晶体受力变形并输出电荷（变形已夸张显示）（图源：Siemens Simcenter Testing Knowledge Base）*
+*压电晶体受力变形并输出电荷（变形已夸张显示）（图源：网络官方公开资料）*
 
 ![图8](/images/accelerometers-comprehensive/fig8.png)
 
-*石英晶体内部原子在应力下的重新排布产生压电效应（图源：Siemens Simcenter Testing Knowledge Base）*
+*石英晶体内部原子在应力下的重新排布产生压电效应（图源：网络官方公开资料）*
 
 内部结构万变不离三件套：晶体、质量块、预紧环。
 
 ![图9](/images/accelerometers-comprehensive/fig9.png)
 
-*剪切型压电加速度计剖面：预紧环、晶体与质量块（图源：Siemens Simcenter Testing Knowledge Base）*
+*剪切型压电加速度计剖面：预紧环、晶体与质量块（图源：网络官方公开资料）*
 
 质量块的惯性力压在晶体上，预紧环保证整个"挂坠"系统刚性连接、行为线性——还记得第一节挂坠的比喻吗？预紧环就是"把挂坠挂结实"的那道工序。压电效应是可逆的：反过来给晶体加电场它会变形，压电促动器用的正是这一侧。
 
 ![图10](/images/accelerometers-comprehensive/fig10.png)
 
-*压电晶体受力产生电压的简化模型（图源：Siemens Simcenter Testing Knowledge Base）*
+*压电晶体受力产生电压的简化模型（图源：网络官方公开资料）*
 
 <strong>电荷型（PE）</strong>：晶体直接输出微小电荷（皮库仑 pC 量级），传感器内无任何电子元件，因此耐高温高寒（排气管、冷冻环境），但信号极怕干扰——电缆内两种材料相互摩擦产生的摩擦电噪声（triboelectric effect）足以淹没信号，必须用含导电碳粒的低噪声电缆并沿途固定。
 
 ![图11](/images/accelerometers-comprehensive/fig11.png)
 
-*电荷型加速度计的电缆固定方案，抑制摩擦电效应（图源：Siemens Simcenter Testing Knowledge Base）*
+*电荷型加速度计的电缆固定方案，抑制摩擦电效应（图源：网络官方公开资料）*
 
 信号调理有三条路：超高阻抗直采、外置电荷放大器、或 Siemens SCADAS VC8 卡直接入卡调理。
 
 ![图12](/images/accelerometers-comprehensive/fig12.png)
 
-*电荷型加速度计的三种信号调理方案（图源：Siemens Simcenter Testing Knowledge Base）*
+*电荷型加速度计的三种信号调理方案（图源：网络官方公开资料）*
 
 用 VC8 卡时，Testlab 通道设置的 Input Mode 会出现 Charge 选项，电量单位自动设为 pC。
 
 ![图13](/images/accelerometers-comprehensive/fig13.png)
 
-*Testlab 通道设置：电荷输入模式（图源：Siemens Simcenter Testing Knowledge Base）*
+*Testlab 通道设置：电荷输入模式（图源：网络官方公开资料）*
 
 **IEPE 型**（Integrated Electronics Piezoelectric，亦称 ICP/CCP）：把电压放大器做进传感器壳体，输出低阻抗（100~300 欧姆）电压信号，由采集系统经 4 mA 恒流源供电——信号与供电共用一根同轴线。好处是普通电缆即可、设置简单；代价是内置电子元件不耐高温（排气、热交换器场合先查温度规格），且恒流偏置必须用高通滤除，故测不了静态加速度。IEPE 还支持 TEDS（Transducer Electronic Data Sheet，传感器电子数据表）：序列号、灵敏度、校准有效期存在传感器芯片里，采集系统一读即得，杜绝手输错误。
 
 ![图14](/images/accelerometers-comprehensive/fig14.png)
 
-*IEPE 加速度计的两种信号调理配置（图源：Siemens Simcenter Testing Knowledge Base）*
+*IEPE 加速度计的两种信号调理配置（图源：网络官方公开资料）*
 
 两类压电传感器的取舍一句话：IEPE 胜在简单便宜（少电缆、免放大器），PE 胜在极端环境（高低温）。
 
 ![图15](/images/accelerometers-comprehensive/fig15.png)
 
-*IEPE/ICP/CCP 与 PE/电荷加速度计优缺点总结（图源：Siemens Simcenter Testing Knowledge Base）*
+*IEPE/ICP/CCP 与 PE/电荷加速度计优缺点总结（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>压电式（Piezoelectric）</strong>：晶体受力输出电荷，只响应动态（交变）加速度，测不了 0 Hz；分电荷型（PE，外置调理、耐极端温度）与 IEPE 型（内置放大、恒流供电、普通电缆）
@@ -146,7 +146,7 @@ $$
 
 ![图16](/images/accelerometers-comprehensive/fig16.png)
 
-*压阻/直流加速度计的基本结构（图源：Siemens Simcenter Testing Knowledge Base）*
+*压阻/直流加速度计的基本结构（图源：网络官方公开资料）*
 
 ### 3.3 变电容式与 MEMS：硅片上的"挂坠"
 
@@ -154,11 +154,11 @@ $$
 
 ![图17](/images/accelerometers-comprehensive/fig17.png)
 
-*变电容加速度计：质量块连接可动电极（图源：Siemens Simcenter Testing Knowledge Base）*
+*变电容加速度计：质量块连接可动电极（图源：网络官方公开资料）*
 
 ![图18](/images/accelerometers-comprehensive/fig18.png)
 
-*基于变电容原理的 MEMS 设计（图源：Siemens Simcenter Testing Knowledge Base）*
+*基于变电容原理的 MEMS 设计（图源：网络官方公开资料）*
 
 ## 四、传感器之外：安装、质量与电缆
 
@@ -168,17 +168,17 @@ $$
 
 ![图19](/images/accelerometers-comprehensive/fig19.png)
 
-*各种安装方式对频响的影响：连接越刚，频带越宽（图源：Siemens Simcenter Testing Knowledge Base）*
+*各种安装方式对频响的影响：连接越刚，频带越宽（图源：网络官方公开资料）*
 
 ![图20](/images/accelerometers-comprehensive/fig20.png)
 
-*斜切垫块用于曲面安装并保持全局坐标方向（图源：Siemens Simcenter Testing Knowledge Base）*
+*斜切垫块用于曲面安装并保持全局坐标方向（图源：网络官方公开资料）*
 
 接地隔离同样关键：传感器壳体与被测结构直接导通时，电网的地电位差会以地环（ground loop）形式窜入信号——欧洲 50 Hz、美国 60 Hz 的谱线尖峰即来源于此，与被测振动无关。隔离垫片从物理上切断这个回路。
 
 ![图21](/images/accelerometers-comprehensive/fig21.png)
 
-*地环噪声（左）与隔离垫片（右）（图源：Siemens Simcenter Testing Knowledge Base）*
+*地环噪声（左）与隔离垫片（右）（图源：网络官方公开资料）*
 
 ### 4.2 质量加载：传感器不能比试件“重”
 
@@ -190,13 +190,13 @@ $$
 
 ![图22](/images/accelerometers-comprehensive/fig22.png)
 
-*滴水环：让冷凝水沿环流走，进不了传感器（图源：Siemens Simcenter Testing Knowledge Base）*
+*滴水环：让冷凝水沿环流走，进不了传感器（图源：网络官方公开资料）*
 
 长电缆还有物理层面的限制：电缆电阻随长度增大，分布电阻与电容构成 RC 低通网络，电缆越长高频衰减越重。厂家提供的诺谟图（nomograph）按输出电压、供电电流与电缆电容给出可用频率上限，长线测试前查一遍。
 
 ![图23](/images/accelerometers-comprehensive/fig23.png)
 
-*诺谟图：按电压、电流、电缆电容查最高可用频率（图源：Siemens Simcenter Testing Knowledge Base）*
+*诺谟图：按电压、电流、电缆电容查最高可用频率（图源：网络官方公开资料）*
 
 ## 五、开测之前：校准与通道设置
 
@@ -206,7 +206,7 @@ $$
 
 ![图24](/images/accelerometers-comprehensive/fig24.png)
 
-*便携式现场校准器（图源：Siemens Simcenter Testing Knowledge Base）*
+*便携式现场校准器（图源：网络官方公开资料）*
 
 ### 5.2 Testlab 通道设置
 
@@ -214,11 +214,11 @@ Classic 界面在 Channel Setup 页签逐项设置：通道开关 ON、Channel G
 
 ![图25](/images/accelerometers-comprehensive/fig25.png)
 
-*Testlab Classic 通道设置速查（图源：Siemens Simcenter Testing Knowledge Base）*
+*Testlab Classic 通道设置速查（图源：网络官方公开资料）*
 
 ![图26](/images/accelerometers-comprehensive/fig26.png)
 
-*Testlab Neo 的 Channels 页签（图源：Siemens Simcenter Testing Knowledge Base）*
+*Testlab Neo 的 Channels 页签（图源：网络官方公开资料）*
 
 ### 5.3 一个 numpy 对账：灵敏度选错的代价
 
@@ -253,15 +253,15 @@ for name, g in cases:
 
 ![图27](/images/accelerometers-comprehensive/fig27.png)
 
-*手电钻顶端安装加速度计评估手传振动（图源：Siemens Simcenter Testing Knowledge Base）*
+*手电钻顶端安装加速度计评估手传振动（图源：网络官方公开资料）*
 
 ![图28](/images/accelerometers-comprehensive/fig28.png)
 
-*测点位置映射到几何后可视化振动形态（图源：Siemens Simcenter Testing Knowledge Base）*
+*测点位置映射到几何后可视化振动形态（图源：网络官方公开资料）*
 
 ![图29](/images/accelerometers-comprehensive/fig29.png)
 
-*振动台闭环控制：加速度计反馈驱动台面复现目标谱（图源：Siemens Simcenter Testing Knowledge Base）*
+*振动台闭环控制：加速度计反馈驱动台面复现目标谱（图源：网络官方公开资料）*
 
 ## 七、小结
 

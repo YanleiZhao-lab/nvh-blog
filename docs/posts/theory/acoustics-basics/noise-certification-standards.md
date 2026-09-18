@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 噪声认证标准怎么选：从指令到测法的决策链
 
-> 产品要进入欧盟市场，声功率认证是必须完成的一环：指令规定限值，C 类标准规定测试规程，基础标准规定测量方法，三层结构缺一不可。本文依据 Simcenter Testing Knowledge Base 的《Guide to measuring Sound Power》，把标准选择整理成一条决策链——先确定产品归属，再确定声压法还是声强法，最后核查 K1/K2 修正能否满足测试场地的要求。
+> 产品要进入欧盟市场，声功率认证是必须完成的一环：指令规定限值，C 类标准规定测试规程，基础标准规定测量方法，三层结构缺一不可。本文依据 公开技术资料 的《Guide to measuring Sound Power》，把标准选择整理成一条决策链——先确定产品归属，再确定声压法还是声强法，最后核查 K1/K2 修正能否满足测试场地的要求。
 
 
 同一台发电机，第三方实验室测出声功率 92.4 dB，公司自家的半消声室测出 90.1 dB——两个数都盖了章，欧盟认证机构只认前者。复盘发现差别不在仪器：自家试验选错了 C 类标准，工况覆盖少了高温满载一条，整套数据作废重测。更常见的纠纷是反过来：产品明明更吵，换个标准测出来的数反而更低，销售拿着这份报告去投标，被竞争对手当场指出标准适用范围不符。噪声认证里"选标准"本身就是测量的一部分——指令、产品规程、基础测法三层选错任何一层，后面测得再精确也交不了差。本文把这条决策链拆开讲清楚：先看法规为什么只认声功率，再看三层标准怎么各管一段，最后看声压法与声强法两条测法路线在环境要求上的分野，以及 K1/K2 修正还能救回什么、救不回什么。
@@ -24,7 +24,7 @@ author: "@NVH_Z"
 
 ![欧盟能效标签，右下角为声功率申报值](/images/noise-certification-standards/energy-label.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>噪声指令（Noise Directive）</strong>：欧盟层面对特定设备类别设定的噪声限值与申报要求，如 2000/14/EC（户外用设备）
@@ -74,13 +74,13 @@ $$
 
 ![声压法声功率测量：麦克风按固定阵列布置在被测对象四周](/images/noise-certification-standards/pressure-array.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 这个公式自洽于测量距离的选取：麦克风靠近声源，声压级升高，但包络面相应减小；麦克风远离声源，声压级降低，但包络面增大。两项此消彼长，声功率级保持不变——这正是声功率“与距离无关”的数学体现。
 
 ![半球阵列剖面：近距小面阵与远距大面阵给出的声功率一致](/images/noise-certification-standards/hemisphere-crosssection.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 它对环境要求严格：公式假设除地面反射平面外没有其他反射和背景源，只有消声室或混响室这类特定声学环境才能直接给出可靠结果。
 
@@ -107,7 +107,7 @@ $$
 
 ![同一电机周围的声强（左，矢量场）与声压（右，标量场）](/images/noise-certification-standards/intensity-vs-pressure.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 声强法可以在任意声场测量，甚至能在其他机器正常运转的车间里测某一台设备：稳态背景噪声穿过封闭面的净声强流量为零——能量流来回抵消，时间平均为零——积分时被自动扣除。代价是可用频带受限（探头间隔决定工作频带）、测量流程耗时，且要求声源稳态（非稳态源无法做时间平均）。
 
@@ -115,7 +115,7 @@ $$
 
 ![已知声功率的对象在 2 m 半球面上的声强测量算例](/images/noise-certification-standards/intensity-hemisphere.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 3.3 两条路线的适用边界
 
@@ -129,7 +129,7 @@ $$
 
 ![声功率测试的最终结果形式：A 计权倍频程谱](/images/noise-certification-standards/soundpower-spectrum.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 两种测法的最终交付物相同：A 计权倍频程谱表形式的声功率级，以基准声功率 1 皮瓦为参考。
 

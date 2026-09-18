@@ -29,13 +29,13 @@ $$f_{mesh} = \frac{N_A \cdot n_A}{60} = \frac{42 \times 68.57}{60}\ \text{Hz} = 
 
 ![齿轮对时域录音对比](/images/cepstrum-analysis/gear-time-signals.png)
 
-*有缺陷（上，橙）与无缺陷（下，蓝）的时域录音几乎无法区分（图源：Simcenter Testing Knowledge Base）*
+*有缺陷（上，橙）与无缺陷（下，蓝）的时域录音几乎无法区分（图源：网络官方公开资料）*
 
 转换到频域后谱峰依然密集：啮合频率的谐波与阀门、电机及车间背景噪声的谱峰混在一起，难以直接辨认那族"每隔 48 Hz 一个"的峰。
 
 ![频谱对比](/images/cepstrum-analysis/gear-spectrum.png)
 
-*频域同样难以判读：谐波被其他设备与背景噪声掩盖（图源：Simcenter Testing Knowledge Base）*
+*频域同样难以判读：谐波被其他设备与背景噪声掩盖（图源：网络官方公开资料）*
 
 但有一项频率结构特征保持不变：齿轮产生的谐波和边带在频率轴上**等间距**排列，间距即啮合频率（谐波之间）或轴频（边带之间）。倒频谱要解决的，就是把"等间距"这一结构特征从背景噪声中提取出来。
 
@@ -65,7 +65,7 @@ $$m\cos(2\pi f_m t)\cos(2\pi f_c t) = \frac{m}{2}\cos\left(2\pi (f_c+f_m) t\righ
 
 ![调幅产生边带](/images/cepstrum-analysis/modulation.png)
 
-*无调制（上）与被调制的载波（下）：调制让频谱长出边带族（图源：Simcenter Testing Knowledge Base）*
+*无调制（上）与被调制的载波（下）：调制让频谱长出边带族（图源：网络官方公开资料）*
 
 ### 第二步：对数把"乘"变"加"
 
@@ -91,7 +91,7 @@ $$c(q) = \left|\,\text{IFFT}\big[\log|\text{FFT}(x)|\,\big]\right|$$
 
 ![三种域的对比](/images/cepstrum-analysis/signal-transforms.png)
 
-*正弦、锯齿、方波、随机信号在时域/频域/倒频谱中的形态：只有频域含等间距结构的信号在倒频谱上有峰（图源：Simcenter Testing Knowledge Base）*
+*正弦、锯齿、方波、随机信号在时域/频域/倒频谱中的形态：只有频域含等间距结构的信号在倒频谱上有峰（图源：网络官方公开资料）*
 
 | 输入信号 | 频域形态 | 倒频谱形态 |
 | --- | --- | --- |
@@ -103,7 +103,7 @@ $$c(q) = \left|\,\text{IFFT}\big[\log|\text{FFT}(x)|\,\big]\right|$$
 
 ![域与单位](/images/cepstrum-analysis/domains-units.png)
 
-*时域—频域—倒频谱的换算路径与各域常用单位（图源：Simcenter Testing Knowledge Base）*
+*时域—频域—倒频谱的换算路径与各域常用单位（图源：网络官方公开资料）*
 
 ::: warning quefrency 不是时间
 倒频谱横轴量纲是秒，但它不是时域。取对数时相位已经丢弃，逆变换回不去原信号；峰位置只应读作"频域间距的倒数"（$f = 1/q$）。将 20.8 ms 解释为"每 20.8 ms 冲击一次"在该例中恰与冲击周期一致，但将 rahmonic 的 41.7 ms 作同样解释则不成立——那是算法在峰的整数倍位置生成的假峰。
@@ -151,11 +151,11 @@ for name, d in [("健康", 0.0), ("故障", 0.7)]:
 
 ![实测倒频谱](/images/cepstrum-analysis/gear-cepstrum.png)
 
-*同一对齿轮的倒频谱：缺陷（橙）在 20.8 ms 处的峰明显高于正常（蓝）（图源：Simcenter Testing Knowledge Base）*
+*同一对齿轮的倒频谱：缺陷（橙）在 20.8 ms 处的峰明显高于正常（蓝）（图源：网络官方公开资料）*
 
 ![倒频率峰读数](/images/cepstrum-analysis/quefrency-peak.png)
 
-*q = 0.02083 s，1/q = 48 Hz，正对啮合频率（图源：Simcenter Testing Knowledge Base）*
+*q = 0.02083 s，1/q = 48 Hz，正对啮合频率（图源：网络官方公开资料）*
 
 ## 四、Testlab 实操：三步计算倒频谱
 
@@ -169,7 +169,7 @@ for name, d in [("健康", 0.0), ("故障", 0.7)]:
 
 ![Testlab 三步流程](/images/cepstrum-analysis/testlab-steps.png)
 
-*倒频谱计算步骤（上）与所需软件模块（下）（图源：Simcenter Testing Knowledge Base）*
+*倒频谱计算步骤（上）与所需软件模块（下）（图源：网络官方公开资料）*
 
 许可方面有一个限制：Data Calculator 需要 Desktop Standard 与 Advanced 档许可，仅有 Desktop Standard 时无法完成该步骤（Advanced Desktop 下 Data Calculator 不额外消耗 token）。另外截至 2406 版本，Testlab Neo 尚不支持倒频谱处理，需返回 Classic 界面。
 

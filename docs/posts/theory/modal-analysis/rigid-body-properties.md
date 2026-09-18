@@ -49,7 +49,7 @@ $$\{a_p\} = \{a_r\} - [\tilde r_p]\,\{\alpha\}$$
 
 ![刚体运动学方程组：对频带内所有谱线、所有测点列超定方程，最小二乘解参考加速度矩阵](/images/rigid-body-properties/kinematics-eq.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 2.3 动力学方程：两步解出质心与惯量
 
@@ -57,7 +57,7 @@ $$\{a_p\} = \{a_r\} - [\tilde r_p]\,\{\alpha\}$$
 
 ![参考力矩阵：输入力向参考点简化为力与力矩](/images/rigid-body-properties/force-eq.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 平动质量线的水平值给出 $1/m$，即得总质量 $m$。将牛顿方程按总体坐标展开，合力等于质量乘质心加速度 $a_{cog} = a_r + \alpha \times r_{cog}$：
 
@@ -83,7 +83,7 @@ $$\{r_j\} \times \{F_j\} - m\left(\{r_{cog}\} \times \{a_{r,j}\}\right) = [I_{re
 
 ![两步求解方程组：前三个方程解质心，代入后六个方程解转动惯量与惯量张量分量](/images/rigid-body-properties/two-step-eq.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: info 方程组结构
 - <strong>第一步（质心）</strong>：$\{F_j\}/m - \{a_{r,j}\} = [\tilde\alpha_j]\{r_{cog}\}$，对质心坐标线性；总质量 $m$ 由平动质量线水平值 $1/m$ 直接给出
@@ -99,7 +99,7 @@ $$\{r_j\} \times \{F_j\} - m\left(\{r_{cog}\} \times \{a_{r,j}\}\right) = [I_{re
 
 ![图19-1 刚体模态：六个刚体自由度与分析频带的选取区间](/images/rigid-body-properties/fig19-1-rigid-body-modes.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ### 3.2 频带选取与质量线取值
 

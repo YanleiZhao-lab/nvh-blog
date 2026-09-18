@@ -31,19 +31,19 @@ author: "@NVH_Z"
 
 ![图1：附近电源的磁场在信号线中感应出电磁干扰](/images/strain-long-cables/fig1-emi.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 <strong>静电干扰（Electrostatic Interference）</strong>则是电荷积累问题：电气源（比如荧光灯）向未屏蔽的信号线放电荷，电荷在线上积累。冬天与人握手被电一下就是静电放电的日常版本——火花甚至不需要真正接触，两只手靠得足够近电荷就会跳过去。
 
 ![图2：近处电气源放出的电荷在信号线上积累，造成静电干扰](/images/strain-long-cables/fig2-esd.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 对付静电干扰的办法是**屏蔽**：用金属层把信号线包起来，电荷积累在屏蔽层上而不是信号线上，屏蔽层再经低阻路径把电荷导入地。SCADAS VB8 电缆用的是编织屏蔽网而不是薄铝箔——编织网让电缆保持柔软，布线拐弯不折断。
 
 ![图3：编织屏蔽网比铝箔屏蔽更柔韧，SCADAS VB8 电缆采用编织屏蔽](/images/strain-long-cables/fig3-shield.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 知识库给出的抗干扰清单，每一条都对应上面某个物理机制：提高激励电压，把信号电平抬高、相对压低干扰（代价是自热，本站将另文专述）；信号电缆远离一切电力源布线，不得不交叉时**垂直交叉**而不是并行；用全桥差分接线吃满共模抑制（原理详见[单端 vs 差分输入](/posts/practice/test-setup/single-ended-vs-differential.html)）；确认屏蔽层提供到地的低阻路径。四条里最常被违反的是第二条——现场临时拉线，动力缆随手压在信号缆上是最常见的事故起点。
 
@@ -57,7 +57,7 @@ author: "@NVH_Z"
 
 ![图4：供电线越长电阻越大，长线（下）到达应变片的电压比短线（上）更低](/images/strain-long-cables/fig4-vdrop.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 在给出公式之前先算一笔具体的账。0.2 mm² 铜导线的电阻率约 1.72×10⁻⁸ Ω·m，单根 50 m 线阻约 4.3 Ω；350 Ω 应变片桥路由供电正、负两根线馈电，两根线的电阻串联进回路。分压意味着到达桥路的电压打了折扣——这笔账用 numpy 算清楚：
 
@@ -97,23 +97,23 @@ $$V_g = V_s \cdot \frac{R_b}{R_b + 2R_c}$$
 
 ![图5：Channel Setup Visibility 中把 Bridge Lead Resistance 加入可见字段](/images/strain-long-cables/fig6-leadres.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 <strong>对策三：sense 线。</strong> 这是最"治本"的方案：在供电线之外再铺两根线，一直接到应变片桥路两端，专门测量桥路上的真实电压。这两根线不载电流——没有电流就没有压降，测到的就是桥路电压的真值。SCADAS 硬件据此**自动上调供电**，把桥路电压顶回设定值，相当于"水管末端装了压力表，水龙头看着表加压"。
 
 ![图6：sense 线与供电线、信号线并行铺到应变片，不载电流](/images/strain-long-cables/fig7-sense.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 sense 线接到 VB8 卡 LEMO 接口的 2 脚与 5 脚。接线完成后，在 Channel Setup 里把 **ExternalSense** 字段设为 Internal Shunt, Sense Lines 即可启用。
 
 ![图7：SCADAS DB8/VB8 卡 LEMO 接口引脚定义，sense 线接 2、5 脚](/images/strain-long-cables/fig8-pinout.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ![图8：ExternalSense 设为 Internal Shunt, Sense Lines 启用 sense 线](/images/strain-long-cables/fig9-sensesetting.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 sense 线的代价是布线量：一枚全桥应变片从 4 根线变成 6 根，线束更粗、通道成本更高。工程上通常按精度需求分层：常规监测通道用导线电阻补偿，全机静力试验这类高精度关键通道上 sense 线。
 
@@ -121,7 +121,7 @@ sense 线的代价是布线量：一枚全桥应变片从 4 根线变成 6 根�
 
 ![图9：外接并联电阻标定时 ExternalSense 设为 External Shunt, No Sense Lines](/images/strain-long-cables/fig5-shunt.png)
 
-*(图源：Siemens Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ## 五、选型清单与常见误用
 

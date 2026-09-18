@@ -34,12 +34,12 @@ author: "@NVH_Z"
 第一个技巧解决的是重复劳动。在 Channel Setup 工作表里，把一个三向头的三行 **PointId 和 Direction 列一起选中**，鼠标移到选区**右下角**，等光标变成**双向白色箭头**，按住往上或往下拖——PointId 自动递增，Direction 按原来那组三向组合自动循环填充。
 
 ![选中 PointId 与 Direction 后在右下角等待双向箭头](/images/triaxial-channel-tricks/autofill-drag.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 拖完检查一眼：每个测点三行，PointId 相同、方向依次 +X/+Y/+Z，下一个测点编号自动加一。
 
 ![拖拽后其余三向头的通道自动填好](/images/triaxial-channel-tricks/autofill-result.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 四十个三向头一百二十行通道，手敲至少半小时，且个别笔误难以完全避免；拖拽填充把这件事变成十秒钟的鼠标动作，而且 Direction 不会出现"+X、+Y、+Z、+X、+Y、+Y"这类连续笔误。
 
@@ -54,7 +54,7 @@ Auto Fill 只填 PointId 和 Direction。灵敏度、量程这些每通道各不
 如果采集硬件是 **SCADAS V-24 卡或 SCADAS XS**，可以改用单线方案：三向加速度计的四芯插头（PCB 4-pin 或 mini 4-pin）通过一根 Lemo 线直连采集卡，三个方向在 connector 内部分好，**结构上不可能交叉接线**。
 
 ![SCADAS XS 与单线三向加速度计](/images/triaxial-channel-tricks/single-cable.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 以 PCB 三向头为例，官方给出的线缆型号：
 
@@ -98,10 +98,10 @@ $$
 此后这三个通道的 Direction 下拉框只会给出**合法的右手系组合**，左手组合无法选到，方向组合填错导致的飞点问题在源头被阻断。
 
 ![默认行为：三个方向独立设置，互不校验](/images/triaxial-channel-tricks/independent-directions.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ![MultiChannel 设为 Triax-RH 后，方向只剩合法右手系组合](/images/triaxial-channel-tricks/triax-rh.png)
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 顺带一提，下拉里还有个 Triax-LH（左手系），官方原文说明它"为南半球用户准备"，这个幽默的说法反映的实际情况是：不同厂家、不同批次传感器的坐标定义确有差异。遇到左手定义的三向头，选 LH 即可，关键是**同一批测点用同一套规则**。
 

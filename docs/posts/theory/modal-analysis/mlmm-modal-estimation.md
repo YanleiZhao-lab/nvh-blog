@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # MLMM 最大似然模态模型：从最小二乘到迭代优化
 
-> 在稳定图（stabilization diagram）上选定极点之后，合成 FRF 与实测曲线之间仍存在明显偏差，是模态试验中的常见情况。MLMM（Maximum Likelihood estimation of a Modal Model，模态模型的最大似然估计）以迭代优化替代人工反复调整极点的过程：以 Polymax 粗拟合结果为初值，对频率、阻尼、模态参与因子做最大似然迭代优化，Simcenter 官方案例中重阻尼结构的合成 FRF 误差由 74% 降至 10%。本文从公分母模型的线性化最小二乘出发，分步推导 ML 代价函数的构造依据与高斯-牛顿求解流程，最后落到 Simcenter Testlab 中的操作步骤与约束设置。
+> 在稳定图（stabilization diagram）上选定极点之后，合成 FRF 与实测曲线之间仍存在明显偏差，是模态试验中的常见情况。MLMM（Maximum Likelihood estimation of a Modal Model，模态模型的最大似然估计）以迭代优化替代人工反复调整极点的过程：以 Polymax 粗拟合结果为初值，对频率、阻尼、模态参与因子做最大似然迭代优化，相关技术资料案例中重阻尼结构的合成 FRF 误差由 74% 降至 10%。本文从公分母模型的线性化最小二乘出发，分步推导 ML 代价函数的构造依据与高斯-牛顿求解流程，最后落到 Simcenter Testlab 中的操作步骤与约束设置。
 
 内饰白车身的副车架模态试验做到深夜，稳定图终于理清了：35 Hz 附近两阶密频、12% 上下的重阻尼，极点选定、曲线拟合完成，报告却在最后一步卡住——Modal Synthesis 页上合成 FRF 与实测曲线形状像、误差却不肯降，correlation 97%、error 24%，几个共振峰的幅值差肉眼可见。有经验的分析师开始手调：把某阶阻尼改小一点、某阶参与因子放大 10%，合成曲线好了一些，误差降到 19%；再调，18.5%；再调，18.4%——每个参数动一点都要重算一次，一下午耗在反复试凑里。更麻烦的是写报告的问题：客户要求给出 35.15 Hz ± 多少的置信度，Polymax 的结果表里根本没有这一栏。这两个困境——粗拟合之后误差降不下去、参数没有不确定度——正是 MLMM（Maximum Likelihood estimation of a Modal Model）要解决的问题：把人肉调参数变成一次有统计依据的迭代优化。
 
@@ -111,7 +111,7 @@ $$
 
 ::: tip 什么时候值得上 MLMM
 - 初拟合误差已经很小（轻阻尼金属结构）：不必，MLMM 改善有限
-- 重阻尼结构、声腔模态、内饰车身（trimmed body）：Simcenter 官方知识库明确列举的高收益场景
+- 重阻尼结构、声腔模态、内饰车身（trimmed body）：公开技术资料明确列举的高收益场景
 - 需要阻尼/频率的置信区间支撑报告结论：ML 是手册路线中唯一能给出区间的
 - OMA（运行模态分析）数据：不适用，MLMM 输入必须是 FRF，Polymax/Time MDOF 初值是硬性前提
 :::
@@ -204,27 +204,27 @@ MLMM 随 LMS Test.Lab 17 发布，Classic 界面需在 Tools -> Add-ins 勾选 M
 
 ![MLMM 改善效果](/images/mlmm-modal-estimation/MLMM_Improvement.png)
 
-*重阻尼结构上 MLMM 自动迭代的效果：该 FRF 合成误差从 74% 降到 10%（图源：Simcenter Testing Knowledge Base）*
+*重阻尼结构上 MLMM 自动迭代的效果：该 FRF 合成误差从 74% 降到 10%（图源：网络官方公开资料）*
 
 ![MLMM 插件勾选](/images/mlmm-modal-estimation/mlmm_addin.png)
 
-*Tools -> Add-ins -> MLMM，Classic 界面入口（图源：Simcenter Testing Knowledge Base）*
+*Tools -> Add-ins -> MLMM，Classic 界面入口（图源：网络官方公开资料）*
 
 ![MLMM 工作表](/images/mlmm-modal-estimation/mlmm_worksheet.png)
 
-*Polymax 工作表顶部新增的 MLMM 页签（图源：Simcenter Testing Knowledge Base）*
+*Polymax 工作表顶部新增的 MLMM 页签（图源：网络官方公开资料）*
 
 MLMM 工作表中设置 Maximum number of iterations（频率/阻尼/参与因子被调整的次数）后点 Calculate，界面中部实时显示合成 FRF 与实测 FRF 的误差，逐次迭代应越来越小、后期变化越来越小。
 
 ![迭代误差下降](/images/mlmm-modal-estimation/iteration_smaller_differences.png)
 
-*每次迭代，合成 FRF 与实测 FRF 的误差逐次变小（图源：Simcenter Testing Knowledge Base）*
+*每次迭代，合成 FRF 与实测 FRF 的误差逐次变小（图源：网络官方公开资料）*
 
 迭代完成后到 Modal Synthesis 页检查合成质量，界面给出两个指标：**correlation**（合成 FRF 形状与实测形状的贴合程度，理想值 100%）和 **error**（幅值差，理想值 0%）。Advanced 按钮下有三类约束可设——这组设置对结果质量的影响比迭代次数本身更大：
 
 ![高级约束选项](/images/mlmm-modal-estimation/advanced_options.png)
 
-*Advanced 选项：可对频率和阻尼设约束（图源：Simcenter Testing Knowledge Base）*
+*Advanced 选项：可对频率和阻尼设约束（图源：网络官方公开资料）*
 
 - **Keep mode frequency constant**：锁定频率不动，只迭代阻尼和参与因子。前一轮分析已确认频率（例如已与 CAE 模型对齐）时使用，防止迭代将频率拉偏
 - **最大阻尼上限**（默认 70%）：MLMM 判断某阶模态对描述 FRF 没有贡献时，会将其阻尼推至该上限值，等效于从模型中剔除。结果中出现 70% 阻尼的模态，表示算法判定该阶模态是多余的
@@ -234,7 +234,7 @@ Neo 中流程类似：Modal 任务下 MLMM 页签，Run 后代价函数实时更
 
 ![模态合成检查](/images/mlmm-modal-estimation/synthesis.png)
 
-*迭代完成后的 Modal Synthesis 检查：上方 correlation 与 error 百分比（图源：Simcenter Testing Knowledge Base）*
+*迭代完成后的 Modal Synthesis 检查：上方 correlation 与 error 百分比（图源：网络官方公开资料）*
 
 ## 七、小结
 

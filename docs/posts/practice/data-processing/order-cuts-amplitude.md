@@ -24,7 +24,7 @@ author: "@NVH_Z"
 
 ![阶次切幅值的计算方法](/images/order-cuts-amplitude/calc-method.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 RMS 求和的公式可从定义分三步写出。设该 RPM 增量的频谱中，落在求和频带内的谱线编号为 $k_1$ 到 $k_2$，第 $k$ 根谱线幅值为 $A_k$：
 
@@ -52,7 +52,7 @@ $$A_{\text{cut}} = \left( \sum_{k=k_1}^{k_2} A_k^{\,2} \right)^{1/2}$$
 
 ![同一阶次、三种带宽的切线对比](/images/order-cuts-amplitude/bandwidth-compare.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 Simcenter 手册指出：结果可以相差许多 dB，**是否超过临界目标可能就取决于阶次是怎么处理的**。所以每切一条阶次都应回到 colormap 核对，目视确认带宽包住了目标阶次的能量、又没有覆盖邻近阶次。
 
@@ -99,7 +99,7 @@ $$\Delta f = \frac{\Delta O \, n}{60}$$
 
 ![Order 模式：阶次带宽恒定，频率带宽随 RPM 增大](/images/order-cuts-amplitude/order-mode.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ### Percentage 模式
 
@@ -123,7 +123,7 @@ $$\Delta O = \frac{60\,\Delta f}{n}$$
 
 ![Frequency/Lines 模式：频率带宽恒定](/images/order-cuts-amplitude/freq-lines-mode.png)
 
-*(图源：Simcenter Testing Knowledge Base)*
+*（图源：网络官方公开资料）*
 
 ::: tip 选择原则
 - 默认用 **Order 模式**，对照 colormap 目视调宽度：包住目标阶次的涂抹带、不碰邻阶

@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 窗函数修正系数：幅值校正 vs 能量校正
 
-> 加窗在抑制泄漏（leakage）的同时，也会同时压缩信号的谱线幅值与能量。窗函数修正系数（window correction factor）通过在频域对每条谱线乘一个由窗类型决定的固定系数来补偿这种失真，但幅值校正（amplitude correction）与能量校正（energy correction）的系数并不相等——汉宁窗的幅值修正系数为 2.00，能量修正系数为 1.633，同一条谱线只能取其一。本文从汉宁窗的定义出发分步推导两种系数，给出 Simcenter Testing Knowledge Base 与 LMS 理论手册的完整系数表，说明 Simcenter Testlab 中的设置位置，以及 RMS 计算在后台自动换用能量校正值的行为。
+> 加窗在抑制泄漏（leakage）的同时，也会同时压缩信号的谱线幅值与能量。窗函数修正系数（window correction factor）通过在频域对每条谱线乘一个由窗类型决定的固定系数来补偿这种失真，但幅值校正（amplitude correction）与能量校正（energy correction）的系数并不相等——汉宁窗的幅值修正系数为 2.00，能量修正系数为 1.633，同一条谱线只能取其一。本文从汉宁窗的定义出发分步推导两种系数，给出 公开技术资料 与 LMS 理论手册的完整系数表，说明 Simcenter Testlab 中的设置位置，以及 RMS 计算在后台自动换用能量校正值的行为。
 
 ## 一、加窗的代价：幅值与能量同时被压缩
 
@@ -13,7 +13,7 @@ author: "@NVH_Z"
 
 ![信号（蓝）乘以汉宁窗（绿）后，幅值与能量同时被压缩（红）](/images/window-correction-factors/fig1-hann-distortion.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 对一个周期正弦信号加汉宁窗，谱峰幅值恰好被压缩为原来的一半。若不补偿，频谱上每条谱线都系统性偏低——做阶次切片、对标声学目标线时，该偏差会一路传递进结论。
 
@@ -85,7 +85,7 @@ $$
 
 ### 2.3 各窗型的修正系数表
 
-Simcenter Testing Knowledge Base 的 Window Correction Factors 一文与 LMS 理论手册表 1.2 给出了一致的系数表：
+公开技术资料 的 Window Correction Factors 一文与 LMS 理论手册表 1.2 给出了一致的系数表：
 
 | 窗类型 | 幅值修正系数 | 能量修正系数 | 典型用途（据 LMS 理论手册） |
 | --- | --- | --- | --- |
@@ -96,9 +96,9 @@ Simcenter Testing Knowledge Base 的 Window Correction Factors 一文与 LMS 理
 | **Kaiser-Bessel** | 2.49 | 1.86 | 区分幅值差别大的多音信号 |
 | <strong>Flattop（平顶）</strong> | 4.18 | 2.26 | 纯音信号的精确幅值测量、系统标定 |
 
-![Simcenter Testing Knowledge Base 给出的窗函数修正系数表](/images/window-correction-factors/fig2-correction-table.png)
+![公开技术资料 给出的窗函数修正系数表](/images/window-correction-factors/fig2-correction-table.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 
 三点说明。其一，只有 Uniform 窗（等价于不加窗）的两种系数相同且等于 1，其余窗型两者必然不等。其二，Knowledge Base 的 RMS 计算专题文章在能量校正语境下给 Flattop 窗的系数为 2.225，与上表的 2.26 略有出入，源于 Flattop 窗定义变体的取法不同，不影响本文的方法与结论。其三，LMS 手册表 1.2 还给出重复加窗的情形：汉宁窗施加两次（x2）系数为 2.67/1.91，三次（x3）为 3.20/2.11，即修正系数取决于窗类型与施加次数。
@@ -111,7 +111,7 @@ Simcenter Testing Knowledge Base 的 Window Correction Factors 一文与 LMS 理
 
 ![幅值校正（乘 2）后谱峰与原始信号一致，但曲线下面积偏大](/images/window-correction-factors/fig4-amplitude-corrected.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 改用能量校正（乘 1.633），曲线下面积与原始信号一致，总能量得到补偿；代价是谱峰只回到
 
@@ -123,7 +123,7 @@ $$
 
 ![能量校正（乘 1.63）后曲线下面积与原始信号一致，但谱峰偏低](/images/window-correction-factors/fig5-energy-corrected.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 两种校正的偏差可以定量给出。取两系数之比：
 
@@ -147,7 +147,7 @@ $$
 
 ![Simcenter Testlab 中 Tools -> Options -> General 下的 2D Correction Mode 设置](/images/window-correction-factors/fig6-2d-correction-mode.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 | 选项 | 行为 |
 | --- | --- |
@@ -161,7 +161,7 @@ $$
 
 ![幅值校正显示下，双游标间 RMS 读数仍与原始信号一致](/images/window-correction-factors/fig7-rms-identical.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 因此会出现图上「两条曲线面积明显不同、RMS 读数却相同」的现象。这不是软件缺陷，而是软件在计算中统一换用能量校正值，避免了校正模式选择不一致带来的能量偏差。若需要手工计算 RMS，必须自行完成上述三项换算。
 

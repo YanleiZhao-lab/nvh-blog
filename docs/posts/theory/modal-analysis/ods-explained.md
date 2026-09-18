@@ -119,25 +119,25 @@ $$
 
 ![同一宽带随机信号经 10、25、100 次平均后的 Spectrum 幅值：平均次数越多幅值越低](/images/ods-explained/dsp-spectrum-averaging-decay.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 需要“正确幅值 + 正确相位 + 平均”三者的场合（ODS 正是典型），应使用**相位参考谱**：指定一个参考通道，每帧、每条谱线先把参考通道的相位归零，再把同样大小的相位从其它所有通道中减去。它利用了振动结构不同测点之间固定的相位关系，使各帧数据相位一致后再平均。下图给出生效机理——同一结构上 plate:1:Z 与 plate:13:Z 同相、plate:15:Z 与 plate:13:Z 反相：
 
 ![振动结构动画：六个测点之间的固定相位关系（plate:1:Z 与 plate:13:Z 同相，plate:15:Z 与 plate:13:Z 反相）](/images/ods-explained/dsp-phase-ref-animation.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 每次采集起始时刻不同，导致各帧之间绝对相位不一致，直接平均会丢失正确幅值：
 
 ![三次采集因起始时刻不同产生不一致的相位，使幅值无法直接平均](/images/ods-explained/dsp-phase-ref-inconsistent.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 相位参考谱按参考通道把各帧数据旋转到一致的相位后再平均，幅值得以保留：
 
 ![相位参考使各帧数据相位一致，平均后幅值正确](/images/ods-explained/dsp-phase-ref-consistent.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ::: warning 工程注意
 - **ODS 无阻尼**：需要阻尼比必须回到模态分析；密集模态下 ODS 更难解读，几阶振型混在一幅变形里
@@ -174,7 +174,7 @@ $$
 
 ![LMS 模态分析理论手册第十七章 ODS 章节示意图](/images/ods-explained/lms-ods-figure.png)
 
-*（图源：Simcenter Testing Knowledge Base）*
+*（图源：网络官方公开资料）*
 
 ## 四、Python 演示：同一根梁，三个频率三幅形
 
