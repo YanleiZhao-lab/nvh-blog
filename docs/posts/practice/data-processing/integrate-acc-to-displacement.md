@@ -111,16 +111,16 @@ print(f"\n0.001 m/s² 偏置积分 8 s 的末端漂移: {0.5*0.001*t_end**2*1e3:
 FAQ 附录的四张对照图，比文字更直观——每张都是"正确结果 vs 少做一步"的叠加显示：
 
 ![未做 DETREND_AC：漂移残留，结果持续发散](/images/integrate-acc-to-displacement/faq630_p4_1.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![未升采样：Simpson 积分在 fs/4 以上产生锯齿误差](/images/integrate-acc-to-displacement/faq630_p4_2.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![未加高通：积分常数以低频/直流形式主导结果](/images/integrate-acc-to-displacement/faq630_p5_2.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![高通截止留在默认 500 Hz：低频被滤光，位移几乎为零](/images/integrate-acc-to-displacement/faq630_p5_3.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 完整公式（Simpson 嵌套版，原文照录，fs=16384 Hz 场景）：
 
@@ -152,18 +152,16 @@ FILTER_HP(DOUBLEINTEGRATE(DETREND_AC(CHx;2);2);2.5;2;IIR(1))
 2. <strong>改用频率段落（Frequency Section）</strong>：不积 Overall，直接算 1 Hz～6400 Hz 的 Frequency Section（带宽 6400 Hz 场景），从源头绕开直流
 
 ![频率段落设置：1 Hz 起算代替含 0 Hz 的 Overall Level](/images/integrate-acc-to-displacement/community-freq-section.jpg)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 图谱域还有一个顺手的技巧：扭振（torsional vibration）分析里转速波动阶次想换成角度位移显示，右键 Y 轴 → Processing → Integrate (Single)，一步完成（与旋转机械手册 TIP 2 的操作一致）；峰值/RMS/峰峰值（peak-to-peak）在同一菜单的 Section Scaling 里切换。
 
 ![2 阶扭振阶次：转速波动经右键 Integrate (Single) 直接转成角度显示](/images/integrate-acc-to-displacement/rot_p46_0.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ## 五、Python 复现：预处理决定漂移与否
 
 用 numpy 把第二节的误差来源和第四节的频域路线走一遍：信号 = 10 Hz 正弦加速度（真实位移幅值 253.3 μm）+ 0.5 Hz 低频干扰 + 0.001 m/s² 偏置 + 线性漂移。
-
-这段代码回答的问题是：错误示范到底能错到多离谱？把第二节的误差来源（偏置、线性漂移、低频干扰）原样喂给最朴素的 cumsum 双重积分，末端漂移超过一米——这个数字本身就是“积分前必须预处理”最有说服力的证据；对照组的频域积分加高通则把漂移彻底清干净，两行输出放在一起就是一张“做与不做预处理”的对照表。
 
 ```python
 import numpy as np
