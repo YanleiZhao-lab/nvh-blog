@@ -12,7 +12,7 @@ author: "@NVH_Z"
 在讨论"中心"参数之前，手册先给出四个描述数据边界的基础量，它们是后续统计量的基础：
 
 ![最大值、最小值、幅值范围和极值示意](/images/mean-median-skewness/fig9-1-max-min-range.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 - <strong>最大值（Maximum）</strong>：规定测量时间段内的最大幅值；
 - <strong>最小值（Minimum）</strong>：规定测量时间段内的最小幅值；
@@ -71,7 +71,7 @@ $$\gamma_1 = \frac{1}{N}\sum_{i=1}^{N} \left( \frac{x_i - \bar{x}}{\sigma} \righ
 其中 $m_3 = \frac{1}{N}\sum d_i^3$ 是三阶中心矩。三次方保留符号：右侧长尾产生正的贡献，左侧长尾产生负的贡献，对称分布正负抵消归零。这就是"正偏斜/负偏斜"的数学来源。
 
 ![数据分布的对称和偏斜](/images/mean-median-skewness/fig9-2-symmetry-vs-skewness.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 均值和中值怎么选：手册给的决策规则
 

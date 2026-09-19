@@ -18,7 +18,7 @@ author: "@NVH_Z"
 
 ![Free Run (angle) 采集设置：按循环数而非时间截取数据](/images/cycle-cycle-averaging/free-run-angle-settings.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>角域（Angle Domain）</strong>：横轴为曲轴转角而非时间的数据表示，转一转 360°、四冲程一个循环 720°
@@ -38,7 +38,7 @@ author: "@NVH_Z"
 
 ![Navigator 里的 5 个循环：左缸压、右振动，横轴均为 720°](/images/cycle-cycle-averaging/five-cycles-angle-domain.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 上图是 Calculate 之后 Navigator 里的结果：每条曲线是一个循环，缸压与振动逐循环叠画。
 
@@ -46,7 +46,7 @@ author: "@NVH_Z"
 
 ![300 个循环的 max/min/average 曲线](/images/cycle-cycle-averaging/map-statistics-avg-max-min.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 平均循环给出这台机器的典型工作状态，min/max 包络的宽度给出它的稳定程度：包络宽度接近测量噪声水平，说明循环变差小；包络在燃烧段明显撑开，就是循环变差大的直接证据。
 
@@ -64,7 +64,7 @@ $$\left(\frac{dP}{d\theta}\right)_{k,i} \approx \frac{P_k(\theta_i+\Delta\theta)
 
 ![Frame Statistics AD 门区设置与每循环最大值结果](/images/cycle-cycle-averaging/frame-statistics-gate.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 有些评估只关心特定角度窗口：比如缸压峰值预期出现在 10°~30° 曲轴角之间。"Section Settings" → **Frame Statistics AD** 标签页（通常在最右侧，AD 即角域）里定义角度门（gate），对每个循环在门内取最大值、均值等统计量。结果存放在 Frame Statistics 文件夹，用 XY 图可以同时查看门内最大值及其出现的角度位置。输出不再是一条曲线，而是**每循环一个数**的序列——300 个循环就是 300 个峰值点，可以直接看散布、做 CPK、挑异常循环。
 

@@ -70,13 +70,13 @@ $$p_{\mathrm{ev}}(r) \propto e^{-\sqrt{k_x^2 - k^2}\, r}$$
 
 ![近场与远场的声波行为差异](/images/sound-fields/fig1-near-far-waves.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 环流波与传播波混在一起，意味着近场中单麦克风测得的声压既不稳定也不可重复。要准确捕获近场能量，需要使用声阵列（Acoustic Array）——用多个传声器把环流与传播两种成分都采集下来。
 
 ![近场里环流与传播并存](/images/sound-fields/fig3-nearfield-circulate.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>近场（Near Field）</strong>：距源 2 个波长以内，倏逝波与传播波共存，声压与距离无固定关系
@@ -95,7 +95,7 @@ $$p_{\mathrm{ev}}(r) \propto e^{-\sqrt{k_x^2 - k^2}\, r}$$
 
 ![自由场与扩散场示意](/images/sound-fields/fig5-free-vs-diffuse.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 自由场：声波仅一次经过观察点
 
@@ -112,7 +112,7 @@ $$p_{\mathrm{ev}}(r) \propto e^{-\sqrt{k_x^2 - k^2}\, r}$$
 
 ![混响室：高反射斜角墙面制造扩散场](/images/sound-fields/fig7-reverberant-room.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 理想扩散场中声强为零
 

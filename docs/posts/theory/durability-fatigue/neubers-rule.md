@@ -19,11 +19,11 @@ author: "@NVH_Z"
 
 ![Neuber 法则的用途：从弹性应力时间历程导出对应的弹塑性应变时间历程](/images/neubers-rule/fig1-elastic-plastic-strain.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![左：线性有限元给出的应力是纯弹性的，需要 Neuber 法则导出弹塑性应变；右：应变片直接测量弹塑性应变](/images/neubers-rule/fig2-linear-fe-vs-strain-gauge.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两条路怎么选？有条件贴片的位置优先贴片——实测永远优先；但当危险点在型腔内壁、装配缝隙深处，或者一个项目要筛几十个候选方案时，"有限元灵敏度 + 实测载荷 + Neuber 换算"就是唯一现实的组合。这也正是 Simcenter Testlab Neo 应变寿命方法为"载荷"和"应力"输入都内置 Neuber 换算的原因。
 
@@ -57,7 +57,7 @@ $$\varepsilon \;=\; \frac{\sigma}{E} \;+\; \left(\frac{\sigma}{K'}\right)^{1/n'}
 
 ![Neuber 法则图解：弹性点（蓝）在杨氏模量直线上，等面积的弹塑性点（红）在 Ramberg-Osgood 曲线上](/images/neubers-rule/fig3-neuber-ramberg-osgood.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - **等面积条件**：弹性应变能密度（$\sigma_e^2/E$）= 弹塑性应变能密度（$\sigma\varepsilon$），Neuber 法则的核心假设，1961 年由 Heinz Neuber 提出
@@ -129,7 +129,7 @@ Simcenter Testlab Neo 的应变寿命（Strain Life）方法接受三种输入�
 
 ![应变寿命方法的三种可能输入：载荷（上红）、应力（中绿）、应变（下蓝）](/images/neubers-rule/fig4-input-types.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 方法属性里的 **Input Type** 字段只有两个选项，对应两条换算路线：
 
@@ -138,7 +138,7 @@ Simcenter Testlab Neo 的应变寿命（Strain Life）方法接受三种输入�
 
 ![Strain Life 方法属性中的 Input Type 设置（右下）](/images/neubers-rule/fig5-input-type-setting.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 选了 Load 之后，还有一步"载荷如何变成应力"要交代，即 **Load Influence** 字段的两个选项：<strong>Manual（手工）</strong>与 <strong>Input Base Unit -> Material Data Base Unit（输入基准单位换算到材料基准单位）</strong>。
 
@@ -146,7 +146,7 @@ Simcenter Testlab Neo 的应变寿命（Strain Life）方法接受三种输入�
 
 ![依据有限元模型设置 Stress Influence 与 Load Influence（5.03983 MPa/N）](/images/neubers-rule/fig7-fe-stress-influence.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **Input Base Unit -> Material Data Base Unit**：换算系数未知时的兜底——把输入历程的数值直接按材料数据库的单位重新标注（例如 2,000,000 N 的历程读作 2,000,000 Pa = 2 MPa）。官方文章明确提示：这样得到的绝对结果不正确（not correct in absolute terms），只能用于相对比较——几条载荷历程谁更伤可以比，绝对寿命不能报。
 

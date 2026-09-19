@@ -13,7 +13,7 @@ author: "@NVH_Z"
 
 ![锤击测试的最小设备配置：SCADAS 前端 + 力锤 + 加速度计](/images/impact-testing-windows/equip.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 但一次敲击要同时当激励信号和被分析信号用，两头的毛病它都得沾：
 
@@ -24,7 +24,7 @@ author: "@NVH_Z"
 
 ![Windowing 子表：用一锤实测数据自动推荐窗设置](/images/impact-testing-windows/window-worksheet.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 二、敲之前的两件事：触发与带宽
 
@@ -36,7 +36,7 @@ author: "@NVH_Z"
 
 ![Trigger 子表：试敲几下，Apply Suggested 自动给出触发电平](/images/impact-testing-windows/trigger.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 带宽：先看力谱平不平，再谈锤头
 
@@ -44,13 +44,13 @@ author: "@NVH_Z"
 
 ![带宽与抗混叠滤波器：80% 带宽以上幅值被压低，Span 即扣除后的可用带宽](/images/impact-testing-windows/bandwidth.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 如果力谱没铺满分析带宽就掉下去，换锤头。物理逻辑是时域与频域的反比关系：脉冲越短，频谱越宽。锤头从两个方向缩短接触时间：**减质量**（锤头越轻，反弹越干脆）和**增刚度**（橡胶换塑料、塑料换金属）。
 
 ![不同刚度与质量的锤头和配重延伸件](/images/impact-testing-windows/tips-selection.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 | 锤头类型 | 接触时间 | 激励频带 | 典型场景 |
 | --- | --- | --- | --- |
@@ -62,7 +62,7 @@ author: "@NVH_Z"
 
 ![锤头太软：蓝线力谱高频跌落，红线 FRF 高频全是噪声，绿线相干塌陷](/images/impact-testing-windows/tip-too-soft.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning 带宽判定顺序
 先确认力谱平坦，再去解释 FRF 的高频噪声。力谱不平就换锤头，加平均次数只能把噪声抹平，救不了信噪比本身。
@@ -120,7 +120,7 @@ $$\beta = \frac{\ln(100/p)}{T}$$
 
 ![不同百分比的指数窗：100% 即矩形，百分比越小压得越狠](/images/impact-testing-windows/exponential-window.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 人工阻尼：窗压得越狠，阻尼虚报越多
 
@@ -140,7 +140,7 @@ $$\zeta_{eff} = \zeta + \frac{\beta}{\omega_n} = \zeta + \frac{\ln(100/p)}{2\pi 
 
 ![加指数窗后信号表观衰减变快，FRF 峰变胖，就是人工阻尼](/images/impact-testing-windows/artificial-damping.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 用 Python 模拟一锤 30 Hz、阻尼比 1% 的衰减信号，加不同指数窗后从包络回归阻尼，人工阻尼直接可见：
 
@@ -182,7 +182,7 @@ Testlab 在 Measure 工作表的 All Settings 里提供双击与过载的自动�
 
 ![健康的测量：FRF 反共振处相干掉落属正常，其余频段应接近 1](/images/impact-testing-windows/frf-coherence.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 六、窗选择速查
 

@@ -40,7 +40,7 @@ SAWR 与随机控制的差别只在目标长什么样：随机控制追的是一
 
 ![闭环 SAWR 试验的硬件链路：控制器、SCADAS、功放/振动台、试件、控制与测量加速度计](/images/waveform-replication-sawr/fig1.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 三个容易被忽略的前提：
 
@@ -49,19 +49,19 @@ SAWR 与随机控制的差别只在目标长什么样：随机控制追的是一
 
 ![STOP 连接器必须插在位，SCADAS 源才有输出](/images/waveform-replication-sawr/fig2.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 3. **外接急停**。STOP 口可接到 DAC Shutdown 急停盒，大黄/大红按钮一拍，试验立即终止——量产件试验台的标配。
 
 ![STOP 口外接 DAC Shutdown 急停盒](/images/waveform-replication-sawr/fig4.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 软件入口在 Testlab Environmental 文件夹的 Single Axis Waveform Replication 图标（token 授权下需 43 个 token）。启动后先做两件事：Tools -> Options -> Shaker 里核对振动台定义（最大位移、最大加速度、频率范围——SAWR 会用这些限值预检波形，超限直接报警）；File -> Save As 存项目文件。之后底部工作表从左到右依次使用：Channel Setup -> SAWR Setup -> System Identification -> System Verification -> SAWR Control -> Batch Reporting。
 
 ![Testlab Environmental 文件夹中的 Single Axis Waveform Replication 入口](/images/waveform-replication-sawr/fig5.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 四、通道与设置：三个最小要求
 
@@ -69,13 +69,13 @@ Channel Setup 工作表里逐行录入传感器：至少一个通道设为 Contr
 
 ![Channel Setup 工作表：逐行录入控制与测量加速度计信息](/images/waveform-replication-sawr/fig8.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 SAWR Setup 工作表完成三件事即达最小可用状态：Control 面板设控制参数、SAWR Profiles 面板定义目标波形、Schedule 面板把 profile 排入试验序列。全部就绪后状态指示转绿显示 Verification OK。
 
 ![SAWR Setup 工作表的七个区域：控制面板、SAWR Profiles、安全、计划、自动测量、吞吐记录、状态指示](/images/waveform-replication-sawr/fig10.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 频率分辨率与波形时长的隐藏约束
 
@@ -89,7 +89,7 @@ SAWR Profiles 面板点 Create Profile 打开 Profile Editor：Select Source Tra
 
 ![Profile Editor：从 .ldsf 实测数据定义目标波形](/images/waveform-replication-sawr/fig12.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 没有实测数据时，Time Signal Calculator 可以现场造一段：启用 add-in 后用 GENERATE_RANDOM 加 FILTER_BP 生成带宽限定的随机时历，Calculate 计算并 Save As 存入项目，即可作为 SAWR 的目标。这适合做方法验证与台架调试，不能替代真实载荷。
 
@@ -99,13 +99,13 @@ SAWR Profiles 面板点 Create Profile 打开 Profile Editor：Select Source Tra
 
 ![System Identification 工作表：设源电压上下限后点 Start](/images/waveform-replication-sawr/fig19.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 辨识完成后到 System Verification 工作表复核结果：FRF 曲线是否光滑、相干是否够高（共振频段应接近 1，反共振与带外低信噪区允许回落）。这一步本质上是给 ITF 做质检——后面所有驱动换算都建立在它之上，脏的 ITF 会把误差逐次放大。
 
 ![System Verification 工作表：复核 FRF 与相干等辨识结果](/images/waveform-replication-sawr/fig20.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 六、四种控制策略：修正发生在什么时候
 
@@ -128,13 +128,13 @@ SAWR Control 工作表点 Arm 再点 Start，状态转 Running。控制界面右
 
 ![SAWR Control 工作表：Arm 与 Start 按钮开始试验](/images/waveform-replication-sawr/fig21.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 试验结束用 Batch Reporting 工作表出报告：选中试验点 Print，File -> Print Options 可选打印机或输出 PowerPoint/Word 版本。报告模板里的 Logo 与页眉图（Logo.bmp、LmsHeading1.bmp）存于安装目录 Application Resources 下，复制到用户目录再改可只影响当前登录。
 
 ![Batch Reporting 工作表一键出报告](/images/waveform-replication-sawr/fig22.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 多输入复现（多个方向或多台激振器）则换用 Testlab Environmental 文件夹里的 Time Waveform Replication（TWR）应用，流程与单轴 SAWR 同构，控制量从标量 ITF 变成矩阵。
 

@@ -27,7 +27,7 @@ $$H = T\,(1 - \alpha)$$
 
 ![重叠处理示意：相邻 FFT 块共用部分数据](/images/overlap-processing/overlap-diagram.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 LMS 理论手册的表述：历次 FFT 所取的时间记录并非彼此完全独立，而是取部分重叠。先做一个时间上的估算，设帧长 T = 2 s、平均 5 次：
 
@@ -56,7 +56,7 @@ $$w(n) = 0.5 - 0.5\cos\left(\frac{2\pi n}{N}\right), \quad n = 0, 1, \dots, N-1$
 
 ![汉宁窗下无重叠处理时的数据损失](/images/overlap-processing/hanning-no-overlap-loss.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### "至少 30% 重叠"的来源
 
@@ -68,7 +68,7 @@ $$w(0.2N) = 0.5 - 0.5\cos(0.4\pi) \approx 0.345$$
 
 ![施加约 30% 重叠后数据被均衡利用](/images/overlap-processing/overlap-30-percent-recover.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 30% 是恢复数据利用率的下限；50% 则是数据权重严格均匀的最小步距，依据是恒定重叠相加条件。
 

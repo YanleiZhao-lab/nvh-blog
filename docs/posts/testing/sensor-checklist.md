@@ -91,11 +91,11 @@ $$\text{Span} = 0.8 \times \frac{f_s}{2} \quad \Rightarrow \quad f_s \ge 2.5\, f
 
 ![带宽 1000 Hz 时，1300 Hz 成分镜像折叠到 700 Hz：超出带宽的频率以带宽为轴反射](/images/sensor-checklist/aliasing-mirror.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![实际抗混叠滤波器在带宽处为 -3 dB 点、带宽外 20% 处衰减为零，无混叠区间为带宽的 80%（span）](/images/sensor-checklist/antialiasing-filter.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 - [ ] 采样率设置确认（常见 2048 / 4096 / 8192 / 51200 Hz）
 - [ ] 抗混叠模拟滤波器已启用（SCADAS 内置，随带宽自动设置）
@@ -130,14 +130,14 @@ $$\text{SNR}_{\max} \approx 6.02\, b + 1.76 \ \mathrm{dB}$$
 
 ![可用量化电平数随信号电压占量程比例变化：小信号对应的电平数急剧减少](/images/sensor-checklist/quantization-bins.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: tip 量程设置与指示条
 Simcenter Testlab 采集设置界面左下角的量程指示条（range indicator）给出直接判据：**白色** = 量程过大（量化误差风险），**绿色** = 量程合适，**橙色** = 接近量程上限，**红色** = 已过载。自动量程操作顺序：start ranging → hold level → set ranges，并建议勾选 Use full range when auto-ranging——未用满量程时，过载后增益每次仅下调一档，可能连续过载。
 
 ![Simcenter Testlab 量程指示条：白色量程过大、绿色合适、橙色接近上限、红色过载](/images/sensor-checklist/range-indicator.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 :::
 
 ## 四、触发与同步
@@ -182,7 +182,7 @@ $$O_{\max} = \frac{\mathrm{PPR}}{2}$$
 
 ![PPR 限制最高可分析阶次：120 PPR 采样时，60 阶以上无阶次信息](/images/sensor-checklist/ppr-order-limit.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: danger 转速信号质量与阶次结果
 阶次分析精度直接取决于转速信号质量：

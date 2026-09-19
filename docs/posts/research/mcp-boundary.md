@@ -33,7 +33,7 @@ $$
 
 物理意义：采样率确定后，可分析频率范围的上限随之确定，高于该上限的成分必须在 ADC 之前由抗混叠滤波器去除。
 
-![带宽为采样率的一半：奈奎斯特判据要求采样率至少为最高分析频率的两倍（图源：网络官方公开资料）](/images/mcp-boundary/fig-bandwidth-nyquist.png)
+![带宽为采样率的一半：奈奎斯特判据要求采样率至少为最高分析频率的两倍（图源：网络 侵删）](/images/mcp-boundary/fig-bandwidth-nyquist.png)
 
 <strong>第二步：谱线数由数据块大小决定。</strong> 对实信号做傅里叶变换，结果共轭对称，有效谱线数（Spectral Lines）为
 
@@ -43,7 +43,7 @@ $$
 
 物理意义：每条谱线携带一对幅值与相位，频率轴上的取值点个数在采样那一刻就已锁定。
 
-![每条谱线含幅值（上）与相位（下）两个量；谱线数等于数据块大小的一半（图源：网络官方公开资料）](/images/mcp-boundary/fig-spectrum-amp-phase.png)
+![每条谱线含幅值（上）与相位（下）两个量；谱线数等于数据块大小的一半（图源：网络 侵删）](/images/mcp-boundary/fig-spectrum-amp-phase.png)
 
 <strong>第三步：频率分辨率由帧长决定。</strong> 相邻谱线间距为带宽除以谱线数，等价于帧长（Frame Size）的倒数：
 
@@ -53,7 +53,7 @@ $$
 
 物理意义：要分辨更靠近的两个频率成分，唯一办法是加长单帧采样时间——这是采集参数选择中的根本性权衡，任何模型都无法绕过。
 
-![100 Hz 与 101 Hz 两个正弦：频率分辨率不足时两峰合并（左），分辨率足够时分开为两个独立峰（右）（图源：网络官方公开资料）](/images/mcp-boundary/fig-two-tones-resolution.png)
+![100 Hz 与 101 Hz 两个正弦：频率分辨率不足时两峰合并（左），分辨率足够时分开为两个独立峰（右）（图源：网络 侵删）](/images/mcp-boundary/fig-two-tones-resolution.png)
 
 ::: tip 数字与解释的分工示例
 用户问"这段数据里有没有共振"。LLM 的职责是解析意图、按上下文选择分析带宽与帧长、调用 FFT 工具、拿到谱线后指出哪个峰值得关注；上式中的三个数值必须来自工具的计算，而不是模型的生成。
@@ -103,9 +103,9 @@ MCP 工具（确定性计算：FFT / 模态 / 指标）
 
 以旋转机械阶次分析为例说明这条边界的实际意义：四缸四冲程发动机每转发生两次燃烧事件，故二阶（2nd order）成分通常是车内噪声的主要贡献者；colormap 上阶次亮带与结构共振线（如 450 Hz、750 Hz）的交点，才是需要关注的转速区间。这些判读规则来自 Simcenter Testing 知识库旋转机械专册，属于"解释规则"，可由 LLM 掌握；但阶次谱和 colormap 本身必须由工具从转速跟踪数据计算得到。
 
-![四缸发动机车辆驾驶人右耳处噪声的 colormap：二阶成分幅度最大，是主要声学贡献（图源：网络官方公开资料）](/images/mcp-boundary/fig-second-order.png)
+![四缸发动机车辆驾驶人右耳处噪声的 colormap：二阶成分幅度最大，是主要声学贡献（图源：网络 侵删）](/images/mcp-boundary/fig-second-order.png)
 
-![colormap 上阶次亮带与 450 Hz、750 Hz 结构共振线的交点指示需要关注的转速区间（图源：网络官方公开资料）](/images/mcp-boundary/fig-order-colormap.png)
+![colormap 上阶次亮带与 450 Hz、750 Hz 结构共振线的交点指示需要关注的转速区间（图源：网络 侵删）](/images/mcp-boundary/fig-order-colormap.png)
 
 ## 五、工程工作流的封装
 

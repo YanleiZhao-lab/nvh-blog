@@ -37,19 +37,19 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![RPM 异常的两种形态](/images/rpm-spike-removal/rpm-anomalies.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>第二类：每转固定位置上的规律毛刺。</strong> RPM 曲线放大后可见，每一转的同一角度位置都出现一个固定的小尖。其来源不是环境，而是斑马带（zebra tape）或码盘上某一条条纹的间距、宽度存在制造偏差——每转到该角度，脉冲间隔错一次，转速计算随之错一次。这类毛刺的危害在于其严格周期性：它会在频谱上生成真实的阶次成分，与被测信号混叠在一起。
 
 ![每转固定位置出现的 RPM 毛刺](/images/rpm-spike-removal/spike-per-revolution.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>第三类：斑马带接缝（butt joint）造成的假扭振。</strong> 斑马带缠绕收尾处若留有豁口，脉冲间隔大于理论值，每转出现一次假的转速跌落（dip）；若两条纹挤压搭接，脉冲间隔小于理论值，每转出现一次假的转速尖峰（spike）。两者都是每转一次的系统性误差，与第二类同源，但成因在搭接处而非单条条纹。接缝误差的成因与修正流程见《[斑马带接缝修正](./zebra-tape-correction.html)》。
 
 ![激光与斑马带](/images/rpm-spike-removal/zebra-tape-laser.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info
 扭振（torsional vibration）测量要求每转内有足够的脉冲数来分辨一转之内的转速波动，因此扭振测试使用高 PPR 斑马带。PPR 越高，单个脉冲的计时误差对转速曲线的影响越直接，毛刺在曲线上也越明显。
@@ -68,7 +68,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![框选毛刺段并按 [R] 替换后的效果](/images/rpm-spike-removal/spike-before-after.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 操作细节：
 
@@ -77,7 +77,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![设置开关与 Undo/Redo 按钮](/images/rpm-spike-removal/settings-undo-buttons.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 - 完成编辑后，左侧有 **Save**（直接覆盖原数据）和 **Save As**（另存）两个选项。做修正操作时应另存——原始转速数据无法重测，覆盖后不可恢复。
 
@@ -93,7 +93,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![函数设置对话框](/images/rpm-spike-removal/spike-removal-dialog.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 算法逻辑
 
@@ -114,13 +114,13 @@ $$\mathrm{MAD} = \operatorname{median}_{i \in W} \Big( \big| n_i - \operatorname
 
 ![毛刺剔除算法流程](/images/rpm-spike-removal/algorithm-flowchart.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 执行后生成新的 trace：
 
 ![剔除前（红）与剔除后（绿）对比](/images/rpm-spike-removal/spike-removal-result.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 参数说明
 

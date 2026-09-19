@@ -13,7 +13,7 @@ author: "@NVH_Z"
 
 ![信号（蓝）乘以汉宁窗（绿）后，幅值与能量同时被压缩（红）](/images/window-correction-factors/fig1-hann-distortion.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 对一个周期正弦信号加汉宁窗，谱峰幅值恰好被压缩为原来的一半。若不补偿，频谱上每条谱线都系统性偏低——做阶次切片、对标声学目标线时，该偏差会一路传递进结论。
 
@@ -98,7 +98,7 @@ $$
 
 ![公开技术资料 给出的窗函数修正系数表](/images/window-correction-factors/fig2-correction-table.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 
 三点说明。其一，只有 Uniform 窗（等价于不加窗）的两种系数相同且等于 1，其余窗型两者必然不等。其二，Knowledge Base 的 RMS 计算专题文章在能量校正语境下给 Flattop 窗的系数为 2.225，与上表的 2.26 略有出入，源于 Flattop 窗定义变体的取法不同，不影响本文的方法与结论。其三，LMS 手册表 1.2 还给出重复加窗的情形：汉宁窗施加两次（x2）系数为 2.67/1.91，三次（x3）为 3.20/2.11，即修正系数取决于窗类型与施加次数。
@@ -111,7 +111,7 @@ $$
 
 ![幅值校正（乘 2）后谱峰与原始信号一致，但曲线下面积偏大](/images/window-correction-factors/fig4-amplitude-corrected.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 改用能量校正（乘 1.633），曲线下面积与原始信号一致，总能量得到补偿；代价是谱峰只回到
 
@@ -123,7 +123,7 @@ $$
 
 ![能量校正（乘 1.63）后曲线下面积与原始信号一致，但谱峰偏低](/images/window-correction-factors/fig5-energy-corrected.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两种校正的偏差可以定量给出。取两系数之比：
 
@@ -147,7 +147,7 @@ $$
 
 ![Simcenter Testlab 中 Tools -> Options -> General 下的 2D Correction Mode 设置](/images/window-correction-factors/fig6-2d-correction-mode.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 | 选项 | 行为 |
 | --- | --- |
@@ -161,7 +161,7 @@ $$
 
 ![幅值校正显示下，双游标间 RMS 读数仍与原始信号一致](/images/window-correction-factors/fig7-rms-identical.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 因此会出现图上「两条曲线面积明显不同、RMS 读数却相同」的现象。这不是软件缺陷，而是软件在计算中统一换用能量校正值，避免了校正模式选择不一致带来的能量偏差。若需要手工计算 RMS，必须自行完成上述三项换算。
 

@@ -19,12 +19,12 @@ Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 Ch
 2. 把该通道的 ChannelGroupId 下拉框从 Tacho 改成 Vibration。
 
 ![Channel Setup 中把 ChannelGroupId 从 Tacho 改为 Vibration 的下拉菜单](/images/torsional-orders-tips/channel-groupid.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 改完之后系统会同时算出两个结果：tachometer 通道照常解算转速，vibration 通道则把原始脉冲波形当作一路"振动"数据保留——一份信号，两种通道，无需分线。
 
 ![ChannelGroupId 改为 Vibration 后即可对扭振信号做彩色图与阶次切片](/images/torsional-orders-tips/colormap-tacho.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 按知识库说明，改组后即可从 throughput 数据创建阶次切片（order cuts）与 FFT——彩色图、切片、谱分析全流程可用。
 
@@ -42,12 +42,12 @@ Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 Ch
 扭振阶次切片默认的纵轴是 RPM 波动——每一转速点上的转速交变幅度。X 轴是整体 RPM，Y 轴是波动量，发动机 run-up（升速）过程中曲轴的扭振一目了然。
 
 ![发动机 run-up 的 2 阶扭振切片](/images/torsional-orders-tips/torsional-order-cut.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 但很多验收规范和耐久评估要的不是"转速抖多少"，而是"轴扭了多少度"。Testlab 里不用导出数据，右键纵轴三步完成：<strong>Processing -> Integrate (Single)</strong>。
 
 ![右键纵轴 Integrate (Single) 将角速度波动积分成角度](/images/torsional-orders-tips/integrate-menu.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 积分的分步推导
 
@@ -103,7 +103,7 @@ print(f"峰峰值      -> {2*np.degrees(theta_pk):.3f} deg")
 角度量纲确定后，报告还需写明幅值口径：同一份数据，RMS、峰值（Peak）、峰峰值（Peak-to-Peak）三种表述相差达 2.8 倍。Testlab 里仍是右键纵轴：**Processing -> Section Scaling**，在三者之间切换。
 
 ![右键纵轴 Section Scaling 切换幅值表述](/images/torsional-orders-tips/section-scaling.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 三者的换算关系建立在正弦假设上：正弦波的 RMS 是峰值的 $1/\sqrt{2}$，峰峰值是峰值的两倍。
 
@@ -144,12 +144,12 @@ print(f"检查 2*1.414*RMS: {2*np.sqrt(2)*rms:.4f} deg = Peak-to-Peak")
 3. 点 <strong>Add Disc...</strong>，填节点名、旋转件半径、圆盘朝向，Apply 后关闭。
 
 ![Add Disc 窗口：节点名、半径与圆盘朝向](/images/torsional-orders-tips/add-disc-window.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 圆盘节点会出现在几何显示区，之后谱、阶次、时域数据都能像驱动普通节点变形一样驱动这些圆盘转动——扭振在轴系各位置的相位关系、幅值分布直接以旋转动画呈现。
 
 ![几何显示区中的 torsional node 圆盘节点](/images/torsional-orders-tips/torsional-node.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>Torsional Node（扭振节点）</strong>：几何模型中代表旋转件的圆盘节点，动画时绕自身轴转动，用于可视化扭振变形；

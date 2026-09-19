@@ -18,7 +18,7 @@ author: "@NVH_Z"
 公开技术资料用图 1 说明同样的道理：同一根圆棒承受轴向拉伸、扭转、弯曲三种载荷，只有轴向拉伸时单轴应变片的读数才完整可信。
 
 ![同一根圆棒三种载荷下单轴应变片的适用性](/images/rosette-strain-gauges/fig1-loads.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 二、两种描述平面应变的语言：应变张量与主应变
 
@@ -47,10 +47,10 @@ $$\theta_p = \frac{1}{2} \arctan\!\left(\frac{\gamma_{xy}}{\varepsilon_x - \vare
 这套换算用**莫尔圆**（Mohr's Circle）可视化最直观：横轴正应变、纵轴切应变，把 $(\varepsilon_x, \gamma_{xy})$ 与 $(\varepsilon_y, -\gamma_{xy})$ 两点连线为直径画圆——圆心是平均应变，与横轴的两个交点就是主应变，半径就是最大切应变的一半。相关技术手册图 3、图 4 分别给出张量/主应变两种视角与莫尔圆的构造。
 
 ![应变张量与主应变两种视角](/images/rosette-strain-gauges/fig3-tensor-principal.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![莫尔圆：由应变分量图解主应变与最大切应变](/images/rosette-strain-gauges/fig4-mohr.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 为什么必须揪出主应变？公开技术资料说得直接：**零件的疲劳寿命由最大应变决定**。拿一个较小的分量应变去算寿命，寿命会被高估、零件会比预测坏得更早。这正是开篇"被仿真部门打回"的原因——单片读数常常既不是主应变、方向也没对齐主方向。
 
@@ -61,19 +61,19 @@ $$\theta_p = \frac{1}{2} \arctan\!\left(\frac{\gamma_{xy}}{\varepsilon_x - \vare
 应变花把三枚单轴片按固定角度集成在同一基底上，贴一次片、测三个方向。金属条上贴装平面三角花的实况见图 5。
 
 ![应变花：三枚共点应变片集成于同一基底](/images/rosette-strain-gauges/fig5-rosette-bar.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 三枚片各出一路应变时间信号（图 6），联立即可反解平面应变场。
 
 ![应变花三路应变信号](/images/rosette-strain-gauges/fig6-three-signals.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 投入三路测量，回报是多少？相关技术手册的账本：三路实测应变 + 材料弹性模量 $E$ 与泊松比 $\nu$，可算出**九个输出量**——最大/最小主应力 SS1、SS2，最大/最小主应变 SN1、SN2，主方向角 AG，切应力 SH，工程切应变 SNSH，von Mises 等效应力 ES，双轴比 BR。三换九，投入产出比一比三。
 
 <strong>矩形花（Rectangular，0°-45°-90°）</strong>：两枚片落在 x、y 轴上，第三枚在 45°，见图 7。角度布置让数学最简。
 
 ![矩形应变花示意图](/images/rosette-strain-gauges/fig7-rectangular.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 矩形花的张量分量反解只需一行。这个公式回答的问题是：三方向读数 $\varepsilon_0$、$\varepsilon_{45}$、$\varepsilon_{90}$ 如何直接给出张量分量？其中 $\varepsilon_{45}$ 对应物理里 45° 方向的线应变，它恰好把 $\gamma_{xy}/2$ "夹带"在正应变投影里，所以系数是 2：
 
@@ -82,7 +82,7 @@ $$\gamma_{xy} = 2\varepsilon_{45} - \varepsilon_0 - \varepsilon_{90}, \qquad \va
 <strong>三角花（Delta，0°-60°-120°）</strong>：三枚片相隔 60°、中片对准 y 轴，角度覆盖更宽，见图 8。其张量分量反解同样规则，只是三方向投影的系数阵不同。
 
 ![三角应变花示意图](/images/rosette-strain-gauges/fig8-delta.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 主应变算出后，应力由平面应力胡克定律给出（$E$ 为弹性模量、$\nu$ 为泊松比，钢的典型值 $E = 210000$ MPa）。这个公式回答的问题是：已知主应变如何换算主应力？其中 $\nu\,\varepsilon_{2,1}$ 对应物理里泊松效应——一个方向的伸长会通过横向收缩"耦合"出另一方向的应力：
 
@@ -101,7 +101,7 @@ $$BR = \frac{\sigma_2}{\sigma_1} \quad (|\sigma_1| > |\sigma_2|)$$
 <strong>临界平面分析（Critical Plane Analysis）</strong>回答另一类问题：主应变给出的是"某时刻最大的应变"，但疲劳损伤关心的是**哪个方向上累积的损伤最大**。做法是把应变时间历史在 0° 到 170°、每 10° 一个平面上全部算出来（图 9），对每个平面的历程做雨流计数、算损伤，损伤最大的角度就是临界平面。主应变与临界平面各有分工：前者找"最大绝对应变"，后者找"最具损伤潜力的方向"——对多轴非比例加载，两者可能不在同一方向。
 
 ![临界平面分析：从三路应变算任意角度的应变历程](/images/rosette-strain-gauges/fig9-critical-plane.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、numpy 复算：三路读数到九个输出
 
@@ -148,16 +148,16 @@ print(f"回代45度: {eps_theta(ex,ey,gxy,45):.1f} ue (应等于 {e45})")
 <strong>实时：Virtual Channels。</strong> 在 Testlab Signature 采集中，Channel Setup 右上角下拉切到 Virtual Channels（图 10），底部出现公式区；点 f(x) 按钮选 Strain gauges 函数组，按花的类型选 delta 或 rectangular（图 11），在 Edit formula arguments 里填三路通道、弹性模量与泊松比（钢的弹性模量 210000 MPa，图 12），确认后时间文件里生成九路 rosette 计算通道（图 13）。
 
 ![Channel Setup 切到 Virtual Channels](/images/rosette-strain-gauges/fig10-virtual-channels.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![f(x) 函数选择：Strain gauges 组](/images/rosette-strain-gauges/fig11-edit-formula.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Edit formula arguments：三通道+材料参数](/images/rosette-strain-gauges/fig12-timefile.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![时间文件中的九路 rosette 输出通道](/images/rosette-strain-gauges/fig13-neo-results.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>离线：Time Signal Calculator。</strong> 采集后的数据用 TSC 同样的 ROSETTE 函数补算。最大切应变默认不在九个输出里，需手动补一行：最大切应变（张量口径）= (SN1 - SN2)/2，即主应变差除二。
 

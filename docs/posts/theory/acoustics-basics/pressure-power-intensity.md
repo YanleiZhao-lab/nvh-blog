@@ -19,7 +19,7 @@ author: "@NVH_Z"
 
 ![暖气类比：温度对应声压、暖气功率对应声功率、热流对应声强](/images/pressure-power-intensity/fig2-heater-analogy.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>声压 $p$</strong>：某空间点的压力波动，标量，单位 Pa，随位置和距离变化
@@ -39,7 +39,7 @@ $$L_I = 10\lg\frac{I}{I_0}, \qquad I_0 = 1\times10^{-12}\ \mathrm{W/m^2}$$
 
 ![三个量各自有独立的参考值，都可以表达为分贝](/images/pressure-power-intensity/fig1-three-db.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 二、工程属性对比
 
@@ -92,7 +92,7 @@ $$W = \oint_S I_n \, \mathrm{d}S$$
 
 ![已知声功率的打印机在 2 米半球面上测量](/images/pressure-power-intensity/fig4-hemisphere.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 自由场半球辐射条件下，距离从 $r_1$ 变到 $r_2$，声强级的变化量为
 
@@ -126,7 +126,7 @@ for r in [1.0, 2.0, 4.0]:     # 半球测量半径
 
 ![电机周围的声强图（左，含矢量箭头）与声压图（右，仅幅值）](/images/pressure-power-intensity/fig3-intensity-vs-pressure.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 声压图只反映"哪里幅值高"，声强图的矢量箭头还反映"声音往哪流、从哪来"。排查电机啸叫时，方向信息可以直接区分噪声来自轴承辐射还是壳体结构辐射。
 

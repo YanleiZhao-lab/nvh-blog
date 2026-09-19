@@ -87,7 +87,7 @@ $$
 
 ![FRF 综合的相关与误差计算式：相关是复共轭乘积的规一化，LS error 是对综合值规一化的偏差](/images/frf-accumulation-synthesis/correlation-error-eqs.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 $$
 \mathrm{LS\ error} = \sqrt{ \frac{\sum_i \left| H_{m}(i) - H_{s}(i) \right|^{2}}{\sum_i \left| H_{s}(i) \right|^{2}} }

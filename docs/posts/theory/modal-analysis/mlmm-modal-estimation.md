@@ -204,27 +204,27 @@ MLMM 随 LMS Test.Lab 17 发布，Classic 界面需在 Tools -> Add-ins 勾选 M
 
 ![MLMM 改善效果](/images/mlmm-modal-estimation/MLMM_Improvement.png)
 
-*重阻尼结构上 MLMM 自动迭代的效果：该 FRF 合成误差从 74% 降到 10%（图源：网络官方公开资料）*
+*重阻尼结构上 MLMM 自动迭代的效果：该 FRF 合成误差从 74% 降到 10%（图源：网络 侵删）*
 
 ![MLMM 插件勾选](/images/mlmm-modal-estimation/mlmm_addin.png)
 
-*Tools -> Add-ins -> MLMM，Classic 界面入口（图源：网络官方公开资料）*
+*Tools -> Add-ins -> MLMM，Classic 界面入口（图源：网络 侵删）*
 
 ![MLMM 工作表](/images/mlmm-modal-estimation/mlmm_worksheet.png)
 
-*Polymax 工作表顶部新增的 MLMM 页签（图源：网络官方公开资料）*
+*Polymax 工作表顶部新增的 MLMM 页签（图源：网络 侵删）*
 
 MLMM 工作表中设置 Maximum number of iterations（频率/阻尼/参与因子被调整的次数）后点 Calculate，界面中部实时显示合成 FRF 与实测 FRF 的误差，逐次迭代应越来越小、后期变化越来越小。
 
 ![迭代误差下降](/images/mlmm-modal-estimation/iteration_smaller_differences.png)
 
-*每次迭代，合成 FRF 与实测 FRF 的误差逐次变小（图源：网络官方公开资料）*
+*每次迭代，合成 FRF 与实测 FRF 的误差逐次变小（图源：网络 侵删）*
 
 迭代完成后到 Modal Synthesis 页检查合成质量，界面给出两个指标：**correlation**（合成 FRF 形状与实测形状的贴合程度，理想值 100%）和 **error**（幅值差，理想值 0%）。Advanced 按钮下有三类约束可设——这组设置对结果质量的影响比迭代次数本身更大：
 
 ![高级约束选项](/images/mlmm-modal-estimation/advanced_options.png)
 
-*Advanced 选项：可对频率和阻尼设约束（图源：网络官方公开资料）*
+*Advanced 选项：可对频率和阻尼设约束（图源：网络 侵删）*
 
 - **Keep mode frequency constant**：锁定频率不动，只迭代阻尼和参与因子。前一轮分析已确认频率（例如已与 CAE 模型对齐）时使用，防止迭代将频率拉偏
 - **最大阻尼上限**（默认 70%）：MLMM 判断某阶模态对描述 FRF 没有贡献时，会将其阻尼推至该上限值，等效于从模型中剔除。结果中出现 70% 阻尼的模态，表示算法判定该阶模态是多余的
@@ -234,7 +234,7 @@ Neo 中流程类似：Modal 任务下 MLMM 页签，Run 后代价函数实时更
 
 ![模态合成检查](/images/mlmm-modal-estimation/synthesis.png)
 
-*迭代完成后的 Modal Synthesis 检查：上方 correlation 与 error 百分比（图源：网络官方公开资料）*
+*迭代完成后的 Modal Synthesis 检查：上方 correlation 与 error 百分比（图源：网络 侵删）*
 
 ## 七、小结
 

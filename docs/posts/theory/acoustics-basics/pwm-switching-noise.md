@@ -25,7 +25,7 @@ $$f_{\mathrm{order}} = O \cdot f_{\mathrm{rot}} = O \cdot \frac{n_{\mathrm{rpm}}
 
 ![电机开关频率谐波族在 colormap 上随转速散开，始终不穿过零频](/images/pwm-switching-noise/pwm-colormap.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 频率特征三要素
 - **悬空**：曲线族以开关基频（及其倍频）为中心分布，下端不落在零频——这是与机械阶次区分的判别性特征
@@ -116,7 +116,7 @@ print("相邻谱线间距 (Hz):", [int(b-a) for a, b in zip(lines, lines[1:])])
 
 ![按正弦指令改变脉冲宽度，生成驱动电机的正弦电压](/images/pwm-switching-noise/pwm-sine-speed.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning 工程注意
 - **边带不是机械阶次**：4950/5050 Hz 的谱线对不对应任何"每转固定事件数"的机械部件，边带是调制产物，系统内不存在相应物理特征数的零件
@@ -165,7 +165,7 @@ print(f"5kHz 频带之外的谱能量: {b0:.0f} -> {b1:.0f}")
 
 ![离散开关方案（左）与随机化开关方案（右）对比：开关频率峰值下降，电机本体频率特征不变](/images/pwm-switching-noise/pwm-randomized.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 四、测量环节的三项注意事项
 

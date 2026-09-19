@@ -28,7 +28,7 @@ FFT 把时域信号分解成一组唯一的正弦波，每根正弦波除幅值�
 对纯幅值分析（例如查看某阶次的转速跟踪水平、比较隔振前后的振动量级），相位是冗余信息，丢弃无损。但一旦涉及**多通道联合分析**——运行振型分析（ODS, Operational Deflection Shape）、传递路径分析（TPA, Transfer Path Analysis）、模态分析——相位就是核心数据：不知道两个测点振动的相对相位，就无法绘制结构的振型，也找不到振动抵消或叠加的来源。
 
 ![Spectrum 保留相位，Autopower 相位恒为零](/images/spectrum-vs-autopower/fig2-bode.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 三、数学上差一步：复共轭乘法
 
@@ -90,12 +90,12 @@ $$\bar{G}_{xx}(f_k) = \frac{1}{M}\sum_{m=1}^{M} \left|S_x^{(m)}(f_k)\right|^2 = 
 手册中的对比图直观展示了这一点：两条反相正弦波平方后完全重合，平均之后幅值分毫未变。
 
 ![反相正弦波平方后全为正，无法互相抵消](/images/spectrum-vs-autopower/fig8-square.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 宽带随机数据的实测效果：10/25/100 次平均，Autopower 谱形越来越光滑、总幅值稳定；Spectrum 幅值则持续降低。
 
 ![宽带随机信号平均 10/25/100 次：Autopower 越平均越稳，Spectrum 越平均越小](/images/spectrum-vs-autopower/fig9-averaging.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ```python
 import numpy as np
@@ -137,7 +137,7 @@ $$\hat{S}_x^{(m)}(f_k) = S_x^{(m)}(f_k)\cdot e^{-\,i\,\phi_{\mathrm{ref}}^{(m)}(
 旋转后参考通道自身相位为零，各通道之间的相对相位保持不变；基准统一后，各帧数据变得一致，平均即可正确进行。注意两点：该操作对每根谱线独立执行、每次采集后单独执行；被减去的相位可以是任意角度（33 度、48 度、56 度等），并不限于 0、90、180 度。
 
 ![相位参考把各帧不一致的数据变为一致，从而可以正确平均](/images/spectrum-vs-autopower/fig12-phase-ref.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: tip 参考通道选择
 - 必须选**结构上振动活跃**的通道，如发动机缸体、变速箱壳体测点
@@ -148,7 +148,7 @@ $$\hat{S}_x^{(m)}(f_k) = S_x^{(m)}(f_k)\cdot e^{-\,i\,\phi_{\mathrm{ref}}^{(m)}(
 Testlab 中的设置：Measurement Function 选 Spectrum，勾选 Phase Referenced Spectrum，在 References 下点击 Define 按钮指定单一参考通道。
 
 ![Simcenter Testlab 中 Phase Referenced Spectrum 的设置界面](/images/spectrum-vs-autopower/fig13-prs-settings.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 六、怎么选：按需求对号入座
 

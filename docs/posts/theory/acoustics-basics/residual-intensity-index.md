@@ -76,7 +76,7 @@ $$
 
 ![图5-1 动态性能指数：残余声强级规定的测量门坎，扣除偏差因子 χ 后即探头的工作范围](/images/residual-intensity-index/fig5-1-dynamic-capability.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>从 δpIo 到可用下限还要再扣一道安全余量。</strong> 直接拿残余声强级当测量下限，测量值将贴着底噪走，精度没有保证。ISO 9614 引入偏差因子 χ（bias factor）：精密级与工程级取 10 dB，观察级取 7 dB。扣除后的动态性能指数（手册式 5-7）：
 
@@ -167,7 +167,7 @@ print(f"δpIo 仿真值 = {10*np.log10(I_ref/abs(I_RI)):.2f} dB，"
 
 ![图5-2 声源、声测量网格与结点：判据逐频带核验的对象是测量面上的数据](/images/residual-intensity-index/fig5-2-measurement-grid.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、工程上怎样管好这块"底噪"
 

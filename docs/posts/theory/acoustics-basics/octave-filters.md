@@ -17,13 +17,13 @@ author: "@NVH_Z"
 
 ![1/1倍频程带的下限、中心与上限频率](/images/octave-filters/fig3-1-1-octave-bands.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 1/3 带切得更细，随之带来一个需要留意的后果：**带宽不再等宽，而是逐带变宽**。100 Hz 带宽约 23 Hz，1000 Hz 带宽约 232 Hz——同样是"一个带"，高频带覆盖的频率范围是低频带的十倍。
 
 ![1/3倍频程带的上下限与中心频率](/images/octave-filters/fig4-1-3-octave-bands.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>倍频程（Octave）</strong>：中心频率按 2 的整数或分数次幂递进的频带划分
@@ -75,7 +75,7 @@ Simcenter Testlab 的倍频程由**一组并行时域带通滤波器**实现，�
 
 ![时域数据流过带通滤波器组，每路输出按带计算总级](/images/octave-filters/fig7-filter-bank.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 这条路叫滤波法（filter-based），与 FFT 法有本质差别：
 
@@ -100,11 +100,11 @@ $$\Delta L = 10\,\lg\frac{BW_{i+1}}{BW_i} = 10\,\lg 2 \approx 3.0\ \mathrm{dB}$$
 
 ![倍频程格式 x 轴下白噪声的窄带谱与倍频程谱](/images/octave-filters/fig5-octave-format.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![线性频率轴下同一组数据：高频倍频程带覆盖的频率范围越来越大](/images/octave-filters/fig6-linear-format.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: tip 怎么选
 - 报告给人看、对标法规或声级计读数：滤波法 1/3 倍频程
@@ -171,11 +171,11 @@ $$a = \frac{a_{f_1}}{2} + \sum_{i} a_i + \frac{a_{f_2}}{2}$$
 
 ![单个倍频程带随时间变化的 octave section](/images/octave-filters/fig8-octave-section.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![滤波法倍频程谱结果示例](/images/octave-filters/fig12-octave-map.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 七、Python 演示：时域滤波法 vs FFT 法同台对比
 

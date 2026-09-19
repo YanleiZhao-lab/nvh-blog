@@ -25,7 +25,7 @@ author: "@NVH_Z"
 
 ![从模拟表针到数字读出的声级计](/images/sound-level-family/fig1_slm_history.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 图 1 中老式声级计靠指针摆幅指示声级，读数快慢由表针的机械惯性决定；现代数字声级计用算法复现同样的响应特性，模拟时代的旋钮在软件里变成了参数：
 
@@ -47,7 +47,7 @@ LAF 与 LAS 共用一个公式，区别只在时间常数。对瞬时 A 计权�
 
 ![LAF 与 LAS 的计算公式](/images/sound-level-family/fig3_eq_laf_las.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 把公式里的指数权重展开看物理意义：它给过去的声音打折扣。离当前时刻 t 越久的声样本，权重按指数衰减——发生在当前时刻的声音权重 100%，一个时间常数前的权重降到约 37%，两个时间常数前约 14%，三个时间常数前只剩 5%。所以指数平均是一种有记忆的均方估计器：Fast 挡记忆窗口 125 ms，读数跳得快；Slow 挡记忆窗口 1 s，读数稳。
 **导读**：这个公式回答的问题是"带记忆的声级怎么算"——当前时刻 t 的读数由多长的历史决定？其中指数因子 $e^{-(t-\xi)/\tau}$ 对应物理里的"遗忘速度"：发生得越早的声音权重越低，tau 越大记忆越长（Fast 的 0.125 s 只记得住刚刚半秒内的事，Slow 的 1 s 能记 5 秒的旧账）。
@@ -66,7 +66,7 @@ $$
 
 ![LAF/LAS/Limpulse 对同一信号的响应](/images/sound-level-family/fig2_time_weighting_response.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 三挡的响应参数来自声级计标准（IEC 651 / ANSI S1.4 一脉），数值为：
 
@@ -82,7 +82,7 @@ Limpulse 的不对称设计有历史原因：它本质是峰值检波器（Peak 
 
 ![Testlab 输出的 LAF/LAS/Limpulse 曲线](/images/sound-level-family/fig4_laf_las_limpulse_output.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 工程判据
 
@@ -106,7 +106,7 @@ Simcenter 知识库原文公式如图 5。
 
 ![LAeq 的计算公式](/images/sound-level-family/fig5_eq_laeq.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 物理意义：LAeq 是与实际时变声在相同时间 T 内携带相同声能量的稳态声级。一个在 70 与 90 dB(A) 之间剧烈波动的车间，其 LAeq 由能量主导——90 dB 段占的时间再短也主导结果，因为能量按 10 的 L/10 次方增长，90 dB 的能量是 70 dB 的 100 倍。
 
@@ -120,7 +120,7 @@ Simcenter Testlab 对 LAeq 提供两种输出（图 6）：<strong>LAeqT（Cumul
 
 ![Testlab 的 LAeqT 累积与 LAeqt 瞬时输出](/images/sound-level-family/fig6_laeq_cumulative_instant.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两者的分工：LAeqT 是从开始测到现在总账折算的等效级，时间越长越稳定，适合报告单一数值；LAeqt 反映眼下这一小段像什么，适合定位时间轴上的事件（如车辆驶过时的峰值区段）。做整车通过噪声时，窗内声级随车辆接近与远离起伏，看 LAeqt 找事件，取 LAeqT 出结果。
 
@@ -140,7 +140,7 @@ $$
 
 ![LAE 的计算公式](/images/sound-level-family/fig7_eq_lae.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **导读**：这个换算式回答的问题是"总账和归一账差多少"——同一事件，LAeq 除以真实时长、LAE 除以 1 秒，差别就是时长比的对数。其中 $10\lg(T/T_0)$ 对应物理里的"稀释修正"：账期 T 拉长 10 倍，平均级被稀释 10 dB，归一级不变。
 
@@ -156,7 +156,7 @@ $$
 
 ![Testlab 的 LAET 累积与 LAEt 瞬时输出](/images/sound-level-family/fig8_lae_sel_output.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 工程判据
 
@@ -228,7 +228,7 @@ print("LAE(1s归一)   = %.1f dB" % (spl(p) + 10*np.log10(10.0)))
 
 ![Testlab Neo 采集界面实时声级监看](/images/sound-level-family/fig9_neo_online.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### Testlab Neo Process Designer：后处理复算
 
@@ -236,7 +236,7 @@ print("LAE(1s归一)   = %.1f dB" % (spl(p) + 10*np.log10(10.0)))
 
 ![Testlab Neo SPL 方法的声级类型选项](/images/sound-level-family/fig10_neo_spl_method.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning 增量与末点不到头
 暴露类指标（LAE/SEL）的输出增量影响累积总量与终点时刻：9.862 s 录音用 0.1 s 增量，最后一个输出点只到 9.8 s；用 0.005 s 增量才能到 9.860 s。峰值落在两个输出点之间时，勾选 Maximum hold 可在下一采样点补报。
@@ -250,15 +250,15 @@ Classic 的跟踪增量由转速步长等跟踪参数决定，输出点之间可
 
 ![Testlab Classic 在线 Level Calculation 标签页](/images/sound-level-family/fig11_classic_level_calc.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Testlab Classic 跟踪增量设置](/images/sound-level-family/fig12_classic_tracking.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Testlab Classic Throughput Processing 声级计算设置](/images/sound-level-family/fig13_classic_throughput.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 一句话记住
 

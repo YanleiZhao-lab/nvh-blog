@@ -19,7 +19,7 @@ author: "@NVH_Z"
 
 ![扫频与步进正弦对比：扫频省时间，步进在每个频率上能量更集中](/images/mimo-swept-stepped-sine/fig1.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两类正弦的具体差别：
 
@@ -85,7 +85,7 @@ Simcenter Testlab 的 MIMO Swept and Stepped Sine 是 Structure Acquisition 目�
 
 ![双激振器扫频/步进正弦试验布置示例](/images/mimo-swept-stepped-sine/fig2.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 启动入口在 Testlab Structure Acquisition 文件夹的"MIMO Swept and Stepped Sine Testing"图标。通道设置（Channel Setup）工作表里，除了常规的传感器标定与测点信息，要做闭环正弦测试至少定义一个<strong>控制通道（Control）</strong>与一个<strong>参考通道（Reference）</strong>。控制通道选力或加速度，两种组合测出的传递特性含义不同：
 
@@ -98,7 +98,7 @@ MIMO Sine Setup 工作表右上角的控制面板集中了主要试验参数（F
 
 ![MIMO Sine Setup 工作表的控制面板：模式、控制策略、扫速、频率范围、扫数](/images/mimo-swept-stepped-sine/fig4.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 - **MIMO sine mode**：Stepped 或 Swept，对应步进/扫频；
 - **Control strategy**：No Control（开环，输出不随响应调整）、Amplitude/Phase（幅值相位双控）、Amplitude（仅幅值控制）。闭环控制根据控制通道的实测与目标谱的偏差实时修正输出；
@@ -111,13 +111,13 @@ MIMO Sine Setup 工作表右上角的控制面板集中了主要试验参数（F
 
 ![Tabulated 扫速编辑器：按频段分别设置周期数与扫速](/images/mimo-swept-stepped-sine/fig5.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 步进正弦的 Frequency Ranges 菜单（Figure 5）定义各频段的步距——共振区 0.1 Hz、其它区域 1 Hz 这样的非均匀布置是标准做法。值得注意的是，Polymax 模态拟合器支持非等间隔频率分辨率的 FRF，步进正弦的变步距数据可以直接进拟合流程。
 
 ![步进正弦 Frequency Ranges 菜单：分频段设置步距，共振区加密](/images/mimo-swept-stepped-sine/fig6.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 关键参数二：扫数与相干
 
@@ -129,7 +129,7 @@ Source Parameters 面板打开各输出通道后，在 MIMO Sine Setup 底部的
 
 ![Edit Reference Profile：逐激振器输入频率-幅值目标谱](/images/mimo-swept-stepped-sine/fig7.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 Safety 区的 Advanced 设置里，OverloadAction 建议改为 Increase Range：扫到共振峰时响应可能突增，软件自动升量程避免试验中断，比默认的停机更稳妥。
 
@@ -141,7 +141,7 @@ System Identification（2206 版之前叫 SelfCheck）是正式试验前的强�
 
 ![System Identification 工作表：低量级随机信号辨识系统传递特性](/images/mimo-swept-stepped-sine/fig8.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 对正弦 MIMO 有个实用技巧：如果该试件已经做过一次正弦采集，System Verification 工作表左上角可选 Load Last MIMO Acquisition，直接用上一次试验的实测数据代替低量级随机辨识。前次实测的响应特性比低量级宽带辨识更接近真实，目标谱的跟踪也更准。
 
@@ -149,7 +149,7 @@ System Identification（2206 版之前叫 SelfCheck）是正式试验前的强�
 
 ![试验进行中的操作按钮：Hold/Release 暂停，扫频中可实时调速](/images/mimo-swept-stepped-sine/fig9.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、数值演示：扫速吃掉了多少峰值
 

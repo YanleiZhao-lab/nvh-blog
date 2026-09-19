@@ -63,13 +63,13 @@ $$S(k_x, k_y) = \iint p(x, y)\, e^{-j(k_x x + k_y y)}\, dx\, dy$$
 
 ![波数向量在测量平面上的投影](/images/acoustic-holography/k-vector.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 一个频率确定的声波可以朝多个方向传播，所以波数向量 $\vec{k}$ 有多个分量。声全息要做的，就是从测量平面上的二维分量 $k_x, k_y$ 出发，恢复完整的传播方向信息。
 
 ![波阵面被测量平面剖切](/images/acoustic-holography/wavefront-slice.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 三、扩散波与损耗波：近场里被指数衰减的细节
 
@@ -89,7 +89,7 @@ $$k_0^2 = k_x^2 + k_y^2 + k_z^2 \quad\Longrightarrow\quad k_z = \sqrt{k_0^2 - k_
 
 ![扩散波与损耗波](/images/acoustic-holography/waves-two-types.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>情形一：$k_x^2 + k_y^2 < k_0^2$</strong>，$k_z$ 是实数，波沿法向正常传播——这就是<strong>扩散波（propagating wave）</strong>，把能量从近场输运到远场的部分。
 
@@ -111,7 +111,7 @@ $$e^{-j k_z z} = e^{-j(-j|k_z|)\,z} = e^{-|k_z|\,z}$$
 
 ![波数域中以 ω/c 为半径的辐射圆](/images/acoustic-holography/radiation-circle.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 在波数域里画一个以 $\omega/c$ 为半径的圆——**辐射圆**。圆内是扩散波，圆外是损耗波。这张图概括了声全息的分辨率来源：圆外的损耗波成分在测量面上仍携带源表面的细微结构，前提是测量面与声源的距离足够小。
 
@@ -189,7 +189,7 @@ $S/N$ 参数的作用是为反演放大倍率设置上限：设定越高，越�
 
 ![AdHoc 窗：一维形状与二维推广](/images/acoustic-holography/adhoc-window.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、从声压到质点速度与声强：p 与 v 的乘积
 
@@ -207,7 +207,7 @@ $$I = \frac{1}{2}\, \mathrm{Re}\{p \cdot v^*\}$$
 
 ![由声压与质点速度得到声强](/images/acoustic-holography/intensity-pv.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 于是同一组测量数据经过不同平面、不同声学量的反演，直接支撑噪声源定位、贡献量排序和声功率评估。对整车或动力总成这类多源耦合的对象，把反演平面取在壳体表面附近查看声强分布，信息量远高于远场单点声压扫描。
 

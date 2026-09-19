@@ -23,7 +23,7 @@ FDS 的做法是把这两个非线性都装进计算流程：不是对原始加�
 
 ![FDS 计算流程：从加速度时程到疲劳损伤谱的完整链路](/images/fatigue-damage-spectrum/fig1.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>FDS（Fatigue Damage Spectrum，疲劳损伤谱）</strong>：把振动时程换算成"逐频率累积损伤"的谱，用于比较不同载荷的破坏势与推导加速试验谱
@@ -41,7 +41,7 @@ FDS 的完整计算链只有四步：振子响应 → 循环计数 → 位移换
 
 ![实测加速度时程施加到一排虚拟 SDOF 振子上，得到各自的相对位移响应](/images/fatigue-damage-spectrum/fig3.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 振子的输出取**相对位移** $z$（质量相对基座的位移），不是绝对加速度。这个选择有讲究：位移正比于应变与应力，正是疲劳关心的量；加速度则是冲击响应谱（SRS）取的量。同一排振子，取相对位移去算损伤就是 FDS，取绝对加速度的最大值就是 SRS/MRS——两条谱线共用一套响应计算，回答两个不同的问题（"攒了多少损伤"与"峰值多大"）。
 
@@ -53,11 +53,11 @@ FDS 的完整计算链只有四步：振子响应 → 循环计数 → 位移换
 
 ![Range-Pair 直接计数示例：位移时程拆成幅值直方图](/images/fatigue-damage-spectrum/fig4.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![雨流计数：把时程中的闭环循环逐个识别出来](/images/fatigue-damage-spectrum/fig5.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 2.3 从位移到应力再到损伤
 
@@ -69,11 +69,11 @@ $$D = \sum_{i} \frac{n_i}{N_i} = \frac{K^b}{A} \sum_{i} n_i\, z_i^{\,b}$$
 
 ![单个 SDOF 振子的损伤计算公式](/images/fatigue-damage-spectrum/fig7.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![应力循环经 Woehler 曲线用 Miner 法则累加成总损伤](/images/fatigue-damage-spectrum/fig8.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 2.4 把每个频率的账并排画出来
 
@@ -81,7 +81,7 @@ $$D = \sum_{i} \frac{n_i}{N_i} = \frac{K^b}{A} \sum_{i} n_i\, z_i^{\,b}$$
 
 ![三个输入时程（上）与各自算出的 FDS（下）：碎石路损伤全面高于加速制动](/images/fatigue-damage-spectrum/fig2.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 官方这张对比图最能说明 FDS 的用途：三段实测载荷（Belgian block 石块路、Saw tooth 锯齿路、Accelerate-brake 加速制动）各算一条 FDS，一眼看出<strong>加速制动（红）在所有频率上的损伤都低于石块路（绿）与锯齿路（蓝）</strong>，且三条谱都是低频段损伤高于高频段——如果要在台架上复现这种损伤，重点得放在低频。这正是"同一张账本上比较不同食谱的含糖量"：不比菜名、不比总热量（RMS），只比对血糖的实际贡献。
 
@@ -97,7 +97,7 @@ Q 因子（品质因数）设定虚拟振子的阻尼：$Q=10$ 对应 5% 阻尼�
 
 ![Q=10 与 Q=2 的 SDOF 响应对比：高 Q 峰更尖更高](/images/fatigue-damage-spectrum/fig13.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 打个比方：Q 是这排"替身振子"的铃铛属性——钢铃（高 Q）敲一下响很久，橡胶铃（低 Q）声音马上闷掉。同一记敲击，钢铃攒的"振次账"自然多。真实结构的阻尼 Unknown 时，Q=10（5% 阻尼）是常用默认。
 
@@ -107,7 +107,7 @@ Q 因子（品质因数）设定虚拟振子的阻尼：$Q=10$ 对应 5% 阻尼�
 
 ![同一信号不同 b 值算出的 FDS：小 b 损伤更高且谱形改变](/images/fatigue-damage-spectrum/fig15.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 工程取值：钢 $b=5$（Testlab 默认）、铝 $b=8$、电子产品常用 5（NATO AECTP-200），常见范围 3~12；多材料组件取**最小的 b** 最保守——小 b 算出的损伤最高，等于按最娇气的材料记账。有的文献把斜率记作 $k$，与本文的 $b$ 是同一个量。
 
@@ -121,7 +121,7 @@ Woehler 截距 $A$ 定曲线高低（单位是应力），应力/位移常数 $K
 
 ![A 与 K 同增时 FDS 不变：两者在分子分母互相抵消](/images/fatigue-damage-spectrum/fig18.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 | 参数 | 物理含义 | 对 FDS 的影响 | 常用值 |
 |---|---|---|---|
@@ -180,13 +180,13 @@ for b in (5.0, 8.0):
 
 ![Mission Synthesis 计算器：Sum FDS 与 Env FDS 按钮](/images/fatigue-damage-spectrum/fig26.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **Simcenter Testlab Neo**（2406 起）：Mission Synthesis 插件的方法库里直接提供 FDS 计算，配合 Combine、to PSD 方法可走完"实测数据 → FDS → 合成 → 反演台架 PSD"的全流程，与任务合成（Mission Synthesis）流程无缝衔接。
 
 ![Testlab Neo 方法库中的 FDS 方法](/images/fatigue-damage-spectrum/fig30.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: tip 使用判断
 - 只比较载荷、不推绝对寿命：A=K=1、Q=10 固定、b 按主导材料选（钢 5/铝 8，多材料取最小）

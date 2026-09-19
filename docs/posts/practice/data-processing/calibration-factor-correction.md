@@ -15,17 +15,17 @@ SCADAS 采集卡记录的永远是**电压**。加速度、声压这些工程量
 
 ![两款常见灵敏度的加速度计：100 mV/g 与 10 mV/g](/images/calibration-factor-correction/fig1-two-accel-models.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Channel Setup 里的 Actual Sensitivity 栏，就是灵敏度录入处](/images/calibration-factor-correction/fig2-channel-setup.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 偏离方向有明确规律：**录入灵敏度高于传感器实际值时，读数偏小**。软件被告知"100 mV 对应 1 g"，而传感器实际 1 g 只输出 10 mV，于是 14 mV 的真实电压被换算为 0.14 g——时历峰值仅为应有值的十分之一（下图中真实值应为 1.4 g）。
 
 ![按错误灵敏度记录的时域历程，峰值只读到 0.14 g](/images/calibration-factor-correction/fig3-wrong-time-history.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>灵敏度（Sensitivity）</strong>：传感器输出电压与工程单位之比，单位为电压/EU（mV/g、mV/Pa），由厂家出厂标定给出
@@ -57,11 +57,11 @@ $$EU_{act} = EU_{rec} \times \frac{S_{rec}}{S_{act}}$$
 
 ![修正比例因子的计算公式](/images/calibration-factor-correction/fig4-scale-formula.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![代入案例数值：100 mV/g 除以 10 mV/g，比例因子 10](/images/calibration-factor-correction/fig5-scale-factor-calc.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 换算为分贝便于快速估算。幅值比例 $k$ 对应的分贝修正量为：
 
@@ -120,7 +120,7 @@ print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixe
 
 ![公式行：原始通道乘以 100/10 的比例因子](/images/calibration-factor-correction/step3-tsc-formula.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 4. **Calculate**：新 trace 生成，橙色显示表示尚未保存；
 5. **删除原通道**：点行号选中整行、Remove Channel(s)。此步不可省略——否则错误数据与修正数据会一同存入新文件，造成后续数据混用；
@@ -130,11 +130,11 @@ print(f"50 Hz 谱线: {A_wrong[i50]:.3f} -> {A_fixed[i50]:.3f} g (比值 {A_fixe
 
 ![Channels Pivot 视图：四个 Run 的同一通道一屏排开](/images/calibration-factor-correction/multi-channels-pivot.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![批量保存对话框：沿用原名加后缀，一次存完](/images/calibration-factor-correction/multi-batch-save.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、修正前先核查：测量时刻实际生效的灵敏度
 

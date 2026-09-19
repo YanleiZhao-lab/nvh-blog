@@ -22,7 +22,7 @@ author: "@NVH_Z"
 
 ![SCADAS RS 广泛拓扑：整个系统经 REC 单元的 1 Gb 以太网或 Wi-Fi 接入网络](/images/rs-system-connection/fig1-wide-topology.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 二、房门钥匙的比方：一扇门配一把钥匙
 
@@ -34,7 +34,7 @@ author: "@NVH_Z"
 
 ![REC 记录仪单元的接口布局：以太网、Wi-Fi 天线、USB、GNSS、CAN、脉冲与电源输出链](/images/rs-system-connection/fig2-rec-connectors.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 三、门一：Wi-Fi 接入点模式——REC 自己发热点
 
@@ -111,7 +111,7 @@ for v in volumes_GB:
 
 ![REC 单元的软件访问方式：嵌入设备的 Web 应用通过任意网络浏览器访问，无需安装](/images/rs-system-connection/fig3-software-access.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 七、安全边界：四扇门共用的门禁规则
 
@@ -144,4 +144,4 @@ REC 单元对外开四扇门：Wi-Fi 接入点自带门牌（SSID 带序列号�
 
 *作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*

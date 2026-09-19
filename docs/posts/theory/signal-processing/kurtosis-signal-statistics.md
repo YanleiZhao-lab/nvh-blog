@@ -23,7 +23,7 @@ NVH 工程中常用总级（Overall Level）描述振动噪声，RMS 本质是�
 :::
 
 ![正负峭度分布与正态分布比较](/images/kurtosis-signal-statistics/fig9-3-kurtosis-distributions.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 二、峭度的定义与典型值
 
@@ -59,7 +59,7 @@ $$\sigma_{\kappa} \approx \sqrt{24 / N}$$
 其中 $N$ 为采样点数。这意味着峭度估计的置信度随数据量增长缓慢：欲将 $\sigma_{\kappa}$ 压到 0.1，需要 $N \approx 2400$ 点；压到 0.05 则需约 9600 点。对非高斯分布，该标准差无法解析确定，实际精度通常更差。手册同时提示：偏斜度与峭度这类高次矩，与基于线性相加的低次矩相比鲁棒性较差，计算结果分散，使用时须谨慎——数据量不足时短帧峭度数值跳动属正常现象，判读应以足够长的记录为基础。
 
 ![数据分布的对称与偏斜](/images/kurtosis-signal-statistics/fig9-2-skewness-distributions.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 三、声品质应用：滑动帧峭度定位瞬态声
 

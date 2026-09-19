@@ -20,7 +20,7 @@ author: "@NVH_Z"
 | **带外过载**（Out-of-band Overload） | 带宽外的高幅值频率成分超出量程 | 带内数据正常，系统仍报警 | 外接低通滤波器，或换低灵敏度传感器 |
 
 ![1V 正弦被 0.5V 量程削顶](/images/overload-clipping-distortion/clip-time-domain.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 采集系统过载最容易识别：DAQ 前端量程低于输入信号范围时，超出部分被削平，前端红灯亮起并置位过载标志。
 
@@ -48,13 +48,13 @@ $$x_{\text{sq}}(t) = \frac{4C}{\pi}\left(\sin\omega t + \frac{1}{3}\sin 3\omega 
 手册的对比实验：同一瞬态信号（范围 1 V）分别用 10 V 和 0.16 V 量程采集。0.16 V 量程下信号时域削顶，频域上过载信号的谱内容从低频到高频整条抬升——不只是基频幅值错误，整个测量带宽内的幅值与噪声水平都发生了变化。手册的示意图显示：即使只有三、四个不同频率的方波叠加，谐波畸变就已显著改变整条频谱。
 
 ![过载与非过载信号的时域与频域对比](/images/overload-clipping-distortion/overload-spectrum-compare.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![不同数量方波叠加产生的谐波畸变谱](/images/overload-clipping-distortion/harmonic-distortion-spectra.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![带外过载：带宽外的频率成分超出量程上限](/images/overload-clipping-distortion/out-of-band-overload.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 削波后基波幅值的解析解
 

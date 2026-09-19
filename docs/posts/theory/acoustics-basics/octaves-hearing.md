@@ -58,7 +58,7 @@ $$
 对比带宽一行：31.5 Hz 频带只有 22 Hz 宽，16 kHz 频带宽 11314 Hz——差了 500 多倍。同样谱密度的信号，低频带窄、高频带宽，高频带内的总能量相应更高。
 
 ![倍频程频带的上下限与中心频率](/images/octaves-hearing/1-1-octave-bands.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>倍频程频带（Octave Band）</strong>：上/下限频率之比为 2 的频带，中心频率为上下限的几何平均（各差根号 2 倍，即约 1.414 倍）
@@ -111,7 +111,7 @@ for k in range(-5, 5):                    # 31.5 Hz 到 16 kHz 十个带
 运行结果要点：相邻频带的能量占比差稳定在 3 dB 出头（-30.4、-26.8、-24.7 直到 -3.3 dB），这就是"白噪声倍频程谱每带约升 3 dB"的由来。反过来看：如果实测的倍频程谱在低频明显高出这条趋势线，说明存在低频噪声源——怠速轰鸣、排气共振都会表现为低频带的显著抬升。
 
 ![白噪声的倍频程谱，柱子逐带升高](/images/octaves-hearing/octave-map.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 三、倍频程不是 FFT 算出来的
 
@@ -126,7 +126,7 @@ for k in range(-5, 5):                    # 31.5 Hz 到 16 kHz 十个带
 在 Testlab 中：Tools 菜单 Add-ins 打开 "ANSI-IEC Octave Filtering"（23 token），然后在 Time Data Processing 里选 averaging（exponential 或 linear）和 sound level type（fast 0.125 s / slow 1.0 s / impulse 0.035 s），在 Section 的 Octave Maps 页勾选频带类型即得倍频程图；Octave Sections 页可跟踪单个频带随时间或转速的行为。
 
 ![时域数据经一组带通滤波器，逐带求总级](/images/octaves-hearing/octave-filters.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 四、A 计权：从传声器记录到人耳感知的修正
 
@@ -181,7 +181,7 @@ print(f"\n总级: {lin:.1f} dB  ->  {dBA:.1f} dB(A)")
 运行结果要点：63 Hz 的 70 dB 经 A 计权修正为 43.8 dB，总级从 71.1 dB 降至 62.7 dB(A)——低频为主的动力总成噪声，A 计权后显著下降，这正是 dBA 被纳入多数噪声法规的原因。但另一方面需要注意的是：一条约 1600 Hz 的口哨音，A 计权后总值反而可能抬高（手册实测 84.2 升到 85.1 dB(A)），因为 1k 到 6 kHz 正处于放大区。
 
 ![A 计权曲线：1 kHz 处 0 dB，低频大幅衰减，1k 到 6k 略放大](/images/octaves-hearing/a-weighting-curve.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning dBA 数值低不等于听感更安静
 - <strong>低频为主的源（排气、进气、怠速轰鸣）</strong>：A 计权后大幅下降，但低频轰鸣引起的"压迫感、烦躁度"并没消失——客户主观抱怨低频轰鸣而 dBA 达标，是声品质工程中最常见的冲突之一。这时要补线性值、1/3 倍频程谱和声品质指标（响度 Sone、粗糙度、尖锐度）

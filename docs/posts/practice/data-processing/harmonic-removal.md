@@ -39,13 +39,13 @@ Harmonic Removal 的思路不是滤掉谐波，而是**先把谐波估计准确�
 
 ![循环平均：滑动窗口内只有与轴同步的 1 阶留在平均里，2.3 阶被平均掉](/images/harmonic-removal/cycle-averaging.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 手册里的经典例子：信号含 1 阶和 2.3 阶两个成分。平均循环里只剩 1 阶（以及 1 阶的整数倍，如果存在），2.3 阶因不同步被平均掉；原信号减去平均循环，剩下的恰好是干净的 2.3 阶。一减一得，两个成分彻底分离。
 
 ![去除谐波前（红）后（绿）的频谱对比](/images/harmonic-removal/spectrum-before-after.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 三、Testlab 操作：六个参数的工程含义
 
@@ -53,7 +53,7 @@ Harmonic Removal 的思路不是滤掉谐波，而是**先把谐波估计准确�
 
 ![HARMONIC_FILTER 在 Time Signal Calculator 的函数列表里](/images/harmonic-removal/tsc-harmonic-filter.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 设置一共六项，每一项都有明确的工程含义：
 
@@ -68,7 +68,7 @@ Harmonic Removal 的思路不是滤掉谐波，而是**先把谐波估计准确�
 
 ![Harmonic Filter 的六个设置项](/images/harmonic-removal/harmonic-filter-settings.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两个参数最容易出问题：
 
@@ -157,7 +157,7 @@ zebra 盘安装偏心时，条纹间距每转一次密一次疏，转速估计�
 
 ![8 Hz 谐波族去除前（上）后（下）的 colormap 对比](/images/harmonic-removal/colormap-8hz-removed.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: tip 使用判断
 - 干扰与某根轴（或某个定频）严格整数倍同步：HARMONIC_FILTER 是首选

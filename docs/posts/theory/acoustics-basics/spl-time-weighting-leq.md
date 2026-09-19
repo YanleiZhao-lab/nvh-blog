@@ -31,11 +31,11 @@ $$L_p = 20\lg\frac{p}{p_0}$$
 
 ![等响曲线族：计权函数的实验底本](/images/spl-time-weighting-leq/fig4-1-equal-loudness.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![标准计权曲线：A、B、C 三种计权随频率的衰减与放大](/images/spl-time-weighting-leq/fig4-2-weighting-curves.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>参数二：时间计权（Time Weighting）。</strong> 对已计权的时域信号做指数平均（Exponential Averaging），得到规定的计权声压级。这一步决定"读数以多快的速度跟随信号变化"，是本文的主题。
 
@@ -189,7 +189,7 @@ $$L_{AE} = L_{Aeq,T} + 10\,\lg T$$
 
 ![声品质测量与分析系统的信号链](/images/spl-time-weighting-leq/fig6-4-sq-system.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning 工程注意
 积分时长不同，Leq 不可直接比较。60 s 与 10 min 的 Leq 属于不同的能量记账口径，跨数据对比前应先统一积分时长与计权方式；将 Leq 与时间计权读数放进同一张表排序，是报告评审中的常见错误。

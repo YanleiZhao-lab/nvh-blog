@@ -55,11 +55,11 @@ $$\frac{\partial \omega_k}{\partial k_{ab}} = \frac{(\psi_{ak} - \psi_{bk})^2}{2
 
 ![质量修改的频率与振型灵敏度公式（手册式 20-19）](/images/modal-design-toolbox/sensitivity-mass.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![刚度修改的频率与振型灵敏度公式（手册式 20-21）](/images/modal-design-toolbox/sensitivity-stiffness.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 灵敏度的三个工程读法
 
@@ -103,17 +103,17 @@ $$\frac{\partial \omega_k}{\partial k_{ab}} = \frac{(\psi_{ak} - \psi_{bk})^2}{2
 
 ![加强肋算例：局部坐标系与方位定义（手册图 20-1）](/images/modal-design-toolbox/rib-local-coords.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 手册的完整算例是把一根加强肋离散成 4 个梁元件、连接在平板 5 个测量结点上：由几何算出截面积、惯性矩等参数，构建每个元件 $12\times12$ 刚度矩阵，集成后静凝聚转角，再以集总修改的形式进入特征值重解。
 
 ![梁元件矩阵：每端 6 个力分量与 6 个自由度（手册图 20-2）](/images/modal-design-toolbox/element-matrix.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![元件矩阵集成为整根梁的修改矩阵（手册图 20-3）](/images/modal-design-toolbox/matrix-assembly.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning 数值与建模的注意事项
 - **不均衡修改会病态**：用大刚度模拟固支、局部强阻尼，会让特征值问题数值病态；自由-自由边界带入近 0 Hz 刚体模态与高频弹性模态混在一起时尤其如此，相关因素是最高与最低固有频率之比

@@ -13,11 +13,11 @@ author: "@NVH_Z"
 
 ![平板的几何与布点：共定义 15 个测点，3 只加速度计分 5 轮贴完](/images/impact-sequence-defined/fig1-geometry-15points.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![期望的敲击序列：每轮锤固定敲 plate:1，三只加速度计整组步进三个点](/images/impact-sequence-defined/fig2-desired-sequence.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 问题出在软件的默认行为上。Testlab 的递增按钮（increment button）默认按"数值 +1"推进：每敲完一轮，每只加速度计的 Point ID 自动加 1。于是第 1 轮测 1/2/3 号点，第 2 轮变 2/3/4 号，第 3 轮 3/4/5 号……5 轮下来只覆盖 7 个点，其中 8 次是重复测量，8 到 15 号点根本没有数据。把账摆开（第四节用 numpy 复算）：
 
@@ -28,7 +28,7 @@ author: "@NVH_Z"
 
 ![默认的数值递增序列：每轮每通道 +1，5 轮后大量测点缺测](/images/impact-sequence-defined/fig3-default-increment.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 注意这不是软件缺陷——"+1"是为"单表逐点顺次推进"这类简单场景设计的默认值；它只是不认识你的布点图。布点一"跳跃"（整组步进、隔点跳测、多锤分工），就得自己写分镜表，这正是 User Defined Impact Sequence 的用途（Simcenter Testlab 16 及以后版本提供，旧称 LMS Test.Lab）。
 
@@ -76,33 +76,33 @@ $$
 
 ![Channel Setup：确认 1 锤 + 3 表共 4 个通道已打开](/images/impact-sequence-defined/fig4-channel-setup.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 2. **开开关**：Measure 工作表点 **All Settings**，在弹出窗口勾选 **User Defined Increment Sequence**，关窗。
 
 ![Measure 工作表的 All Settings 入口](/images/impact-sequence-defined/fig5-all-settings.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![All Settings 窗口：勾选 User Defined Impact Sequence](/images/impact-sequence-defined/fig6-all-settings-window.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 3. **填分镜表**：回到 Measure 界面点 **Edit Points…**，逐轮填入：每轮 hammer 固定 plate:1，三只表的 Point ID 与 Direction 按 1-2-3、4-5-6……填满 5 轮。
 
 ![Measure 界面的 Edit Points 入口](/images/impact-sequence-defined/fig7-edit-points.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Edit Points 窗口：逐轮填入锤与各加速度计的测点和方向，自定义序列就在这里写](/images/impact-sequence-defined/fig8-edit-points-window.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 4. **照表翻场**：此后每敲完一轮，按递增按钮，软件按表推进到下一组测点——不再 +1，而是你排的下一场戏。
 
 ![按递增按钮后，测点按自定义序列整组推进](/images/impact-sequence-defined/fig9-increment-button.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 四、numpy 对账：覆盖与工时
 

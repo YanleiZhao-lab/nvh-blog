@@ -29,7 +29,7 @@ author: "@NVH_Z"
 
 ![六种 FRF 形式总览](/images/dynamic-stiffness-compliance-mobility/frf-six-forms.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 
 打个比方，六种 FRF 形式就像**同一笔钱的几种报价**。同样是“100 元”，用纸币说是一张百元钢钕，用角币说是 1000 角，用分币说是 10000 分——数值变了、单位变了，但购买力一分没差。位移、速度、加速度之间隔的是 $\mathrm{j}\omega$ 这道“汇率”：速度是位移乘 $\mathrm{j}\omega$，加速度再乘一次，就像角币乘 10 变成分币报价，换算规则全局统一、童叟无欺。而“正演换反演”（导纳变动刚度）则是把“每牛的力产生多少响应”改口成“产生单位响应需要多少力”——好比把“每欧元兑 7.8 元人民币”倒过来说“每元人民币兑 0.128 欧元”，汇率还是那一件事，只是分子分母掉了个头。记住这张“汇率表”，后面所有推导都是在核对汇率没有算错：积分微分就是乘除 $\mathrm{j}\omega$，取反演就是倒数换算，共振峰在正演曲线上的“贵”，到反演曲线上自然变成“便宜”的谷。
@@ -53,7 +53,7 @@ $$F = (k - \omega^2 m + j\omega c) \cdot X$$
 
 ![FRF 的三个主导区](/images/dynamic-stiffness-compliance-mobility/frf-regions.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>低频段（频率趋于零）</strong>：惯性项 $\omega^2 m$ 和阻尼项 $\omega c$ 都趋于零，方程退化为 $F \approx kX$，柔度趋于 $1/k$。物理上激励太慢，质量来不及储能、阻尼没机会耗能，只有弹簧变形——这就是**刚度线**，在柔度图上平行于频率轴。
 
@@ -69,7 +69,7 @@ $$\left| \frac{X}{F} \right|_{\omega = \omega_n} = \frac{1}{\omega_n c} = \frac{
 
 ![加速度导纳的质量线](/images/dynamic-stiffness-compliance-mobility/accelerance-mass-line.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: tip 读图判断
 - 正演形式（柔度/导纳/加速度导纳）：低频平线 = 刚度线（读 $1/k$），高频趋于 $1/m$（加速度导纳）或下降线（导纳）
@@ -95,7 +95,7 @@ $$\frac{V}{F} = j\omega \cdot \frac{X}{F} = \frac{j\omega}{k - \omega^2 m + j\om
 
 ![SDOF 导纳曲线](/images/dynamic-stiffness-compliance-mobility/mobility-sdof.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>第三步，导纳到加速度导纳。</strong> 再乘一次 $j\omega$：
 
@@ -167,13 +167,13 @@ $$f_{operational} = v_{operational} \cdot Z$$
 
 ![SDOF 动刚度曲线](/images/dynamic-stiffness-compliance-mobility/dynamic-stiffness-sdof.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 悬置与隔振（vibration isolation）是动刚度最重要的应用场景。橡胶悬置供应商的技术规格书几乎全用动刚度表述，整车厂评估悬置安装点（车身侧/副车架侧）也用动刚度。经验法则是：
 
 ![悬置安装点刚度匹配](/images/dynamic-stiffness-compliance-mobility/mount-attachment-rule.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **安装点动刚度至少要达到悬置动刚度的 10 倍**。依据是串联弹簧的变形分配：悬置（刚度 $k_m$）与安装点（刚度 $k_a$）串联，等效刚度为
 
@@ -206,7 +206,7 @@ for r, s, kt in zip(ratio, share, k_mount*k_att/(k_mount+k_att)):
 
 ![安装点刚度目标检查](/images/dynamic-stiffness-compliance-mobility/stiffness-target.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、在 Testlab 里切换形式
 
@@ -214,7 +214,7 @@ Simcenter Testlab 里六种形式之间切换不需要重新计算：右键点�
 
 ![Testlab 中积分微分切换](/images/dynamic-stiffness-compliance-mobility/testlab-integrate.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 另外锤击试验工作簿（Impact Testing）可以在 Measure 页签的 All Settings 下 Data Storage 里勾选 "Dynamic Stiffness"，采集时直接存出动刚度曲线，省去后处理。
 

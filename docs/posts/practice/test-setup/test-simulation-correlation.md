@@ -44,7 +44,7 @@ $$\mathrm{MAC}_{AX} = \frac{\left| \sum_{i=1}^{N} \psi^A_i \left(\psi^X_i\right)
 
 ![短舱 FEM 与试验件](/images/test-simulation-correlation/nacelle-fem-test.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 第 1 步：FEM 自由模态解
 
@@ -62,13 +62,13 @@ Ribbon 的 **Correlation** 标签页里点 **New Test Reference Solution**，Sol
 
 ![试验模型与 FEM 未对齐](/images/test-simulation-correlation/test-model-misaligned.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 对齐操作在 Test Model 节点右键 **Alignment**：在 Alignment Control 对话框里选 3 个试验节点与 FEM 上对应的 3 个节点（勾选 Preview 可实时查看累计效果），必要时用 **Fine Tune Alignment** 做离散平移/旋转微调。
 
 ![Alignment Control 对话框](/images/test-simulation-correlation/alignment-control.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 这步没有公式但极为关键：后续节点映射按"距离最近"原则匹配传感器与 FEM 节点，坐标系没对齐时距离全是错的，容差再大也映射不上几个点。
 
@@ -82,25 +82,25 @@ Correlation 标签页里点 **New Correlation**，Reference Solution 选试验�
 
 ![Correlation Details View](/images/test-simulation-correlation/correlation-details.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 任意一行右键 **Side-by-Side Animation**，两个视窗同步动画直接对比振型形态：
 
 ![Side-by-Side 动画](/images/test-simulation-correlation/side-by-side-animation.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **Correlation Metrics** 节点右键 **Correlate**，对话框里 **Show Results Heat Map** 以热图显示 MAC 矩阵，**Show Results Spreadsheet** 可导出 Excel：
 
 ![MAC 热图](/images/test-simulation-correlation/mac-heatmap.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 热图的读法：横轴试验模态、纵轴仿真模态，对角线亮说明配对成功；某行整行发暗说明该阶仿真模态在试验数据中找不到对应者。最后右键 **Generate 1-COMAC Results**，输出逐传感器图：
 
 ![COMAC 传感器图](/images/test-simulation-correlation/comac-sensors.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 COMAC 显示的是"个别 MAC 分量最差"的传感器位置——MAC 总分合格不代表每个测点都合格，个别传感器数据可疑（粘接松动、方向装反、坐标录错）时，COMAC 会把它们点名。
 
