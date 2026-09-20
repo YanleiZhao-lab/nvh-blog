@@ -170,7 +170,7 @@ title: "📖 全部文章"
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（25 篇）
+### 测试操作（26 篇）
 
 - [应变片激励电压怎么选：灵敏度与自热的平衡](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张公开资料插图
 
@@ -209,6 +209,7 @@ title: "📖 全部文章"
 - [SCADAS RS 故障排除：LED 状态/网络/数据传输诊断树](practice/test-setup/rs-troubleshooting.html) — 快闪红色在 REC 上有两种含义：存储几乎满（清 SSD 即愈）或菊花链超吞吐（查每链 1.7 MSa/s/整机 7.8 MSa/s 的采样率账）——灯语是颜色定性质、频率定状态的编码系统，读不懂它现场就只能反复断电重启；医院分诊台类比贯穿（护士不治病：看脸色=灯色、量脉搏=闪烁频率、送科室=电源/网络/吞吐/存储），UPS 电源灯语义链按优先级排到快闪红=过载/过热必干预、固体青=停充保护降载自愈；网络三层分型——浏览器层先 Ctrl+F5 清缓存（升级后最高频假故障）、发现层查 SSDP/WS-Discovery/LLMNR 被公司网封（最后靠机身 APIPA 地址或 SFTP 进场）、地址层静态 IP 对不上账则长按模式键 15 秒恢复出厂；numpy 把灯语表写成可跑的分诊函数（红快闪与红正常频正确分流存储科/吞吐科），吞吐分诊代码配置阶段就算余量，6 张公开资料插图
 
 - [CAN 总线与 OBD-II 测量：车上数据的第二通道](practice/test-setup/can-bus-obd-measurements.html) — 发动机舱封好没地方装转速传感器，但 ECU 每时每刻在总线上广播转速/车速/挡位——CAN 通道把整车变成传感器的延伸；公寓广播类比贯穿全文（无主机广播、ID 优先级仲裁、门口记录员只听不说）；三层认识：数据层 DBC 换算式 physical=raw×factor+offset 定读数对错（0x018C 大端拼 396、factor 0.5/0.25 读数差一倍），信号层三误差源拆账（量化台阶=factor、报文速率限信息上限、时间戳抖动被线性插值斜率项放大：numpy 实测 20 Hz+1 rpm 量化误差仅 0.47 rpm、叠加 ±5 ms 抖动升至 1.92 rpm），应用层每转帧数=f_msg/(n/60) 随转速骤降（20 Hz 报文 2000 rpm 每转只剩 0.6 帧——工况标记/colormap 转速轴够用、扭振高阶次必须回物理传感器）；OBD-II 诊断协议（标准化低速率）与原生 CAN 并接（需 DBC 全速率）双路取舍与交叉校核，Testlab Channel Setup 总线通道区与 SCADAS CAN 调节单元（每台 4 条总线、CAN 2.0B/FD）锚点，4 张自绘图
+- [智能选锤 Smart Hit Selection：让算法挑出最好的几锤](practice/test-setup/smart-hit-selection.html) — — 25 锤敲完相干还是上不去：双击、过载、敲偏、力度飘忽大忽小，坏锤平均进去就取不出来。Testlab Neo 2506 的 Smart Hit Selection 是锤击试验的连拍：多按几次快门、回家挑不糊的那张——四道关顺序过（过载→双击→峰值力带→一致性/相干选锤）；锤数三件套 Target 10 ≥ Max 6 > Min 3 的统计理由用二项分布 numpy 对账（单锤合格率 0.5 时 N=6 成功率仅 0.656、N=10 才 0.945）；非线性结构才开峰值力限带（4 N 正负 20%，橙色待定红色剔除）；两两相似度比曲线形状、两两相干比线性关系强弱；状态栏 OK 不是终判（后来的好锤可以顶掉先到的）；忘按 Save 只能靠 Archived Settings 补存；15 张公开资料插图
 
 
 ### 耐久试验（3 篇）
