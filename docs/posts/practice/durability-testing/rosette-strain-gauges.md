@@ -177,4 +177,4 @@ print(f"回代45度: {eps_theta(ex,ey,gxy,45):.1f} ue (应等于 {e45})")
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

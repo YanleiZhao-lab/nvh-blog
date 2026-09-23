@@ -193,4 +193,4 @@ TSC 修正只作用于**时域历程**。此前已计算好的频谱、阶次切
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

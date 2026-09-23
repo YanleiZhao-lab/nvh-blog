@@ -169,4 +169,4 @@ print('安装偏心 k=1:', order_spectrum(62.0, 1.0, m=0.6))   # 61/62/63 阶
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

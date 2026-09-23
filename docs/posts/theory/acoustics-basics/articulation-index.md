@@ -186,4 +186,4 @@ print(f"{'轰鸣 SNR':>8} " + " ".join(f"{v:6.1f}" for v in snr_r) + f" {snr_r.m
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

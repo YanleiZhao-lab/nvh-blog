@@ -260,4 +260,4 @@ $$O_{\max} = \frac{\mathrm{PPR}}{2}$$
 
 测试链像一台相机：麦克风格式是焦段、传感器质量是云台负重、采样率是像素、量程是曝光——出问题很少是相机坏了，多是镜头装错了场合；清单核对的永远是“部件与被摄对象匹配吗”。
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

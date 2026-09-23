@@ -233,4 +233,4 @@ dB 的要点归纳为三条：
 dB 是一张"每次翻倍记一格"的对数键盘：能量翻倍 +3 dB、幅值翻倍 +6 dB；10 lg 与 20 lg 的区别只在"平方才是能量"；键盘的第一格由参考值锚定，比较两个 dB 先核对锚点；叠加要回到能量域——格数不能直接相加。
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

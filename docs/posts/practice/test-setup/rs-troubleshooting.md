@@ -141,6 +141,6 @@ LED 是分诊台不是显示器：颜色定性质、频率定状态；快闪红 
 
 ---
 
-*作者：@NVH_Z· [NVH Test](https://www.nvhtest.cn/blog/)· 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z· [NVH Test](https://www.nvhtest.cn/blog/)*
 
 来源：网络官方公开资料，经整理与复核。

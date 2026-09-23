@@ -219,4 +219,4 @@ $$\mathrm{Kurtosis} = \frac{1}{N\,\sigma^{4}} \sum_{i=1}^{N}\left(x_i - \bar{x}\
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*

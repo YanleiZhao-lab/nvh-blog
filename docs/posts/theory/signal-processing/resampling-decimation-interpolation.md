@@ -196,4 +196,4 @@ print(f"插零升采样: 镜像峰 {f3[np.argmax(X3*mask)]:.0f} Hz")
 来源：网络官方公开资料，经整理与复核。
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
