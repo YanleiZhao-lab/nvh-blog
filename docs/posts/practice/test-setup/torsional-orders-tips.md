@@ -7,26 +7,34 @@ author: "@NVH_Z"
 
 > 扭振（torsional vibration）数据采回来后，常卡在三个环节：tacho 通道的 throughput 数据进不了谱分析流程、阶次切片纵轴只有 RPM 波动一种量纲、想看扭振沿轴系的分布却只有曲线。本文整理 Simcenter Testlab 的三个操作要点——通道组改为 Vibration、纵轴 Integrate 与 Section Scaling、Torsional Node 圆盘动画——操作都停留在右键菜单级别，分别解决数据流程、量纲换算与结果表达三个问题。
 
+
+一批台架扭振数据交到分析手里，切片做出来只有“RPM 波动”一条路：评审问“轴到底扭了多少度”，答不上来；想把 tacho 通道的数据拉进谱分析流程，通道列表里压根选不进去；好不容易出图，对方又要看“扭振沿轴系怎么分布”的动画。更常见的局面是三方对账：同一份数据，A 报 0.2 度（RMS）、B 报 0.28 度（峰值）、C 报 0.55 度（峰峰值），数字对不上，谁都觉得自己没算错。这三个卡点都不是采集问题——数据早就躺在盘里，卡住的是通道的身份、纵轴的量纲和报告的口径。本文的三个操作要点，分别拆掉这三道墙。
+
+
 ## 一、通道组设置：让 tacho 通道进入振动处理流程
 
 用激光/磁电传感器测扭振（torsional vibration）时，信号接进的是一个 tacho 通道。而 tacho 通道的定位是转速解算：采完的 throughput 数据在后续处理里做 colormap（彩色图）、做阶次（order）切片时，通道经常选不进去——它属于"转速通道"，不在"振动数据"的处理流程里。
 
 传统解法需要硬件分线：把传感器信号物理分成两路，一路接 tacho 通道，一路接普通动态通道。硬件上多一根线、通道表里多一个点名，标定还要做两遍。
 
-Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 ChannelGroupId**。
+
+这件事可以拿小区门禁打比方：同一个人（一路传感器信号），刷卡进门时是“业主”（tacho 通道，负责解转速），快递登记时是“收件人”（振动通道，负责进谱分析）——身份不是信号本身固有的，是系统给贴的标签。传统做法相当于让这个人办两张卡、登记两次（硬件分线、标定两遍）；更聪明的做法是给门禁系统加一条规则：同一个证件号允许同时挂两种身份。通道的 ChannelGroupId 就是这张“身份标签”：信号的物理内容一个字节都没变，变的只是它在后处理流程里的“通行权限”。
+
+
+公开技术资料给出的做法更直接：**不改接线，只改 ChannelGroupId**。
 
 1. Channel Setup 里照常打开一个 tachometer 通道；
 2. 把该通道的 ChannelGroupId 下拉框从 Tacho 改成 Vibration。
 
 ![Channel Setup 中把 ChannelGroupId 从 Tacho 改为 Vibration 的下拉菜单](/images/torsional-orders-tips/channel-groupid.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 改完之后系统会同时算出两个结果：tachometer 通道照常解算转速，vibration 通道则把原始脉冲波形当作一路"振动"数据保留——一份信号，两种通道，无需分线。
 
 ![ChannelGroupId 改为 Vibration 后即可对扭振信号做彩色图与阶次切片](/images/torsional-orders-tips/colormap-tacho.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
-按知识库说明，改组后即可从 throughput 数据创建阶次切片（order cuts）与 FFT——彩色图、切片、谱分析全流程可用。
+按相关技术文档说明，改组后即可从 throughput 数据创建阶次切片（order cuts）与 FFT——彩色图、切片、谱分析全流程可用。
 
 ::: info 核心概念
 - <strong>ChannelGroupId（通道组）</strong>：Testlab 里决定通道身份的字段，控制该通道的数据能进入哪些后处理流程；
@@ -42,12 +50,12 @@ Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 Ch
 扭振阶次切片默认的纵轴是 RPM 波动——每一转速点上的转速交变幅度。X 轴是整体 RPM，Y 轴是波动量，发动机 run-up（升速）过程中曲轴的扭振一目了然。
 
 ![发动机 run-up 的 2 阶扭振切片](/images/torsional-orders-tips/torsional-order-cut.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 但很多验收规范和耐久评估要的不是"转速抖多少"，而是"轴扭了多少度"。Testlab 里不用导出数据，右键纵轴三步完成：<strong>Processing -> Integrate (Single)</strong>。
 
 ![右键纵轴 Integrate (Single) 将角速度波动积分成角度](/images/torsional-orders-tips/integrate-menu.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ### 积分的分步推导
 
@@ -55,15 +63,21 @@ Simcenter Testing 知识库给出的做法更直接：**不改接线，只改 Ch
 
 **第一步**，角位移是角速度波动对时间的积分——转速波动每个瞬间都在累积角度偏移：
 
+第一章那张“通行权限”解决的是数据能不能进来；进来之后第一道换算是量纲。这个公式回答的问题是：转速每分钟抖 25 下，折算到轴上到底扭了多少度——角位移是角速度波动对时间的累积，积分关系是全部换算的起点。
+
 $$\theta(t) = \int \Delta\omega(t)\,dt$$
 
 **第二步**，设某阶扭振的角速度波动为正弦 $\Delta\omega(t) = \hat{\omega}\sin(2\pi f t)$，其中 $f = O \cdot f_{rot}$（阶次 $O$ 乘转频 $f_{rot}$，即该阶分量在时域的振荡频率）。代入积分：
+
+这个公式回答的问题是：把正弦波动代入积分后，角度幅值被压到多少——分母里的 $2\pi f$ 说明阶次越高、转速越高，同样的转速抖动折算出的角度越小，这正是低转速区扭振角度更大的第一重原因。
 
 $$\theta(t) = \int \hat{\omega}\sin(2\pi f t)\,dt = -\frac{\hat{\omega}}{2\pi f}\cos(2\pi f t) + C$$
 
 积分会产生待定常数 $C$（直流项）。手推不定积分时丢掉 $C$ 不影响波动幅值，但数值积分从零初值起步会把直流项带进结果——后面代码要靠去均值把它去掉。
 
 **第三步**，取波动的幅值，即余弦项的系数：
+
+这个公式回答的问题是：报告里那个“多少度”到底指哪一段——取的是波动幅值（余弦项系数），它把 RPM 口径与角度口径直接接通，验收对账就从这里开始。
 
 $$\hat{\theta} = \frac{\hat{\omega}}{2\pi f} = \frac{\hat{\omega}}{2\pi \cdot O \cdot f_{rot}}$$
 
@@ -103,7 +117,7 @@ print(f"峰峰值      -> {2*np.degrees(theta_pk):.3f} deg")
 角度量纲确定后，报告还需写明幅值口径：同一份数据，RMS、峰值（Peak）、峰峰值（Peak-to-Peak）三种表述相差达 2.8 倍。Testlab 里仍是右键纵轴：**Processing -> Section Scaling**，在三者之间切换。
 
 ![右键纵轴 Section Scaling 切换幅值表述](/images/torsional-orders-tips/section-scaling.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 三者的换算关系建立在正弦假设上：正弦波的 RMS 是峰值的 $1/\sqrt{2}$，峰峰值是峰值的两倍。
 
@@ -144,12 +158,12 @@ print(f"检查 2*1.414*RMS: {2*np.sqrt(2)*rms:.4f} deg = Peak-to-Peak")
 3. 点 <strong>Add Disc...</strong>，填节点名、旋转件半径、圆盘朝向，Apply 后关闭。
 
 ![Add Disc 窗口：节点名、半径与圆盘朝向](/images/torsional-orders-tips/add-disc-window.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 圆盘节点会出现在几何显示区，之后谱、阶次、时域数据都能像驱动普通节点变形一样驱动这些圆盘转动——扭振在轴系各位置的相位关系、幅值分布直接以旋转动画呈现。
 
 ![几何显示区中的 torsional node 圆盘节点](/images/torsional-orders-tips/torsional-node.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>Torsional Node（扭振节点）</strong>：几何模型中代表旋转件的圆盘节点，动画时绕自身轴转动，用于可视化扭振变形；
@@ -166,4 +180,12 @@ Add Disc 时填的半径要和真实旋转件一致——圆盘的视觉转动�
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+## 一句话记住
+
+扭振后处理就是“换证件、换单位、换口径”三件事：ChannelGroupId 换身份让 tacho 数据进谱分析；除以 $2\pi O f_{rot}$ 把 RPM 波动换成角度（阶次转速越高角度越小）；RMS、峰值、峰峰值差 1.414 到 2.828 倍，报告先统一口径再对数——动画只管直观，定量以切片为准。
+
+---
+
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
