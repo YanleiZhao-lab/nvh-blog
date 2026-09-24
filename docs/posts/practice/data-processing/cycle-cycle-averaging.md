@@ -7,6 +7,8 @@ author: "@NVH_Z"
 
 > 同一台发动机、同一工况，每个缸压循环都不一样——燃烧循环变差（combustion variability）直接决定怠速稳定性和驾驶性（driveability）。Simcenter Testlab 的逐循环角域处理能把一段连续数据切成一个一个 720° 循环，再做平均、包络、门区统计。本文说明其背后的原理和操作路径。
 
+两台同型号发动机做台架验收，平均缸压曲线几乎重合、峰值压力只差 0.3 bar，签报告前试车员却反馈：一台怠速"稳得像手表"，另一台转速表针在小范围内来回摆。复测平均循环，两条曲线依旧分不出高低——因为差别根本不在平均循环里，而在被平均"抹掉"的那部分：循环与循环之间的散布。平均值回答"典型长什么样"，回答不了"偏离典型有多远、偏离集中在哪个角度段"。要看清后者，必须把数据按循环切开、逐点对齐后再统计，这正是逐循环分析要解决的问题。
+
 ## 一、为什么要"逐循环"看数据
 
 看发动机数据，常见的做法是拉一段时域波形，或者做 colormap 看阶次。但只要涉及**燃烧相关的评估**——缸内压力、燃烧振动、怠速抖动——时域和频域都不够用：
@@ -16,9 +18,11 @@ author: "@NVH_Z"
 
 真正的物理基准是<strong>曲轴转角（crank angle）</strong>。四冲程发动机一个完整循环是 2 转 = 720°，无论转速怎么波动，压缩上止点（Top Dead Center, TDC）永远在同一个角度位置。把数据从时域变换到<strong>角域（Angle Domain）</strong>，第 N 个循环和第 N+1 个循环就能严格逐点对齐——逐循环统计才有意义。
 
+打个比方：摄影师想拍清赛道某个弯道路面的真实状态。方案 A 是每隔 2 秒按一次快门，车速有快有慢，弯道一会儿入画一会儿出画，三百张叠起来只剩一团糊影；方案 B 是把相机固定在弯道口的护栏上，无论这一圈跑 40 秒还是 42 秒，每张照片拍到的都是同一个位置——叠片时随机走过镜头的观众被抹掉，护栏和路缘石反而越叠越清晰。时域按固定时间切波形就是方案 A（转速波动让燃烧事件在时间轴上来回漂移），角域按曲轴转角切循环就是方案 B（720° 循环里压缩上止点永远落在同一角度）。本文后面所有的切循环、平均、包络，都建立在"把相机固定在弯道口"这一个动作上。
+
 ![Free Run (angle) 采集设置：按循环数而非时间截取数据](/images/cycle-cycle-averaging/free-run-angle-settings.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>角域（Angle Domain）</strong>：横轴为曲轴转角而非时间的数据表示，转一转 360°、四冲程一个循环 720°
@@ -38,7 +42,7 @@ author: "@NVH_Z"
 
 ![Navigator 里的 5 个循环：左缸压、右振动，横轴均为 720°](/images/cycle-cycle-averaging/five-cycles-angle-domain.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 上图是 Calculate 之后 Navigator 里的结果：每条曲线是一个循环，缸压与振动逐循环叠画。
 
@@ -46,7 +50,7 @@ author: "@NVH_Z"
 
 ![300 个循环的 max/min/average 曲线](/images/cycle-cycle-averaging/map-statistics-avg-max-min.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 平均循环给出这台机器的典型工作状态，min/max 包络的宽度给出它的稳定程度：包络宽度接近测量噪声水平，说明循环变差小；包络在燃烧段明显撑开，就是循环变差大的直接证据。
 
@@ -54,7 +58,7 @@ author: "@NVH_Z"
 
 想算多缸之间的平均缸压，先做相位对齐：**Angle Domain Validation** 界面给每个通道填 **Cyl Offset**（各缸上止点的角度偏移量），把各缸压缩上止点拉到同一角度。对齐后回到 Time Data Processing → "Channel Processing" → Change Settings → **DerivedAD** 标签页，用 LINAVG 等函数在角域做通道间运算——比如 CH1~CH4 的平均缸压曲线。
 
-除了平均，DerivedAD 里还可以定义 DIFFERENTIATE 之类的函数，对缸压求角域导数，得到<strong>压力升高率（pressure rise rate）</strong> $dP/d\theta$——其峰值是评估燃烧粗暴度（爆震倾向、燃烧噪声）的关键指标。设 $P_k(\theta)$ 为第 $k$ 个循环的缸压曲线、$\Delta\theta$ 为角域采样间隔（由每转采样数决定），采样点 $\theta_i$ 处的导数用中心差分近似：
+除了平均，DerivedAD 里还可以定义 DIFFERENTIATE 之类的函数，对缸压求角域导数，得到<strong>压力升高率（pressure rise rate）</strong> $dP/d\theta$——其峰值是评估燃烧粗暴度（爆震倾向、燃烧噪声）的关键指标。这个公式回答的问题是：手里只有一串按角度采样的离散点、没有解析表达式时，怎么算出缸压在某个角度位置的瞬时变化速率？设 $P_k(\theta)$ 为第 $k$ 个循环的缸压曲线、$\Delta\theta$ 为角域采样间隔（由每转采样数决定），采样点 $\theta_i$ 处的导数用中心差分近似：
 
 $$\left(\frac{dP}{d\theta}\right)_{k,i} \approx \frac{P_k(\theta_i+\Delta\theta)-P_k(\theta_i-\Delta\theta)}{2\,\Delta\theta}$$
 
@@ -64,7 +68,7 @@ $$\left(\frac{dP}{d\theta}\right)_{k,i} \approx \frac{P_k(\theta_i+\Delta\theta)
 
 ![Frame Statistics AD 门区设置与每循环最大值结果](/images/cycle-cycle-averaging/frame-statistics-gate.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 有些评估只关心特定角度窗口：比如缸压峰值预期出现在 10°~30° 曲轴角之间。"Section Settings" → **Frame Statistics AD** 标签页（通常在最右侧，AD 即角域）里定义角度门（gate），对每个循环在门内取最大值、均值等统计量。结果存放在 Frame Statistics 文件夹，用 XY 图可以同时查看门内最大值及其出现的角度位置。输出不再是一条曲线，而是**每循环一个数**的序列——300 个循环就是 300 个峰值点，可以直接看散布、做 CPK、挑异常循环。
 
@@ -85,19 +89,19 @@ $$\left(\frac{dP}{d\theta}\right)_{k,i} \approx \frac{P_k(\theta_i+\Delta\theta)
 | **标准差循环** | 逐角度点的波动强度 | 找变差集中的角度段（通常是燃烧段） |
 | **门区每循环峰值** | 单循环特征值序列 | 散布分析、CPK、异常循环挑拣 |
 
-前三个量可以严格定义。设第 $k$ 个循环的角域信号为 $x_k(\theta)$，$\theta \in [0^{\circ}, 720^{\circ})$，$k = 1, \dots, N$。**平均循环**是在每个角度位置上对全部循环做平均：
+前三个量可以严格定义。这个公式回答的问题是：$N$ 个形状相近又各有差异的循环，怎样合成一条代表"典型状态"的基准曲线？答案是把角度固定住、跨循环取平均——随机涨落相互抵消，共有形态越叠越清晰。设第 $k$ 个循环的角域信号为 $x_k(\theta)$，$\theta \in [0^{\circ}, 720^{\circ})$，$k = 1, \dots, N$。**平均循环**是在每个角度位置上对全部循环做平均：
 
 $$\bar{x}(\theta) = \frac{1}{N}\sum_{k=1}^{N} x_k(\theta)$$
 
 物理意义：固定角度 $\theta$，把 $N$ 个循环在该角度的取值平均——循环间的随机涨落相互抵消，保留所有循环共有的确定性成分，即"典型形态"。
 
-**标准差循环**度量每个角度位置上的散布强度：
+这个公式回答的问题是：循环偏离典型形态的抖动，在 720° 里集中在哪些角度段？它把每个角度上的偏差平方、平均再开方，得到一条与平均循环共享同一角度轴的"波动强度曲线"。**标准差循环**度量每个角度位置上的散布强度：
 
 $$\sigma(\theta) = \sqrt{\frac{1}{N-1}\sum_{k=1}^{N}\left[x_k(\theta) - \bar{x}(\theta)\right]^2}$$
 
 分三步理解：先求每个循环相对平均循环的偏差 $x_k(\theta)-\bar{x}(\theta)$，再对偏差平方取平均（除以 $N-1$ 得无偏估计），最后开方恢复原量纲；$\sigma(\theta)$ 大的角度段就是循环变差集中的区段。
 
-对门区统计得到的每循环峰值序列 $P_1, P_2, \dots, P_N$，同样先算均值 $\mu$ 和标准差 $\sigma$，再归一为<strong>变异系数（Coefficient of Variation, CoV）</strong>：
+这个公式回答的问题是：门区峰值序列的散布，怎么在峰值水平不同的机型、不同工况之间直接比较？答案是先用均值归一、变成无量纲的百分比。对门区统计得到的每循环峰值序列 $P_1, P_2, \dots, P_N$，同样先算均值 $\mu$ 和标准差 $\sigma$，再归一为<strong>变异系数（Coefficient of Variation, CoV）</strong>：
 
 $$\mathrm{CoV} = \frac{\sigma}{\mu}\times 100\%$$
 
@@ -161,4 +165,12 @@ print(f"散布比 std/mean = {p_max.std()/p_max.mean()*100:.1f}%")
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+## 一句话记住
+
+逐循环分析就是"把相机固定在弯道口"：按曲轴转角切循环，相位才对得齐；平均循环给典型形态，包络与标准差给散布的幅度和位置，门区序列的 CoV 给一个可跨工况比较的数——燃烧稳不稳，看散布比看平均更有说服力。
+
+---
+
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
