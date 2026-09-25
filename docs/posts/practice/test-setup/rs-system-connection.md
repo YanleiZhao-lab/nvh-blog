@@ -103,7 +103,7 @@ for v in volumes_GB:
 
 **方式二：SFTP。**相关技术手册在两处明确"还支持 SFTP"——当文件共享这条路走不通时，SFTP 是指定的替补通道。
 
-什么时候必须换 SFTP？故障排除表列出了文件共享失效的完整链条：PC 的 Windows 版本早于 7（无法连接）；WS-Discovery 未发现 Samba 服务器（刷新 F5、在 Windows 搜索框输入 `\\A.B.C.D` 直填 REC 主机端口 IP、或启用 WS-Discovery 服务）；以及最常见的——**公司网络出于安全考虑把 LLMNR、WS-Discovery、SSDP、NBNS 全部禁用**，此时设备可见性与双击访问都会受限，官方给出的兜底方案就是：改用 SFTP 连接 REC 单元。
+什么时候必须换 SFTP？故障排除表列出了文件共享失效的完整链条：PC 的 Windows 版本早于 7（无法连接）；WS-Discovery 未发现 Samba 服务器（刷新 F5、在 Windows 搜索框输入 `\\A.B.C.D` 直填 REC 主机端口 IP、或启用 WS-Discovery 服务）；以及最常见的——**公司网络出于安全考虑把 LLMNR、WS-Discovery、SSDP、NBNS 全部禁用**，此时设备可见性与双击访问都会受限，相关技术手册给出的兜底方案就是：改用 SFTP 连接 REC 单元。
 
 另一个值得写进班组规矩的细节：相关技术手册明确**不鼓励同时访问文件和进行录制**——拷数与采数抢的是同一块 SSD 的吞吐，边采边拷既拖慢采集又威胁数据完整性。收工流程应该是"停车、停录、再拷数"。
 

@@ -11,7 +11,7 @@ author: "@NVH_Z"
 
 应变片的信号链比加速度计“多一截”。IEPE 传感器恒流源供电、单线进 BNC，插上就出数；应变片却要自己搭半座电桥：供桥电压、桥臂电阻、引线、调零、分流标定——每一环在采集系统里都对应一个设置项，选错一格，轻则幅值差一个比例，重则通道整场飘红。原理篇算过一笔账：350 Ω 片、100 με 应变、GF=2 时电阻只变 0.07 Ω，四分之一桥 5 V 供桥输出仅 250 μV——毫伏级的小信号，对供电精度、接线质量和干扰的容忍度天然就低。
 
-所以公开技术资料专门用一整篇文章讲“在 Simcenter Testlab 里测应变片”：硬件（VB8 卡）、接线（桥型与 LEMO 引脚）、软件（两个界面的通道设置）、标定（Bridge Nulling 与 Shunt Calibration）、归零（Zeroing/Balancing），直到测量（含自动分流序列）。本文化读官方全文，配公开资料插图与两张设置对照表，经典 Testlab 与 Testlab Neo 两条路各走一遍。
+所以公开技术资料专门用一整篇文章讲“在 Simcenter Testlab 里测应变片”：硬件（VB8 卡）、接线（桥型与 LEMO 引脚）、软件（两个界面的通道设置）、标定（Bridge Nulling 与 Shunt Calibration）、归零（Zeroing/Balancing），直到测量（含自动分流序列）。本文依据相关技术资料全文整理，配公开资料插图与两张设置对照表，经典 Testlab 与 Testlab Neo 两条路各走一遍。
 
 ::: info 核心概念
 - <strong>VB8-II / VB8-III 卡</strong>：SCADAS Mobile / Lab 机箱里的应变调理卡，每卡 8 通道，逐通道独立可选 ICP、电压、电桥（四分之一/半/全）、电位计与有源传感器调理——供桥、桥臂补全电阻、分流电阻、sense 线一应俱全
@@ -31,12 +31,12 @@ author: "@NVH_Z"
 ![VB8-II 卡 7 芯 LEMO 接口的引脚定义](/images/strain-gauge-testlab/fig2.png)
 *（图源：网络官方公开资料）*
 
-四分之一桥、半桥、全桥的常见接法官方给了一张接线图。经验法则只有一句：<strong>线越多，信号质量越好</strong>。全桥信号走两根线（差分输入），共模抑制天然成立，抗电磁干扰能力最强；四分之一桥与半桥信号只走一根线（单端输入），没有共模抑制可言——而应变片偏偏是“长导线 + 低电平”的组合，正是电磁干扰最爱的对象。能上全桥就上全桥，这是接线阶段能买到的第一份保险（单端与差分的机理详见[单端对差分输入](/posts/practice/test-setup/single-ended-vs-differential.html)）。
+四分之一桥、半桥、全桥的常见接法，相关技术资料给了一张接线图。经验法则只有一句：<strong>线越多，信号质量越好</strong>。全桥信号走两根线（差分输入），共模抑制天然成立，抗电磁干扰能力最强；四分之一桥与半桥信号只走一根线（单端输入），没有共模抑制可言——而应变片偏偏是“长导线 + 低电平”的组合，正是电磁干扰最爱的对象。能上全桥就上全桥，这是接线阶段能买到的第一份保险（单端与差分的机理详见[单端对差分输入](/posts/practice/test-setup/single-ended-vs-differential.html)）。
 
 ![四分之一桥、半桥、全桥在 VB8 卡上的常见接线方式](/images/strain-gauge-testlab/fig3.png)
 *（图源：网络官方公开资料）*
 
-两种使用场景官方都明确支持：应变片直连 SCADAS；或者经滑环（slip ring）接到旋转部件上的应变片——扭轴测扭矩就是典型。
+两种使用场景相关技术文档都明确支持：应变片直连 SCADAS；或者经滑环（slip ring）接到旋转部件上的应变片——扭轴测扭矩就是典型。
 
 ## 三、经典 Testlab：Signature 的六步
 
@@ -68,7 +68,7 @@ author: "@NVH_Z"
 ![Channel Setup 中应变通道的各设置字段](/images/strain-gauge-testlab/fig5.png)
 *（图源：网络官方公开资料）*
 
-若产品说明书给出桥路类型编号（Type I / Type II 等），官方提供了“类型-设置”对照表，逐格照抄即可：
+若产品说明书给出桥路类型编号（Type I / Type II 等），相关技术资料提供了“类型-设置”对照表，逐格照抄即可：
 
 ![桥路配置类型 Type I/II 与 Testlab 通道设置的对照表](/images/strain-gauge-testlab/table1.png)
 *（图源：网络官方公开资料）*
@@ -171,7 +171,7 @@ Calibration 页→ Offset Calibration：勾选通道→ Balance→ 系统平衡�
 
 ### 第 3 步：Shunt Calibration 分流标定
 
-对桥式传感器官方推荐一律做一次：并已知分流电阻、Balance、完成后 Apply。它标的是<strong>引线电阻</strong>——从采集箱到应变片那根长电缆的铜阻会分掉供桥电压（详细账目见[长导线应变测量](/posts/practice/test-setup/strain-long-cables.html)），分流标定把这份损耗一并计进灵敏度，长线场景尤其必要。
+对桥式传感器相关技术资料推荐一律做一次：并已知分流电阻、Balance、完成后 Apply。它标的是<strong>引线电阻</strong>——从采集箱到应变片那根长电缆的铜阻会分掉供桥电压（详细账目见[长导线应变测量](/posts/practice/test-setup/strain-long-cables.html)），分流标定把这份损耗一并计进灵敏度，长线场景尤其必要。
 
 ![Neo 的 Shunt Calibration 界面](/images/strain-gauge-testlab/fig25.png)
 *（图源：网络官方公开资料）*

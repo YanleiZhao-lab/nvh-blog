@@ -192,7 +192,7 @@ k=3: 实倒频谱 +0.0313  功率倒频谱 0.00098
 
 ## 五、Testlab 实现：可做与不可做的
 
-Simcenter Testlab 没有倒频谱的一键功能，Data Calculator 公式串是官方实现路径。核心三步（上一篇详细走过，这里只列关键参数）：
+Simcenter Testlab 没有倒频谱的一键功能，Data Calculator 公式串是相关技术资料给出的实现路径。核心三步（上一篇详细走过，这里只列关键参数）：
 
 1. 时域到频域：Signature Throughput Processing，Function 选 **Autopowers Linear**，Hanning 窗，分辨率选能用的最粗档
 2. 取对数：Data Calculator 新建公式，函数选 **LOG10**，作用于谱数据（如 F1）

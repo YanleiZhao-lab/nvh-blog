@@ -180,7 +180,7 @@ Soderberg n = 1.13
 
 ## 八、Testlab 落地：无限寿命判定的软件位置
 
-Simcenter 体系里这条链有两处官方入口，均在原文与配套视频中有演示。
+Simcenter 体系里这条链有两处现成入口，相关技术资料与配套视频中均有演示。
 
 **Simcenter Testlab Neo Process Designer**：
 
@@ -206,7 +206,7 @@ Simcenter 体系里这条链有两处官方入口，均在原文与配套视频�
 
 *（图源：网络官方公开资料）*
 
-**Simcenter Tecware ProcessBuilder**：官方文章附带安装说明与 .pb 流程文件，运行后自动出报告；Tecware ProcessBuilder 可用 Testlab 授权运行。
+**Simcenter Tecware ProcessBuilder**：相关技术资料附带安装说明与 .pb 流程文件，运行后自动出报告；Tecware ProcessBuilder 可用 Testlab 授权运行。
 
 ![Tecware ProcessBuilder 中的 Goodman 无限寿命流程](/images/mean-stress-goodman/fig17.jpg)
 

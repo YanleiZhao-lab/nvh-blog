@@ -98,7 +98,7 @@ print(f"\n0.001 m/s² 偏置积分 8 s 的末端漂移: {0.5*0.001*t_end**2*1e3:
 
 ## 三、推荐流程：FAQ 630 五步法
 
-官方 FAQ 630（"How to 'correctly' integrate time data within Time Domain Integration"）给出的推荐流程，每一步都对应上一节的某个误差来源：
+相关技术文档的专题问答（"How to 'correctly' integrate time data within Time Domain Integration"）给出的推荐流程，每一步都对应上一节的某个误差来源：
 
 | 步骤 | Time Signal Calculator 函数 | 作用 | 跳过的后果（FAQ 附录实测） |
 | --- | --- | --- | --- |
@@ -146,7 +146,7 @@ FILTER_HP(DOUBLEINTEGRATE(DETREND_AC(CHx;2);2);2.5;2;IIR(1))
 
 ## 四、只要级值：频域积分路线
 
-如果目的只是整体级（Overall Level）或谱级（比如位移 RMS 随转速的趋势），不必碰时域双重积分。频域积分（frequency domain integration）是逐谱线除以 $\omega$，快且稳；需要防备的仍是 0 Hz：Overall Level 从 0 Hz 起积分，直流谱线经 1/ω 放大后主导整个结果。官方给两个对策：
+如果目的只是整体级（Overall Level）或谱级（比如位移 RMS 随转速的趋势），不必碰时域双重积分。频域积分（frequency domain integration）是逐谱线除以 $\omega$，快且稳；需要防备的仍是 0 Hz：Overall Level 从 0 Hz 起积分，直流谱线经 1/ω 放大后主导整个结果。相关技术资料给两个对策：
 
 1. **First bins to clear 设 2**：把 0 Hz 和第一根谱线清零再积分，在 Time Data Processing 的 Channel Processing 里设置
 2. <strong>改用频率段落（Frequency Section）</strong>：不积 Overall，直接算 1 Hz～6400 Hz 的 Frequency Section（带宽 6400 Hz 场景），从源头绕开直流
