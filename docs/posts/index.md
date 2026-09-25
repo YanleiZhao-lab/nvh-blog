@@ -177,7 +177,7 @@ title: "📖 全部文章"
 - [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [测量后才发现灵敏度设错了：校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### 测试操作（27 篇）
+### 测试操作（28 篇）
 
 - [应变片激励电压怎么选：灵敏度与自热的平衡](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张公开资料插图
 
@@ -220,6 +220,8 @@ title: "📖 全部文章"
 
 - [Qsources 激振器家族：声学与结构激振源的安装与设置](practice/test-setup/qsources-exciters-setup.html) — 激励源的三条硬约束"输入可测、质量轻载、装得进现场"决定 FRF 分母的可靠性：声学侧四只全向单极子源（Q-MED 低频高输出全向至 2 kHz、Q-LMF 衍射特性近人体专为座椅耳位优化、Q-MHF 管状通用、Q-IND2 仅 0.3 kg 带 PT1000）内置体积加速度传感器直接输出标定 Q（m³/s²）；结构侧四只解耦质量惯性激振器（Q-TMP 5-200 Hz/25 Nrms 整机 1 kg 有效仅 150 g、Q-ISH 20-2000 Hz/7 Nrms 钟形座带驱动点加速度计、Q-MSH 50-5000 Hz/2 Nrms 胶粘快换、Q-HSH 500-10000 Hz/0.8 Nrms 有效质量 2 g 以下）自悬挂自对准、任意方向安装；注射器类比贯穿（刻度=集成传感器、针细=克级加载、可换部位=快拆）；测量链"SCADAS 源-功放-EPS 保护-激振器"与 Q-AMP 无风扇低噪声功放的高通旋钮（把 0-30 Hz 白吃容量的能量省回关心频段）；Q-TMP 安全绳与 12/13 mm 拆装力矩、Q-HSH 力耦合器打毛+省胶两条寿命纪律（ATF-3 浸泡一周末力输出无差异）；Testlab Channel Setup 的 Point/Direction/ICP/Force 四项与 Source Control 下限截止设置锚点，7 张公开资料插图
 
+
+- [游动锤 vs 游动加速度计：模态试验的两种组织方式对比](practice/test-setup/roving-hammer-vs-accelerometer.html) — 同设备同点位，搬表与搬锤拟合出的振型一个完整一个残缺：三向加速度计一次听全三方向，锤一次只敲一个方向——游动加速度计 9 次搬家填满 FRF 矩阵完整一行，游动锤单向敲击 9 次分属 9 个不同列、一条完整列也凑不出，振型完整性不看测量条数看表格结构；互易性 H(ij)=H(ji) 保证一行可翻转为一列、两种组织数学等价，但等价前提是行/列真的"完整"；numpy 对账同是 27 格、完整行 True 对完整列 0；搬锤要做满每点三方向 27 次敲击换三列完整数据（平表面切向敲击几乎不可行为主要障碍），搬表的代价是每搬一点改一次质量分布（轻质结构慎用）；会议室座位表演讲者/听众方言类比贯穿，Testlab User Defined Impact Sequence 管住多轮推进
 
 ### 耐久试验（3 篇）
 
