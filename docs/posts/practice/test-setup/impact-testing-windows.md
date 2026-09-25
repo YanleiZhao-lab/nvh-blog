@@ -88,7 +88,7 @@ Testlab 里力窗和指数窗成对出现（Force + Exponential），cutoff 参�
 
 ### 从泄漏说起
 
-FFT 假设记录帧无限周期延拓。锤击响应若在记录时间内完全衰减到零，帧首尾都是零，延拓无缝衔接，理论上加矩形窗（Uniform/Rectangle Window）就行，这也是手册把完全衰减的冲击列为矩形窗适用场景的原因。
+FFT 假设记录帧无限周期延拓。锤击响应若在记录时间内完全衰减到零，帧首尾都是零，延拓无缝衔接，理论上加矩形窗（Uniform/Rectangle Window）就行，这也是相关技术手册把完全衰减的冲击列为矩形窗适用场景的原因。
 
 麻烦的是小阻尼结构。判断衰减完没完，看时间常数（Time Constant）$\tau$——包络衰到初值的 $e^{-1} \approx 37\%$ 所需的时间。从衰减包络出发分步推导：
 
@@ -200,7 +200,7 @@ Testlab 在 Measure 工作表的 All Settings 里提供双击与过载的自动�
 
 ## 六、窗选择速查
 
-手册给锤击和 FRF 场景的窗选择列了明确清单：
+相关技术手册给锤击和 FRF 场景的窗选择列了明确清单：
 
 | 测量对象 | 推荐窗 | 理由 |
 | --- | --- | --- |
@@ -228,4 +228,4 @@ Testlab 在 Measure 工作表的 All Settings 里提供双击与过载的自动�
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

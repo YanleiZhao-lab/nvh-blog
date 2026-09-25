@@ -30,12 +30,12 @@ $$x_{rms} = \frac{A}{\sqrt{2}} \approx 0.707A$$
 其物理含义是：幅度为 $0.707A$ 的稳定直流量与该正弦波等效发热，因此 RMS 又称<strong>等效稳态值（equivalent steady state value）</strong>。
 
 ![正弦信号的 RMS 是其等效稳态值](/images/rms-overall-level/rms-equivalent-steady-state.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 频谱里的每条谱线本质上都是一个正弦波，因此谱线同样有 Peak、RMS、Peak-Peak 三种<strong>幅值格式（Amplitude Format）</strong>：峰值格式取 $A$，RMS 格式取 $A/\sqrt{2}$，峰峰值格式取 $2A$。峰值 1.000 g 的谱线，换算为 RMS 格式即 0.707 g——数据本身不变，只是幅值的表达方式不同。
 
 ![同一份频谱数据可用不同幅值格式显示，RMS 格式谱线为峰值格式的 0.707 倍](/images/rms-overall-level/amplitude-formats-peak-rms.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - **RMS**：信号平方平均后开根号，代表振荡信号的等效稳态能量；正弦波为其峰值的 0.707 倍
@@ -54,7 +54,7 @@ $$X_{rms} = \sqrt{\sum_{k=0}^{K} A_k^2}$$
 其中 $A_0$ 是频段内第一条谱线，$A_K$ 是最后一条谱线，$A_k$ 的单位与被测量一致（Pa、g 等）。它回答的问题是"这个频段内总共含有多少能量"，与单根谱线的高度是两个概念——一条平坦低矮的宽带谱，其总级可能超过一根高耸的窄带谱线。
 
 ![频谱的总级（Overall Level）是单一数值，即整条谱的 RMS](/images/rms-overall-level/rms-of-spectrum-overall.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 为什么各谱线能量可以直接平方相加？因为不同频率的正弦波相互<strong>正交（orthogonal）</strong>，互不贡献能量，各谱线能量简单叠加——这与分贝计算中的"能量叠加"是同一条物理规律。理论根基是 <strong>Parseval 定理（Parseval's Theorem）</strong>：时域平方的积分等于频域各分量平方之和，因此时域计算 RMS 与频域计算总级殊途同归。
 
@@ -69,7 +69,7 @@ $$X_{rms} = \sqrt{\sum_{k=0}^{K} A_k^2}$$
 其中第三项的能量校正（Energy Correction）：加窗会压低谱线的能量，须乘回固定系数——汉宁窗（Hanning）为 1.633，平顶窗（Flattop）为 2.225，只有矩形窗（Uniform，等效不加窗）校正系数为 1。
 
 ![加窗后的谱线须乘能量校正系数：汉宁窗 1.633、平顶窗 2.225](/images/rms-overall-level/window-energy-correction.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 Simcenter Testlab 在后台统一处理了上述换算：无论屏幕上显示的是 Peak 格式还是幅值校正格式，软件计算 RMS 时一律自动转换为**线性、RMS、能量校正**数值，因此计算结果与显示格式无关。
 
@@ -84,7 +84,7 @@ Simcenter Testlab 在后台统一处理了上述换算：无论屏幕上显示�
 例如在 3500 至 4000 RPM 之间每 25 rpm 计算一次频谱，对每张频谱求总级，再将这些 RMS 值对转速绘图。这样即可定量识别能量异常的转速区间——哪个峰值对应哪一阶激励、与主观感受的"轰鸣点"（boom）是否吻合，判断便有了定量依据。相比在彩色云图上目测扫描，这种方法客观得多，也是阶次切片、传递路径分析定位前的常规第一步。
 
 ![声学信号的总级随转速跟踪曲线](/images/rms-overall-level/tracked-overall-vs-rpm.png)
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 在 Testlab 中的操作路径：测量模式设为 **Tracked**，Section Settings 对话框的 Overall Level 标签页勾选 Overall level，数据存到 Sections 目录下的 Overall Level 文件夹。若只对已有图形读总级：图例右键 Options 里在 Calculated Content 标签页添加 RMS（全频段）；或添加双光标框住频段后，右键光标选 Calculations → RMS（部分频段）。
 
@@ -136,4 +136,6 @@ RMS 是能量的语言：电热毯不看电流摆幅看等效发热档，谱线�
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

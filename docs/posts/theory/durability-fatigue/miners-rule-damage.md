@@ -28,7 +28,7 @@ author: "@NVH_Z"
 
 ![材料试件承受 4 个应力循环：力施加在面积 A 上，一个完整循环从初值出发经上下方回到初值](/images/miners-rule-damage/fig-four-cycles.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ## 二、价目表：S-N 曲线怎么读出"每一笔的单价"
 
@@ -36,11 +36,11 @@ Miner 记账的第一步是拿到价目表。把一批材料试件（coupon）�
 
 ![S-N 曲线：循环应力水平对致断循环次数，应力越高寿命越短](/images/miners-rule-damage/fig-sn-curve.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![对材料试件施加恒幅循环载荷的轴向疲劳试验机](/images/miners-rule-damage/fig-coupon-machine.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 价目表上每一行就是一条"单价"：某应力幅下试件能扛 N 次，那么每次这样的循环花掉 1/N 的寿命。加载方式可以是轴向、扭转、弯曲，S-N 曲线随材料和载荷类型不同——本文重点是记账规则本身，S-N 曲线的三区间、疲劳极限与双对数幂律详见 S-N 曲线专文。
 
@@ -52,25 +52,25 @@ Miner 记账的第一步是拿到价目表。把一批材料试件（coupon）�
 
 ![记账第 1 笔：左侧载荷历程、中间 S-N 曲线、右侧损伤累计 2/6 = 0.33](/images/miners-rule-damage/fig-damage-33.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 <strong>第二笔：2 个更高幅值循环。</strong> 换到更高的应力幅再来 2 个循环。查表：这个幅值下 4 次循环致断。记账 2/4 = 0.50，账本累计 0.33 + 0.50 = 0.83。还没到 1，按 Miner 法则零件完好。
 
 ![记账第 2 笔：再 2 个高幅值循环，2/4 = 0.50，累计 0.83，未失效](/images/miners-rule-damage/fig-damage-83.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 <strong>第三笔：再来 1 个高幅值循环。</strong> 同幅值第 3 个循环到来，记账 1/4 = 0.25，累计 0.83 + 0.25 = 1.08 ≥ 1。失效发生——裂纹出现在零件表面。
 
 ![记账第 3 笔：再 1 个循环，累计 1.08 ≥ 1，失效发生](/images/miners-rule-damage/fig-damage-108.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 三笔账并列放在一张图里，就是完整的记账流程：载荷时间历程（左）→ S-N 曲线查寿命（中）→ 损伤逐笔累加（右）。
 
 ![完整记账流程：时间历程 + S-N 曲线 → 损伤累计表](/images/miners-rule-damage/fig-tally-summary.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 回到储值卡类比：第一笔是中等单价刷了 2 次，第二笔是高单价刷了 2 次，第三笔再刷 1 次，卡余额归负——储值卡没有"透支即停机"的保护，Miner 账本同样只认总额，不问刷卡顺序。
 
@@ -84,7 +84,7 @@ $$D = \sum_{i=1}^{k} \frac{n_i}{N_i}$$
 
 ![Miner 法则公式：D = Σ n/N，D 等于 1 时失效](/images/miners-rule-damage/fig-formula.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 历史注记
 1945 年 M. A. Miner 推广了这条法则，故称 Miner's Rule；更早的提出者是 1924 年的 A. Palmgren，因此规范名称是 Palmgren-Miner 线性损伤假设（linear damage hypothesis）。
@@ -98,7 +98,7 @@ $$D = \sum_{i=1}^{k} \frac{n_i}{N_i}$$
 
 ![真实产品的服役载荷历程：杂乱变幅，绝非恒幅正弦](/images/miners-rule-damage/fig-complex-load.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 还有一条量级提醒：真实金属的 S-N 曲线是双对数曲线，寿命动辄数百万次循环，多级程序块与实测谱的记账项数远多于教学示例的三笔——但规则一条不变。
 
@@ -165,4 +165,6 @@ Miner 记账三件事：S-N 曲线查单价（1/N）、每个循环记一笔（n
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

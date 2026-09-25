@@ -27,7 +27,7 @@ $$n_i = \frac{60}{N\,\Delta t_i}\ \mathrm{rpm}$$
 
 ![激光与斑马带](/images/zebra-tape-correction/laser-zebra-tape.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 按采样定理，PPR 至少要达到目标扭振阶次的 2 倍：测第 60 阶扭振至少需要 120 PPR；工程上通常再取约 10 倍安全系数，因为 PPR 采样没有抗混叠保护。
 
@@ -37,7 +37,7 @@ $$n_i = \frac{60}{N\,\Delta t_i}\ \mathrm{rpm}$$
 
 ![缠在轴上的斑马带](/images/zebra-tape-correction/wrapped-shaft.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 接缝出错分两种，方向相反：
 
@@ -46,7 +46,7 @@ $$n_i = \frac{60}{N\,\Delta t_i}\ \mathrm{rpm}$$
 
 ![接缝处搭接不齐](/images/zebra-tape-correction/butt-joint.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>接缝（Butt joint）</strong>：斑马带两端搭接处，条纹间距偏离理论值的那个位置；每转经过激光一次
@@ -76,7 +76,7 @@ $$\delta n_j = \hat{n}_j - n_j = -\frac{\varepsilon}{1+\varepsilon}\, n_j$$
 
 ![接缝造成的假转速波动](/images/zebra-tape-correction/rpm-artifact.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 识别判据就一条：**每转固定角度、每转一次、形状可重复**的转速突跳，先怀疑接缝，再怀疑别的。随机毛刺（油污、丢脉冲）没有固定角度位置，据此可以区分。
 
@@ -102,13 +102,13 @@ $$\theta_k = k \cdot \frac{360^\circ}{N} \ (\mathrm{mod}\ 360^\circ)$$
 
 ![函数设置对话框](/images/zebra-tape-correction/function-dialog.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 修正效果直接看前后对比：原始曲线（红）每转一跳的锯齿被压平，修正后（绿）只剩真实扭振波动。
 
 ![修正前后对比](/images/zebra-tape-correction/correction-result.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 16A 版本起支持一条带子多个搭接段的修正——轴径大、带子长、中间加固点多的场合用得上。
 
@@ -121,7 +121,7 @@ $$\theta_k = k \cdot \frac{360^\circ}{N} \ (\mathrm{mod}\ 360^\circ)$$
 | **扭振信息** | 保留（几何重排，不平滑） | 保留（只动出错的少数脉冲） | 目标阶次被扣掉 |
 | **伤害风险** | Pulses_per_rev 填错则全错 | 门槛太低误删正常波动 | 扣错阶次误伤真信号 |
 
-按手册说明：毛刺剔除工具只处理零星出错脉冲，属于局部修正；接缝修正要求全部脉冲绕轴重新均布，属于全局重排。两者解决的问题不同，数据里两类误差并存时需要先后都用。
+按相关技术手册说明：毛刺剔除工具只处理零星出错脉冲，属于局部修正；接缝修正要求全部脉冲绕轴重新均布，属于全局重排。两者解决的问题不同，数据里两类误差并存时需要先后都用。
 
 ::: tip 使用判断
 - 数据里既有接缝跳变又有随机毛刺：先跑毛刺剔除，再做接缝修正——重排前先把离群脉冲清干净
@@ -170,4 +170,6 @@ print(f"接缝误差是真实扭振的 {abs(err[::n_stripe].max()) / 8.0:.1f} �
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

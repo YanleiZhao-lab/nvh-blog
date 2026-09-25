@@ -84,7 +84,7 @@ $$f_{img} = \left| k \cdot f_s \pm f \right|, \quad k = 1, 2, \dots$$
 
 非整数比率的重采样通过升采样和降采样的组合实现。因子 2.5 的降采样 = 先因子 2 升采样，再因子 5 降采样。**顺序至关重要**。
 
-手册的算例：信号上限频率 300 Hz，原采样率 2 kHz，目标采样率 800 Hz（因子 2.5 降采样）。
+相关技术手册的算例：信号上限频率 300 Hz，原采样率 2 kHz，目标采样率 800 Hz（因子 2.5 降采样）。
 
 正确步骤：
 1. 先升采样至 4 kHz（分析带宽 2 kHz），用截止 1 kHz 的低通保留原谱成分；
@@ -125,7 +125,7 @@ $$SDR = 10 \log_{10} \left( \frac{80 R}{\pi \cdot f_c\% / 100} \right) \ \mathrm
 
 $$\Delta\alpha_{\max} = \frac{360^\circ \times \mathrm{rpm}_{\min}}{60 \, F_s}$$
 
-其中 $\mathrm{rpm}_{\min}$ 为全程最低转速（r/min），$F_s$ 为采样率（Hz），分母 60 完成每分钟到每秒的换算。手册算例：最低转速 500 rpm、采样率 2000 Hz，则 $\Delta\alpha_{\max} = 360 \times 500/(60 \times 2000) = 1.5^\circ$。取小于阈值的角度增量只会产生更多角度域数据点而不增加信息（超量处理）；取大于阈值的增量则导致低转速段的信息损失，且转换回原域后无法恢复。
+其中 $\mathrm{rpm}_{\min}$ 为全程最低转速（r/min），$F_s$ 为采样率（Hz），分母 60 完成每分钟到每秒的换算。相关技术手册算例：最低转速 500 rpm、采样率 2000 Hz，则 $\Delta\alpha_{\max} = 360 \times 500/(60 \times 2000) = 1.5^\circ$。取小于阈值的角度增量只会产生更多角度域数据点而不增加信息（超量处理）；取大于阈值的增量则导致低转速段的信息损失，且转换回原域后无法恢复。
 
 ![时域到角度域的转换步骤](/images/resampling-decimation-interpolation/adaptive-resample-steps.png)
 *（图源：网络官方公开资料）*
@@ -196,4 +196,4 @@ print(f"插零升采样: 镜像峰 {f3[np.argmax(X3*mask)]:.0f} Hz")
 来源：网络官方公开资料，经整理与复核。
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

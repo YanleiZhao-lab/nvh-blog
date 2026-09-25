@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # Neuber 法则：从名义应力到局部缺口应力的换算
 
-> 同一个悬置支架，装在车上的那件两万公里就在圆角处裂了，台架上按名义应力评估却显示"远低于屈服、无限寿命"。裂纹偏偏从圆角起。缺口根部的真实应力早就不止名义值乘应力集中系数那么简单——材料一旦局部屈服，应力集中会被塑性"缓和"，而应变集中反而被放大，真正驱动低周疲劳的是后者。本文讲 公开技术资料的 Neuber 法则（Neuber's Rule）：只用一条弹性应力时间历程加一条 Ramberg-Osgood 材料曲线，把每一个时间点上的弹性应力换算成对应的弹塑性应变，让线性有限元的输出也能喂给应变寿命法算疲劳。就像用一张信用卡账单（弹性应力）反推出你实际花了多少现金（弹塑性应变）——账单是线性的，现金流不是，中间靠一条"等面积"规则对账。
+> 同一个悬置支架，装在车上的那件两万公里就在圆角处裂了，台架上按名义应力评估却显示"远低于屈服、无限寿命"。裂纹偏偏从圆角起。缺口根部的真实应力早就不止名义值乘应力集中系数那么简单——材料一旦局部屈服，应力集中会被塑性"缓和"，而应变集中反而被放大，真正驱动低周疲劳的是后者。本文讲公开技术资料的 Neuber 法则（Neuber's Rule）：只用一条弹性应力时间历程加一条 Ramberg-Osgood 材料曲线，把每一个时间点上的弹性应力换算成对应的弹塑性应变，让线性有限元的输出也能喂给应变寿命法算疲劳。就像用一张信用卡账单（弹性应力）反推出你实际花了多少现金（弹塑性应变）——账单是线性的，现金流不是，中间靠一条"等面积"规则对账。
 
 悬挂支架台架复现不了裂纹，是耐久评审上常见的僵局。线性有限元给出的应力时间历程永远是"弹性"的——载荷翻倍应力翻倍，300 MPa 就是 300 MPa，材料屈服这件事在模型里根本不存在。可缺口根部的真实材料早就局部屈服了：真实应力比弹性预测的低（塑性形变替它"扛"了一部分载荷），真实应变比弹性预测的大（塑性形变是额外的、不可恢复的形变量）。低周疲劳恰恰由应变驱动——S-N 曲线那套应力记账在这里失灵，必须换应变寿命（Strain Life）法，而应变寿命法的输入是弹塑性应变时间历程。一边只有弹性应力，一边要弹塑性应变，中间缺的那座桥就是 Neuber 法则。公开技术资料对它的定位一句话讲清：**它让线性模型预测非线性行为**（Neuber's Rule allows a linear model to predict non-linear behavior）。
 
@@ -19,11 +19,11 @@ author: "@NVH_Z"
 
 ![Neuber 法则的用途：从弹性应力时间历程导出对应的弹塑性应变时间历程](/images/neubers-rule/fig1-elastic-plastic-strain.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![左：线性有限元给出的应力是纯弹性的，需要 Neuber 法则导出弹塑性应变；右：应变片直接测量弹塑性应变](/images/neubers-rule/fig2-linear-fe-vs-strain-gauge.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 两条路怎么选？有条件贴片的位置优先贴片——实测永远优先；但当危险点在型腔内壁、装配缝隙深处，或者一个项目要筛几十个候选方案时，"有限元灵敏度 + 实测载荷 + Neuber 换算"就是唯一现实的组合。这也正是 Simcenter Testlab Neo 应变寿命方法为"载荷"和"应力"输入都内置 Neuber 换算的原因。
 
@@ -57,7 +57,7 @@ $$\varepsilon \;=\; \frac{\sigma}{E} \;+\; \left(\frac{\sigma}{K'}\right)^{1/n'}
 
 ![Neuber 法则图解：弹性点（蓝）在杨氏模量直线上，等面积的弹塑性点（红）在 Ramberg-Osgood 曲线上](/images/neubers-rule/fig3-neuber-ramberg-osgood.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - **等面积条件**：弹性应变能密度（$\sigma_e^2/E$）= 弹塑性应变能密度（$\sigma\varepsilon$），Neuber 法则的核心假设，1961 年由 Heinz Neuber 提出
@@ -129,7 +129,7 @@ Simcenter Testlab Neo 的应变寿命（Strain Life）方法接受三种输入�
 
 ![应变寿命方法的三种可能输入：载荷（上红）、应力（中绿）、应变（下蓝）](/images/neubers-rule/fig4-input-types.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 方法属性里的 **Input Type** 字段只有两个选项，对应两条换算路线：
 
@@ -138,7 +138,7 @@ Simcenter Testlab Neo 的应变寿命（Strain Life）方法接受三种输入�
 
 ![Strain Life 方法属性中的 Input Type 设置（右下）](/images/neubers-rule/fig5-input-type-setting.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 选了 Load 之后，还有一步"载荷如何变成应力"要交代，即 **Load Influence** 字段的两个选项：<strong>Manual（手工）</strong>与 <strong>Input Base Unit -> Material Data Base Unit（输入基准单位换算到材料基准单位）</strong>。
 
@@ -146,7 +146,7 @@ Simcenter Testlab Neo 的应变寿命（Strain Life）方法接受三种输入�
 
 ![依据有限元模型设置 Stress Influence 与 Load Influence（5.03983 MPa/N）](/images/neubers-rule/fig7-fe-stress-influence.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 **Input Base Unit -> Material Data Base Unit**：换算系数未知时的兜底——把输入历程的数值直接按材料数据库的单位重新标注（例如 2,000,000 N 的历程读作 2,000,000 Pa = 2 MPa）。官方文章明确提示：这样得到的绝对结果不正确（not correct in absolute terms），只能用于相对比较——几条载荷历程谁更伤可以比，绝对寿命不能报。
 
@@ -169,4 +169,6 @@ Neuber 法则用"应力乘应变能量守恒"把弹性点搬到 Ramberg-Osgood �
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

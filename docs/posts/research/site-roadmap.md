@@ -85,11 +85,11 @@ services:
 博客不应依赖论坛数据库，门户不应硬编码 API 地址。各服务通过约定接口或静态聚合实现松耦合（Loose Coupling），保证可独立演进。
 :::
 
-阶段三的 NVH API 封装的是确定性工程计算，而非文本生成。以下两张手册图例给出了这类服务的典型封装对象：一是数字信号处理链路的参数体系，二是旋转机械阶次分析的标准输出。
+阶段三的 NVH API 封装的是确定性工程计算，而非文本生成。以下两张公开技术资料图例给出了这类服务的典型封装对象：一是数字信号处理链路的参数体系，二是旋转机械阶次分析的标准输出。
 
-![数字傅里叶变换中的时域与频域术语体系：帧长、带宽、谱线数等参数由定义严格确定，参数间换算不容许估计，是 NVH API 封装的最基础计算对象（图源：网络 侵删）](/images/site-roadmap/fft-chain-terms.png)
+![数字傅里叶变换中的时域与频域术语体系：帧长、带宽、谱线数等参数由定义严格确定，参数间换算不容许估计，是 NVH API 封装的最基础计算对象（图源：网络官方公开资料）](/images/site-roadmap/fft-chain-terms.png)
 
-![四缸发动机升速数据的阶次 colormap 与 RPM 波动曲线：二阶发火阶次及其谐波为主导阶次，曲轴共振（约 2600 RPM）处扭振幅值出现峰值——此类分析流程与判读规则构成专业服务的第二类封装对象（图源：网络 侵删）](/images/site-roadmap/order-colormap-rpm.png)
+![四缸发动机升速数据的阶次 colormap 与 RPM 波动曲线：二阶发火阶次及其谐波为主导阶次，曲轴共振（约 2600 RPM）处扭振幅值出现峰值——此类分析流程与判读规则构成专业服务的第二类封装对象（图源：网络官方公开资料）](/images/site-roadmap/order-colormap-rpm.png)
 
 ## 五、下一步
 
@@ -107,4 +107,6 @@ services:
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

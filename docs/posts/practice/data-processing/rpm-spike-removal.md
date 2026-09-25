@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # RPM 信号去毛刺：转速信号的清洗
 
-> 转速通道与振动通道一样存在系统性误差：偶发尖峰、掉线、每转固定位置的毛刺和斑马带接缝跳变，会在 colormap 与阶次切片上产生虚假的阶次成分。本文按 公开技术资料 的分类梳理 RPM 信号常见误差模式的成因，并给出 Simcenter Testlab 中对应的处理方法、算法判据与参数选择依据。
+> 转速通道与振动通道一样存在系统性误差：偶发尖峰、掉线、每转固定位置的毛刺和斑马带接缝跳变，会在 colormap 与阶次切片上产生虚假的阶次成分。本文按公开技术资料 的分类梳理 RPM 信号常见误差模式的成因，并给出 Simcenter Testlab 中对应的处理方法、算法判据与参数选择依据。
 
 某 run-up 项目的数据复盘会上，工程师把 colormap 投上屏幕：低阶区多出一条时隐时现的阶次线，对应的阶次切片在特定转速点上突然跳变；而同一段工况，振动通道的时域复查毫无异常。传感器换过、灵敏度重新标过、复测一轮，阶次线依旧。最后有人把转速曲线纵向放大——每转的同一角度都立着一根小尖刺。问题不在振动通道：转速曲线上的毛刺会让阶次计算每转错一次，colormap 上便多出本不存在的阶次成分。毛刺从哪来、为什么偏偏每转一次、Testlab 里用什么工具清洗这份数据，就是本文的主线。
 
@@ -31,25 +31,25 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ## 二、毛刺的三种典型类型
 
-按 公开技术资料 的分类，转速信号异常分为三类。
+按公开技术资料 的分类，转速信号异常分为三类。
 
-<strong>第一类：偶发的尖峰或掉线。</strong> 转速曲线整体平滑，个别时间点上 RPM 突然升高（spike）或跌落至零附近（dropout）。测试现场通常处于手册所称的恶劣环境（hostile environment）：轴面油污、粉尘使激光反射信号时好时坏，脉冲计数随之出错。台架存在切削液雾或金属屑飞溅的场合尤其常见。
+<strong>第一类：偶发的尖峰或掉线。</strong> 转速曲线整体平滑，个别时间点上 RPM 突然升高（spike）或跌落至零附近（dropout）。测试现场通常处于相关技术手册所称的恶劣环境（hostile environment）：轴面油污、粉尘使激光反射信号时好时坏，脉冲计数随之出错。台架存在切削液雾或金属屑飞溅的场合尤其常见。
 
 ![RPM 异常的两种形态](/images/rpm-spike-removal/rpm-anomalies.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 <strong>第二类：每转固定位置上的规律毛刺。</strong> RPM 曲线放大后可见，每一转的同一角度位置都出现一个固定的小尖。其来源不是环境，而是斑马带（zebra tape）或码盘上某一条条纹的间距、宽度存在制造偏差——每转到该角度，脉冲间隔错一次，转速计算随之错一次。这类毛刺的危害在于其严格周期性：它会在频谱上生成真实的阶次成分，与被测信号混叠在一起。
 
 ![每转固定位置出现的 RPM 毛刺](/images/rpm-spike-removal/spike-per-revolution.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 <strong>第三类：斑马带接缝（butt joint）造成的假扭振。</strong> 斑马带缠绕收尾处若留有豁口，脉冲间隔大于理论值，每转出现一次假的转速跌落（dip）；若两条纹挤压搭接，脉冲间隔小于理论值，每转出现一次假的转速尖峰（spike）。两者都是每转一次的系统性误差，与第二类同源，但成因在搭接处而非单条条纹。接缝误差的成因与修正流程见《[斑马带接缝修正](./zebra-tape-correction.html)》。
 
 ![激光与斑马带](/images/rpm-spike-removal/zebra-tape-laser.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info
 扭振（torsional vibration）测量要求每转内有足够的脉冲数来分辨一转之内的转速波动，因此扭振测试使用高 PPR 斑马带。PPR 越高，单个脉冲的计时误差对转速曲线的影响越直接，毛刺在曲线上也越明显。
@@ -68,7 +68,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![框选毛刺段并按 [R] 替换后的效果](/images/rpm-spike-removal/spike-before-after.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 操作细节：
 
@@ -77,7 +77,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![设置开关与 Undo/Redo 按钮](/images/rpm-spike-removal/settings-undo-buttons.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 - 完成编辑后，左侧有 **Save**（直接覆盖原数据）和 **Save As**（另存）两个选项。做修正操作时应另存——原始转速数据无法重测，覆盖后不可恢复。
 
@@ -93,7 +93,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![函数设置对话框](/images/rpm-spike-removal/spike-removal-dialog.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ### 算法逻辑
 
@@ -114,13 +114,13 @@ $$\mathrm{MAD} = \operatorname{median}_{i \in W} \Big( \big| n_i - \operatorname
 
 ![毛刺剔除算法流程](/images/rpm-spike-removal/algorithm-flowchart.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 执行后生成新的 trace：
 
 ![剔除前（红）与剔除后（绿）对比](/images/rpm-spike-removal/spike-removal-result.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ### 参数说明
 
@@ -178,4 +178,6 @@ $$P \ge 2 \, O_{\max}$$
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

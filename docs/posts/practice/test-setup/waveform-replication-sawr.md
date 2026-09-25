@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 波形复现 SAWR：从实测波形到台架输出
 
-> 同一条山路，实车跑一遍底盘加速度计记下 90 秒波形；回实验室想在这段实测载荷上做疲劳考核，把录好的波形直接灌给功放行不行？不行——台面读回来的波形在试件共振处冲高数倍、在反共振处几乎消失。本文依据 公开技术资料 的 Single Axis Waveform Replication（SAWR）指南，讲清这条从实测波形到台架输出的完整链路：系统辨识为什么先于一切、逆传递函数 ITF 如何把目标波形换算成驱动波形、四种控制策略各自的修正时机，以及频率分辨率对波形时长的隐藏约束。把 SAWR 想成一只学舌的鹦鹉：它听一遍（系统辨识）、跟着说（首次回放）、被纠正发音（迭代修正）、越说越像（ITF 更新）——全程唯一的判据是控制点听到的像不像，而不是嘴里说出来的是什么。
+> 同一条山路，实车跑一遍底盘加速度计记下 90 秒波形；回实验室想在这段实测载荷上做疲劳考核，把录好的波形直接灌给功放行不行？不行——台面读回来的波形在试件共振处冲高数倍、在反共振处几乎消失。本文依据公开技术资料 的 Single Axis Waveform Replication（SAWR）指南，讲清这条从实测波形到台架输出的完整链路：系统辨识为什么先于一切、逆传递函数 ITF 如何把目标波形换算成驱动波形、四种控制策略各自的修正时机，以及频率分辨率对波形时长的隐藏约束。把 SAWR 想成一只学舌的鹦鹉：它听一遍（系统辨识）、跟着说（首次回放）、被纠正发音（迭代修正）、越说越像（ITF 更新）——全程唯一的判据是控制点听到的像不像，而不是嘴里说出来的是什么。
 
 先看一个对比：同样这段载荷，换成随机掯动试验做为什么不会出这个问题？因为随机掯动的目标只是一条谱形，控制器每帧都在按谱修正驱动，波形长什么样无所谓；SAWR 的目标却是逐时刻的波形本身。换句话说，随机掯动只要求学得像（谱一致），SAWR 还要求每一句都学得像（时序一致）——考核的严苛度高了一个维度，控制链路上任何一环的频率特性都会直接写进最终结果。
 
@@ -40,7 +40,7 @@ SAWR 与随机控制的差别只在目标长什么样：随机控制追的是一
 
 ![闭环 SAWR 试验的硬件链路：控制器、SCADAS、功放/振动台、试件、控制与测量加速度计](/images/waveform-replication-sawr/fig1.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 三个容易被忽略的前提：
 
@@ -49,19 +49,19 @@ SAWR 与随机控制的差别只在目标长什么样：随机控制追的是一
 
 ![STOP 连接器必须插在位，SCADAS 源才有输出](/images/waveform-replication-sawr/fig2.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 3. **外接急停**。STOP 口可接到 DAC Shutdown 急停盒，大黄/大红按钮一拍，试验立即终止——量产件试验台的标配。
 
 ![STOP 口外接 DAC Shutdown 急停盒](/images/waveform-replication-sawr/fig4.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 软件入口在 Testlab Environmental 文件夹的 Single Axis Waveform Replication 图标（token 授权下需 43 个 token）。启动后先做两件事：Tools -> Options -> Shaker 里核对振动台定义（最大位移、最大加速度、频率范围——SAWR 会用这些限值预检波形，超限直接报警）；File -> Save As 存项目文件。之后底部工作表从左到右依次使用：Channel Setup -> SAWR Setup -> System Identification -> System Verification -> SAWR Control -> Batch Reporting。
 
 ![Testlab Environmental 文件夹中的 Single Axis Waveform Replication 入口](/images/waveform-replication-sawr/fig5.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ## 四、通道与设置：三个最小要求
 
@@ -69,19 +69,19 @@ Channel Setup 工作表里逐行录入传感器：至少一个通道设为 Contr
 
 ![Channel Setup 工作表：逐行录入控制与测量加速度计信息](/images/waveform-replication-sawr/fig8.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 SAWR Setup 工作表完成三件事即达最小可用状态：Control 面板设控制参数、SAWR Profiles 面板定义目标波形、Schedule 面板把 profile 排入试验序列。全部就绪后状态指示转绿显示 Verification OK。
 
 ![SAWR Setup 工作表的七个区域：控制面板、SAWR Profiles、安全、计划、自动测量、吞吐记录、状态指示](/images/waveform-replication-sawr/fig10.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ### 频率分辨率与波形时长的隐藏约束
 
 Control 面板里最小频率、最大频率之外，频率分辨率（Frequency Resolution）这一项藏着一个新手常踩的坑。它决定了采集的采样率，也决定了驱动波形按多长的数据块来处理——用作目标的录音时长必须是频率分辨率倒数的整数倍。
 
-这个约束回答的问题是：为什么明明录了 2 分 30 秒整的波形，导入后长度却对不上？举手册原例：频率分辨率设 3.125 Hz，对应时间块 1/3.125 = 0.32 秒；参考时历长 2.5 分钟即 150 秒，150/0.32 = 468.75 不是整数——软件只能取最近的整数块，profile 实际时长变成 468 块（149.76 秒）或 469 块（150.08 秒）。差 0.24 秒在疲劳累计上通常无伤大雅，但若目标波形包含必须完整保留的事件（冲击、制动），就要反过来先选频率分辨率再裁波形。
+这个约束回答的问题是：为什么明明录了 2 分 30 秒整的波形，导入后长度却对不上？举相关技术手册原例：频率分辨率设 3.125 Hz，对应时间块 1/3.125 = 0.32 秒；参考时历长 2.5 分钟即 150 秒，150/0.32 = 468.75 不是整数——软件只能取最近的整数块，profile 实际时长变成 468 块（149.76 秒）或 469 块（150.08 秒）。差 0.24 秒在疲劳累计上通常无伤大雅，但若目标波形包含必须完整保留的事件（冲击、制动），就要反过来先选频率分辨率再裁波形。
 
 ### 目标波形从哪来
 
@@ -89,23 +89,23 @@ SAWR Profiles 面板点 Create Profile 打开 Profile Editor：Select Source Tra
 
 ![Profile Editor：从 .ldsf 实测数据定义目标波形](/images/waveform-replication-sawr/fig12.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 没有实测数据时，Time Signal Calculator 可以现场造一段：启用 add-in 后用 GENERATE_RANDOM 加 FILTER_BP 生成带宽限定的随机时历，Calculate 计算并 Save As 存入项目，即可作为 SAWR 的目标。这适合做方法验证与台架调试，不能替代真实载荷。
 
 ## 五、系统辨识：一切修正的起点
 
-系统辨识（System Identification）工作表用低量级激励测出从驱动电压到控制加速度的频响，再取倒数得 ITF。手册特别提醒：默认电压上下限往往过于保守（量级太低、信噪比不足），建议从 Min. RMS 0.02 V、Max. RMS 0.06 V 起步尝试，再按各台系统具体情况调整——辨识量级与正式试验量级差太远时，非线性系统（含间隙、大变形橡胶）的 ITF 代表性会下降。
+系统辨识（System Identification）工作表用低量级激励测出从驱动电压到控制加速度的频响，再取倒数得 ITF。相关技术手册特别提醒：默认电压上下限往往过于保守（量级太低、信噪比不足），建议从 Min. RMS 0.02 V、Max. RMS 0.06 V 起步尝试，再按各台系统具体情况调整——辨识量级与正式试验量级差太远时，非线性系统（含间隙、大变形橡胶）的 ITF 代表性会下降。
 
 ![System Identification 工作表：设源电压上下限后点 Start](/images/waveform-replication-sawr/fig19.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 辨识完成后到 System Verification 工作表复核结果：FRF 曲线是否光滑、相干是否够高（共振频段应接近 1，反共振与带外低信噪区允许回落）。这一步本质上是给 ITF 做质检——后面所有驱动换算都建立在它之上，脏的 ITF 会把误差逐次放大。
 
 ![System Verification 工作表：复核 FRF 与相干等辨识结果](/images/waveform-replication-sawr/fig20.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ## 六、四种控制策略：修正发生在什么时候
 
@@ -128,13 +128,13 @@ SAWR Control 工作表点 Arm 再点 Start，状态转 Running。控制界面右
 
 ![SAWR Control 工作表：Arm 与 Start 按钮开始试验](/images/waveform-replication-sawr/fig21.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 试验结束用 Batch Reporting 工作表出报告：选中试验点 Print，File -> Print Options 可选打印机或输出 PowerPoint/Word 版本。报告模板里的 Logo 与页眉图（Logo.bmp、LmsHeading1.bmp）存于安装目录 Application Resources 下，复制到用户目录再改可只影响当前登录。
 
 ![Batch Reporting 工作表一键出报告](/images/waveform-replication-sawr/fig22.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 多输入复现（多个方向或多台激振器）则换用 Testlab Environmental 文件夹里的 Time Waveform Replication（TWR）应用，流程与单轴 SAWR 同构，控制量从标量 ITF 变成矩阵。
 
@@ -182,4 +182,6 @@ SAWR 把实测波形当目标、把控制点反馈当判据：先低量级辨识
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

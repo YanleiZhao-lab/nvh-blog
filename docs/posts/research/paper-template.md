@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 论文复现实验记录模板
 
-> 阅读一篇 NVH 论文，到自己能复现其方法并应用到工程问题，中间有大量细节需要沉淀。本文提供一个结构化的复现记录模板，确保关键信息不遗漏，复现过程可追溯。文中判据与术语按 Simcenter 数字信号处理理论手册对齐。
+> 阅读一篇 NVH 论文，到自己能复现其方法并应用到工程问题，中间有大量细节需要沉淀。本文提供一个结构化的复现记录模板，确保关键信息不遗漏，复现过程可追溯。文中判据与术语按相关技术手册对齐。
 
 ## 一、为什么需要复现模板
 
@@ -129,15 +129,15 @@ $$\Delta f = \frac{F_{max}}{SL} = \frac{F_s/2}{N/2} = \frac{F_s}{N} = \frac{1}{T
 
 这就是数字信号处理的"黄金方程"：频率分辨率由帧长唯一决定——分辨率越细，要求的采集时间越长；帧长越短，分辨率越粗。论文给出频率范围与 FFT 点数时，应据此核算其隐含的帧长是否与工况时长匹配。
 
-![数字信号处理的黄金方程：频率分辨率与帧长互为倒数（图源：网络 侵删）](/images/paper-template/dsp-golden-equation.png)
+![数字信号处理的黄金方程：频率分辨率与帧长互为倒数（图源：网络官方公开资料）](/images/paper-template/dsp-golden-equation.png)
 
-![频率分辨率对谱分析的影响：1.0 Hz 分辨率下 100 Hz 与 101 Hz 两个正弦分量合并为一个峰，0.5 Hz 分辨率下可分开（图源：网络 侵删）](/images/paper-template/dsp-frequency-resolution.png)
+![频率分辨率对谱分析的影响：1.0 Hz 分辨率下 100 Hz 与 101 Hz 两个正弦分量合并为一个峰，0.5 Hz 分辨率下可分开（图源：网络官方公开资料）](/images/paper-template/dsp-frequency-resolution.png)
 
 窗函数的取舍同样有定量判据。汉宁窗（Hanning）用于一般随机数据分析，在频率分辨率与幅值精度之间折中：最大幅值误差为 15%（即使施加窗修正因子后仍如此），泄漏通常限制在原信号两侧各 1.5 条谱线内；若信号在帧内周期截断，则误差为 0。平顶窗（Flattop）幅值精度高，常用于校准。瞬态事件宜用 Tukey 窗，锤击模态试验用指数窗（需注意引入人工阻尼）。
 
-![对随机数据施加汉宁窗：窗函数（中）使数据帧两端平滑过渡到零，抑制截断突变（图源：网络 侵删）](/images/paper-template/dsp-hanning-random-data.png)
+![对随机数据施加汉宁窗：窗函数（中）使数据帧两端平滑过渡到零，抑制截断突变（图源：网络官方公开资料）](/images/paper-template/dsp-hanning-random-data.png)
 
-![汉宁窗的时域形状（左）及其对周期/非周期截断正弦信号的频域影响（右）（图源：网络 侵删）](/images/paper-template/dsp-hanning-shape-leakage.png)
+![汉宁窗的时域形状（左）及其对周期/非周期截断正弦信号的频域影响（右）（图源：网络官方公开资料）](/images/paper-template/dsp-hanning-shape-leakage.png)
 
 ::: info 记录"为什么"
 参数表里最有价值的不是数值，而是"理由"那一列。这些工程经验是论文不会写、但复现必须搞清楚的。
@@ -185,4 +185,6 @@ papers/
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

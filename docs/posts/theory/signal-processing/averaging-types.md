@@ -110,7 +110,7 @@ $$\bar{a}_{\max} = \max_n a_n, \qquad \bar{a}_{\min} = \min_n a_n$$
 ```python
 import numpy as np
 
-# 手册算例：10 Hz 谱线处三帧自功率谱幅值
+# 相关技术手册算例：10 Hz 谱线处三帧自功率谱幅值
 v = np.array([3.0, 5.0, 10.0])
 
 # 1) 能量平均：平方 -> 平均 -> 开方

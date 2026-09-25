@@ -42,7 +42,7 @@ author: "@NVH_Z"
 :::
 
 ::: warning 工程注意
-改组之后扭振分析走的是"振动通道"的路线：zebra 带（斑马带）接缝误差、盘偏心 runout 这些转速侧的误差会原样进入振动数据。清洗要分两类做：毛刺剔除（Time Signal Calculator 的 TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM）针对个别错误脉冲，接缝修正（ZEBRA_MOMENTS_TO_RPM）针对斑马带搭接处——手册明确两者不能互相替代，必要时先后都要做。先清洗 RPM 信号，再改组做谱分析，顺序别反。
+改组之后扭振分析走的是"振动通道"的路线：zebra 带（斑马带）接缝误差、盘偏心 runout 这些转速侧的误差会原样进入振动数据。清洗要分两类做：毛刺剔除（Time Signal Calculator 的 TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM）针对个别错误脉冲，接缝修正（ZEBRA_MOMENTS_TO_RPM）针对斑马带搭接处——相关技术手册明确两者不能互相替代，必要时先后都要做。先清洗 RPM 信号，再改组做谱分析，顺序别反。
 :::
 
 ## 二、纵轴量纲：从 RPM 波动换算成角度

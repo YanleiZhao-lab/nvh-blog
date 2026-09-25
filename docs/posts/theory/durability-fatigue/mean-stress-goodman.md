@@ -5,7 +5,7 @@ author: "@NVH_Z"
 
 # 平均应力修正与 Goodman-Haigh 图：无限寿命的边界在哪里
 
-> 两个悬架零件用同一种钢，交变应力幅都是 150 MPa，一个装在只承受对称循环的试验台上无限寿命验证通过，另一个装在整车上跑了几万公里就出现裂纹——幅值相同、材料相同，寿命凭什么差出一个数量级？差别藏在一个不看波形图根本注意不到的量里：平均应力。试验台上那件的平均应力是零，车上那件还驮着车重，静态拉应力从没撤过。本文把"平均应力如何改写疲劳寿命"这件事讲成一张图：Goodman-Haigh 图把交变幅值与平均应力放在同一张坐标纸上，用屈服强度、强度极限、疲劳极限三个材料常数圈出无限寿命区，任一循环落在外面就不再"永远不坏"。配 15 张 相关技术资料插图与 numpy 数值演示：同一个循环点在 Goodman、Gerber、Soderberg 三条修正线下安全系数 1.30 / 1.56 / 1.13 各不相同。
+> 两个悬架零件用同一种钢，交变应力幅都是 150 MPa，一个装在只承受对称循环的试验台上无限寿命验证通过，另一个装在整车上跑了几万公里就出现裂纹——幅值相同、材料相同，寿命凭什么差出一个数量级？差别藏在一个不看波形图根本注意不到的量里：平均应力。试验台上那件的平均应力是零，车上那件还驮着车重，静态拉应力从没撤过。本文把"平均应力如何改写疲劳寿命"这件事讲成一张图：Goodman-Haigh 图把交变幅值与平均应力放在同一张坐标纸上，用屈服强度、强度极限、疲劳极限三个材料常数圈出无限寿命区，任一循环落在外面就不再"永远不坏"。配 15 张相关技术资料插图与 numpy 数值演示：同一个循环点在 Goodman、Gerber、Soderberg 三条修正线下安全系数 1.30 / 1.56 / 1.13 各不相同。
 
 设计评审上常见这样一幕：载荷组报上来的应力循环幅值 150 MPa，材料手册翻到疲劳极限一栏写着 200 MPa，幅值低于极限，当场宣布"无限寿命，通过"。散会前有人补了一句——这个件还承受 100 MPa 的静态拉伸预载呢。会议室安静了：预载算不算？怎么算？
 
@@ -37,17 +37,17 @@ $$\sigma_m = \frac{\sigma_{\max} + \sigma_{\min}}{2}$$
 
 ![交变应力：循环中摆动部分的幅值](/images/mean-stress-goodman/fig2.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![平均应力：净压缩与净拉伸两种情形](/images/mean-stress-goodman/fig3.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 在 Haigh 图（以他 1917 年引入这对坐标命名）上，交变应力 $\sigma_a$ 画在纵轴、平均应力 $\sigma_m$ 画在横轴，负值（左半轴）为压缩、正值（右半轴）为拉伸——每个循环坍缩成一个点：
 
 ![Haigh 图：纵轴交变应力、横轴平均应力](/images/mean-stress-goodman/fig4.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ::: info 核心概念
 - <strong>交变应力（Alternating Stress，$\sigma_a$）</strong>：循环中摆动部分的幅值，峰值相对均值的偏移量，疲劳损伤的"发动机"
@@ -63,31 +63,31 @@ $$\sigma_m = \frac{\sigma_{\max} + \sigma_{\min}}{2}$$
 
 ![静态应力-应变试验确定屈服强度与强度极限](/images/mean-stress-goodman/fig5.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 把这两个强度画进 Haigh 图：纵轴上 $\pm S_y$ 两点连成屈服包络——任何循环点不得越出，否则循环过程中材料屈服（即便疲劳还没说话，静强度已经输了）。注意这条包络关于纵轴对称，它不区分拉伸与压缩，这正说明它只是"第一道门"。
 
 ![屈服强度与强度极限画入 Goodman-Haigh 图](/images/mean-stress-goodman/fig6.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 第三样来自动态（循环）试验——S-N 曲线：
 
 ![带无限寿命水平段的 S-N 曲线](/images/mean-stress-goodman/fig7.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 S-N 曲线趋于水平的拐点就是疲劳极限 $S_e$。把它标到 Haigh 图纵轴上（$\sigma_m=0$、$\sigma_a=S_e$），我们手里就有了三个锚点：纵轴上的 $S_e$ 与 $S_y$、横轴上的 $S_u$。
 
 ![疲劳极限标入 Goodman-Haigh 图](/images/mean-stress-goodman/fig8.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 无限寿命区由两步连线构成：**拉伸侧**，从纵轴上的疲劳极限 $S_e$ 直连横轴上的强度极限 $S_u$——这条线就是修正 Goodman 线（Modified Goodman Line）；**压缩侧**，把 $S_e$ 水平投影过去——压缩平均应力不削减门槛（更保守的处理甚至允许压缩侧门槛上浮，但工程上常取平推，偏安全）。
 
 ![修正 Goodman 线圈出的无限寿命区](/images/mean-stress-goodman/fig9.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 看形状就懂了物理：拉伸侧的边界是一条下斜直线——平均拉应力越大，能扛的交变幅值越小，两者此消彼长；压缩侧边界是水平线——平均压应力"不加分也不扣分"。整块区域不对称，拉伸侧被削掉一角，正是"拉开裂纹比压闭裂纹危险"的几何表达。回到开头那对悬架零件：试验台零件的循环点落在纵轴上（$\sigma_m=0$）、区内；车上零件的循环点右移到 $\sigma_m=+100$ MPa 处，该处门槛约 167 MPa，幅值 150 MPa 时仍在区内；但只要幅值再大一点、或预载再重一点，点就越线出局。Goodman-Haigh 图把这笔账变成了一眼可见的几何判据。
 
@@ -107,7 +107,7 @@ $$\sigma_{a,\lim} = S_e \left( 1 - \frac{\sigma_m}{S_u} \right), \qquad \sigma_m
 
 $$\sigma_{a,\mathrm{eq}} = \frac{\sigma_a}{1 - \dfrac{\sigma_m}{S_u}} \;(\text{Goodman}), \qquad \sigma_{a,\mathrm{eq}} = \frac{\sigma_a}{1 - \left(\dfrac{\sigma_m}{S_u}\right)^2} \;(\text{Gerber}), \qquad \sigma_{a,\mathrm{eq}} = \frac{\sigma_a}{1 - \dfrac{\sigma_m}{S_y}} \;(\text{Soderberg})$$
 
-等效幅值小于 $S_e$ 即无限寿命成立。三线的定位：**Goodman** 直线偏保守，适合脆性材料与存在焊接缺陷的场景，是机械设计手册的默认选项；**Gerber** 抛物线贴合韧性钢的试验数据均值，用于追求不浪费材料的优化设计；**Soderberg** 把横轴截距从 $S_u$ 收紧到 $S_y$，保证任何循环都不屈服，最保守，用于安全关键件。以本节样例材料、均值 +100 MPa 处的门槛幅值为例：Gerber 给约 194 MPa、Goodman 给约 167 MPa、Soderberg 给约 143 MPa——三条线最多差出 36%，选哪条不是学术趣味，是实打实的重量与成本。
+等效幅值小于 $S_e$ 即无限寿命成立。三线的定位：**Goodman** 直线偏保守，适合脆性材料与存在焊接缺陷的场景，是机械设计相关技术手册的默认选项；**Gerber** 抛物线贴合韧性钢的试验数据均值，用于追求不浪费材料的优化设计；**Soderberg** 把横轴截距从 $S_u$ 收紧到 $S_y$，保证任何循环都不屈服，最保守，用于安全关键件。以本节样例材料、均值 +100 MPa 处的门槛幅值为例：Gerber 给约 194 MPa、Goodman 给约 167 MPa、Soderberg 给约 143 MPa——三条线最多差出 36%，选哪条不是学术趣味，是实打实的重量与成本。
 
 ## 五、安全系数：从原点画一条射线
 
@@ -121,7 +121,7 @@ $$n = \frac{1}{\dfrac{\sigma_a}{S_e} + \dfrac{\sigma_m}{S_u}}$$
 
 ![从原点引射线到修正 Goodman 线计算安全系数](/images/mean-stress-goodman/fig11.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 Simcenter 原文的示例给出了约等于 2 的安全系数（洋红线与绿线长度之比），并指出许多工程应用要求 3 以上。
 
@@ -131,7 +131,7 @@ Simcenter 原文的示例给出了约等于 2 的安全系数（洋红线与绿�
 
 ![全部循环点落入无限寿命区，判定通过](/images/mean-stress-goodman/fig10.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 上图中全部应力循环都落在无限寿命区内——判定通过。只要有一个点在外，无限寿命即不成立，且（第一节铁律）此后疲劳极限资格吊销，应转回有限寿命框架：S-N 曲线 + Miner 累积（见本站《Miner 线性累积损伤》）或应变寿命法。
 ## 七、numpy 演示：三条修正线与安全系数
@@ -192,29 +192,29 @@ Simcenter 体系里这条链有两处官方入口，均在原文与配套视频�
 
 ![Testlab Neo 中加载 TecWare 插件](/images/mean-stress-goodman/fig12.jpg)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![激活 Tecware 页签并加载批处理文件](/images/mean-stress-goodman/fig13.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![选择材料 Excel XML 数据表](/images/mean-stress-goodman/fig14.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![按需为通道加应变偏置以计入装配应变](/images/mean-stress-goodman/fig15.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 **Simcenter Tecware ProcessBuilder**：官方文章附带安装说明与 .pb 流程文件，运行后自动出报告；Tecware ProcessBuilder 可用 Testlab 授权运行。
 
 ![Tecware ProcessBuilder 中的 Goodman 无限寿命流程](/images/mean-stress-goodman/fig17.jpg)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![Tecware 生成的 Goodman 无限寿命 Word 报告](/images/mean-stress-goodman/fig19.jpg)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 报告里的判读规则与本文一致：全部循环（三角形点）落在 Goodman 三角区内即无限寿命；任一点在外则不成立。上游配套：载荷历程由 SCADAS 采集、雨流计数在 Neo 的 Process Designer 功能块或 Tecware 中完成、材料 S-N 数据管理见 Tecware 的 SN-Curve 设置。
 
@@ -235,4 +235,6 @@ Goodman-Haigh 图把"平均应力如何改写疲劳寿命"变成一张几何图�
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

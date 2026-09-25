@@ -67,7 +67,7 @@ $$I(\omega) = -\frac{1}{\omega \rho \Delta r} \, \mathrm{Im}\{G_{AB}(\omega)\}$$
 
 ![双传声器面对面布置，中间用实体隔离垫分隔，三种垫长覆盖不同频段](/images/sound-intensity-probe-power/probe-spacers.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 <strong>指向性为"8 字"。</strong> 声波沿探头轴入射时两传声器压差最大；垂直入射（90 度）时两路信号完全相同，压差为零，声强读数为零。任意入射角 $\theta$ 下测到的是轴向分量，自动乘上 $\cos\theta$——探头与计算合起来构成余弦指向性，极坐标图为 8 字形。反向的用途是<strong>零点搜索法（Null Search）</strong>：让探头轴平行扫过疑似声源所在平面，显示值在正负之间快速跳变的位置，声波必然沿 90 度入射——即声源方位。85 度入射读数为正、95 度为负，指向突变极为灵敏，可快速定位机器的主要辐射面。
 
@@ -99,7 +99,7 @@ $$\frac{I_{est}}{I_{true}} = \left[ \frac{\sin(k\Delta r/2)}{k\Delta r/2} \right
 
 ![箱体面与半球面两种典型测量面](/images/sound-intensity-probe-power/box-hemisphere-surfaces.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 - **箱体面**：平面好划分、好平均，各面部分声功率直接相加
 - **半球面**：对全向声源在自由场中面上声强近似均匀，需要的测点最少
@@ -108,11 +108,11 @@ $$\frac{I_{est}}{I_{true}} = \left[ \frac{\sin(k\Delta r/2)}{k\Delta r/2} \right
 
 ![离散点法：测量面划分网格，每个面元中心测一点](/images/sound-intensity-probe-power/discrete-points.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ![扫描法：探头以恒定速度均匀扫过整个测量面](/images/sound-intensity-probe-power/swept-scan.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 | **维度** | 离散点法（ISO 9614-1） | 扫描法（ISO 9614-2） |
 | --- | --- | --- |
@@ -128,11 +128,11 @@ $$\frac{I_{est}}{I_{true}} = \left[ \frac{\sin(k\Delta r/2)}{k\Delta r/2} \right
 
 ![声强图谱示例：面上声强分布直接暴露主要辐射区域](/images/sound-intensity-probe-power/intensity-map-example.png)
 
-*（图源：网络 侵删）*
+*（图源：网络官方公开资料）*
 
 ## 五、Python 演示
 
-<strong>演示一：隔离垫的有限差分误差曲线。</strong> 用上面的误差公式复算手册频限——50 mm 垫在 1.25 kHz、12 mm 垫在 5 kHz 应落在 1 dB 准则内：
+<strong>演示一：隔离垫的有限差分误差曲线。</strong> 用上面的误差公式复算相关技术手册频限——50 mm 垫在 1.25 kHz、12 mm 垫在 5 kHz 应落在 1 dB 准则内：
 
 ```python
 import numpy as np
@@ -186,4 +186,6 @@ print(f"声功率级      Lw = {Lw:.1f} dB re 1 pW")
 
 ---
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
+*来源：网络官方公开资料，经整理与复核。*
+
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
