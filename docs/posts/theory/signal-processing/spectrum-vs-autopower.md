@@ -193,7 +193,7 @@ Testlab 中的设置：Measurement Function 选 Spectrum，勾选 Phase Referenc
 
 Spectrum 是"带起唱时机的谱"，相位随机时直接平均必衰减；Autopower 是"只记响度的谱"，平方记账越平均越稳；既要相位又要平均，用相位参考谱先统一时机。
 
-来源：网络官方公开资料，经整理与复核。
+*来源：网络官方公开资料，经整理与复核。*
 
 ---
 

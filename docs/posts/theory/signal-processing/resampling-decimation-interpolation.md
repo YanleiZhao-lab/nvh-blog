@@ -193,7 +193,7 @@ print(f"插零升采样: 镜像峰 {f3[np.argmax(X3*mask)]:.0f} Hz")
 
 重采样就是重新定按快门的节奏：降采样先滤后抽，否则高频折成假低频；升采样插零必配低通，否则镜像入谱；分数比率先升后降；角度域分辨率按最低转速定——快门节奏可以改，信息一旦丢就找不回。
 
-来源：网络官方公开资料，经整理与复核。
+*来源：网络官方公开资料，经整理与复核。*
 ---
 
 *作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*

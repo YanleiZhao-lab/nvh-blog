@@ -90,6 +90,8 @@ $$f_{l} = f_c\,2^{-1/(2x)}\,,\qquad f_{u} = f_c\,2^{+1/(2x)}$$
 
 ![等响曲线：同一响度级下各频率所需声压级连成的曲线簇](/images/nvh-metrics/fig6-2-equal-loudness.png)
 
+
+*（图源：网络官方公开资料）*
 <strong>响度（线性标尺）。</strong> phon 是对数标尺，由它导出的线性感知标尺为响度，单位为宋（sone）。这个公式回答的问题是：phon 是对数标尺，“每加 10 翻倍”的感觉没法直接做算术，如何换成一个能加减的线性标尺？以 40 phon（定义为 1 sone）为基准、每 10 phon 翻一番：指数 $(P-40)/10$ 就是“从基准翻了几番”。相关技术手册给出换算式（式 7-2）：
 
 $$S = 2^{(P-40)/10}\quad(\mathrm{sone})$$
@@ -110,6 +112,8 @@ $$S_t = S_m + F\left(\sum_i S_i - S_m\right)$$
 
 ![窄带噪声掩蔽效应：4 kHz、50 dB 纯音在中心 1.2 kHz、90 dB 窄带背景中仍可闻，背景升到 100 dB 后被掩蔽](/images/nvh-metrics/fig7-3-masking-zwicker.png)
 
+
+*（图源：网络官方公开资料）*
 ::: info 算法标准
 响度计算的现行标准为 **ISO 532-1**（Zwicker 方法，对应旧版 ISO 532B）与 **ISO 532-2**（Moore-Glasberg 方法）。工程中以 Zwicker 方法最常用；Stevens Mark VI 对应旧版 ISO 532A-1975。
 :::
@@ -130,8 +134,12 @@ $$S = 0.11\,\frac{\displaystyle\int_0^{24} g(z)\,N'(z)\,z\;\mathrm{d}z}{N}\quad(
 
 ![尖锐度与限带噪声中心频率、带宽的关系：噪声频率越高，尖锐度越高](/images/nvh-metrics/fig7-5-sharpness-band.png)
 
+
+*（图源：网络官方公开资料）*
 ![计算尖锐度的计权函数 g(z)：16 Bark 以下恒为 1，以上按指数规律增长](/images/nvh-metrics/fig7-6-sharpness-weighting.png)
 
+
+*（图源：网络官方公开资料）*
 ```python
 import numpy as np
 

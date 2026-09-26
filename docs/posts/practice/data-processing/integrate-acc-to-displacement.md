@@ -209,4 +209,4 @@ print(f"位移谱 10 Hz 幅值: {abs(D[i10]*H[i10])/len(t)*2*1e6:.1f} um (理论
 
 *作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
 
-来源：网络官方公开资料，经整理与复核。
+*来源：网络官方公开资料，经整理与复核。*
