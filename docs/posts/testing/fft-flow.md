@@ -278,7 +278,7 @@ FFT 的每条谱线上有两个量：幅值与相位；谱线数等于数据块�
 - **Oppenheim & Schafer** — Discrete-Time Signal Processing
 - **Bendat & Piersol** — Random Data: Analysis and Measurement Procedures
 - **Brüel & Kjær** — Primer on FFT analysis
-- **Siemens 公开技术资料** — Digital Signal Processing 基础系列
+- **公开技术资料** — Digital Signal Processing 基础系列
 
 ---
 

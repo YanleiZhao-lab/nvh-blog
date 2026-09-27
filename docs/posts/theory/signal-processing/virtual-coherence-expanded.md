@@ -166,7 +166,7 @@ ch4: γ²v(PC1)=0.723  γ²v(PC2)=0.277  和=1.000
 ## 参考
 
 - **相关技术手册** - 第 3.2 节"相干函数：常相干、重相干、偏相干、虚拟相干；主分量谱"（式 3-16 至 3-20）
-- **Simcenter Testlab 帮助文档** - Principal Component Analysis / Virtual Coherence 相关处理方法
+- **相关技术文档** - Principal Component Analysis / Virtual Coherence 相关处理方法
 - 本站《[主分量谱 PCS：多参考数据的降维视图](/posts/theory/signal-processing/principal-component-spectrum.html)》 - PCS 的完整推导与 CMIF 的关系
 - 本站《[相干函数：评估频响测量质量的统计指标](/posts/theory/signal-processing/coherence-function.html)》 - 四种相干的定义与低相干成因分析
 
