@@ -193,6 +193,7 @@ print(f"原始峰谷 {len(pv)} 点 -> 值域滤波 R=30 后 {len(pvf)} 点")
 ```python
 import numpy as np
 
+# 本块承接上一代码块的输出 pvf（值域滤波后的峰谷序列）；单独运行请先执行上一块
 def rainflow(pv):
     """四点法雨流：返回(完整循环, 残数半循环)，各为(值域, 均值)"""
     stack, cyc = [], []
