@@ -4,12 +4,15 @@ import { generateSidebar } from 'vitepress-sidebar'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'Test',
+  title: 'NVH Test',
   description: '工程研究与知识社区',
   lastUpdated: true,
   appearance: 'dark',
   base: '/blog/',
   cleanUrls: false,
+  sitemap: {
+    hostname: 'https://www.nvhtest.cn/blog/',
+  },
 
   head: [
     ['link', { rel: 'icon', href: '/logo.svg' }],
@@ -18,7 +21,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/logo.svg',
-    siteTitle: 'Test',
+    siteTitle: 'NVH Test',
 
     // 未发布文章的预告链接白名单（写作 cron 分批发布系列文时防构建失败）
     // 发布后自动变真链接；真死链仍会被构建拦截
@@ -93,7 +96,7 @@ export default defineConfig({
 
     footer: {
       message: '基于 VitePress + 飞书同步 + Docker 部署',
-      copyright: `Copyright © 2024-${new Date().getFullYear()} Test`,
+      copyright: `Copyright © 2024-${new Date().getFullYear()} NVH Test`,
     },
 
     sidebarMenuLabel: '目录',
