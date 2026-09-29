@@ -138,7 +138,7 @@ function updateHomePageStyle(value: boolean) {
   if (value) {
     if (homePageStyle) return
     homePageStyle = document.createElement('style')
-    homePageStyle.innerHTML = `:root { animation: rainbow 12s linear infinite; }`
+    homePageStyle.innerHTML = `:root { --vp-home-hero-name-background: none; }`
     document.body.appendChild(homePageStyle)
   } else {
     if (!homePageStyle) return

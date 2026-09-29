@@ -7,7 +7,7 @@ export default defineConfig({
   title: 'NVH Test',
   description: '工程研究与知识社区',
   lastUpdated: true,
-  appearance: 'dark',
+  appearance: 'light',
   base: '/blog/',
   cleanUrls: false,
   sitemap: {
@@ -16,7 +16,7 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', href: '/logo.svg' }],
-    ['meta', { name: 'theme-color', content: '#1f6feb' }],
+    ['meta', { name: 'theme-color', content: '#f7f8f7' }],
   ],
 
   themeConfig: {

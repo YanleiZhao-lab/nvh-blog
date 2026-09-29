@@ -9,8 +9,9 @@ hero:
   text: "工程研究与知识社区"
   tagline: Noise · Vibration · Harshness · 耐久疲劳 — 171 篇工程文章持续更新
   image:
-    src: /back.svg
-    alt: NVH Test
+    src: /nasa-wing-test.webp
+    alt: NASA Armstrong 工程人员准备结构振动测试
+  # 首屏影像：NASA Armstrong / Steve Freeman，公共领域。
   actions:
     - theme: brand
       text: 阅读博客
