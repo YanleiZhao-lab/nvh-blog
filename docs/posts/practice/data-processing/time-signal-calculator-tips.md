@@ -51,7 +51,7 @@ Conditioning 组里的 FILTER_LP、FILTER_HP、FILTER_BP 分别对应低通（lo
 两个容易出问题的细节：
 
 - 菜单里的 **Sample Frequency** 只用于设定滤波器形状的显示频率范围，对滤波器本身的性能和属性没有影响——不能指望调整它改变截止特性；
-- 点 **Show** 按钮可以预览滤波器的幅频、相位与群延迟（group delay）形状，确认无误再执行。IIR 滤波器在截止频率附近群延迟最大，FIR 各频率延迟恒定——这是相位敏感场合的选型依据，详见《[FIR 与 IIR：滤波器怎么选](../../theory/signal-processing/fir-vs-iir.html)》。
+- 点 **Show** 按钮可以预览滤波器的幅频、相位与群延迟（group delay）形状，确认无误再执行。IIR 滤波器在截止频率附近群延迟最大，FIR 各频率延迟恒定——这是相位敏感场合的选型依据，详见《[同样截止 150 Hz，两款低通为什么一个时延恒定、一个时延漂移？](../../theory/signal-processing/fir-vs-iir.html)》。
 
 ### 任务 2：通道运算——相减、平均、积分
 
