@@ -41,18 +41,10 @@
   --vp-button-brand-bg: #1f4f82;
   --vp-button-brand-hover-bg: #28639b;
 }
-/* The home hero still uses VitePress' normal layout, with the main site's image. */
-.VPHome .VPHero .image-container { border-radius: 2px; overflow: hidden; }
+/* Preserve the original VitePress homepage illustration. */
+.VPHome .VPHero .image-container { max-width: 100%; }
 .VPHome .VPHero .image-bg { display: none; }
-.VPHome .VPHero .image-src {
-  max-width: min(100%, 520px);
-  max-height: 340px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 2px;
-  box-shadow: 0 12px 32px rgba(20, 45, 57, .13);
-}
+.VPHome .VPHero .image-src { max-width: 100%; width: auto; height: auto; object-fit: contain; box-shadow: none; border-radius: 0; }
 .VPHome .VPHero .name { font-weight: 600; letter-spacing: -.035em; }
 .VPHome .VPHero .text { letter-spacing: -.025em; }
 .VPHome .VPHero .tagline { max-width: 560px; color: var(--vp-c-text-2); text-wrap: pretty; overflow-wrap: anywhere; }
