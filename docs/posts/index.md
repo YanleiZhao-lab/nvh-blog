@@ -66,7 +66,7 @@ title: "📖 全部文章"
 - [倍频程：人耳的频率分辨与计权](theory/acoustics-basics/octaves-hearing.html) — 频率轴从物理等间距改为听觉等间距：带宽逐带翻倍、白噪声每带约升 3 dB；滤波法倍频程不是 FFT 分组求和，A 计权 1 kHz 零点低频显著衰减，dBA 对低频源偏乐观
 - [同一台电机 73 dB 对 78 dB，为什么两个数都对？——声压、声功率、声强的定义、换算与选用判据](theory/acoustics-basics/pressure-power-intensity.html) — 暖气类比说明三个量的物理图像：声压是某点的温度、声功率是暖气瓦数、声强是有方向的热流；Lw 恒 103 dB 而声压每倍距降 6 dB，验收条款必须写明是哪个量的分贝值
 - [声学量Q：体积加速度的物理意义](theory/acoustics-basics/acoustic-quantity-q.html) — 声学系统的"力"：面积×加速度的面积分，高频相位相消要求细分区；Q-source 互易法靠 P/F≡A/Q（均为 1/m²）把 12 次敲击合成 1 次测量，标定单决定通道设置
-- [dB 与对数刻度：为什么声学量都用分贝](theory/acoustics-basics/decibel-basics.html) — 分贝不是单位而是对数比值，功率类 10 lg 与幅值类 20 lg 的区别、参考值、能量叠加与 A 计权
+- [同一台电机为什么测出 62、68、55 三个都对的分贝值？——dB 与对数刻度](theory/acoustics-basics/decibel-basics.html) — 分贝不是单位而是对数比值，功率类 10 lg 与幅值类 20 lg 的区别、参考值、能量叠加与 A 计权
 - [隔声量测量：传声损失TL的实验室方法](theory/acoustics-basics/sound-transmission-loss.html) — TL = 10 lg(Wi/Wt) 且强依赖频率；3% 裸露或 1% 开孔即可把 30 dB 材料的等效 TL 降到 20 dB 以下，首个泄漏造成的损失最大；阻抗管两负载法测消声器管路、双室声强法测前壁板并给出泄漏云图、双混响室声压法测建筑规范件
 - [声强法测声功率：双传声器探头与ISO 9614扫描](theory/acoustics-basics/sound-intensity-probe-power.html) — 声强对封闭面积分直接得声功率，无需消声室，稳态背景噪声高 10 dB 也能测准到 1 dB；探头本质是欧拉方程加有限差分，分析仪算互谱虚部；隔离垫定频限（50 mm 到 1.25 kHz、12 mm 到 5 kHz），ISO 9614-2 扫描快、9614-1 离散点可仲裁，测量同时获得的声强图谱常是定位问题的关键数据
 - [声强测出的数据敢不敢用？——声场指数与动态性能指数的验收判据](theory/acoustics-basics/sound-field-indicators.html) — 声强数据是否可用，ISO 9614-1 规定逐项核验指标：残余声强由通道相位失配决定（δpIo = 10lg(kd/φe)，低频 kd 减小使其下降），扣除偏差因子 χ 得动态性能指数 Ld = δ−χ（精密级与工程级 χ 取 10 dB，观察级 7 dB）；F1~F4 分别量化时间稳定性、声压与声强偏差、外噪声源贡献与空间不均匀性；判据一 Ld−F2>0 逐频带核验测量链，判据二 N>C·F4² 核验网格密度（1-4 kHz 带精密级 C 达 57，A 计权 C=8 属观察级）；F3−F2 超 3 dB 须先处理外噪声源再复测
