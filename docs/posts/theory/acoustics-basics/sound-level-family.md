@@ -1,11 +1,19 @@
 ---
-title: "声级家族全解：LAeq/LAS/LAF/SEL 各是什么"
+title: "同一段怠速录音，两位工程师为什么报出差 4 dB 的两个声级？——LAeq/LAS/LAF/SEL 声级家族全解"
 author: "@NVH_Z"
 ---
 
-# 声级家族全解：LAeq/LAS/LAF/SEL 各是什么
+# 同一段怠速录音，两位工程师为什么报出差 4 dB 的两个声级？——LAeq/LAS/LAF/SEL 声级家族全解
 
 > 同一段枪噪声录音，声级软件可以输出 LAF、LAS、Limpulse、LAeq、SEL 五条曲线，数值各不相同，却没有一个算错。声级指标是一族量：频率计权决定哪些频率计入，时间计权决定读数跟随信号的速度，等效级把一段时间折算成单一数，暴露级把事件能量归一到 1 秒。本文逐个推导 LAF/LAS/Limpulse 的指数平均公式、LAeq 的线性能量平均、SEL/LAE 的 1 秒归一，给出各指标在 Simcenter Testlab 与 Testlab Neo 中的计算设置，以及什么时候看哪个数的选择判据。
+
+::: tip 30 秒速览
+- **一句话**：同一段录音，声级软件为什么能读出五个互不相同的分贝数——哪个才是“真值”？
+- **类比**：声级家族就像家里的水表和电表——水表指针摆得快、看的是“此刻”，电表月底抄总数、算的是“总账”，两种表都没坏，回答的是不同问题。
+- **关键数字**：同一记关门声，慢挡读 61 dB(A)、脉冲挡读 71 dB(A)，差 10 dB 却一个都没错——差的是“记性长短”，不是精度。
+- **结论**：五个数都是真值，只是分工不同：看眼前用 LAF/LAS，算总账用 LAeq，给不同时长的事件比大小用 SEL；报数字必须连口径一起报。
+:::
+
 
 同一辆测试车、同一段怠速录音，两位工程师报出的声级却差了 4 dB：一位读的是声级计屏幕上不断跳动的 LAF 瞬时值，另一位抄的是软件自动算出的整个工况段 LAeq。数字都对，口径不同。更常见的纠纷在单次事件上：一个关门声，用 Slow 挡测得 61 dB(A)，用 Impulse 挡测得 71 dB(A)，供应商与主机厂各执一词——差的不是测量误差，是时间计权把 50 毫秒的脉冲"摊薄"还是"抓牢"。要听懂这些数字为什么合法地不一致，得回到声级指标家族的分叉点：频率计权与时间计权两个旋钮。
 
@@ -25,7 +33,7 @@ author: "@NVH_Z"
 
 ![从模拟表针到数字读出的声级计](/images/sound-level-family/fig1_slm_history.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 图 1 中老式声级计靠指针摆幅指示声级，读数快慢由表针的机械惯性决定；现代数字声级计用算法复现同样的响应特性，模拟时代的旋钮在软件里变成了参数：
 
@@ -43,14 +51,17 @@ author: "@NVH_Z"
 
 ### 公式与物理意义
 
-LAF 与 LAS 共用一个公式，区别只在时间常数。对瞬时 A 计权声压做指数加权积分，取平方根再取对数，得到时刻 t 的计权声级。相关公开技术资料原文给出的形式如图 2：积分号内是计权声压平方，指数因子即时间计权，tau 是时间常数（Slow 取 1 s，Fast 取 0.125 s），p0 是参考声压 20 微帕。
+LAF 与 LAS 共用一个公式，区别只在时间常数。对瞬时 A 计权声压做指数加权积分，取平方根再取对数，得到时刻 t 的计权声级。相关公开技术资料给出的形式如图 2：积分号内是计权声压平方，指数因子即时间计权，tau 是时间常数（Slow 取 1 s，Fast 取 0.125 s），p0 是参考声压 20 微帕。
 
 ![LAF 与 LAS 的计算公式](/images/sound-level-family/fig3_eq_laf_las.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 把公式里的指数权重展开看物理意义：它给过去的声音打折扣。离当前时刻 t 越久的声样本，权重按指数衰减——发生在当前时刻的声音权重 100%，一个时间常数前的权重降到约 37%，两个时间常数前约 14%，三个时间常数前只剩 5%。所以指数平均是一种有记忆的均方估计器：Fast 挡记忆窗口 125 ms，读数跳得快；Slow 挡记忆窗口 1 s，读数稳。
 **导读**：这个公式回答的问题是"带记忆的声级怎么算"——当前时刻 t 的读数由多长的历史决定？其中指数因子 $e^{-(t-\xi)/\tau}$ 对应物理里的"遗忘速度"：发生得越早的声音权重越低，tau 越大记忆越长（Fast 的 0.125 s 只记得住刚刚半秒内的事，Slow 的 1 s 能记 5 秒的旧账）。
+
+<details>
+<summary>推导：LAF/LAS 指数计权声级的完整积分式（点击展开）</summary>
 
 用数学语言写全（式 1）：
 
@@ -60,13 +71,16 @@ $$
 
 其中 p_A 是瞬时 A 计权声压（帕），xi 是积分区间内的时刻（秒），d-xi 是积分微元。方括号内是一个加权均方声压：离当前 t 越远的 xi，其声压平方被指数因子压得越低。这个积分从负无穷积到当前时刻 t，工程上等价于一个平方域的一阶低通滤波器，时间常数就是 tau。
 
+</details>
+
+
 ### 三挡响应对比
 
 图 3 是同一段声信号（黑）激励下三种时间计权的输出叠加：LAF（红）上升最快、回落也快；LAS（黄）爬坡到满幅要将近 5 秒、衰减也慢；Limpulse（紫）上升最快、衰减最慢。
 
 ![LAF/LAS/Limpulse 对同一信号的响应](/images/sound-level-family/fig2_time_weighting_response.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 三挡的响应参数来自声级计标准（IEC 651 / ANSI S1.4 一脉），数值为：
 
@@ -82,7 +96,7 @@ Limpulse 的不对称设计有历史原因：它本质是峰值检波器（Peak 
 
 ![Testlab 输出的 LAF/LAS/Limpulse 曲线](/images/sound-level-family/fig4_laf_las_limpulse_output.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 工程判据
 
@@ -102,11 +116,11 @@ $$
 L_{Aeq,T} = 10\lg\left[\frac{1}{T}\int_{t_1}^{t_2}\left(\frac{p_A(\xi)}{p_0}\right)^2 d\xi\right], \quad T = t_2 - t_1
 $$
 
-相关公开技术资料原文公式如图 5。
+相关公开技术资料公式如图 5。
 
 ![LAeq 的计算公式](/images/sound-level-family/fig5_eq_laeq.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 物理意义：LAeq 是与实际时变声在相同时间 T 内携带相同声能量的稳态声级。一个在 70 与 90 dB(A) 之间剧烈波动的车间，其 LAeq 由能量主导——90 dB 段占的时间再短也主导结果，因为能量按 10 的 L/10 次方增长，90 dB 的能量是 70 dB 的 100 倍。
 
@@ -120,7 +134,7 @@ Simcenter Testlab 对 LAeq 提供两种输出（图 6）：<strong>LAeqT（Cumul
 
 ![Testlab 的 LAeqT 累积与 LAeqt 瞬时输出](/images/sound-level-family/fig6_laeq_cumulative_instant.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两者的分工：LAeqT 是从开始测到现在总账折算的等效级，时间越长越稳定，适合报告单一数值；LAeqt 反映眼下这一小段像什么，适合定位时间轴上的事件（如车辆驶过时的峰值区段）。做整车通过噪声时，窗内声级随车辆接近与远离起伏，看 LAeqt 找事件，取 LAeqT 出结果。
 
@@ -140,7 +154,7 @@ $$
 
 ![LAE 的计算公式](/images/sound-level-family/fig7_eq_lae.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **导读**：这个换算式回答的问题是"总账和归一账差多少"——同一事件，LAeq 除以真实时长、LAE 除以 1 秒，差别就是时长比的对数。其中 $10\lg(T/T_0)$ 对应物理里的"稀释修正"：账期 T 拉长 10 倍，平均级被稀释 10 dB，归一级不变。
 
@@ -156,7 +170,7 @@ $$
 
 ![Testlab 的 LAET 累积与 LAEt 瞬时输出](/images/sound-level-family/fig8_lae_sel_output.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 工程判据
 
@@ -188,6 +202,11 @@ LAeq 与 SEL 混标。一个 30 s 测量得到 LAeq = 75 dB(A)，直接当成声
 
 ## 六、Python 演示：同一段信号五种指标各得多少
 
+完整数值实验代码折叠存放，结论先行：先读下方运行结果要点，需要复现或核对某一挡时间常数时再展开。
+
+<details>
+<summary>数值实验：同一段信号五种指标各得多少（28 行）</summary>
+
 ```python
 import numpy as np
 
@@ -218,6 +237,8 @@ print("LAS 平稳段读数 = %.1f dB" % np.median(expo(p[t < 3.5], 1.0)))
 print("LAE(1s归一)   = %.1f dB" % (spl(p) + 10*np.log10(10.0)))
 ```
 
+</details>
+
 运行结果要点：50 ms 的 90 dB 短脉冲只占 10 s 测量的 0.5%，却把 LAeq 从 60 抬到 68.0 dB——能量按 10 的 L/10 次方计权，短促高声压主导总能量；Limpulse 峰值 89.1 dB 比 LAF 峰值 85.5 dB 高 3.6 dB，35 ms 上升时间常数抓得住毫秒级突升，125 ms 平均帧则把脉冲摊薄；LAS 平稳段读数 59.2 dB 贴合背景；LAE 比 LAeq 恰好高 10 lg 10 = 10 dB，即 1 秒归一的换算差。
 
 ## 七、在 Simcenter Testlab 里算这些量
@@ -228,7 +249,7 @@ print("LAE(1s归一)   = %.1f dB" % (spl(p) + 10*np.log10(10.0)))
 
 ![Testlab Neo 采集界面实时声级监看](/images/sound-level-family/fig9_neo_online.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### Testlab Neo Process Designer：后处理复算
 
@@ -236,7 +257,7 @@ print("LAE(1s归一)   = %.1f dB" % (spl(p) + 10*np.log10(10.0)))
 
 ![Testlab Neo SPL 方法的声级类型选项](/images/sound-level-family/fig10_neo_spl_method.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: warning 增量与末点不到头
 暴露类指标（LAE/SEL）的输出增量影响累积总量与终点时刻：9.862 s 录音用 0.1 s 增量，最后一个输出点只到 9.8 s；用 0.005 s 增量才能到 9.860 s。峰值落在两个输出点之间时，勾选 Maximum hold 可在下一采样点补报。
@@ -250,15 +271,15 @@ Classic 的跟踪增量由转速步长等跟踪参数决定，输出点之间可
 
 ![Testlab Classic 在线 Level Calculation 标签页](/images/sound-level-family/fig11_classic_level_calc.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Testlab Classic 跟踪增量设置](/images/sound-level-family/fig12_classic_tracking.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![Testlab Classic Throughput Processing 声级计算设置](/images/sound-level-family/fig13_classic_throughput.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 一句话记住
 
@@ -273,6 +294,6 @@ Classic 的跟踪增量由转速步长等跟踪参数决定，输出点之间可
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
