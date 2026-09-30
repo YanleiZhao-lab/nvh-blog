@@ -62,7 +62,7 @@ title: "📖 全部文章"
 - [colormap 上那族不穿零频的曲线，为什么不是机械阶次？——PWM 开关噪声的识别、成因与整改](theory/acoustics-basics/pwm-switching-noise.html) — 两条识别判据：曲线族不穿过零频（机械阶次转速归零必落地）、表观阶次 60f/n 随转速漂移（5000 Hz 在 600–12000 rpm 折算 500–25 阶）；成因是占空比调制产生的调幅边带，谱线位于 n·fsw±k·fe、相邻间距等于电频率并随转速散开；幅值可达电机本体水平；整改二选一：提高基频移出听阈（开关损耗与效率为代价）或随机化 PWM 摊能量（示例峰值降至约 5%、带外能量升约 4 倍，电机本体频率特征不变）
 - [声品质评价指标：响度、尖锐度、粗糙度](theory/acoustics-basics/sound-quality-metrics.html) — dB(A) 相同声音感受可以完全不同：宋标尺让响度可线性沟通（每 +10 方翻倍），Zwicker 法沿 Bark 临界带算局部响度、显式计入掩蔽；尖锐度 acum 盯高频占比（g(z) 高于 16 Bark 指数抬升）；粗糙度 asper 与抖动 vacil 以调制频率 15～20 Hz 分界，各在 70 Hz 与 4 Hz 最敏感；电驱呜呜声、关门声这类"不响但烦"的问题就该用这组指标
 - [清晰度指数与语言干扰级：语言频带内的可懂度评价](theory/acoustics-basics/articulation-index.html) — 决定"话能不能听清"的不是 dBA 是语言频带：AI 按 1/3 倍频程计权算可懂度余额（私密上限 0.05），PSIL/ANSI-SIL 三四个带级平均快速分级（口径差 1~2.5 dB 不可混比）；67 dBA 轰鸣车与 56 dBA 风噪车 PSIL 打平、2 kHz 带信噪比 6 dB vs 14 dB 的 numpy 对照
-- [A计权：为什么 40 方等响曲线成了标准](theory/acoustics-basics/a-weighting.html) — 40 方等响曲线的工程化身：1 kHz 零点、低频重罚、1 k~6 kHz 微放；总值在能量域合成，低频源掉 20 dB 而啸叫反涨 1 dB，dBA 对低频偏乐观，低频问题须配 Linear/C 计权交叉判读
+- [dBA 更低却更吵？——A 计权曲线给低频打的折从哪来](theory/acoustics-basics/a-weighting.html) — 40 方等响曲线的工程化身：1 kHz 零点、低频重罚、1 k~6 kHz 微放；总值在能量域合成，低频源掉 20 dB 而啸叫反涨 1 dB，dBA 对低频偏乐观，低频问题须配 Linear/C 计权交叉判读
 - [倍频程：人耳的频率分辨与计权](theory/acoustics-basics/octaves-hearing.html) — 频率轴从物理等间距改为听觉等间距：带宽逐带翻倍、白噪声每带约升 3 dB；滤波法倍频程不是 FFT 分组求和，A 计权 1 kHz 零点低频显著衰减，dBA 对低频源偏乐观
 - [同一台电机 73 dB 对 78 dB，为什么两个数都对？——声压、声功率、声强的定义、换算与选用判据](theory/acoustics-basics/pressure-power-intensity.html) — 暖气类比说明三个量的物理图像：声压是某点的温度、声功率是暖气瓦数、声强是有方向的热流；Lw 恒 103 dB 而声压每倍距降 6 dB，验收条款必须写明是哪个量的分贝值
 - [声学量Q：体积加速度的物理意义](theory/acoustics-basics/acoustic-quantity-q.html) — 声学系统的"力"：面积×加速度的面积分，高频相位相消要求细分区；Q-source 互易法靠 P/F≡A/Q（均为 1/m²）把 12 次敲击合成 1 次测量，标定单决定通道设置
