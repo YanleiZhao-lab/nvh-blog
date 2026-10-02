@@ -179,6 +179,8 @@ $$
 \mathrm{STL} = L_{P_i} - L_{I_t} - 6.18 \quad \mathrm{dB}
 $$
 
+</details>
+
 坝的比喻在这里同样成立：入射侧的“上游水位”用声压级读，透射侧的“漏水量”用声强级读，6.18 dB 是两岸标尺刻度不一致的换算零头。
 
 ![混响室与消声室布置，样件装于两室之间](/images/sound-transmission-loss/fig9-two-room-intensity.png)
