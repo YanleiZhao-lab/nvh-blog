@@ -33,7 +33,7 @@ title: "📖 全部文章"
 - [平均技术对比：同一组数据，五种平均差出三倍](theory/signal-processing/averaging-types.html) — 3g/5g/10g 三帧数据五种平均从 3 到 10 g：能量平均平方放大高幅值帧（6.68 g）、线性平均保相位、指数平均顺序敏感（3,5,10 得 7 g 而 5,10,3 得 5.25 g）、Max/Min 是峰值保持不收敛；声学默认能量平均、worst-case 用 Maximum、EWF 是记忆长度旋钮
 - [谱与自功率谱的区别](theory/signal-processing/spectrum-vs-autopower.html) — 只差一个复共轭乘法：Spectrum 保相位、Autopower 消相位，多帧平均时一个幅值衰减一个稳定收敛，ODS 等既要相位又要平均的场合用相位参考谱
 - [混叠：采样定理的约束与抗混叠滤波器设计](theory/signal-processing/aliasing.html) — 高于带宽的频率镜像折叠成假低频，Span 只有 80% 带宽，带宽按最高关心频率的 1.25 倍设置
-- [功率谱密度 PSD：随机信号为什么必须用它](theory/signal-processing/psd-explained.html) — Autopower 幅值随分辨率变化，除以 Δf 后随机数据可跨分辨率对比；正弦信号正好相反，谐波幅值判读用 Autopower
+- [同一份路噪数据，换台分析仪怎么就差出 8 倍？——功率谱密度 PSD 与随机信号的密度表述](theory/signal-processing/psd-explained.html) — Autopower 幅值随分辨率变化，除以 Δf 后随机数据可跨分辨率对比；正弦信号正好相反，谐波幅值判读用 Autopower
 - [窗函数修正系数：幅值校正 vs 能量校正](theory/signal-processing/window-correction-factors.html) — 幅值系数 Ka=N/sum(w) 与能量系数 Ke=sqrt(N/sum(w^2)) 从汉宁窗定义分步推导（相干增益 1/2 与均方增益 3/8）：汉宁窗 2.00/1.633、平顶窗 4.18/2.26 全系数表；选错模式 RMS 偏差 +22.5%（Ka/Ke=1.225）；Testlab Automatic 按数据类型分配、RMS 计算后台换用能量校正值
 - [RMS 与总级：从时域到频域的能量守恒](theory/signal-processing/rms-overall-level.html) — 谱的 RMS 就是总级：谱线平方和开根号，Parseval 定理保证时域频域对得上；手动复算须核对线性单位、RMS 格式、能量校正三件事，Peak 格式硬算偏大 3 dB
 - [吉布斯现象：为什么陡峭滤波器会振铃](theory/signal-processing/gibbs-phenomenon.html) — 时域突变需要无限带宽，实测必然截断，边沿就留下约 9% 的振铃过冲：截断量决定振铃时长、滤波器陡度决定振铃幅度，压振铃要靠缓滚降 Bessel 而不是加带宽
