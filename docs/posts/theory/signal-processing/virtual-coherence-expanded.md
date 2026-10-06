@@ -17,7 +17,7 @@ author: "@NVH_Z"
 
 ## 二、主分量：先造出一组互不相关的"虚拟源"
 
-虚拟相干的分母与分子都建立在主分量之上，所以先把主分量谱（Principal Component Spectrum, PCS）的骨架立起来。这里只列展开虚拟相干所需的最小集合，完整的推导、与 CMIF 的关系、特征值断崖读源数的用法，见《[主分量谱 PCS：多参考数据的降维视图](/posts/theory/signal-processing/principal-component-spectrum.html)》。
+虚拟相干的分母与分子都建立在主分量之上，所以先把主分量谱（Principal Component Spectrum, PCS）的骨架立起来。这里只列展开虚拟相干所需的最小集合，完整的推导、与 CMIF 的关系、特征值断崖读源数的用法，见《[四个通道四个峰，独立振源到底有几个？——主分量谱 PCS](/posts/theory/signal-processing/principal-component-spectrum.html)》。
 
 **导读**：这个公式回答的问题是"N 个混在一起的通道，如何线性重组为一组两两不相关的信号"——其中 $[U]$ 对应物理里的"分声部归队表"：每列是一个虚拟源在各通道上的混合比例（该源传到各测点的相对大小与相位），酉矩阵保证重组不放大也不缩小任何成分。
 
@@ -167,7 +167,7 @@ ch4: γ²v(PC1)=0.723  γ²v(PC2)=0.277  和=1.000
 
 - **相关技术手册** - 第 3.2 节"相干函数：常相干、重相干、偏相干、虚拟相干；主分量谱"（式 3-16 至 3-20）
 - **相关技术文档** - Principal Component Analysis / Virtual Coherence 相关处理方法
-- 本站《[主分量谱 PCS：多参考数据的降维视图](/posts/theory/signal-processing/principal-component-spectrum.html)》 - PCS 的完整推导与 CMIF 的关系
+- 本站《[四个通道四个峰，独立振源到底有几个？——主分量谱 PCS](/posts/theory/signal-processing/principal-component-spectrum.html)》 - PCS 的完整推导与 CMIF 的关系
 - 本站《[两遍锤击测出的 FRF 差 4 dB，信哪一次？——相干函数逐频率验收测量质量](/posts/theory/signal-processing/coherence-function.html)》 - 四种相干的定义与低相干成因分析
 
 ---
