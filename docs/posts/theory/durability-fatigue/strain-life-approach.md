@@ -51,7 +51,7 @@ author: "@NVH_Z"
 
 *（图源：网络 侵删）*
 
-一个必须先说清的边界：局部应力-应变时间历程只能预测**测点那一个位置**的寿命，换一个位置就得换一片应变片。想知道结构上其他位置会不会先坏，要么补测更多应变片，要么上有限元模型——但有限元是线性的，输出的弹性应力需要经 Neuber 法则换算成弹塑性应变才能进入本流程（详见[《Neuber 法则》](neubers-rule.html)）。
+一个必须先说清的边界：局部应力-应变时间历程只能预测**测点那一个位置**的寿命，换一个位置就得换一片应变片。想知道结构上其他位置会不会先坏，要么补测更多应变片，要么上有限元模型——但有限元是线性的，输出的弹性应力需要经 Neuber 法则换算成弹塑性应变才能进入本流程（详见[《弹性算出 750 MPa，缺口根部真实应力为什么只有 426？》](neubers-rule.html)）。
 ## 二、第一步：从实测应变到局部应力-应变历程
 
 起点是使用现场或台架上应变片直接测到的应变时间历程。实验上直接测应变比测应力容易得多——应变片贴上就有，应力却没有对应的传感器。但算疲劳损伤需要同一位置的应力与应变配对，于是缺的那一半——应力——要靠材料本构关系补出来。
@@ -230,7 +230,7 @@ for sm in (0.0, 150.0, -150.0):               # 平均应力扫描：SWT 损伤�
 
 ## 八、Simcenter Testlab 中的位置
 
-- **Testlab Neo Process Designer**：Durability 方向的 **Strain Life** 方法即本文全流程的落地（Input Type 三选一：实测应变直通；载荷或应力输入先走 Neuber 换算，见[《Neuber 法则》](neubers-rule.html)）；输出即 Life Curve 与 Life Statistics（Design Point Block 单值）。
+- **Testlab Neo Process Designer**：Durability 方向的 **Strain Life** 方法即本文全流程的落地（Input Type 三选一：实测应变直通；载荷或应力输入先走 Neuber 换算，见[《弹性算出 750 MPa，缺口根部真实应力为什么只有 426？》](neubers-rule.html)）；输出即 Life Curve 与 Life Statistics（Design Point Block 单值）。
 - **材料库**：EN 曲线参数（疲劳强度系数、指数与疲劳延性系数、指数，加弹性模量与 Ramberg-Osgood 参数）与 SWT/Morrow 选择都在方法属性里配置；PN 曲线由 EN 曲线按所选公式自动导出，无需单独输入。
 - **配套阅读**：公开技术资料 "Performing Strain Life Analysis in Simcenter Testlab Neo" 与 "Simcenter Testlab Neo: Strain Life Method" 两篇给出逐步操作；循环计数细节见[《雨流计数》](../signal-processing/rainflow-counting.html)，平均应力的 S-N 侧对照见[《平均应力修正与 Goodman-Haigh 图》](mean-stress-goodman.html)。
 
