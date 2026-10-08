@@ -141,8 +141,6 @@ check("complex", psi_complex)
 check("flipped", psi_flipped)
 ```
 
-```
-
 </details>
 
 ![三条振型的 MPC、MPD、MOV 计算结果对比](/images/modal-validation-mpc-mpd-mov/metrics-comparison.png)
