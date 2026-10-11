@@ -68,6 +68,7 @@ $$
 
 <details>
 <summary>数值实验：物理域组装、VPA 模态域装配与截断对比，46 行（点击展开）</summary>
+
 ```python
 import numpy as np
 np.random.seed(3)
@@ -116,6 +117,7 @@ lt = eig_nc(Phit.T@M@Phit, Phit.T@C@Phit, Phit.T@K@Phit)
 print("截断  各留 1 阶:  f =", np.round(np.abs(lt)/2/np.pi,2),
       "Hz  zeta =", np.round(-lt.real/np.abs(lt)*100,2), "%")
 ```
+
 </details>
 
 结论先摆在这段代码跑出来的数里——两条路线四阶频率、阻尼逐位一致，截断只伤第二阶。运行结果（实测输出）：
