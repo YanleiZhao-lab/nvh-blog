@@ -136,6 +136,11 @@ $$F_{\mathrm{blocked}} = \left(H_{24}^{T} H_{24}\right)^{-1} H_{24}^{T} \, a_{4}
 $$F_{\mathrm{contact}} = F_{\mathrm{blocked}}\cdot\frac{Z_R}{Z_{\mathrm{src}}+Z_R}$$
 
 
+结论先摆在这段代码的输出里：同一个源接到柔软、质量、刚硬三个接收端上，接触力一栏从 2.6 N 一路爬到 77.3 N，而阻断力一栏三行都是 75.0 N——随搭档变与不随搭档变在同一张表里对账。
+
+<details>
+<summary>数值实验：接触力随搭档变、阻断力恒为 75 N（含运行输出，点击展开）</summary>
+
 ```python
 import numpy as np
 
@@ -158,11 +163,7 @@ for name, ZR in [("柔软 k=2e4", 2e4/(1j*w)),
     print(f"{name:12s}: 接触力 = {abs(Fc):6.1f} N   阻断力 = {abs(F_bl):.1f} N")
 ```
 
-结论先摆在这段代码的输出里：同一个源接到柔软、质量、刚硬三个接收端上，接触力一栏从 2.6 N 一路爬到 77.3 N，而阻断力一栏三行都是 75.0 N——随搭档变与不随搭档变在同一张表里对账。
-
-<details>
-<summary>数值实验：接触力随搭档变、阻断力恒为 75 N（含运行输出，点击展开）</summary>
-
+实测输出（numpy 2.x）：
 
 ```text
 |Zsrc| = 3000 N*s/m, v_free = 25.00 mm/s
