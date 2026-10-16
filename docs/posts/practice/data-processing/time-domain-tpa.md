@@ -1,10 +1,17 @@
 ---
-title: "时域 TPA：把每条路径的贡献做成可以听的声音"
+title: "频域 TPA 曲线降了 3 dB，为什么听起来没变好？——时域 TPA：把每条路径的贡献做成可以听的声音"
 author: "@NVH_Z"
 ---
 
-# 时域 TPA：把每条路径的贡献做成可以听的声音
+# 频域 TPA 曲线降了 3 dB，为什么听起来没变好？——时域 TPA：把每条路径的贡献做成可以听的声音
 > 频域 TPA 报告里某条路径贡献降了 3 dB，评审会上却有人反问："降了 3 dB 的声音，听起来到底好没好？"——曲线答不上来。曲线是照片，声音是电影：把每条传递路径的贡献量从频谱变回可以回放的时间波形，工程师就能像调音师推分推子一样，一条条路径单独试听、组合试听。本文说明 Simcenter Testlab 中 Time Domain TPA 与 TPA Synthesis 两个插件如何把频域 TPA 模型"翻译"回时域，采数要满足哪些苛刻前提，以及回放面板上的每个开关对应什么物理含义。
+
+::: tip 30 秒速览
+- **一句话**：报告里贡献降了 3 dB，为什么装车后耳朵听不出变化？——因为频谱曲线丢了时间结构和听感两样东西，要听才知道。
+- **类比**：频域 TPA 像乐队总谱（每个声部多强都写着），时域 TPA 像调音台回放（单独静音鼓组、只听贝斯，一推推子立见分晓）。
+- **关键数字**：输入里 20 Hz 分量本是 33 Hz 的 2.4 倍，经过一个 30 Hz 共振路径后输出两者幅值比变成 1.0——同一个力，换条路径听感完全不同。
+- **结论**：时域 TPA 不重建模型，只用同步等采样率的时间历史驱动频域模型、逆变换回波形；好不好听，用耳朵验收。
+:::
 
 ## 一、为什么"看得见"的贡献量还需要"听得见"
 
@@ -21,7 +28,7 @@ NVH 工程里有一个反复出现的尴尬场景：整改方案在 2D 图上赢
 时域 TPA 不重建模型，而是给已有的频域 TPA 模型"配音"。流程核心一句话：**把实测的输入时间历史加到频域模型上，在频域完成路径贡献计算，再把结果反变换回时域输出**。
 
 ![时域TPA原理：实测输入时间历史在频域加到模型上，算出各路径输出的时间历史](/images/time-domain-tpa/fig1.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 一个典型的频域 TPA 模型由两部分组成：
 
@@ -58,7 +65,10 @@ $$
 p_{\mathrm{total}}(t) = \sum_{i=1}^{N} \mathcal{F}^{-1}\!\left\{ F_i(f)\,H_i(f) \right\}
 $$
 
-用 numpy 把这个过程走一遍：构造一个 30 Hz 共振的 SDOF 传递函数，输入是 20 Hz + 33 Hz 两个成分的力时间序列，看单条路径的贡献波形如何被"路径滤波"出来——
+用 numpy 把这个过程走一遍：构造一个 30 Hz 共振的 SDOF 传递函数，输入是 20 Hz + 33 Hz 两个成分的力时间序列，看单条路径的贡献波形如何被"路径滤波"出来。结论先摆在这段代码跑出来的数里：峰值频率 33.0 Hz、两成分幅值比 1.0——输入里占优的 20 Hz 被 30 Hz 共振峰的裙边压低，33 Hz 反被抬起来成为主角（推导与代码在下面，点击展开）：
+<details>
+<summary>数值实验：单路径时域贡献计算，20 行（点击展开）</summary>
+
 ```python
 import numpy as np
 
@@ -86,7 +96,15 @@ print(f"贡献波形峰值频率: {peak:.1f} Hz")   # -> 33.0 Hz
 print(f"33Hz/20Hz 幅值比: {mag[np.argmin(abs(f_axis-33))]/mag[np.argmin(abs(f_axis-20))]:.1f}")
 ```
 
+</details>
+
 运行结果：贡献波形的峰值频率是 33.0 Hz——输入里 20 Hz 幅值（12 N）本是 33 Hz（5 N）的 2.4 倍，但路径 FRF 在 33 Hz 的放大倍数约是在 20 Hz 的 2.45 倍（30 Hz 共振峰的 skirt），两个效应几乎完全抵消，输出中两成分幅值相当（比值约 1.0）、33 Hz 略占上风并成为峰值。这正是"路径的声音"：同一个工况输入，贴上不同路径的传递函数，回放出来完全不同——换一条没有 30 Hz 共振的路径，同样的力听起来就是低频哼声为主。频域里这是传递函数曲线上的两个点；时域里这是两段听感截然不同的声音。
+
+## 四、软件操作：Testlab 里的 Time Domain TPA
+
+上文的最小例子是一条路径、两个频率成分；真实项目里是十几条路径、整段运行记录，软件替你把同一套 FFT 相乘与逆变换批量化。操作链分三步：开插件、算时间历史、在 Navigator 里认出结果——以下逐屏说明。
+
+时域 TPA 在 Testlab 里由两个插件配合完成，从主菜单 Tools -> Add-ins 打开：
 
 ### 4.1 准备工作：插件与输入
 
@@ -100,37 +118,37 @@ print(f"33Hz/20Hz 幅值比: {mag[np.argmin(abs(f_axis-33))]/mag[np.argmin(abs(f
 第一步把模型输入端的时间历史（throughput 文件）加入输入篮：在 Navigator 里右键该时间历史，选 Add to Input Basket。
 
 ![右键输入时间历史吞吐文件，选择 Add to Input Basket](/images/time-domain-tpa/fig2.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![在 Testlab 主菜单 Tools -> Add-ins 中开启 Time Domain TPA 与 TPA Synthesis](/images/time-domain-tpa/fig3.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 4.2 计算路径贡献时间历史
 
 开启 Time Domain TPA 后，TPA Results 工作簿会多出一个 Time Domain 子表。
 
 ![TPA Results 工作簿新增的 Time Domain 子表（右下）](/images/time-domain-tpa/fig4.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 在 Time Domain 子表里：点 Read Input Basket 读入时间历史——吞吐文件名出现在按钮下方，左下角 PointId 信息列从红色翻绿并出现字母 X，表示各通道匹配成功；点击任意绿色单元格可以查看对应的时间波形，用方向键上下翻看各通道。
 
 ![TPA Results 工作簿可视化输入时间历史](/images/time-domain-tpa/fig5.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 然后选定路径贡献时间历史的频率范围（无特殊要求就用默认值），按 Calculate。软件把建模型时的原始时间数据（直接力、间接加速度等）变换为各路径的贡献时间历史。
 
 ![按下 Calculate 后生成路径贡献时间历史](/images/time-domain-tpa/fig6.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 4.3 Navigator 里认出 TTPA 数据：三个属性
 
 计算结果存在一个以 TTPA 结尾的新分析里，与原始采集数据混在同一个文件中。在 Navigator 列头右键 Select Columns，把两个属性列加出来：Origin 设为 Testlab、Type 设为 Block，在 Quick Find 里输入 tpa，把 **TPA Path** 与 **TPA Result Type** 加入 Selected。
 
 ![列头右键选择 Select Columns](/images/time-domain-tpa/fig7.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ![把 TPA Path 与 TPA Result Type 两个属性加入 Selected 区](/images/time-domain-tpa/fig8.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 TPA Result Type 属性的取值有三类，对应回放时看到的三种时间历史：
 
@@ -139,21 +157,21 @@ TPA Result Type 属性的取值有三类，对应回放时看到的三种时间�
 - **Load-MI**：路径上工况力的时间历史——算贡献前必须先把力算出来，这些中间结果也一并保留
 
 ![时间历史上的属性：Total Contribution、Partial Contribution 与 Load-MI](/images/time-domain-tpa/fig9.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、回放：调音台式的听音决策
 
 ### 5.1 选段与回放
 
-回到调音台的比喻：现在每个推子（路径）后面都已经接上信号（贡献时间历史），可以开始混音评审了。开启 TPA Synthesis 插件，在 Definition 子表里如果只关心某段时间（比如换挡瞬间），用 Double X 光标选段并按 Apply segment selection——不必回放整段记录。
+回到开篇调音台的比喻：现在每个推子（路径）后面都已经接上信号（贡献时间历史），可以开始混音评审了。开启 TPA Synthesis 插件，在 Definition 子表里如果只关心某段时间（比如换挡瞬间），用 Double X 光标选段并按 Apply segment selection——不必回放整段记录。
 
 ![TPA Synthesis 工作簿 Definition 子表中可选局部时间片段回放](/images/time-domain-tpa/fig10.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 切到 Replay 子表：最上面一行是原始实测数据，下面各行是 TPA 模型（包括用 TPA Component Editing 做过修改的模型变体）。按 Replay 开始回放；回放进行中直接点不同模型行，就能实时对比"原始声"与"各方案声"。右侧的复选框逐条开关路径——注意实测数据那行不能开关路径，只有 TPA 模型行可以，因为只有模型里才存在"路径"这个概念。
 
 ![TPA Synthesis 工作簿 Replay 子表交互式试听路径贡献](/images/time-domain-tpa/fig11.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 如果建模时用了 groupset（路径分组），整组路径可以一键开关——例如把电机的全部空气声路径与全部结构声路径整体对比，一步听出两大类贡献的主次。这相当于调音台上把鼓组总线一键静音。
 
@@ -162,7 +180,7 @@ TPA Result Type 属性的取值有三类，对应回放时看到的三种时间�
 回放不止是听。右键任意路径选 Add Eavesdropping，回放的同时显示该路径的实时频谱——耳朵听感与眼中谱形同步对照，"糙"的声音到底糙在哪个频段当场可见。
 
 ![右键路径选择 Add Eavesdropping 查看实时频谱](/images/time-domain-tpa/fig12.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 同样在右键菜单里还可以给路径加滤波器：带通、带阻、高通、低通或陷波——相当于给单个推子串一个 EQ。先听后滤波再听，快速验证"把这个频段拿掉声音是否改善"的假设，为后续整改方案缩小范围。
 
@@ -176,6 +194,6 @@ TPA Result Type 属性的取值有三类，对应回放时看到的三种时间�
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
