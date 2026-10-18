@@ -1,11 +1,18 @@
 ---
-title: "RPM 信号去毛刺：转速信号的清洗"
+title: "colormap 上多出的那条阶次线，为什么病根在转速通道？——RPM 信号去毛刺：转速信号的清洗"
 author: "@NVH_Z"
 ---
 
-# RPM 信号去毛刺：转速信号的清洗
+# colormap 上多出的那条阶次线，为什么病根在转速通道？——RPM 信号去毛刺：转速信号的清洗
 
-> 转速通道与振动通道一样存在系统性误差：偶发尖峰、掉线、每转固定位置的毛刺和斑马带接缝跳变，会在 colormap 与阶次切片上产生虚假的阶次成分。本文按公开技术资料 的分类梳理 RPM 信号常见误差模式的成因，并给出 Simcenter Testlab 中对应的处理方法、算法判据与参数选择依据。
+> 转速通道与振动通道一样存在系统性误差：偶发尖峰、掉线、每转固定位置的毛刺和斑马带接缝跳变，会在 colormap 与阶次切片上产生虚假的阶次成分。本文按公开技术资料的分类梳理 RPM 信号常见误差模式的成因，并给出 Simcenter Testlab 中对应的处理方法、算法判据与参数选择依据。
+
+::: tip 30 秒速览
+- **一句话**：彩色图谱上多出来的那条阶次线，为什么查到最后病根在转速通道而不是振动通道？
+- **类比**：转速测量就是体育场上掐秒表的裁判——裁判手一抖，记下的"圈速"就错一次。
+- **关键数字**：计时错 1%，转速就错 1%——3000 r/min 的曲线上，一根小毛刺就是每转一次的假 30 r/min 跳变。
+- **结论**：转速是"按表时间差"换算出来的二手量，三类毛刺（偶发尖峰/每转固定/接缝跳变）各有专门工具清洗，修正前先另存原始数据。
+:::
 
 某 run-up 项目的数据复盘会上，工程师把 colormap 投上屏幕：低阶区多出一条时隐时现的阶次线，对应的阶次切片在特定转速点上突然跳变；而同一段工况，振动通道的时域复查毫无异常。传感器换过、灵敏度重新标过、复测一轮，阶次线依旧。最后有人把转速曲线纵向放大——每转的同一角度都立着一根小尖刺。问题不在振动通道：转速曲线上的毛刺会让阶次计算每转错一次，colormap 上便多出本不存在的阶次成分。毛刺从哪来、为什么偏偏每转一次、Testlab 里用什么工具清洗这份数据，就是本文的主线。
 
@@ -31,25 +38,25 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ## 二、毛刺的三种典型类型
 
-按公开技术资料 的分类，转速信号异常分为三类。
+按公开技术资料的分类，转速信号异常分为三类。
 
-<strong>第一类：偶发的尖峰或掉线。</strong> 转速曲线整体平滑，个别时间点上 RPM 突然升高（spike）或跌落至零附近（dropout）。测试现场通常处于相关技术手册所称的恶劣环境（hostile environment）：轴面油污、粉尘使激光反射信号时好时坏，脉冲计数随之出错。台架存在切削液雾或金属屑飞溅的场合尤其常见。
+<strong>第一类：偶发的尖峰或掉线。</strong> 转速曲线整体平滑，个别时间点上 RPM 突然升高（spike）或跌落至零附近（dropout）。测试现场通常处于公开技术资料所述的恶劣环境（hostile environment）：轴面油污、粉尘使激光反射信号时好时坏，脉冲计数随之出错。台架存在切削液雾或金属屑飞溅的场合尤其常见。
 
 ![RPM 异常的两种形态](/images/rpm-spike-removal/rpm-anomalies.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>第二类：每转固定位置上的规律毛刺。</strong> RPM 曲线放大后可见，每一转的同一角度位置都出现一个固定的小尖。其来源不是环境，而是斑马带（zebra tape）或码盘上某一条条纹的间距、宽度存在制造偏差——每转到该角度，脉冲间隔错一次，转速计算随之错一次。这类毛刺的危害在于其严格周期性：它会在频谱上生成真实的阶次成分，与被测信号混叠在一起。
 
 ![每转固定位置出现的 RPM 毛刺](/images/rpm-spike-removal/spike-per-revolution.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <strong>第三类：斑马带接缝（butt joint）造成的假扭振。</strong> 斑马带缠绕收尾处若留有豁口，脉冲间隔大于理论值，每转出现一次假的转速跌落（dip）；若两条纹挤压搭接，脉冲间隔小于理论值，每转出现一次假的转速尖峰（spike）。两者都是每转一次的系统性误差，与第二类同源，但成因在搭接处而非单条条纹。接缝误差的成因与修正流程见《[斑马带接缝修正](./zebra-tape-correction.html)》。
 
 ![激光与斑马带](/images/rpm-spike-removal/zebra-tape-laser.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info
 扭振（torsional vibration）测量要求每转内有足够的脉冲数来分辨一转之内的转速波动，因此扭振测试使用高 PPR 斑马带。PPR 越高，单个脉冲的计时误差对转速曲线的影响越直接，毛刺在曲线上也越明显。
@@ -68,7 +75,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![框选毛刺段并按 [R] 替换后的效果](/images/rpm-spike-removal/spike-before-after.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 操作细节：
 
@@ -77,7 +84,7 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![设置开关与 Undo/Redo 按钮](/images/rpm-spike-removal/settings-undo-buttons.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 - 完成编辑后，左侧有 **Save**（直接覆盖原数据）和 **Save As**（另存）两个选项。做修正操作时应另存——原始转速数据无法重测，覆盖后不可恢复。
 
@@ -93,9 +100,12 @@ $$\frac{\mathrm{d} n_k}{n_k} = -\frac{\mathrm{d} (\Delta t_k)}{\Delta t_k}$$
 
 ![函数设置对话框](/images/rpm-spike-removal/spike-removal-dialog.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 算法逻辑
+
+<details>
+<summary>推导：手里没有真值转速，MAD 判据凭什么认出毛刺（点击展开）</summary>
 
 该函数不是滑动平均式的平滑，其判别基准是统计学的：
 
@@ -108,21 +118,26 @@ $$\mathrm{MAD} = \operatorname{median}_{i \in W} \Big( \big| n_i - \operatorname
 
 其中 $W$ 为当前滑动窗口，$n_i$ 为窗口内第 $i$ 个脉冲间隔的平均转速（r/min）。
 
+</details>
+
 3. 偏离基准超过判定门槛（Spike_detection_threshold）的脉冲判为离群点（outlier），即毛刺；剔除后由剩余脉冲重新生成 RPM trace。
 
 以中位数而非均值作为位置基准具有明确的统计意义：毛刺本身就是极端值，若以均值和标准差构造判据，基准会被毛刺自身拉偏；中位数与 MAD 对少量极端值不敏感。这也是该算法对"每转固定的规律毛刺"有效的原因——规律毛刺在窗口内始终是少数离群点。
 
 ![毛刺剔除算法流程](/images/rpm-spike-removal/algorithm-flowchart.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 执行后生成新的 trace：
 
 ![剔除前（红）与剔除后（绿）对比](/images/rpm-spike-removal/spike-removal-result.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 参数说明
+
+<details>
+<summary>速查：TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM 七个参数逐项说明（点击展开）</summary>
 
 | 参数 | 默认值 | 说明 |
 |---|---|---|
@@ -133,6 +148,8 @@ $$\mathrm{MAD} = \operatorname{median}_{i \in W} \Big( \big| n_i - \operatorname
 | Pulse_rejection_mode | 0 | 0 为优化算法，剔除最少的脉冲数并尽量保留原信号的频率与扭振内容；1 为激进算法，剔除所有产生超门槛转速尖峰的脉冲 |
 | Additional_pulse_rejection | 0 | 剔除坏脉冲时是否连带：0 只删坏脉冲本身；1 连同前一个；2 连同后一个；3 前后都删 |
 | Function2 | DEFAULT | 输出采样率；默认与输入一致 |
+
+</details>
 
 调参顺序：先用默认值执行一遍，前后对比检查毛刺是否清除、正常转速波动是否被误删。默认门槛 3.5 对多数数据适用。若毛刺幅度小、清除不彻底，将 threshold 向 2 的方向下调；若正常转速波动被误删、曲线被过度平滑，向上调。Additional_pulse_rejection 在毛刺成对出现（一个尖峰紧随一个凹陷）时取 3 效果更好。
 
@@ -178,6 +195,6 @@ $$P \ge 2 \, O_{\max}$$
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
