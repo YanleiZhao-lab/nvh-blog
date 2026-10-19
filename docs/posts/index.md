@@ -179,7 +179,7 @@ title: "📖 全部文章"
 - [数据测完才发现漏了低通，非得重测吗？——Time Signal Calculator 时域公式处理实用技巧](practice/data-processing/time-signal-calculator-tips.html) — 公式表串起数据后天补救：滤波函数 Sample Frequency 只管预览、积分前先高通防漂、8 Hz 方波造虚拟转速通道喂给 HARMONIC_FILTER 扣定频谐波族，MAD 统计剔毛刺的 numpy 复现
 - [滤波器赶不走的那族谐波，怎么“估计准、减干净”？——谐波去除：从信号中剥离已知干扰](practice/data-processing/harmonic-removal.html) — 不滤波而是先估计再减：角域循环平均只留同步成分、非同步成分被平均掉，四步算法剥掉 zebra 盘偏心假 1 阶、多旋转部件阶次归属、8 Hz 电力谐波定频污染；六参数表与相位差 360 度乘阶次小数部分的 numpy 复现
 - [同一组数据、同一个阶次，切线幅值为什么差出 7 dB？——阶次切线的带宽账](practice/data-processing/order-cuts-amplitude.html) — 切线幅值是带内能量的 RMS 求和而非读单根谱线：带宽太窄漏涂抹带、太宽吃进邻阶，同一组数据能差出数 dB 直接决定过没过目标线；四种带宽模式 Order/百分比/频率/谱线数各对应一种随 RPM 变化的几何，切前必须对着 colormap 目视定带宽、报告里注明设置，numpy 演示 0.05/0.12/0.60 阶三个带宽差出 7.3 dB；Testlab 里 Throughput 批处理与 Processing Cursor 交互切法及 PWM 阶次的 Offset 用法
-- [矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
+- [三个方向各测各的，评审要的总振动到底是多少？——矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [拿错灵敏度型号，三天测试数据还能救回来吗？——校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
 ### 测试操作（28 篇）
