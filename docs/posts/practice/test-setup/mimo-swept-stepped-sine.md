@@ -1,13 +1,20 @@
 ---
-title: "扫频与步进正弦 MIMO：另一种激励路线"
+title: "共振峰为什么被随机激励测矮了？——扫频与步进正弦 MIMO"
 author: "@NVH_Z"
 ---
 
-# 扫频与步进正弦 MIMO：另一种激励路线
+# 共振峰为什么被随机激励测"矮"了？——扫频与步进正弦 MIMO
 
 > 同一台白车身，随机激励 MIMO 半小时测完的 FRF 在某阶轻阻尼模态处峰值比仿真低了一截，改用步进正弦重新测，峰值"长"回来 30%——是结构变了，还是激励方式在说谎？答案往往是后者：随机激励把能量摊到全频段，每个频率分到的功率有限；正弦激励把全部能量逐个频率投放，共振峰处的信噪比天然更高。这就像用喷淋花洒和聚焦水枪冲洗同一块污渍：花洒覆盖快、单点冲力弱，水枪单点冲力强、但要一寸一寸挪。Simcenter Testlab 的 MIMO Swept and Stepped Sine 软件包走的就是"水枪"路线：多台激振器输出受控正弦，频率连续扫过（扫频）或逐级步进（步进），把每个频率上的激励能量和响应幅值钉在目标谱上。本文说明扫频与步进的物理差别、扫速为什么必须慢过共振建立时间、闭环控制与系统辨识怎么做，以及 Testlab 里从通道设置到采集的完整操作路径。
 
 一个真实的对比试验很能说明问题：某航天器部件模态试验先用 burst random MIMO 完成，阻尼比 0.4% 的一阶模态拟合出的阻尼比明显偏高、峰值偏低；同一状态改用步进正弦复测，共振区 0.05 Hz 步距加密，拟合阻尼比回落 20%，与有限元仿真终于对上。两次试验结构没变、传感器没动，变的只是激励把能量"喂"给每个频率的方式。
+
+::: tip 30 秒速览
+- **一句话**：同一阶共振没变，为什么换种激励方式测出的峰值就矮了一大截？——因为能量是摊开洒向全频段，还是对准一个频率灌，结果完全不同
+- **类比**：花洒与水枪——花洒覆盖快、单点冲力弱；水枪一寸一寸挪、但冲得透
+- **关键数字**：一阶 100 Hz 共振，10 Hz/s 的快扫只测到真实峰高的 64%，扫速慢于 0.8 Hz/s 才能测满 98%
+- **结论**：要快就用扫频、但共振区必须放慢；要准（尤其轻阻尼结构）就用在每个频率上停够时间的步进正弦
+:::
 
 ## 一、为什么需要正弦激励：随机 MIMO 之外的第二条路线
 
@@ -19,7 +26,7 @@ author: "@NVH_Z"
 
 ![扫频与步进正弦对比：扫频省时间，步进在每个频率上能量更集中](/images/mimo-swept-stepped-sine/fig1.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 两类正弦的具体差别：
 
@@ -85,7 +92,7 @@ Simcenter Testlab 的 MIMO Swept and Stepped Sine 是 Structure Acquisition 目�
 
 ![双激振器扫频/步进正弦试验布置示例](/images/mimo-swept-stepped-sine/fig2.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 启动入口在 Testlab Structure Acquisition 文件夹的"MIMO Swept and Stepped Sine Testing"图标。通道设置（Channel Setup）工作表里，除了常规的传感器标定与测点信息，要做闭环正弦测试至少定义一个<strong>控制通道（Control）</strong>与一个<strong>参考通道（Reference）</strong>。控制通道选力或加速度，两种组合测出的传递特性含义不同：
 
@@ -98,7 +105,7 @@ MIMO Sine Setup 工作表右上角的控制面板集中了主要试验参数（F
 
 ![MIMO Sine Setup 工作表的控制面板：模式、控制策略、扫速、频率范围、扫数](/images/mimo-swept-stepped-sine/fig4.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 - **MIMO sine mode**：Stepped 或 Swept，对应步进/扫频；
 - **Control strategy**：No Control（开环，输出不随响应调整）、Amplitude/Phase（幅值相位双控）、Amplitude（仅幅值控制）。闭环控制根据控制通道的实测与目标谱的偏差实时修正输出；
@@ -111,13 +118,13 @@ MIMO Sine Setup 工作表右上角的控制面板集中了主要试验参数（F
 
 ![Tabulated 扫速编辑器：按频段分别设置周期数与扫速](/images/mimo-swept-stepped-sine/fig5.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 步进正弦的 Frequency Ranges 菜单（Figure 5）定义各频段的步距——共振区 0.1 Hz、其它区域 1 Hz 这样的非均匀布置是标准做法。值得注意的是，Polymax 模态拟合器支持非等间隔频率分辨率的 FRF，步进正弦的变步距数据可以直接进拟合流程。
 
 ![步进正弦 Frequency Ranges 菜单：分频段设置步距，共振区加密](/images/mimo-swept-stepped-sine/fig6.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 关键参数二：扫数与相干
 
@@ -129,7 +136,7 @@ Source Parameters 面板打开各输出通道后，在 MIMO Sine Setup 底部的
 
 ![Edit Reference Profile：逐激振器输入频率-幅值目标谱](/images/mimo-swept-stepped-sine/fig7.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 Safety 区的 Advanced 设置里，OverloadAction 建议改为 Increase Range：扫到共振峰时响应可能突增，软件自动升量程避免试验中断，比默认的停机更稳妥。
 
@@ -141,7 +148,7 @@ System Identification（2206 版之前叫 SelfCheck）是正式试验前的强�
 
 ![System Identification 工作表：低量级随机信号辨识系统传递特性](/images/mimo-swept-stepped-sine/fig8.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 对正弦 MIMO 有个实用技巧：如果该试件已经做过一次正弦采集，System Verification 工作表左上角可选 Load Last MIMO Acquisition，直接用上一次试验的实测数据代替低量级随机辨识。前次实测的响应特性比低量级宽带辨识更接近真实，目标谱的跟踪也更准。
 
@@ -149,11 +156,14 @@ System Identification（2206 版之前叫 SelfCheck）是正式试验前的强�
 
 ![试验进行中的操作按钮：Hold/Release 暂停，扫频中可实时调速](/images/mimo-swept-stepped-sine/fig9.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ## 五、数值演示：扫速吃掉了多少峰值
 
-下面这段自包含 numpy 代码复现第二节的表格：100 Hz、阻尼比 0.5% 的单自由度系统，20-200 Hz 线性扫频，比较不同扫速下的峰值与峰值位置。离散化用增广矩阵指数（零阶保持），不需要微分方程数值库：
+结论先摆在这段代码跑出来的数里：0.5 Hz/s 慢扫峰值保住稳态的 97.3%、10 Hz/s 快扫只剩 64.4% 且峰位被拖到 102.1 Hz——第二节表格的每一行都逐位复现。这段自包含 numpy 代码复现第二节的表格：100 Hz、阻尼比 0.5% 的单自由度系统，20-200 Hz 线性扫频，比较不同扫速下的峰值与峰值位置。离散化用增广矩阵指数（零阶保持），不需要微分方程数值库（41 行，默认折叠，点击展开）：
+
+<details>
+<summary>数值实验：不同扫速下 100 Hz、阻尼比 0.5% 单自由度系统的峰值与峰位（点击展开）</summary>
 
 ```python
 import numpy as np
@@ -195,6 +205,8 @@ for r in [0.5, 1, 2, 5, 10]:
     print(f"{r:>4} Hz/s: 峰值 {pk/steady*100:5.1f}% 稳态值, 峰值处 {pf:6.1f} Hz")
 ```
 
+</details>
+
 运行输出（阻尼比 0.5%，τ 约 318 ms，半功率带宽 1 Hz）：
 
 | 扫速 | 峰值/稳态值 | 峰值处瞬时频率 |
@@ -228,6 +240,6 @@ for r in [0.5, 1, 2, 5, 10]:
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
