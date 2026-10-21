@@ -184,7 +184,7 @@ title: "📖 全部文章"
 
 ### 测试操作（28 篇）
 
-- [应变片激励电压怎么选：灵敏度与自热的平衡](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张公开资料插图
+- [供桥电压从 5 V 提到 10 V，零点为什么半夜集体上爬？——应变片激励电压的选择](practice/test-setup/strain-excitation-voltage.html) — 同一枚片供桥 5 V 稳如老友、提到 10 V 零点半夜集体上爬：电压翻倍焦耳热翻四倍，栅丝温度升高后热应变冒充机械应变——应变片是比例式传感器，信号随供桥线性变好、自热按平方变坏，平衡点就是 $V_{max}=\sqrt{R\,A\,T\,\lambda}$（RATY 估算式：阻值×栅面积×温度梯度×导热系数开根）；六配置算例一表看懂降额（350 Ω/24 mm²/钢 17.7 V、120 Ω/9 mm²/钢 6.3 V、同片贴塑料只剩 0.2 V——导热掉三个数量级上限掉两个）；选片三招把上限做进硬件（高阻、大栅、平面花优于叠层花）；烤面包机类比贯穿（面包好导热=钢、差=塑料）；稳定化判据不用公式也能定电压（加压盯视在应变，漂就退档，稳了再校零），numpy 复算六行算例与敏感性（R 与 A 平方根同效），Testlab Channel Setup 的 Excitation 字段与 Balance/Zero 时序锚点，7 张公开资料插图
 
 - [设备没坏、人却累垮：SCADAS RS 怎么把六件手工活提前做完？——实战技巧六则](practice/test-setup/scadas-rs-tips.html) — 独立运行的采集前端如何"配置一次、现场零思考"：Monitor 的 Custom 页自建仪表盘/XY图盯关键量，Auto zeroing 让应变通道每次采集自动归零（Zeroing 列逐通道豁免非应变量），REC 主机四通道数字 IO 接台架急停做振动超限联锁，Topology→Save As 存模板场场复用，Configuration Builder 生成 .nfec 在 Testlab Neo 离线模式预配全部通道，Schedule Designer（2506+免费）把 Run-up/30/50/80 kph 四工况排成序列由 Recorder App 逐步引导，Download and Export 工具批量搬数据并转格式
 
