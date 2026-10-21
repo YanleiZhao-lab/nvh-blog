@@ -201,7 +201,7 @@ title: "📖 全部文章"
 
 - [链上再并一个适配器为什么会烧单元？——SCADAS RS 菊花链供电与数据链的级联规则](practice/test-setup/rs-daisy-chain-power.html) — 同一条链接两台 UPS 相关技术手册允许、再并一个交直流适配器却会烧单元：电源在链上单向流动，UPS 只向下游供电、多台 UPS 各管各的下游段互不顶牛，而两个无隔离电源的电压差直接形成无限制环流。彩灯串类比贯穿（中途再接一个插头=远端补 UPS、拔插头全串熄=断链缆下游全断、但 REC 断电前保存数据）；三条硬规则：REC 必须由 UPS 直供且调节单元不得垫在 UPS 与 REC 之间、每链吞吐 1.7 MSa/s 上限/REC 总计 7.8 MSa/s、PC 只能从 REC 的以太网/Wi-Fi 进不得挂调节单元；功耗账一表算清（REC 基本 21.5 W 满配 49.65 W、UPS 缓冲 58.4 Wh 带 5 单元、负载超 82 W 电池停充 75 W 以下恢复、低温放电限制与 UN 3481 运输边界）；开关机次序（主 UPS 按钮开机、REC 安全关机保存数据）与接地规则（10 m 分界），最后压成规划一条链的六步清单
 
-- [振动台选型与使用：推力、位移、承载](practice/test-setup/shaker-table-considerations.html) — 额定推力是裸台成绩单不是试验可用推力：动圈+夹具+试件全算运动质量（400 N 台带 20 kg 试件只剩 1.4 g，numpy 对账）、窄带随机推力按带宽平方根折减（200 Hz 带宽只剩 32%）、铜阻每 100 摄氏度涨 40% 打七折，选型留 15%~20% 余量；性能曲线 g/V 三段受限（低频位移/中频速度/高频力），平均控制救夹具不均匀，Tracked Sine Dwell 裸台传递函数定期体检
+- [样本册上的额定推力，为什么装上试件就缩水十倍？——振动台选型与使用：推力、位移、承载](practice/test-setup/shaker-table-considerations.html) — 额定推力是裸台成绩单不是试验可用推力：动圈+夹具+试件全算运动质量（400 N 台带 20 kg 试件只剩 1.4 g，numpy 对账）、窄带随机推力按带宽平方根折减（200 Hz 带宽只剩 32%）、铜阻每 100 摄氏度涨 40% 打七折，选型留 15%~20% 余量；性能曲线 g/V 三段受限（低频位移/中频速度/高频力），平均控制救夹具不均匀，Tracked Sine Dwell 裸台传递函数定期体检
 
 - [5 轮敲完还缺 8 个点，是敲错了还是排错了？——用户自定义敲击序列：多锤/多点的组织](practice/test-setup/impact-sequence-defined.html) — 敲击序列是锤击试验的分镜表：默认 +1 递增遇整组搬家 5 轮只盖 7/15 点、白敲 8 轮（numpy 对账），User Defined Impact Sequence 在 Measure→All Settings 开启、Edit Points 逐轮填锤与表的点位方向，N_run×N_ch≥N_point 且零重复再开工，参考点先做驱动点查勘防节点失踪
 - [共振峰为什么被随机激励测"矮"了？——扫频与步进正弦 MIMO](practice/test-setup/mimo-swept-stepped-sine.html) — 正弦激励把全部能量逐频率投放：扫频快但峰值受扫速限制（快扫 10 Hz/s 削峰 35.6%、峰值拖后 2.1 Hz，numpy 状态空间仿真定量复现），步进准但耗时；建立时间 τ=1/(2πζf₀) 定扫速上限、共振区必须 Tabulated 慢扫；Testlab 从 Control 面板（Stepped/Swept、幅值相位双控）到系统辨识（低量级随机辨识 g/V 传递函数、可 Load Last MIMO Acquisition 复用前次）再到采集中实时调速的完整路径
