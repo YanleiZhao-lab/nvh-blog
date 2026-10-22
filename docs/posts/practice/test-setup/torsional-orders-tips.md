@@ -1,14 +1,22 @@
 ---
-title: "扭振阶次实操三则：通道组、纵轴量纲与扭振动画"
+title: "同一根轴，为什么 A 报 0.2 度、B 报 0.28 度、C 报 0.55 度？——扭振阶次实操三则"
 author: "@NVH_Z"
 ---
 
-# 扭振阶次实操三则：通道组、纵轴量纲与扭振动画
+# 同一根轴，为什么 A 报 0.2 度、B 报 0.28 度、C 报 0.55 度？——扭振阶次实操三则
 
 > 扭振（torsional vibration）数据采回来后，常卡在三个环节：tacho 通道的 throughput 数据进不了谱分析流程、阶次切片纵轴只有 RPM 波动一种量纲、想看扭振沿轴系的分布却只有曲线。本文整理 Simcenter Testlab 的三个操作要点——通道组改为 Vibration、纵轴 Integrate 与 Section Scaling、Torsional Node 圆盘动画——操作都停留在右键菜单级别，分别解决数据流程、量纲换算与结果表达三个问题。
 
 
 一批台架扭振数据交到分析手里，切片做出来只有“RPM 波动”一条路：评审问“轴到底扭了多少度”，答不上来；想把 tacho 通道的数据拉进谱分析流程，通道列表里压根选不进去；好不容易出图，对方又要看“扭振沿轴系怎么分布”的动画。更常见的局面是三方对账：同一份数据，A 报 0.2 度（RMS）、B 报 0.28 度（峰值）、C 报 0.55 度（峰峰值），数字对不上，谁都觉得自己没算错。这三个卡点都不是采集问题——数据早就躺在盘里，卡住的是通道的身份、纵轴的量纲和报告的口径。本文的三个操作要点，分别拆掉这三道墙。
+
+::: tip 30 秒速览
+- **一句话**：同一根轴的扭振，为什么三个人能报出 0.2、0.28、0.55 三个都对的角度？
+- **类比**：同一个人在小区门禁那儿是"业主"、在快递台那儿是"收件人"——数据也一样，身份变了，能进的门就变了。
+- **关键数字**：转速抖正负 25 圈（每分钟），折算到轴上只扭 0.28 度；再换个统计口径，同一个 0.28 又能写成 0.2 或 0.55。
+- **结论**：三个人都没算错——差的只是"单位怎么换"和"口径怎么选"；改一个下拉菜单、点一次右键，三种数字就能互相打通。
+:::
+
 
 
 ## 一、通道组设置：让 tacho 通道进入振动处理流程
@@ -27,12 +35,12 @@ author: "@NVH_Z"
 2. 把该通道的 ChannelGroupId 下拉框从 Tacho 改成 Vibration。
 
 ![Channel Setup 中把 ChannelGroupId 从 Tacho 改为 Vibration 的下拉菜单](/images/torsional-orders-tips/channel-groupid.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 改完之后系统会同时算出两个结果：tachometer 通道照常解算转速，vibration 通道则把原始脉冲波形当作一路"振动"数据保留——一份信号，两种通道，无需分线。
 
 ![ChannelGroupId 改为 Vibration 后即可对扭振信号做彩色图与阶次切片](/images/torsional-orders-tips/colormap-tacho.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 按相关技术文档说明，改组后即可从 throughput 数据创建阶次切片（order cuts）与 FFT——彩色图、切片、谱分析全流程可用。
 
@@ -42,7 +50,7 @@ author: "@NVH_Z"
 :::
 
 ::: warning 工程注意
-改组之后扭振分析走的是"振动通道"的路线：zebra 带（斑马带）接缝误差、盘偏心 runout 这些转速侧的误差会原样进入振动数据。清洗要分两类做：毛刺剔除（Time Signal Calculator 的 TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM）针对个别错误脉冲，接缝修正（ZEBRA_MOMENTS_TO_RPM）针对斑马带搭接处——相关技术手册明确两者不能互相替代，必要时先后都要做。先清洗 RPM 信号，再改组做谱分析，顺序别反。
+改组之后扭振分析走的是"振动通道"的路线：zebra 带（斑马带）接缝误差、盘偏心 runout 这些转速侧的误差会原样进入振动数据。清洗要分两类做：毛刺剔除（Time Signal Calculator 的 TACHO_MOMENTS_SPIKEREMOVAL_TO_RPM）针对个别错误脉冲，接缝修正（ZEBRA_MOMENTS_TO_RPM）针对斑马带搭接处——相关技术文档明确两者不能互相替代，必要时先后都要做。先清洗 RPM 信号，再改组做谱分析，顺序别反。
 :::
 
 ## 二、纵轴量纲：从 RPM 波动换算成角度
@@ -50,12 +58,12 @@ author: "@NVH_Z"
 扭振阶次切片默认的纵轴是 RPM 波动——每一转速点上的转速交变幅度。X 轴是整体 RPM，Y 轴是波动量，发动机 run-up（升速）过程中曲轴的扭振一目了然。
 
 ![发动机 run-up 的 2 阶扭振切片](/images/torsional-orders-tips/torsional-order-cut.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 但很多验收规范和耐久评估要的不是"转速抖多少"，而是"轴扭了多少度"。Testlab 里不用导出数据，右键纵轴三步完成：<strong>Processing -> Integrate (Single)</strong>。
 
 ![右键纵轴 Integrate (Single) 将角速度波动积分成角度](/images/torsional-orders-tips/integrate-menu.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 积分的分步推导
 
@@ -85,6 +93,11 @@ $$\hat{\theta} = \frac{\hat{\omega}}{2\pi f} = \frac{\hat{\omega}}{2\pi \cdot O 
 
 低转速区扭振角度更大还有第二重原因：四冲程发动机相邻燃烧事件之间曲轴减速更充分，转速波动幅值本身在低转速就更大。公式解释的是"同样波动幅值折算出更大角度"，燃烧事件间隔解释的是"波动幅值本身更大"，两个因素在低转速区叠加。
 
+结论先摆在这段代码跑出来的数里：正负 25 RPM 的波动，在 2600 RPM、2 阶下折合约 0.28 度峰值、0.55 度峰峰值，数值积分与理论值偏差不到 2%。下面 15 行 numpy 把这笔账完整算一遍（点击展开）：
+
+<details>
+<summary>数值实验：25 RPM 波动折算多少度（点击展开）</summary>
+
 ```python
 import numpy as np
 
@@ -108,6 +121,10 @@ print(f"峰峰值      -> {2*np.degrees(theta_pk):.3f} deg")
 
 运行结果要点：正负 25 RPM 的波动在 2600 RPM、2 阶下折合约 0.28 度峰值（波动分量，理论值 0.275 度）、0.55 度峰峰值——去掉直流项后数值积分与理论值的偏差在 2% 以内（0.1 s 窗口不含整数个扭振周期，留有少量截断残差）。换算成角度后，"RMS 多少"和"扭多少度"两套验收语言就打通了。
 
+</details>
+
+这句话值得再留在折叠外说一遍：正负 25 RPM 折算下来只有约 0.28 度峰值、0.55 度峰峰值——"轴到底扭了多少度"这笔账，从此有了和 RPM 口径互相验证的算法。
+
 ::: warning 工程注意
 积分会放大低频漂移。转速信号若有缓变趋势（油门变化、接缝残留的每转一次分量），积分后趋势项会淹没真实的扭振角度。做 Integrate 之前先确认 RPM 已去毛刺、去接缝，必要时先做高通或去趋势；积分之后同样要检查直流项是否已去除。
 :::
@@ -117,9 +134,14 @@ print(f"峰峰值      -> {2*np.degrees(theta_pk):.3f} deg")
 角度量纲确定后，报告还需写明幅值口径：同一份数据，RMS、峰值（Peak）、峰峰值（Peak-to-Peak）三种表述相差达 2.8 倍。Testlab 里仍是右键纵轴：**Processing -> Section Scaling**，在三者之间切换。
 
 ![右键纵轴 Section Scaling 切换幅值表述](/images/torsional-orders-tips/section-scaling.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 三者的换算关系建立在正弦假设上：正弦波的 RMS 是峰值的 $1/\sqrt{2}$，峰峰值是峰值的两倍。
+
+结论先摆在这段代码跑出来的数里：0.30 度峰值的正弦，RMS 是 0.2121 度，峰峰值是 0.60 度——同一个扭振，三种写法差出近三倍。下面 8 行 numpy 把三种口径的换算跑一遍（点击展开）：
+
+<details>
+<summary>数值实验：同一正弦的三种幅值口径（点击展开）</summary>
 
 ```python
 import numpy as np
@@ -136,6 +158,10 @@ print(f"检查 2*1.414*RMS: {2*np.sqrt(2)*rms:.4f} deg = Peak-to-Peak")
 ```
 
 运行结果要点：0.30 度峰值的正弦，RMS 是 0.2121 度，峰峰值 0.60 度。审阅报告时看到"扭振 0.2 度"，先确认是 RMS 还是峰值——两者相差 1.4 到 2.8 倍，对照验收限值时必须统一口径。
+
+</details>
+
+折叠外只留一句底线：0.2、0.28、0.55 三个数可以同源于一条曲线——限值是哪种口径，报告就用哪种口径，对账先对口径。
 
 | 表述 | 与 RMS 的关系（正弦） | 典型用途 |
 | --- | --- | --- |
@@ -158,12 +184,12 @@ print(f"检查 2*1.414*RMS: {2*np.sqrt(2)*rms:.4f} deg = Peak-to-Peak")
 3. 点 <strong>Add Disc...</strong>，填节点名、旋转件半径、圆盘朝向，Apply 后关闭。
 
 ![Add Disc 窗口：节点名、半径与圆盘朝向](/images/torsional-orders-tips/add-disc-window.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 圆盘节点会出现在几何显示区，之后谱、阶次、时域数据都能像驱动普通节点变形一样驱动这些圆盘转动——扭振在轴系各位置的相位关系、幅值分布直接以旋转动画呈现。
 
 ![几何显示区中的 torsional node 圆盘节点](/images/torsional-orders-tips/torsional-node.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ::: info 核心概念
 - <strong>Torsional Node（扭振节点）</strong>：几何模型中代表旋转件的圆盘节点，动画时绕自身轴转动，用于可视化扭振变形；
@@ -186,6 +212,6 @@ Add Disc 时填的半径要和真实旋转件一致——圆盘的视觉转动�
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
