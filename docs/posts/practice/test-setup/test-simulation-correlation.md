@@ -1,11 +1,19 @@
 ---
-title: "试验-仿真模态对标：Simcenter 3D 中的 MAC 相关分析实操"
+title: "仿真 31.2 Hz 对试验 29.4 Hz，模型到底能不能信？——试验-仿真模态对标与 MAC 相关分析"
 author: "@NVH_Z"
 ---
 
-# 试验-仿真模态对标：Simcenter 3D 中的 MAC 相关分析实操
+# 仿真 31.2 Hz 对试验 29.4 Hz，模型到底能不能信？——试验-仿真模态对标与 MAC 相关分析
 
 > 同一阶模态，仿真算出来 31.2 Hz、试验测出来 29.4 Hz，差了快 6%——这个有限元模型还能信吗？直接拿频率逐个对比行不通：模型里 20 阶模态、试验里只有十几阶，谁跟谁比都还没定。本文用 Simcenter 3D FE Model Correlation 的完整流程（Nastran 特征值解、导入试验几何与振型、对齐、配对、MAC 热图与 COMAC）回答这个问题，并给出判读规则：频率误差看趋势、MAC 看振型一致性、COMAC 指认拖后腿的测点。
+
+
+::: tip 30 秒速览
+- **一句话**：仿真和试验各报一个频率，到底谁跟谁比、模型可不可信，怎么看？
+- **类比**：判断两张照片拍的是不是同一栋楼——不逐像素比，只看轮廓像不像。
+- **关键数字**：51 个测点里只有 1 个装反，模态总分就从 0.99 掉到 0.87。
+- **结论**：频率误差管标定、MAC 管振型、COMAC 点名捣乱传感器，三个数连起来读，模型可信度自然浮出水面。
+:::
 
 ## 一、为什么频率对上了也不敢下结论
 
@@ -44,7 +52,7 @@ $$\mathrm{MAC}_{AX} = \frac{\left| \sum_{i=1}^{N} \psi^A_i \left(\psi^X_i\right)
 
 ![短舱 FEM 与试验件](/images/test-simulation-correlation/nacelle-fem-test.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 ### 第 1 步：FEM 自由模态解
 
@@ -62,13 +70,13 @@ Ribbon 的 **Correlation** 标签页里点 **New Test Reference Solution**，Sol
 
 ![试验模型与 FEM 未对齐](/images/test-simulation-correlation/test-model-misaligned.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 对齐操作在 Test Model 节点右键 **Alignment**：在 Alignment Control 对话框里选 3 个试验节点与 FEM 上对应的 3 个节点（勾选 Preview 可实时查看累计效果），必要时用 **Fine Tune Alignment** 做离散平移/旋转微调。
 
 ![Alignment Control 对话框](/images/test-simulation-correlation/alignment-control.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 这步没有公式但极为关键：后续节点映射按"距离最近"原则匹配传感器与 FEM 节点，坐标系没对齐时距离全是错的，容差再大也映射不上几个点。
 
@@ -82,31 +90,36 @@ Correlation 标签页里点 **New Correlation**，Reference Solution 选试验�
 
 ![Correlation Details View](/images/test-simulation-correlation/correlation-details.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 任意一行右键 **Side-by-Side Animation**，两个视窗同步动画直接对比振型形态：
 
 ![Side-by-Side 动画](/images/test-simulation-correlation/side-by-side-animation.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 **Correlation Metrics** 节点右键 **Correlate**，对话框里 **Show Results Heat Map** 以热图显示 MAC 矩阵，**Show Results Spreadsheet** 可导出 Excel：
 
 ![MAC 热图](/images/test-simulation-correlation/mac-heatmap.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 热图的读法：横轴试验模态、纵轴仿真模态，对角线亮说明配对成功；某行整行发暗说明该阶仿真模态在试验数据中找不到对应者。最后右键 **Generate 1-COMAC Results**，输出逐传感器图：
 
 ![COMAC 传感器图](/images/test-simulation-correlation/comac-sensors.png)
 
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 COMAC 显示的是"个别 MAC 分量最差"的传感器位置——MAC 总分合格不代表每个测点都合格，个别传感器数据可疑（粘接松动、方向装反、坐标录错）时，COMAC 会把它们点名。
 
 ## 四、numpy 演示：一个反号测点如何现形
 
+结论先摆在这段代码的输出里：单个测点极性反号让 MAC 从 0.994 掉到 0.874，1-COMAC 把该测点残差标成次差测点的 6 倍——反号测点一查一个准。
+
 用 51 个测点的简支梁振型做一个最小可复现算例：仿真侧 3 阶振型，试验侧第 1、2 阶各带任意缩放（3.2 倍、-0.8 倍——检验 MAC 对标尺免疫）与 5% 噪声，另把测点 17 的传感器极性装反（模拟方向贴错），观察 MAC 与 COMAC 的反应。
+
+<details>
+<summary>数值实验：51 测点简支梁 MAC/1-COMAC 反号测点定位，37 行（点击展开）</summary>
 
 ```python
 import numpy as np
@@ -158,6 +171,8 @@ MAC 矩阵（行=试验，列=仿真）
 1-COMAC 最差 3 测点: [(17, 0.104), (23, 0.017), (34, 0.017)]
 ```
 
+</details>
+
 三个现象值得注意。其一，T1 带着任意缩放 3.2 倍、T2 带着反号缩放 -0.8 倍，MAC 照样等于 1.000 与 0.874——标尺免疫是 MAC 的设计目的，复共轭内积把任意复数因子约掉了。其二，单个测点极性反号让 T2 的 MAC 从 0.994 掉到 0.874：51 个分量里只错了 1 个，总分就被拉低 12 个百分点——反过来说，看到 0.87 这种"不错但不到 0.9"的分数时，不该急着怀疑整个模型。其三，1-COMAC 把测点 17 的残差（0.104）标成次差测点（0.017）的 6 倍，一查一个准——这正是 Simcenter 3D 里 Generate 1-COMAC Results 在做的事。
 
 频率误差一栏则演示了两个指标的分工：T1-S1 频率差 -5.2% 而 MAC 完美，说明振型形状对但质量/刚度整体偏了；若 MAC 也低，问题就不只是标定，得回查建模假设与试验识别。
@@ -184,6 +199,6 @@ MAC 矩阵（行=试验，列=仿真）
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
