@@ -68,12 +68,12 @@ $$y(n) = \sum_{k=0}^{N} a(k)\, x(n-k) + \sum_{k=1}^{P} b(k)\, y(n-k)$$
 同一阶数下 IIR 滚降更陡——递归项相当于用少量系数实现无限长的脉冲响应。反过来说，达到同样的滚降，IIR 所需阶数远低于 FIR。
 
 ![IIR 用更低阶数实现与 FIR 相当的性能](/images/fir-vs-iir/iir-lower-order.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 相关技术手册的总结对比图：
 
 ![FIR 与 IIR 滤波器特性对比](/images/fir-vs-iir/fir-iir-summary.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 把两类滤波器放在同一指标下对比（同样截止 150 Hz 的低通、滚降相当）：
 
@@ -170,7 +170,7 @@ $$\tau_g(\omega) = -\frac{d\varphi(\omega)}{d\omega} = \frac{N-1}{2}$$
 IIR 没有这个保证：不同频率的时延不相等，相关技术手册指出时延最大通常出现在截止频率附近（本文算例的群时延峰约 3.8 个样本，出现在 117 Hz，位于通带边沿）。通带内各成分的相对相位被改变，波形发生畸变。
 
 ![FIR 恒定时延，IIR 时延随频率变化](/images/fir-vs-iir/group-delay.png)
-*（图源：网络官方公开资料）*
+*（图源：网络 侵删）*
 
 <details>
 <summary>数值实验：两款滤波器从 50 Hz 到 400 Hz 的群时延逐点对照（27 行）</summary>
@@ -284,6 +284,6 @@ FIR 是直行传送带：输出只看输入、恒定时延 (N-1)/2、永不失�
 
 ---
 
-*来源：网络官方公开资料，经整理与复核。*
+*来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/) · 本文采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans) 许可，禁止搬运*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
