@@ -52,7 +52,7 @@ $$\varepsilon_{1,2} = \frac{\varepsilon_x + \varepsilon_y}{2} \pm \sqrt{\left(\f
 
 $$\theta_p = \frac{1}{2} \arctan\!\left(\frac{\gamma_{xy}}{\varepsilon_x - \varepsilon_y}\right)$$
 
-这套换算用**莫尔圆**（Mohr's Circle）可视化最直观：横轴正应变、纵轴切应变，把 $(\varepsilon_x, \gamma_{xy})$ 与 $(\varepsilon_y, -\gamma_{xy})$ 两点连线为直径画圆——圆心是平均应变，与横轴的两个交点就是主应变，半径就是最大切应变的一半。相关技术手册图 3、图 4 分别给出张量/主应变两种视角与莫尔圆的构造。
+这套换算用**莫尔圆**（Mohr's Circle）可视化最直观：横轴正应变、纵轴切应变，把 $(\varepsilon_x, \gamma_{xy})$ 与 $(\varepsilon_y, -\gamma_{xy})$ 两点连线为直径画圆——圆心是平均应变，与横轴的两个交点就是主应变，半径就是最大切应变的一半。相关技术文档图 3、图 4 分别给出张量/主应变两种视角与莫尔圆的构造。
 
 ![应变张量与主应变两种视角](/images/rosette-strain-gauges/fig3-tensor-principal.png)
 *（图源：网络 侵删）*
@@ -76,7 +76,7 @@ $$\theta_p = \frac{1}{2} \arctan\!\left(\frac{\gamma_{xy}}{\varepsilon_x - \vare
 ![应变花三路应变信号](/images/rosette-strain-gauges/fig6-three-signals.png)
 *（图源：网络 侵删）*
 
-投入三路测量，回报是多少？相关技术手册的账本：三路实测应变 + 材料弹性模量 $E$ 与泊松比 $\nu$，可算出**九个输出量**——最大/最小主应力 SS1、SS2，最大/最小主应变 SN1、SN2，主方向角 AG，切应力 SH，工程切应变 SNSH，von Mises 等效应力 ES，双轴比 BR。三换九，投入产出比一比三。
+投入三路测量，回报是多少？相关技术文档的账本：三路实测应变 + 材料弹性模量 $E$ 与泊松比 $\nu$，可算出**九个输出量**——最大/最小主应力 SS1、SS2，最大/最小主应变 SN1、SN2，主方向角 AG，切应力 SH，工程切应变 SNSH，von Mises 等效应力 ES，双轴比 BR。三换九，投入产出比一比三。
 
 <strong>矩形花（Rectangular，0°-45°-90°）</strong>：两枚片落在 x、y 轴上，第三枚在 45°，见图 7。角度布置让数学最简。
 

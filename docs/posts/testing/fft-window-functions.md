@@ -84,7 +84,7 @@ $$
 
 ## 三、常用窗函数对比
 
-下表给出常用窗函数的主要特性（数据取自相关测试技术手册表 1.1）：
+下表给出常用窗函数的主要特性（数据取自相关测试技术文档表 1.1）：
 
 | 窗类型 | 最高旁瓣 (dB) | 旁瓣衰减 (dB/十个旁瓣) | 有效噪声带宽 ($\times \Delta f$) | 最大幅值误差 (dB) |
 | --- | --- | --- | --- | --- |
@@ -179,7 +179,7 @@ $$
 
 两种校正不能同时施加：幅值校正后峰值正确但频带内能量偏大，能量校正后能量正确但峰值偏低。Simcenter Testlab 在 Tools → Options → General 的 2D Correction Mode 中默认 Automatic——谱、自功率谱与阶次自动采用幅值校正，功率谱密度自动采用能量校正。
 
-各窗的校正因子如下（取自相关测试技术手册表 1.2）：
+各窗的校正因子如下（取自相关测试技术文档表 1.2）：
 
 | 窗类型 | 幅值校正因子 | 能量校正因子 |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ freqs, spec_flat   = apply_window(x, 'flattop')
 </details>
 
 ::: info 幅值校正的实现
-上例中的 `scale = N / np.sum(win)` 即幅值校正因子 $K_A$：汉宁窗给出 2.0，scipy 的 flattop 给出约 4.2（与相关技术手册表 1.2 的 4.18 为不同系数的平顶窗实现，量级一致）。
+上例中的 `scale = N / np.sum(win)` 即幅值校正因子 $K_A$：汉宁窗给出 2.0，scipy 的 flattop 给出约 4.2（与相关技术文档表 1.2 的 4.18 为不同系数的平顶窗实现，量级一致）。
 :::
 
 ## 六、不同窗函数的频谱表现
@@ -309,7 +309,7 @@ plt.savefig('window_comparison.png', dpi=150)
 
 ## 九、参考
 
-- <strong>相关测试技术手册</strong> — 第 1.3 节"泄漏与加窗"，表 1.1 时窗特性、表 1.2 窗校正因子
+- <strong>相关测试技术文档</strong> — 第 1.3 节"泄漏与加窗"，表 1.1 时窗特性、表 1.2 窗校正因子
 - **公开技术资料** — "Window Types"、"Window Correction Factors"、"Leakage and Windows"
 - <strong>Heinzel et al. (2002)</strong> — *Spectrum and spectral density estimation by the DFT*, with a window performance survey
 - **Brüel & Kjær Technical Review** — Window functions in FFT analyzers

@@ -139,7 +139,7 @@ $$\frac{I_{est}}{I_{true}} = \left[ \frac{\sin(k\Delta r/2)}{k\Delta r/2} \right
 
 ## 五、Python 演示
 
-<strong>演示一：隔离垫的有限差分误差曲线。</strong> <strong>结论先摆在这：50 mm 长垫在 1.25 kHz 还只差 -0.5 dB、到 5 kHz 已跌到 -9.7 dB 完全不可用，换 12 mm 短垫后 5 kHz 只差 -0.4 dB——「高频换短垫」这四个字，就是这条曲线算出来的。</strong>用上面的误差公式复算相关技术手册频限：
+<strong>演示一：隔离垫的有限差分误差曲线。</strong> <strong>结论先摆在这：50 mm 长垫在 1.25 kHz 还只差 -0.5 dB、到 5 kHz 已跌到 -9.7 dB 完全不可用，换 12 mm 短垫后 5 kHz 只差 -0.4 dB——「高频换短垫」这四个字，就是这条曲线算出来的。</strong>用上面的误差公式复算相关技术文档频限：
 
 <details>
 <summary>数值实验：隔离垫有限差分误差复算（Python 14 行，点击展开）</summary>
