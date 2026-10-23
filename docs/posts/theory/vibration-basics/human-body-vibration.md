@@ -189,4 +189,4 @@ ISO 2631-1 本身是"评价方法"标准，不设强制限值；各国把 A(8) �
 
 *来源：网络公开资料，经整理与复核；图片版权归原作者所有，侵删。*
 
-*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/*
+*作者：@NVH_Z · [NVH Test](https://www.nvhtest.cn/blog/)*
