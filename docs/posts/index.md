@@ -238,7 +238,7 @@ title: "📖 全部文章"
 
 ## 研究笔记
 
-- [NVH 指标体系与工程解释](./research/nvh-metrics.html) — 响度、尖锐度、粗糙度等指标的完整工程解释
+- [两台样车都测 41.5 dBA，为什么所有人都说 B 更安静？——NVH 指标体系与工程解释](./research/nvh-metrics.html) — 响度、尖锐度、粗糙度等指标的完整工程解释
 
 - [论文复现实验记录模板](./research/paper-template.html) — 结构化的论文复现笔记模板，含参数清单与偏差分析
 
