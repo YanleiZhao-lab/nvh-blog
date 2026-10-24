@@ -16,6 +16,8 @@ author: "@NVH_Z"
 - **结论**：随机信号（路噪、风噪）比大小必须用 PSD（除以 Δf 得 g²/Hz），正弦谐波单线幅值判读用 Autopower；拿不准就改一次分辨率看幅值变不变。
 :::
 
+> **入门轨道 5/12**　[← 上一篇：窗函数修正系数](window-correction-factors.html) ｜ [下一篇：总级合成 →](rms-overall-level.html)
+
 
 ## 一、问题从哪来：同一根轴，测出三个“正确”答案
 

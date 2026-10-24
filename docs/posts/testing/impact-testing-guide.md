@@ -18,6 +18,8 @@ author: "@NVH_Z"
 - **结论**：先保住"敲"和"收"两个动作的质量——锤头配结构、预触发保前沿、响应记录够长能不加窗就不加窗，相干函数做最终验收
 :::
 
+> **入门轨道 8/12**　[← 上一篇：FRF 三种估计子](../theory/modal-analysis/frf-estimators.html) ｜ [下一篇：圆拟合模态参数估计 →](../theory/modal-analysis/modal-circle-fit.html)
+
 ## 一、锤击法的原理与适用场景
 
 锤击法的核心是用力锤对结构施加脉冲激励。锤头内置力传感器记录输入力，加速度计记录结构响应，两者在频域之比即频响函数（Frequency Response Function, FRF），再经模态拟合提取频率、阻尼和振型。

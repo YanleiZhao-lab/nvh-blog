@@ -17,6 +17,8 @@ author: "@NVH_Z"
 - **结论**：要分清挨得近的频率用汉宁窗，要量准单个正弦的幅值用平顶窗，整周期或瞬态信号干脆不加窗；算完记得把窗吃掉的幅值乘回来
 :::
 
+> **入门轨道 3/12**　[← 上一篇：FFT 全流程](fft-flow.html) ｜ [下一篇：窗函数修正系数 →](../theory/signal-processing/window-correction-factors.html)
+
 
 ## 一、为什么需要窗函数
 

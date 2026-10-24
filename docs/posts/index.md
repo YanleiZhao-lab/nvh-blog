@@ -4,6 +4,27 @@ title: "📖 全部文章"
 
 # 博客文章
 
+## 🚀 入门推荐：12 篇学习轨道
+
+刚接触 NVH？不必从 171 篇里挑——下面这 12 篇按学习顺序串成一条轨道：dB → FFT → 窗 → 谱函数 → FRF → 模态 → 声学 → 阶次。每篇开头都有「30 秒速览」卡片，赶时间只读卡片也能带走结论。
+
+① [同一台电机为什么测出 62、68、55 三个都对的分贝值？——dB 与对数刻度](theory/acoustics-basics/decibel-basics.html) — 分贝不是单位而是对数比值：两个 80 dB 叠加是 83 dB 不是 160 dB，先把参考值与能量域加减搞清楚
+② [同一台电机，两份频谱为什么连峰都对不上？——FFT 全流程：从采样率到谱线判读](testing/fft-flow.html) — 从采样率、带宽到谱线判读的完整流水线：只差 1 Hz 的两个峰，要采满 1 s 才分得开
+③ [换个窗读数就差 1 dB，两个峰还测成一个？——FFT 窗函数选择与频谱泄漏](testing/fft-window-functions.html) — 为什么必须加窗、泄漏长什么样：50.5 Hz 正弦不加窗差 3.9 dB，汉宁与平顶各管什么用
+④ [同一条谱线，乘 2.00 还是乘 1.633？——窗函数修正系数：幅值校正 vs 能量校正](theory/signal-processing/window-correction-factors.html) — 加了窗读数怎么补回来：幅值校正乘 2.00、能量校正乘 1.633，用错一档 RMS 偏 22.5%
+⑤ [同一份路噪数据，换台分析仪怎么就差出 8 倍？——功率谱密度 PSD 与随机信号的密度表述](theory/signal-processing/psd-explained.html) — 随机信号为什么要除以带宽：同一份路噪数据换台分析仪差出 8 倍，除以带宽后两谱重合
+⑥ [时域频域各算一遍，RMS 为什么差出 3 dB？——总级合成的三项前置条件](theory/signal-processing/rms-overall-level.html) — 谱线平方和开根号就是总级：时域频域各算一遍差 3 dB 的三个常见原因
+⑦ [同一组锤击数据，FRF 反共振谷为什么差出 5 倍？——H1、H2、Hv 三种估计子的噪声假设与选择](theory/modal-analysis/frf-estimators.html) — 频响函数的 H1、H2、Hv：输入端噪声还是输出端噪声，决定反共振谷该信谁
+⑧ [同一把锤同一台车身，两套 FRF 为什么一套干净一套报废？——锤击法模态测试实战指南](testing/impact-testing-guide.html) — 同一把锤两套 FRF 一套干净一套报废：差别在选锤、力窗与触发设置
+⑨ [圆拟合法凭什么多出一位有效数字？——复平面上的 SDOF 模态参数估计](theory/modal-analysis/modal-circle-fit.html) — 复平面上用圆拟合提取频率与阻尼：峰值法差 0.3 Hz，圆拟合多出一位有效数字
+⑩ [dBA 更低却更吵？——A 计权曲线给低频打的折从哪来](theory/acoustics-basics/a-weighting.html) — dBA 给低频打的折从哪来：63 Hz 的 70 dB 计权后只剩 44 dB，为什么更低反而更吵
+⑪ [同一份白噪声，窄带谱平线、倍频程柱子为什么爬楼梯？——倍频程分带与 A 计权](theory/acoustics-basics/octaves-hearing.html) — 听觉按倍数分格：白噪声窄带谱是平线，倍频程柱子每升一带涨 3 dB
+⑫ [转速一直在变，谱峰跟着跑，怎么给每座峰挂上部件名牌？——阶次：旋转机械的每转事件数](theory/rotating-machinery/whats-an-order.html) — 把频率轴换成每转事件数：六缸机 3 阶从 40 Hz 爬到 200 Hz，阶次纹丝不动
+
+::: tip 轨道怎么走
+每篇的速览卡片下有一行「入门轨道 n/12」导航，点「下一篇」即可顺着轨道读下去；中途从目录页任意跳入也能靠这行找到前后篇。
+:::
+
 ## 理论基础
 
 

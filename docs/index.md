@@ -7,7 +7,7 @@ titleTemplate: 工程研究与知识社区
 hero:
   name: NVH Test
   text: "工程研究与知识社区"
-  tagline: Noise · Vibration · Harshness · 耐久疲劳 — 171 篇工程文章持续更新
+  tagline: Noise · Vibration · Harshness · 耐久疲劳 — 171 篇工程文章持续更新 · 入门？从 12 篇学习轨道开始
   image:
     src: /back.svg
     alt: NVH Test
@@ -15,6 +15,9 @@ hero:
     - theme: brand
       text: 阅读博客
       link: /posts/
+    - theme: alt
+      text: 入门轨道 12 篇
+      link: /posts/#🚀-入门推荐-12-篇学习轨道
     - theme: sponsor
       text: 导航
       link: /nav/
