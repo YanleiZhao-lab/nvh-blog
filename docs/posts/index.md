@@ -203,7 +203,7 @@ title: "📖 全部文章"
 - [三个方向各测各的，评审要的总振动到底是多少？——矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [拿错灵敏度型号，三天测试数据还能救回来吗？——校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### Testlab Neo 与采集硬件（14 篇）
+### Testlab Neo 与采集硬件（15 篇）
 
 *围绕 Testlab Neo 数据工作流、自动化与报告，以及 SCADAS RS/ES 采集硬件的配置、连接和现场运维。*
 
@@ -232,6 +232,8 @@ title: "📖 全部文章"
 - [光电、磁电与编码器都能测转速，接到 RS 后为什么结果不同？——SCADAS RS 转速通道实操](practice/testlab-neo-hardware/scadas-rs-tachometer-rpm.html) — 三台传感器测同一根轴读数对不上：磁电怠速段一排 0 rpm（幅值随转速坍缩、阈值够不着）、高线数编码器读出毛茸茸噪声带（逐脉冲更新放大计时时钟抖动）、光电开关稳稳的（方波免阈值、比较器硬件搞定）——转速测量的第一性问题不是算得准不准，而是信号走对路径、参数填对格子；数字转速走 REC 单元 9 路输入（三个 DI 连接器各三路单端或一个增量编码器、REC-DI-WIRE-3M 线色-针位口诀 7白8棕/1绿2黄/3灰4粉、A/B/INDEX 八线判方向、Recorder App 三步 Tacho(Digital)+每转脉冲数、免设阈值），高线数开 Skip Pulses 每转只取一次（Pulses to Skip=每转脉冲数-1，匀速干净 vs 扭振细节按用途取舍）；模拟转速走 U12 第 12 通道 12P 专属输入（Pulse Detection Level 阈值+Hysteresis 迟滞滤阈值附近抖动+Hold-off 按前对脉冲间隔百分比抑制毛刺三参数）；两本量化账——磁电 e=-N·dPhi/dt 幅值正比转速 1800rpm 3Vpp 到 150rpm 只剩 0.25Vpp 必有低速盲区（阈值压低/加齿/换光电三对策）、分辨率一格=60/(T×PPR) rpm（60 齿 0.2s 窗口一格 5 rpm、每转 1 脉冲同窗口一格 300 rpm）；numpy 三本账实跑（阈值 0.2V 遇 1.8V 噪声 1000 沿虚高 11%）；Monitor 视图 Analog 指针/Numerical 数字验证、原始脉冲串不落盘需并行拆数据通道、Too Slow 告警三成因（断线/没转/阈值不当）；行李计数器类比贯穿
 
 - [重复操作能不能交给脚本？——Testlab Automation、MATLAB 与批处理接口](practice/testlab-neo-hardware/testlab-automation-matlab-api.html) — 凌晨两点的屏幕上没有一步分析、全是搬运：50 个 run 每个十二分钟四十次点击，第十个就把 Run13 存成 Run31、第 41 个方向选错不报错——把执行还给软件之前先选对层级：流程文件是定线公交（重复 3 遍就存，Checks 质检）、Workflow Automation 是包车（一份流程吃整场几十个 run）、Automation 接口是专车（MATLAB/VBA/Python 坐后座指挥 Testlab 干活，数据不出系统）；两笔账说清什么时候必须上脚本：工时模型 T=N·tm 对 cs+N·tw（50 run 手工 600 min 对脚本 5 min，盈亏平衡 0.2 个 run）与三类只有脚本干得了的闭环活（DOE 扫描 4 因素 3 水平 81 工况手工 20.2 h 对脚本守护 40.5 min、游标读数反哺下一步、跨软件矩阵往返 0.37 GiB vs 人工抄表 640 字符差 61 万倍）；五层递进选型表收尾，打车比方贯穿（公交/包车/专车），5 个常见坑含版本许可与异常分支处理
+
+- [RS 适合路试，ES 适合什么？——SCADAS ES/RS 分布式采集架构与选型](practice/testlab-neo-hardware/scadas-es-rs-architecture.html) — 参数表几乎一样的两代同门为什么必须分成两件工具：ES 是车间里的立式铣床（卡件插满框架、风冷散热、通道密度高，坐镇实验室台架中央），RS 是背出门的电动工具（独立防护外壳单元、菊花链级联、绑在测点旁）——选型不看通道参数看系统形态；三笔账定量分工：电缆账（96 通道 20 m 拉回机柜 49920 元对 3 m 短线加链缆 7844 元省 84%、重量 73 kg 到 11 kg）、吞吐账（单链 1.7 MSa/s、REC 总计 7.8 MSa/s、48 kHz 全速最多 162 通道——192 通道挤 4 条链链先堵、分 8 条链 REC 堵，高通道高带宽是 ES 主场）、环境账（RS IP66/IP67、-40~+85 °C 扩展温度、海拔 5000 m 对 ES 机柜级防护——零下二十度矿区一票否决）；四问决策清单（测点围中心转吗/设备随行吗/环境多狠/数据率多大），行业地图覆盖汽车轨道、重机船舶、航空、能源基建、机械家电，既有卡件电缆与机架配置在支持矩阵内继续融入同步测量；工具箱类比贯穿（电动工具 vs 立式铣床），交叉引用菊花链供电/灯语诊断/维护校准诸文
 
 ### 测试操作（22 篇）
 
