@@ -203,7 +203,7 @@ title: "📖 全部文章"
 - [三个方向各测各的，评审要的总振动到底是多少？——矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [拿错灵敏度型号，三天测试数据还能救回来吗？——校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### Testlab Neo 与采集硬件（9 篇）
+### Testlab Neo 与采集硬件（10 篇）
 
 *围绕 Testlab Neo 数据工作流、自动化与报告，以及 SCADAS RS/ES 采集硬件的配置、连接和现场运维。*
 
@@ -223,6 +223,8 @@ title: "📖 全部文章"
 - [流程搭好了，为什么换批数据就失效？——Testlab Neo Process Designer 与变量化工作流](practice/testlab-neo-hardware/neo-process-designer-variables.html) — 同一条处理流程换批数据就报错或悄悄算错，病根是参数写死在每一步的对话框里：Process Designer 把切段-质检-算谱-提阶次-平均连成可视化流水线存成流程文件，Process Variables 把通道选择/截止频率/稳速容差/Checks 阈值抽成集中变量表（条件化变量按通道 ID/运行名/车型等元数据查行、整表外置 Excel 运行时现读）；中央厨房类比贯穿（灶台工序固定、辣度咸淡写在墙上小黑板，能固定的进流程会变的上黑板）；numpy 复现切段判据变量化（120 s 录痕 target 80→95 一行不改切出 26.7 s 与 31.0 s 两段）与 5 次 runup 的 Run Average 账（单次散布 0.027 g 平均后 0.012 g、包络-均值 1.2 倍单次散布），向上接 Schedule Designer 预挂流程文件、向下接 Workflow Automation 批处理与自动报告
 
 - [一段长时历，怎样按工况切成可复用的数据块？——Testlab Neo Segments 与多段处理](practice/testlab-neo-hardware/neo-segments-multi-processing.html) — 录痕按时间连续、分析按工况离散，切段就是把这道翻译工序交给软件：Input 方法 Ctrl+Alt 拖选手动规范切段（Save in Run 逐段独立成 run、Run suffix 命名、Per Run 逐录痕各设一段），Extract Segments (Rule-Based) 把稳速写成通道值判据（64~66 km/h 带 ±2 容差与最短时长 5 s，numpy 复算 300 s 录痕只命中 2 段共 102.6 s——一半以上是过渡过程，数值必须带工程单位且大小写与 Y 轴图例一致），双条件走 Calculate 先造 0/1 索引通道再以 0.5 为门槛切段（转速>4500 rpm 且扭矩>100 N·m 联合判据 300 s 只命中 70 s 占 23%，键盘 marker/评分同样可当判据），Split by Position 用 Google Earth 触发线按路段切（名称三段式 名称:串联编号:正负号定起止、导出前删 Gps Points/Track），Decompose 按挡位索引通道把 900 s 录痕拆 6 条（Fading mode 淡化接缝、整段平均 60.0 °C 会糊掉 40.6~79.4 °C 的六挡差异），Extract Segment (Block) 在频率/阶次轴批量取段算 RMS；切出段存新 run 并常带原始数据链接（Input Data 改 Do not save 即纯净段），下游直接接 Spectral Map（Tracked on Channel）与 Order Sections（2;4;6 阶次列表）一条流程跑到报告，判据交给 Process Variables 变量化后一份流程通吃多批数据；录像带章节类比贯穿（带子不动、章节随定义变）
+
+- [结果算完了，报告为什么还要手工贴图？——Testlab Neo Reporting 与批量报告](practice/testlab-neo-hardware/neo-reporting-batch-powerpoint.html) — 测试流程里最亏的一环是"贴图"：240 条版式完全一样的曲线逐张导出、粘进 PowerPoint、对齐、改注，熟练工也要 6 小时且贴错不报错——而版式与数据本来就该分开管。三级递进的报告自动化：Print 工具栏三个下拉框（Print the 选 Picture/Report、With 选 Automatic 或自建 Print Format、To 选 file）先把单图与 Report 多页打印走通；Batch Reporting（Add-in 免额外许可）靠"排序定顺序、分组定页面"把几百条曲线一次成册——Select Columns 加 Run 名/测点/方向/阶次列、双击列头 A/B/C 三级排序、同组数据落同一页（组大小 4/6/8 三种排片单）、Save Template 存整套设置；Process Designer 流程末端把打印格式 Couple 到流程（Assign to Process + Auto Print after Processing，2606+），Display 切 Data as Queries 让图例带 Q 的曲线随每次运行自动更新，跑完流程点 Accept 报告自动生成——报告从交付物变成流程副产物；页数账 N_pages=ceil(N/g) 与工时账的 numpy 复算（240 条曲线组 4/6/8 对 60/40/30 页、手工 360 min 对批量 22 min 差 16 倍、1% 贴错率期望 2.4 条）；证件照冲印类比贯穿（冲印机=打印格式、排片单=排序分组、底片永远留着=Active Picture 可回溯数据），四个坑：Reporting 忘切 All 只出 1 页、拖图跨组张冠李戴、耦合状态直接改图静默失效、Preview 图忘换 Q 数据不更新
 
 ### 测试操作（22 篇）
 
