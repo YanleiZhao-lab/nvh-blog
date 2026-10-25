@@ -203,7 +203,7 @@ title: "📖 全部文章"
 - [三个方向各测各的，评审要的总振动到底是多少？——矢量合成：把三向振动变成一个可读数](practice/data-processing/vector-sum.html) — 逐谱线对 XYZ 三向做平方和开根号得到与方向无关的总量级：5/7/12 g 合成 14.76 g 且被大分量锁死；顺序坑的 numpy 实证——先 FFT 再合成谱线干净，时域取模后 FFT 造出 3.38 g 直流和 60/160 Hz 假线而总 RMS 分毫不差；Signature Derived 标签 VECTOR_SUM 与 Neo Block Calculate vectorsum 两条设置路径
 - [拿错灵敏度型号，三天测试数据还能救回来吗？——校准因子事后修正](practice/data-processing/calibration-factor-correction.html) — 拿错 100 mV/g 与 10 mV/g 加速度计、读数小 10 倍的经典事故：电压/EU 换算链推出无量纲比例因子（错填/真实，乘 10 即 +20 dB），TSC 六步单 Run 修正、Channels Pivot 一条公式批量处理多 Run；Archived Settings 与 Data Properties 两个入口侦查当时用的灵敏度，Edit Properties 仅限 SCADAS Mobile；修正只救时历，已算谱必须重算，过载削波与量化损失任何系数都救不回；numpy 实测同一因子贯穿时域峰值、RMS 与 50 Hz 谱线
 
-### Testlab Neo 与采集硬件（11 篇）
+### Testlab Neo 与采集硬件（12 篇）
 
 *围绕 Testlab Neo 数据工作流、自动化与报告，以及 SCADAS RS/ES 采集硬件的配置、连接和现场运维。*
 
@@ -226,6 +226,8 @@ title: "📖 全部文章"
 
 - [结果算完了，报告为什么还要手工贴图？——Testlab Neo Reporting 与批量报告](practice/testlab-neo-hardware/neo-reporting-batch-powerpoint.html) — 测试流程里最亏的一环是"贴图"：240 条版式完全一样的曲线逐张导出、粘进 PowerPoint、对齐、改注，熟练工也要 6 小时且贴错不报错——而版式与数据本来就该分开管。三级递进的报告自动化：Print 工具栏三个下拉框（Print the 选 Picture/Report、With 选 Automatic 或自建 Print Format、To 选 file）先把单图与 Report 多页打印走通；Batch Reporting（Add-in 免额外许可）靠"排序定顺序、分组定页面"把几百条曲线一次成册——Select Columns 加 Run 名/测点/方向/阶次列、双击列头 A/B/C 三级排序、同组数据落同一页（组大小 4/6/8 三种排片单）、Save Template 存整套设置；Process Designer 流程末端把打印格式 Couple 到流程（Assign to Process + Auto Print after Processing，2606+），Display 切 Data as Queries 让图例带 Q 的曲线随每次运行自动更新，跑完流程点 Accept 报告自动生成——报告从交付物变成流程副产物；页数账 N_pages=ceil(N/g) 与工时账的 numpy 复算（240 条曲线组 4/6/8 对 60/40/30 页、手工 360 min 对批量 22 min 差 16 倍、1% 贴错率期望 2.4 条）；证件照冲印类比贯穿（冲印机=打印格式、排片单=排序分组、底片永远留着=Active Picture 可回溯数据），四个坑：Reporting 忘切 All 只出 1 页、拖图跨组张冠李戴、耦合状态直接改图静默失效、Preview 图忘换 Q 数据不更新
 - [传感器都接对了，第一条时历为什么还是作废？——Testlab Neo 时数据采集从通道设置到存储](practice/testlab-neo-hardware/neo-time-data-acquisition.html) — 所有 NVH 工作流的入口一课：同一批传感器老师傅采回干净数据、新手第一条时历作废，差别全在按 Start 之前的三张表——通道设置（量程让峰值占满量程 60%~80%、7.8 V 峰值在 ±10 V 档占 78% 换 ±5 V 档 156% 贴顶报废、采样率取关心频率 2.56 倍且不超卡件带宽、灵敏度/工程单位/跟踪源/分组逐项核对）、采集监视（电平表十几秒扫贴顶贴底、条图看毛刺漂移、自定义监控页只留三五个关键量、跟踪条图按转速格对限值线判越限——8 格 4 格越限最差 1.02 g 超 104%，顺手为下一场量程分档攒证据）、存储管理（体积乘法账 S=Nch×fs×T×b：40 通道 20480 Hz 1 小时 11.0 GiB、采样率是唯一可调杠杆降四分之三、长会话按 10 分钟拆 6 个 1.83 GiB 段隔离损失、循环缓冲预触发 10 s 只多 0.031 GiB 买回事件前因）；三张单据类比贯穿（护照签证/登机口屏幕/行李托运+手提行李），采集前中后检查单收尾，交叉引用量程量化/过载削波/混叠/切段诸文
+
+- [重复操作能不能交给脚本？——Testlab Automation、MATLAB 与批处理接口](practice/testlab-neo-hardware/testlab-automation-matlab-api.html) — 凌晨两点的屏幕上没有一步分析、全是搬运：50 个 run 每个十二分钟四十次点击，第十个就把 Run13 存成 Run31、第 41 个方向选错不报错——把执行还给软件之前先选对层级：流程文件是定线公交（重复 3 遍就存，Checks 质检）、Workflow Automation 是包车（一份流程吃整场几十个 run）、Automation 接口是专车（MATLAB/VBA/Python 坐后座指挥 Testlab 干活，数据不出系统）；两笔账说清什么时候必须上脚本：工时模型 T=N·tm 对 cs+N·tw（50 run 手工 600 min 对脚本 5 min，盈亏平衡 0.2 个 run）与三类只有脚本干得了的闭环活（DOE 扫描 4 因素 3 水平 81 工况手工 20.2 h 对脚本守护 40.5 min、游标读数反哺下一步、跨软件矩阵往返 0.37 GiB vs 人工抄表 640 字符差 61 万倍）；五层递进选型表收尾，打车比方贯穿（公交/包车/专车），5 个常见坑含版本许可与异常分支处理
 
 ### 测试操作（22 篇）
 
