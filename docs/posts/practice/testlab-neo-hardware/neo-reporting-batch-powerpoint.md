@@ -54,7 +54,7 @@ $$\text{Report} = F_{\text{format}}\big(D_{\text{query}};\ G_{\text{group}}\big)
 - **With** 选 *Automatic*：用默认格式；
 - **To** 选 *file*：输出到文件，点 Print 后软件询问文件名与目录。
 
-![Print 工具栏分 Report、Printing、Print Options 三组（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/nr-print-ribbon.png)
+![Print 工具栏分 Report、Printing、Print Options 三组](/images/neo-reporting-batch-powerpoint/nr-print-ribbon.png)
 
 *图 1 Print 工具栏：左侧 Report 组、中间 Printing 组、右侧 Print Options 组（图源：网络 侵删）*
 
@@ -62,11 +62,11 @@ $$\text{Report} = F_{\text{format}}\big(D_{\text{query}};\ G_{\text{group}}\big)
 
 但 Automatic 格式不可控：页面上没 Logo、坐标轴字号偏小、没有项目信息。要控制长相，就得先做模板——选中这张图，点 Printing 组的 **New Print Format**，PowerPoint 会自动打开并生成一份与当前图配套的格式模板：在这里加公司 Logo、改图幅、放自动标注字段（在 PowerPoint 的 Add-ins 页签里点 New Field，可以把"试验工程师""日期""频率分辨率"这类属性位摆到页面上，打印时自动填充）。保存模板后，把 With 从 Automatic 换成 *Select a Print Format…*，选中刚存的模板再打印，出来的页面就带 Logo 与自动标注了。
 
-![New Print Format 生成可编辑的 PowerPoint 格式模板（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/nr-new-print-format.png)
+![New Print Format 生成可编辑的 PowerPoint 格式模板](/images/neo-reporting-batch-powerpoint/nr-new-print-format.png)
 
 *图 2 选中图片后点 New Print Format，自动打开配套的 PowerPoint 模板供编辑（图源：网络 侵删）*
 
-![套用自定义模板后：Logo、自动标注、更清晰的坐标轴（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/nr-logo-annotation.png)
+![套用自定义模板后：Logo、自动标注、更清晰的坐标轴](/images/neo-reporting-batch-powerpoint/nr-logo-annotation.png)
 
 *图 3 同一张图套用自定义打印格式后：公司 Logo、自动标注、坐标轴可读性都由模板控制（图源：网络 侵删）*
 
@@ -78,11 +78,11 @@ $$\text{Report} = F_{\text{format}}\big(D_{\text{query}};\ G_{\text{group}}\big)
 
 打印时把 **Print the** 从 Picture 换成 *Report*，With 选模板、To 选 file，按 Print——三张图自动变成三页 PowerPoint，一页一图，每页都套同一个模板。页数随图片数自动增长，模板不用改。
 
-![Report 1 编组包含雨流矩阵、损伤、自功率谱三张图（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/nr-report-group3.png)
+![Report 1 编组包含雨流矩阵、损伤、自功率谱三张图](/images/neo-reporting-batch-powerpoint/nr-report-group3.png)
 
 *图 4 一个 Report 编组：雨流矩阵、损伤、自功率谱三张图将打印成三页（图源：网络 侵删）*
 
-![Print the 切到 Report 即出多页（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/nr-print-the-report.png)
+![Print the 切到 Report 即出多页](/images/neo-reporting-batch-powerpoint/nr-print-the-report.png)
 
 *图 5 Print the 从 Picture 切到 Report，三张图打印为三页（图源：网络 侵删）*
 
@@ -92,17 +92,17 @@ $$\text{Report} = F_{\text{format}}\big(D_{\text{query}};\ G_{\text{group}}\big)
 
 Batch Reporting 是传统 Testlab 界面（Advanced Desktop 附带，无需额外许可）里的一个附加工作表，专门解决"几百条曲线一次成册"。它的入口在 Tools 到 Add-ins，勾选 Batch Reporting 后，屏幕底部多出一个同名工作表。
 
-![Tools 到 Add-ins 勾选 Batch Reporting（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-addins.png)
+![Tools 到 Add-ins 勾选 Batch Reporting](/images/neo-reporting-batch-powerpoint/fig-addins.png)
 
 *图 6 Batch Reporting 在 Add-ins 列表中勾选启用，附带于 Advanced Desktop、无需额外许可（图源：网络 侵删）*
 
 操作骨架五步：把待打印数据加入 Input Basket；在 Batch Reporting 工作表左上"…"里把数据源设为 Input Basket，点 **Add to List** 把数据列成清单；点 **Load a Format** 套用打印格式（没有模板就先用 Navigator 的 Make Printformat 做一份）；把左下的 Reporting 从 *Current Group* 切到 **All**（这一步决定 Print 时出多页而不是单页）；最后 Print，软件逐组出页、自动生成多页文档。退出前用 **Save Template** 把整套设置存下来，下次同结构数据直接复用。
 
-![Batch Reporting 工作表全貌（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-batch-worksheet.png)
+![Batch Reporting 工作表全貌](/images/neo-reporting-batch-powerpoint/fig-batch-worksheet.png)
 
 *图 7 Batch Reporting 工作表：左侧数据清单、中部格式与分组区（图源：网络 侵删）*
 
-![Reporting 切到 All 才会出多页（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-reporting-all.png)
+![Reporting 切到 All 才会出多页](/images/neo-reporting-batch-powerpoint/fig-reporting-all.png)
 
 *图 8 Reporting 从 Current Group 切到 All，Print 时生成多页报告（图源：网络 侵删）*
 
@@ -113,25 +113,25 @@ Batch Reporting 是传统 Testlab 界面（Advanced Desktop 附带，无需额�
 
 排片单靠元数据列来写：右键清单列头调出 Select Columns，把 Run 名、测点号（Point Id）、方向（Absolute direction，X/Y/Z 不带正负号）、Section 值（阶次号、频带）、函数类别（Autopower/Spectrum/Time）这些列加进来；然后**双击列头排序**——A、B、C 标出第一、第二、第三排序键。
 
-![Select Columns 加入 Run 名、测点、方向等元数据列（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-select-columns.png)
+![Select Columns 加入 Run 名、测点、方向等元数据列](/images/neo-reporting-batch-powerpoint/fig-select-columns.png)
 
 *图 9 Select Columns 对话框：把 Available 列移到 Selected，数据清单才有排序依据（图源：网络 侵删）*
 
-![A、B、C 标出三级排序键（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-sort-abc.png)
+![A、B、C 标出三级排序键](/images/neo-reporting-batch-powerpoint/fig-sort-abc.png)
 
 *图 10 双击列头排序，A/B/C 依次为第一、二、三排序键（图源：网络 侵删）*
 
 分组在清单上表现为深浅相间的色带——相邻同色的一组数据将落在同一页。组开多大，完全由"哪几列参与分组"决定：组大小 4 可以是"同一工况、同一测点的 X/Y 两方向与 2 阶叠一页"；组大小 6 可以是"同一点、不同工况、不同阶次"；组大小 8 可以是"全部 2 阶、不同工况、全部方向"。把数据从清单里**同组内**拖到右侧格式预览的对应图位上，Print 时软件按组循环、同样的位置逐组填充，一套版式复制到每一页。
 
-![组大小 4：同工况同测点 X/Y 两方向 2 阶一页（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-group4.png)
+![组大小 4：同工况同测点 X/Y 两方向 2 阶一页](/images/neo-reporting-batch-powerpoint/fig-group4.png)
 
 *图 11 组大小 4：Body 与 Engine 两测点的 X/Y 两方向与 2 阶，同工况一页（图源：网络 侵删）*
 
-![组大小 6：同测点、不同工况、不同阶次（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-group6.png)
+![组大小 6：同测点、不同工况、不同阶次](/images/neo-reporting-batch-powerpoint/fig-group6.png)
 
 *图 12 组大小 6：同一点上叠不同工况、不同阶次（图源：网络 侵删）*
 
-![组大小 8：全部 2 阶、不同工况、全方向（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-group8.png)
+![组大小 8：全部 2 阶、不同工况、全方向](/images/neo-reporting-batch-powerpoint/fig-group8.png)
 
 *图 13 组大小 8：所有 2 阶曲线按工况与方向铺满一页（图源：网络 侵删）*
 
@@ -179,29 +179,29 @@ print(f"1% 贴错率在 {N} 条曲线上的期望 = {0.01*N:.1f} 条")
 
 **第二段：让数据“可查询”（Queryable）。** 这是流程末端打印与手工打印的本质区别：图里的数据不是某条具体曲线，而是一条**查询**。在 Display 页签把取数模式从 Regular Data 切到 **Data as Queries**，再把数据从 Active Analysis 拖进图里——图例上曲线名旁出现一个小小的“Q”，就说明这条曲线是“按条件定义”的：下次流程处理新数据时，Q 自动指向新结果，图和报告随之更新。从既有 run 里取的图也可以用 Edit Queries 把数据源改指到 Active Analysis（注意此工作流暂不支持 Run 属性，需把 Run 与 Section 属性从查询里去掉）。
 
-![Display 页签切到 Data as Queries（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-data-as-queries.png)
+![Display 页签切到 Data as Queries](/images/neo-reporting-batch-powerpoint/fig-data-as-queries.png)
 
 *图 14 Display 页签把取数模式切换为 Data as Queries，之后放入显示的数据都以查询形式定义（图源：网络 侵删）*
 
-![从 Active Analysis 拖数据进显示（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-drag-active-analysis.png)
+![从 Active Analysis 拖数据进显示](/images/neo-reporting-batch-powerpoint/fig-drag-active-analysis.png)
 
 *图 15 把 Active Analysis 的处理结果拖放进显示区（图源：网络 侵删）*
 
-![图例中的 Q 标记曲线为查询数据（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-legend-q.png)
+![图例中的 Q 标记曲线为查询数据](/images/neo-reporting-batch-powerpoint/fig-legend-q.png)
 
 *图 16 曲线名旁的小“Q”表示这条曲线按查询定义，流程跑新数据后自动更新（图源：网络 侵删）*
 
 **第三段：耦合格式并自动打印。** 点 Report 区 PowerPoint 图标的下拉菜单，先 **New Print Format** 做一份流程报告模板（与第三节同法：编辑母版、加 Logo、摆标注字段），然后在同一菜单勾选 **Assign to Process** 与 **Auto Print after Processing**——PowerPoint 图标出现在报告页签旁，格式已与流程绑定。选一批新数据，点 Run；跑完后点状态栏的 **Accept**，PowerPoint 自动生成并打开，Q 查询的数据按模板落进每页图里。
 
-![Assign to Process 与 Auto Print after Processing（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-assign-to-process.png)
+![Assign to Process 与 Auto Print after Processing](/images/neo-reporting-batch-powerpoint/fig-assign-to-process.png)
 
 *图 17 勾选 Assign to Process 与 Auto Print after Processing，打印格式与流程绑定（图源：网络 侵删）*
 
-![跑完流程点 Accept 自动生成 PowerPoint（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-accept.png)
+![跑完流程点 Accept 自动生成 PowerPoint](/images/neo-reporting-batch-powerpoint/fig-accept.png)
 
 *图 18 流程运行结束后点 Accept，报告在新的 PowerPoint 实例中自动生成（图源：网络 侵删）*
 
-![自动填充数据的最终 PowerPoint 报告（图源：网络 侵删）](/images/neo-reporting-batch-powerpoint/fig-final-ppt.png)
+![自动填充数据的最终 PowerPoint 报告](/images/neo-reporting-batch-powerpoint/fig-final-ppt.png)
 
 *图 19 生成的 PowerPoint：每页图的数据都来自 Q 查询，随每次流程运行自动填充（图源：网络 侵删）*
 

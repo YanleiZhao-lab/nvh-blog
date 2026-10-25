@@ -137,6 +137,8 @@ $$\begin{bmatrix} M_s & 0 \\ -G^T & M_f \end{bmatrix} \begin{bmatrix} \ddot{u} \
 
 ![参数估计方法分类（相关技术文档表 15.1）](/images/vibro-acoustic-modal-analysis/table15-1-part1.png)
 
+*（图源：网络 侵删）*
+
 ![参数估计方法分类·续（相关技术文档表 15.1）](/images/vibro-acoustic-modal-analysis/table15-1-part2.png)
 
 *（图源：网络 侵删）*

@@ -48,7 +48,7 @@ Segments 做的就是"打章节点"这件事，而且打点的依据不是时间
 
 公开技术资料把 Process Designer 里可用的切段方法整理成一张全家福（图 1）：Input 方法的交互拖选、Extract Segments (Rule-Based) 的规则切段、Split by Position 的 GPS 位置切段、Decompose 的索引通道分解、Extract Segment (Block) 的函数域取段。它们共用同一套输出逻辑——产出一个只含所截段的新文件——所以可以按"判据来自哪里"分成四条路线来记。
 
-![Process Designer 中可用的切段方法全家福（图源：网络 侵删）](/images/neo-segments-multi-processing/fig1.png)
+![Process Designer 中可用的切段方法全家福](/images/neo-segments-multi-processing/fig1.png)
 
 *图 1 切段方法一览：交互选择、规则、位置、分解、块提取五类方法（图源：网络 侵删）*
 
@@ -66,7 +66,7 @@ Segments 做的就是"打章节点"这件事，而且打点的依据不是时间
 
 即使是最"手工"的拖选，Testlab Neo 也给了规范路径，而不是靠导出再裁剪。在时间历程显示里，按住 **Ctrl + Alt** 同时从左到右拖动，就高亮出一个段（图 2）；只按 Ctrl 不按 Alt，则单选一段。多个段可以连续这样选中。
 
-![在显示中按住 Ctrl+Alt 拖动高亮出段（图源：网络 侵删）](/images/neo-segments-multi-processing/fig2.png)
+![在显示中按住 Ctrl+Alt 拖动高亮出段](/images/neo-segments-multi-processing/fig2.png)
 
 *图 2 按住 Ctrl 与 Alt 同时从左到右拖动即可选中段（图源：网络 侵删）*
 
@@ -77,7 +77,7 @@ Segments 做的就是"打章节点"这件事，而且打点的依据不是时间
 
 如果同一段判据在不同录痕里发生在不同时刻（比如"司机踩下油门的瞬间"每次录的位置都不一样），把 **Segment Mode** 从 All Runs 切到 **Per Run**（图 4）：段列表第一列变成 run 选择下拉，逐 run 各设一段。
 
-![Segment Mode 从 All Runs 切换为 Per Run（图源：网络 侵删）](/images/neo-segments-multi-processing/fig4.png)
+![Segment Mode 从 All Runs 切换为 Per Run](/images/neo-segments-multi-processing/fig4.png)
 
 *图 3 逐 run 设置不同时间段的 Segment Mode 切换（图源：网络 侵删）*
 
@@ -119,11 +119,11 @@ print(f"段1 平均速度 {spd[keep[0,0]:keep[0,1]].mean():.2f} km/h")
 
 在软件里，这套判据落在方法的属性页（图 5~图 7）：参考通道选车速通道，规则类型选 **Extract**（数值落在两个值之间），写 64 与 66——注意数值必须**带工程单位**（km/h、Nm、rpm），大小写要和显示里 Y 轴图例的写法逐字一致，字段是大小写敏感的。Detection Mode 选 **First Occurrence**（只取第一处）或 **All Occurrences**（所有命中段；还可进一步选 Join 把多段并成一个 run，或 Separate 各自成 run）。
 
-![变速录痕中一段稳速区与待处理的对应数据（图源：网络 侵删）](/images/neo-segments-multi-processing/fig7.png)
+![变速录痕中一段稳速区与待处理的对应数据](/images/neo-segments-multi-processing/fig7.png)
 
 *图 4 上：车速通道（蓝）与切出的 64~66 km/h 段（绿）；下：原始数据通道与切出的段（图源：网络 侵删）*
 
-![规则切段运行后的结果：切出的段叠加在原始录痕上（图源：网络 侵删）](/images/neo-segments-multi-processing/fig11.png)
+![规则切段运行后的结果：切出的段叠加在原始录痕上](/images/neo-segments-multi-processing/fig11.png)
 
 *图 5 规则切段的输出：新段迹线从原录痕中提取，可与原始信号叠加核对（图源：网络 侵删）*
 
@@ -131,7 +131,7 @@ print(f"段1 平均速度 {spd[keep[0,0]:keep[0,1]].mean():.2f} km/h")
 
 单一门槛只认一个通道。想要"转速超 3500 rpm **且** 扭矩超 100 N·m"的段，就轮到 **Calculate**（时域计算）方法出场：先用它造一个 0/1 的**索引通道（Index Channel）**——默认 0，两个条件同时满足时为 1——再把规则切段指到这个索引通道上，门槛取 0.5（起点要求上斜坡、终点要求下斜坡）。同一套思路也能接住采集时键盘录入的事件标记/评分（Time Data Acquisition 的 marker 与 ratings 功能），司机在采集 PC 上敲的数字键随数据一起记录，事后同样能变成切段判据。
 
-![Calculate 方法造索引通道：扭矩超 100 Nm 且转速超 3500 rpm 时输出 1（图源：网络 侵删）](/images/neo-segments-multi-processing/fig13.png)
+![Calculate 方法造索引通道：扭矩超 100 Nm 且转速超 3500 rpm 时输出 1](/images/neo-segments-multi-processing/fig13.png)
 
 *图 6 双条件索引通道：转速（绿）与扭矩（红）同时超限时索引通道（蓝）为 1（图源：网络 侵删）*
 
@@ -151,7 +151,7 @@ print(f"段1 平均速度 {spd[keep[0,0]:keep[0,1]].mean():.2f} km/h")
 
 操作链路是：把录痕的 GPS 数据导出成 KML → 在 Google Earth 新建工程并导入，沿着轨迹在路段首尾画两条触发线并按上述规则命名 → 删掉 KML 里的 "Gps Points" 与 "Gps Track"（只留触发线）→ 导出触发线 KML → 在 Split by Position 方法的 Track Definition 参数里选这个文件 → Run。切出的段存在以触发线名命名的 run 里，其下的 Process 文件夹装着切出的数据。注意 Google Earth 显示默认不随 Testlab Neo 开启（出口管制），符合条件时可向销售/支持渠道申请授权。
 
-![GPS 轨迹（红线）与目标路段（黄色括号段）（图源：网络 侵删）](/images/neo-segments-multi-processing/fig17.png)
+![GPS 轨迹（红线）与目标路段（黄色括号段）](/images/neo-segments-multi-processing/fig17.png)
 
 *图 7 地图上红色为实测 GPS 轨迹，黄色为待切取的目标路段（图源：网络 侵删）*
 
@@ -161,7 +161,7 @@ print(f"段1 平均速度 {spd[keep[0,0]:keep[0,1]].mean():.2f} km/h")
 
 第四条路线解决"状态"维度的切分。一条 900 s 的温度录痕里，挡位通道在 0~5 之间跳变——每个挡位对应一段连续的"状态窗口"。**Decompose** 方法（Interactive Analysis add-in）按索引通道的取值把整条录痕拆开：挡位通道有 6 个值，就输出 6 条新迹线，每条只含对应挡位期间的数据。拆完每条迹线内部的样本来自原录痕的不同时间段（同一挡位的各次出现被"缝"在一起），方法还提供 Fading mode 让缝合处以淡入淡出方式衔接——对声音、振动数据尤其有用，硬拼接会在接缝处产生假瞬态。
 
-![900 秒温度录痕按 6 个挡位 Decompose 成 6 条独立迹线（图源：网络 侵删）](/images/neo-segments-multi-processing/fig28.png)
+![900 秒温度录痕按 6 个挡位 Decompose 成 6 条独立迹线](/images/neo-segments-multi-processing/fig28.png)
 
 *图 8 原 900 s 温度记录按挡位分解为 6 条记录，温度量级随挡位升高（图源：网络 侵删）*
 

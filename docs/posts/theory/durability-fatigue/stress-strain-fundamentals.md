@@ -33,11 +33,11 @@ author: "@NVH_Z"
 
 金属试棒（coupon）两端受拉力 F，任取一个横截面，截面两侧的材料互相拽着——这个"内部拽力"除以截面面积就是应力。相关技术资料用一根受拉圆柱给出定义图示：
 
-![图1：金属试棒拉伸试验：左为原始试样、中为颈缩阶段、右为断裂（图源：网络 侵删）](/images/stress-strain-fundamentals/f1.png)
+![图1：金属试棒拉伸试验：左为原始试样、中为颈缩阶段、右为断裂](/images/stress-strain-fundamentals/f1.png)
 
 *（图源：网络 侵删）*
 
-![图2：力施加在金属圆柱（试棒）上（图源：网络 侵删）](/images/stress-strain-fundamentals/f2.png)
+![图2：力施加在金属圆柱（试棒）上](/images/stress-strain-fundamentals/f2.png)
 
 *（图源：网络 侵删）*
 
@@ -55,11 +55,11 @@ $$\sigma = \frac{F}{A_0}$$
 
 **几何陷阱**。设计部门把直圆柱改成"可乐瓶"造型，中段收窄，有效截面积骤减：
 
-![图3：截面积从 A 变为 A1，试棒上的应力随之降低（图源：网络 侵删）](/images/stress-strain-fundamentals/f3.png)
+![图3：截面积从 A 变为 A1，试棒上的应力随之降低](/images/stress-strain-fundamentals/f3.png)
 
 *（图源：网络 侵删）*
 
-![图4：几何变化减小有效截面积并产生应力集中（图源：网络 侵删）](/images/stress-strain-fundamentals/f4.png)
+![图4：几何变化减小有效截面积并产生应力集中](/images/stress-strain-fundamentals/f4.png)
 
 *（图源：网络 侵删）*
 
@@ -75,7 +75,7 @@ $$\sigma = \frac{F}{A_0}$$
 
 试棒受拉后变长一点点。应变定义为长度变化量与原始长度之比：
 
-![图5：应变定义为长度变化量除以原始长度（图源：网络 侵删）](/images/stress-strain-fundamentals/f5.png)
+![图5：应变定义为长度变化量除以原始长度](/images/stress-strain-fundamentals/f5.png)
 
 *（图源：网络 侵删）*
 
@@ -136,7 +136,7 @@ gauge dR/R=0.0009 -> 450 muE -> 94.5 MPa
 
 载荷从小往上加，最初应力与应变成严格正比——这段叫**弹性区（elastic region）**：卸载后零件完全回到原状，身高尺量完人还能缩回去。
 
-![图6：材料弹性区内应力与应变的关系（图源：网络 侵删）](/images/stress-strain-fundamentals/f6.png)
+![图6：材料弹性区内应力与应变的关系](/images/stress-strain-fundamentals/f6.png)
 
 *（图源：网络 侵删）*
 
@@ -156,13 +156,13 @@ $$\sigma = E \, \varepsilon$$
 
 载荷继续加，应力-应变关系从直线变弯——进入**塑性区（plastic region）**：卸载后零件不再回到原状，身高尺量完人回不去了，"变长"被永久记住。
 
-![图7：材料弹性区与塑性区内的应力-应变关系全貌（图源：网络 侵删）](/images/stress-strain-fundamentals/f7.png)
+![图7：材料弹性区与塑性区内的应力-应变关系全貌](/images/stress-strain-fundamentals/f7.png)
 
 *（图源：网络 侵删）*
 
 直线到曲线的转折点叫**屈服强度（yield strength）**。现实里这个转折不是一刀切，而是有一小段过渡区，因此标准做法是画一条从 0.2% 应变处平行于弹性段的偏移线，取它与应力-应变曲线的交点定义为屈服强度（0.2% offset method）。越过屈服继续加载，某处开始**颈缩（necking）**——对应**强度极限（ultimate strength）**；再往后试棒断裂。
 
-![图8：试棒应力逐级升高时截面积的变化：从左到右（图源：网络 侵删）](/images/stress-strain-fundamentals/f8.png)
+![图8：试棒应力逐级升高时截面积的变化：从左到右](/images/stress-strain-fundamentals/f8.png)
 
 *（图源：网络 侵删）*
 
@@ -174,7 +174,7 @@ $$\sigma = E \, \varepsilon$$
 
 试棒拉长时横截面积在缩（弹性阶段泊松效应缩得极慢，塑性阶段越缩越快）。前面所有应力都除以**原始**面积 A₀——这是**工程应力**口径，试验报告默认用它。若改用**当前实际**面积，得到**真实应力**：
 
-![图9：工程应力曲线（红）与真实应力曲线（蓝）的对比：试棒载荷逐级升高（图源：网络 侵删）](/images/stress-strain-fundamentals/f9.png)
+![图9：工程应力曲线（红）与真实应力曲线（蓝）的对比：试棒载荷逐级升高](/images/stress-strain-fundamentals/f9.png)
 
 *（图源：网络 侵删）*
 
