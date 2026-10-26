@@ -305,7 +305,7 @@ print("标定结果:", zetas[errs.argmin()], "（真值 0.012）")
 6. **虚拟通道命名对齐实测**：同列、同采样、同命名习惯，处理流程一视同仁。
 7. **标定闭环**：暴露阻尼等不确定参数，用实测数据按残差最小原则标定后，模型才有资格量产虚拟通道。
 
-相关阅读：数据如何按属性被检索与复用见[测试数据的七项 AI 就绪条件](/blog/posts/practice/testlab-neo-hardware/ai-ready-test-data-seven-pillars/)；Testlab Neo 处理流程的变量组织见[Process Designer 的变量与方法](/blog/posts/practice/testlab-neo-hardware/neo-process-designer-variables/)；虚拟振动台如何用系统辨识数据驱动实时模型见[虚拟振动台、限幅与 Notching 策略](/blog/posts/practice/testlab-neo-hardware/virtual-shaker-testing-notching/)。
+相关阅读：数据如何按属性被检索与复用见[测试数据的七项 AI 就绪条件](ai-ready-test-data-seven-pillars.html)；Testlab Neo 处理流程的变量组织见[Process Designer 的变量与方法](neo-process-designer-variables.html)；虚拟振动台如何用系统辨识数据驱动实时模型见[虚拟振动台、限幅与 Notching 策略](virtual-shaker-testing-notching.html)。
 
 ## 一句话记住
 
