@@ -1,0 +1,115 @@
+/* Posts index: beginner learning path overview. */
+.learning-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0 26px;
+}
+
+.learning-overview__card {
+  display: flex;
+  min-width: 0;
+  min-height: 190px;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 13px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1) !important;
+  text-decoration: none !important;
+  box-shadow: 0 7px 22px rgba(31, 79, 130, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.learning-overview__card:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+  box-shadow: 0 11px 28px rgba(31, 79, 130, 0.1);
+}
+
+.learning-overview__meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.learning-overview__step {
+  display: inline-grid;
+  width: 32px;
+  height: 25px;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 12px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.learning-overview__topic {
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+}
+
+.learning-overview__title {
+  display: block;
+  color: var(--vp-c-text-1);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.learning-overview__summary {
+  display: block;
+  margin-top: 9px;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.learning-overview__action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: auto;
+  padding-top: 15px;
+  color: var(--vp-c-brand-1);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.learning-overview__action span {
+  transition: transform 0.2s ease;
+}
+
+.learning-overview__card:hover .learning-overview__action span {
+  transform: translateX(3px);
+}
+
+@media (max-width: 700px) {
+  .learning-overview {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .learning-overview__card {
+    min-height: 0;
+    padding: 15px;
+  }
+
+  .learning-overview__action {
+    padding-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-overview__card,
+  .learning-overview__action span {
+    transition: none;
+  }
+}

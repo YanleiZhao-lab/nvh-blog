@@ -17,6 +17,7 @@ import HomeUnderline from './components/HomeUnderline.vue'
 import confetti from './components/confetti.vue'
 import PyodideRunner from './components/PyodideRunner.vue'
 import LearningTrack from './components/LearningTrack.vue'
+import LearningOverview from './components/LearningOverview.vue'
 
 // 彩虹背景动画
 let homePageStyle: HTMLStyleElement | undefined
@@ -43,6 +44,7 @@ export default {
     app.component('confetti', confetti)
     app.component('PyodideRunner', PyodideRunner)
     app.component('LearningTrack', LearningTrack)
+    app.component('LearningOverview', LearningOverview)
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false })
