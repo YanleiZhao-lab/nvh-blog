@@ -16,7 +16,14 @@ author: "@NVH_Z"
 - **结论**：柱子高不是高频噪声更强，是装高频的"筐"更大——人耳按对数分辨频率，倍频程分带与 A 计权都是照耳朵的规矩办事
 :::
 
-> **入门轨道 11/12**　[← 上一篇：A 计权曲线](a-weighting.html) ｜ [下一篇：阶次：每转事件数 →](../rotating-machinery/whats-an-order.html)
+<LearningTrack
+  :current="11"
+  :total="12"
+  prev-title="A 计权曲线"
+  prev-href="a-weighting.html"
+  next-title="阶次：每转事件数"
+  next-href="../rotating-machinery/whats-an-order.html"
+/>
 
 ## 一、从音乐借来的分带方式
 

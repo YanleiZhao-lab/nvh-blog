@@ -18,7 +18,14 @@ author: "@NVH_Z"
 - **结论**：先保住"敲"和"收"两个动作的质量——锤头配结构、预触发保前沿、响应记录够长能不加窗就不加窗，相干函数做最终验收
 :::
 
-> **入门轨道 8/12**　[← 上一篇：FRF 三种估计子](../theory/modal-analysis/frf-estimators.html) ｜ [下一篇：圆拟合模态参数估计 →](../theory/modal-analysis/modal-circle-fit.html)
+<LearningTrack
+  :current="8"
+  :total="12"
+  prev-title="FRF 三种估计子"
+  prev-href="../theory/modal-analysis/frf-estimators.html"
+  next-title="圆拟合模态参数估计"
+  next-href="../theory/modal-analysis/modal-circle-fit.html"
+/>
 
 ## 一、锤击法的原理与适用场景
 

@@ -16,7 +16,14 @@ author: "@NVH_Z"
 - **结论**：多数时候不是谁算错了，是频域那一路悄悄违反了三道关——线性单位、RMS 格式、能量校正；对不上账先查这三件事，再怀疑数据。
 :::
 
-> **入门轨道 6/12**　[← 上一篇：功率谱密度 PSD](psd-explained.html) ｜ [下一篇：FRF 三种估计子 →](../modal-analysis/frf-estimators.html)
+<LearningTrack
+  :current="6"
+  :total="12"
+  prev-title="功率谱密度 PSD"
+  prev-href="psd-explained.html"
+  next-title="FRF 三种估计子"
+  next-href="../modal-analysis/frf-estimators.html"
+/>
 
 ## 一、为什么平均值为零的信号也有能量
 
